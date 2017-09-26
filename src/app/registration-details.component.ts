@@ -22,6 +22,10 @@ export class RegistrationDetailsComponent implements OnDestroy {
       .subscribe(reg => this.reg = reg);
   }
 
+  printWaiver() {
+    alert('FIXME: not implemented yet!');
+  }
+
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }

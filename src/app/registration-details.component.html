@@ -25,19 +25,19 @@
               <p class="card-text text-danger">Wir haben Ihre Einverständniserklärung noch nicht erhalten.</p>
               <p class="card-text">Bitte drucken Sie jetzt die Einverständniserklärung aus und schicken Sie sie unterschrieben an uns zurück oder bringen Sie sie im Gemeindebüro vorbei.</p>
             </div>
-            <button class="btn btn-primary mt-3">Einverständniserklärung drucken</button>
+            <button class="btn btn-primary mt-3" (click)="printWaiver()">Einverständniserklärung drucken</button>
           </div>
         </div>
       </div>
       <div class="col-lg-6 mb-3">
         <div class="card" [ngClass]="{ 'border-danger': !reg.payment || !reg.payment.received }">
           <div class="card-body">
-            <h3 class="card-title">Teilnahmebeitrag</h3>
+            <h3 class="card-title">Teilnahmebeitrag € {{ reg.price.total | number:'1.2-2' }}</h3>
             <div *ngIf="reg.payment && reg.payment.received">
               <p class="card-text">Wir haben Ihren Teilnahmebeitrag erhalten. Vielen Dank!</p>
             </div>
             <div *ngIf="!reg.payment || !reg.payment.received">
-              <p class="card-text text-danger">Wir haben Ihren Teilnahmebeitrag von <strong>TODO</strong> noch nicht erhalten.</p>
+              <p class="card-text text-danger">Wir haben Ihren Teilnahmebeitrag noch nicht erhalten.</p>
               <p class="card-text">Bitte überweisen Sie den Betrag auf das folgende Konto:</p>
               <p class="card-text">
                 Begünstigter: EMK Rothenbergen<br>

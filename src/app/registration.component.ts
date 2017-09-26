@@ -6,13 +6,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { RegistrationService } from './registration.service';
 import { CustomValidators } from './validators';
-import { Registration, ShirtSize } from './model';
-
-
-interface PriceElement {
-  label: string;
-  price: number;
-}
+import { Registration, ShirtSize, Price, PriceElement } from './model';
 
 
 @Component({
@@ -23,8 +17,7 @@ export class RegistrationComponent {
   error: string;
   form: FormGroup;
   shirtSizes = ShirtSize.values;
-  priceElements: PriceElement[];
-  totalPrice: number;
+  price: Price;
 
   constructor(private router: Router, private registrationService: RegistrationService, formBuilder: FormBuilder) {
     this.form = formBuilder.group({
@@ -51,15 +44,9 @@ export class RegistrationComponent {
       }),
     });
 
-    this.form.get('child.nextChild').valueChanges.forEach(this.updatePrice.bind(this));
-    this.updatePrice(false);
-  }
-
-  private updatePrice(nextChild) {
-    const priceElements = [{ label: 'Teilnahmebeitrag', price: 30 }];
-    if (nextChild) priceElements.push({ label: 'Ermäßigung für Geschwisterkind', price: -5 });
-    this.priceElements = priceElements;
-    this.totalPrice = priceElements.reduce((a, b) => a += b.price, 0);
+    const updatePrice = values => this.price = new Registration(values).price;
+    this.form.valueChanges.forEach(updatePrice);
+    updatePrice(this.form.value);
   }
 
   submit() {

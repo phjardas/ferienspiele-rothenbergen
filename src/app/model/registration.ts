@@ -1,6 +1,7 @@
 import { FirebaseModel } from './firebase-model';
 import { Child } from './child';
 import { Parent } from './parent';
+import { Price, PriceElement } from './price';
 
 export class Registration implements FirebaseModel {
   public id: string;
@@ -13,6 +14,13 @@ export class Registration implements FirebaseModel {
     this.child = new Child(data.child);
     this.parent = new Parent(data.parent);
     this.registeredAt = new Date(data.registeredAt);
+  }
+
+  get price(): Price {
+    const elements: PriceElement[] = [{ label: 'Teilnahmebeitrag', price: 30 }];
+    if (this.child.nextChild) elements.push({ label: 'Ermäßigung für Geschwisterkind', price: -5 });
+    const totalPrice = elements.reduce((a, b) => a += b.price, 0);
+    return new Price(totalPrice, elements);
   }
 
   toFirebase(): any {

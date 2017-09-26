@@ -185,11 +185,11 @@
         <tfoot>
           <tr>
             <th>Gesamtbetrag</th>
-            <th class="number">{{ totalPrice | number:'1.2-2' }}</th>
+            <th class="number">{{ price.total | number:'1.2-2' }}</th>
           </tr>
         </tfoot>
         <tbody>
-          <tr *ngFor="let el of priceElements">
+          <tr *ngFor="let el of price.elements">
             <td>{{ el.label }}</td>
             <td class="number">{{ el.price | number:'1.2-2' }}</td>
           </tr>
