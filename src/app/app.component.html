@@ -1,0 +1,10 @@
+<main-menu></main-menu>
+
+<router-outlet></router-outlet>
+
+<div class="footer">
+  <div class="container">
+    Feriespiele Rothenbergen – Version {{ version.version }}-{{ version.revision }}
+    <span *ngIf="!production" class="badge badge-danger">development</span>
+  </div>
+</div>

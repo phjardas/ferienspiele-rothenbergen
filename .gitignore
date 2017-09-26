@@ -1,0 +1,15 @@
+# generated versions
+/src/environments/version.ts
+
+# compiled output
+/dist
+
+# dependencies
+/node_modules
+
+# logs
+*.log
+
+# system files
+.DS_Store
+Thumbs.db
