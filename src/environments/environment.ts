@@ -6,11 +6,11 @@
 export const environment = {
   production: false,
   firebase: {
-    apiKey: 'AIzaSyD5IlsvQ5Ie2mUAsbENSc_BPpLpmF-yJzw',
-    authDomain: 'drivr-f620a.firebaseapp.com',
-    databaseURL: 'https://drivr-f620a.firebaseio.com',
-    projectId: 'drivr-f620a',
-    storageBucket: 'drivr-f620a.appspot.com',
-    messagingSenderId: '908979870448',
+    apiKey: "AIzaSyAv_pH6lX9XXQYKV8Gu4a_feqcIJCpDo2I",
+    authDomain: "feriespiele-rothenbergen.firebaseapp.com",
+    databaseURL: "https://feriespiele-rothenbergen.firebaseio.com",
+    projectId: "feriespiele-rothenbergen",
+    storageBucket: "feriespiele-rothenbergen.appspot.com",
+    messagingSenderId: "527240705336"
   }
 };
