@@ -1,17 +1,61 @@
-<div class="jumbotron jumbotron-fluid" *ngIf="!reg">
+<div class="jumbotron jumbotron-fluid" *ngIf="reg == null">
   <div class="container">
     <h2 class="display-3">lädt…</h2>
   </div>
 </div>
 
-<div *ngIf="reg">
+<div *ngIf="reg != null">
   <div class="jumbotron jumbotron-fluid">
     <div class="container">
       <h2 class="display-3">{{reg.child.firstName}} {{reg.child.lastName}}</h2>
+      <p>Angemeldet am {{ reg.registeredAt | date }}</p>
     </div>
   </div>
 
   <div class="container">
-    <pre>{{ reg | json }}</pre>
+    <div class="row">
+      <div class="col-lg-6 mb-3">
+        <div class="card" [ngClass]="{ 'border-danger': !reg.waiver || !reg.waiver.received }">
+          <div class="card-body">
+            <h3 class="card-title">Einverständniserklärung</h3>
+            <div *ngIf="reg.waiver && reg.waiver.received">
+              <p class="card-text">Wir haben Ihre Einverständniserklärung erhalten.</p>
+            </div>
+            <div *ngIf="!reg.waiver || !reg.waiver.received">
+              <p class="card-text text-danger">Wir haben Ihre Einverständniserklärung noch nicht erhalten.</p>
+              <p class="card-text">Bitte drucken Sie jetzt die Einverständniserklärung aus und schicken Sie sie unterschrieben an uns zurück oder bringen Sie sie im Gemeindebüro vorbei.</p>
+            </div>
+            <button class="btn btn-primary mt-3">Einverständniserklärung drucken</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6 mb-3">
+        <div class="card" [ngClass]="{ 'border-danger': !reg.payment || !reg.payment.received }">
+          <div class="card-body">
+            <h3 class="card-title">Teilnahmebeitrag</h3>
+            <div *ngIf="reg.payment && reg.payment.received">
+              <p class="card-text">Wir haben Ihren Teilnahmebeitrag erhalten. Vielen Dank!</p>
+            </div>
+            <div *ngIf="!reg.payment || !reg.payment.received">
+              <p class="card-text text-danger">Wir haben Ihren Teilnahmebeitrag von <strong>TODO</strong> noch nicht erhalten.</p>
+              <p class="card-text">Bitte überweisen Sie den Betrag auf das folgende Konto:</p>
+              <p class="card-text">
+                Begünstigter: EMK Rothenbergen<br>
+                IBAN: DE38507500940027050992<br>
+                BIC: HELADEF1GEL<br>
+                Verwendungszweck: "Ferienspiele {{reg.child.firstName}} {{reg.child.lastName}}"
+              </p>
+              <p class="card-text">Sie können den Teilnahmebeitrag auch in bar bezahlen:</p>
+              <p class="card-text">
+                Büro der Katholischen Kirche "Christkönig"<br>
+                Niedergründauer Straße 20<br>
+                63584 Rothenbergen
+              </p>
+              <p class="card-text">Sie können das Geld und die Einverstädniserklärung auch im Sekretariat der Anton Calaminus Schule in Rothenbergen abgeben.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
