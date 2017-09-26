@@ -10,24 +10,30 @@ import { environment } from '../environments/environment';
 import { AuthenticationService } from './authentication.service';
 import { RegistrationService } from './registration.service';
 import { AppComponent } from './app.component';
-import { MainMenuComponent } from './main-menu.component';
 import { DashboardComponent } from './dashboard.component';
+import { LoginComponent } from './login.component';
+import { MainMenuComponent } from './main-menu.component';
 import { RegistrationComponent } from './registration.component';
 import { RegistrationDetailsComponent } from './registration-details.component';
+import { DashboardComponent as OfficeDashboardComponent } from './office';
 
 const routes: Routes = [
   { path: 'registration', component: RegistrationComponent },
   { path: 'registration/:id', component: RegistrationDetailsComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'office', component: OfficeDashboardComponent },
   { path: '', component: DashboardComponent },
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
-    MainMenuComponent,
+    LoginComponent,
     DashboardComponent,
+    MainMenuComponent,
     RegistrationComponent,
     RegistrationDetailsComponent,
+    OfficeDashboardComponent,
   ],
   imports: [
     BrowserModule,

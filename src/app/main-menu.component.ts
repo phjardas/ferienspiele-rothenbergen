@@ -1,9 +1,8 @@
 import { Component, OnDestroy } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
-import { User } from 'firebase/app';
 
-import { AuthenticationService, AuthenticationProvider } from './authentication.service';
+import { AuthenticationService, AuthenticationProvider, User } from './authentication.service';
 
 
 @Component({
@@ -18,10 +17,6 @@ export class MainMenuComponent implements OnDestroy {
   constructor(private authenticationService: AuthenticationService) {
     this.subscription = authenticationService.user.subscribe(user => this.user = user);
     this.authenticationProviders = authenticationService.providers;
-  }
-
-  signin(type) {
-    this.authenticationService.signin(type);
   }
 
   signout() {
