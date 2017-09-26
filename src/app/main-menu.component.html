@@ -5,6 +5,23 @@
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent"></div>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto" *ngIf="user && user.hasRole('office')">
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/office']">Anmeldungen</a>
+        </li>
+      </ul>
+
+      <ul class="navbar-nav" *ngIf="user != null">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" data-toggle="dropdown">
+            <i class="fa fa-user mr-1"></i> {{user.label}}
+          </a>
+          <div class="dropdown-menu">
+            <button class="dropdown-item" href="#" (click)="signout()"><i class="fa fa-sign-out mr-1"></i> Sign out</button>
+          </div>
+        </li>
+      </ul>
+    </div>
   </div>
 </nav>

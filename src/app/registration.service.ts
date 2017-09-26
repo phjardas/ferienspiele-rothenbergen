@@ -32,4 +32,8 @@ export class RegistrationService {
     const promise: PromiseLike<string> = this.db.list('/registrations').push(regData).then(x => x.key);
     return Observable.fromPromise(promise).mergeMap(id => this.getRegistration(id));
   }
+
+  getRegistrations(): Observable<Registration[]> {
+    return this.db.list('/registrations').map(datas => datas.map(data => new Registration(data)));
+  }
 }
