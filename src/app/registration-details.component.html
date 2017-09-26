@@ -1,0 +1,17 @@
+<div class="jumbotron jumbotron-fluid" *ngIf="!reg">
+  <div class="container">
+    <h2 class="display-3">lädt…</h2>
+  </div>
+</div>
+
+<div *ngIf="reg">
+  <div class="jumbotron jumbotron-fluid">
+    <div class="container">
+      <h2 class="display-3">{{reg.child.firstName}} {{reg.child.lastName}}</h2>
+    </div>
+  </div>
+
+  <div class="container">
+    <pre>{{ reg | json }}</pre>
+  </div>
+</div>
