@@ -8,6 +8,9 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 
 import { environment } from '../environments/environment';
 
+import { AppRoutingModule } from './app-routing.module';
+import { OfficeModule } from './office/office.module';
+
 import { AuthenticationService } from './authentication.service';
 import { RegistrationService } from './registration.service';
 import { WaiverService } from './waiver.service';
@@ -16,17 +19,10 @@ import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard.component';
 import { LoginComponent } from './login.component';
 import { MainMenuComponent } from './main-menu.component';
+import { PageNotFoundComponent } from './page-not-found.component';
 import { RegistrationComponent } from './registration.component';
 import { RegistrationDetailsComponent } from './registration-details.component';
-import { DashboardComponent as OfficeDashboardComponent } from './office';
 
-const routes: Routes = [
-  { path: 'registration', component: RegistrationComponent },
-  { path: 'registration/:id', component: RegistrationDetailsComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'office', component: OfficeDashboardComponent },
-  { path: '', component: DashboardComponent },
-];
 
 @NgModule({
   declarations: [
@@ -34,17 +30,18 @@ const routes: Routes = [
     LoginComponent,
     DashboardComponent,
     MainMenuComponent,
+    PageNotFoundComponent,
     RegistrationComponent,
     RegistrationDetailsComponent,
-    OfficeDashboardComponent,
   ],
   imports: [
     BrowserModule,
     ReactiveFormsModule,
-    RouterModule.forRoot(routes),
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
+    OfficeModule,
+    AppRoutingModule,
   ],
   providers: [
     AuthenticationService,

@@ -7,10 +7,7 @@ import { RegistrationService } from '../registration.service';
 import { Registration } from '../model';
 
 
-@Component({
-  selector: 'office-dashboard',
-  templateUrl: 'dashboard.component.html'
-})
+@Component({ templateUrl: 'dashboard.component.html' })
 export class DashboardComponent {
   registrations: Observable<Registration[]>;
 

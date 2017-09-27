@@ -10,7 +10,6 @@ import { Registration, ShirtSize, Price, PriceElement } from './model';
 
 
 @Component({
-  selector: 'registration',
   templateUrl: 'registration.component.html'
 })
 export class RegistrationComponent {
@@ -53,7 +52,7 @@ export class RegistrationComponent {
     this.error = null;
     const reg = new Registration(this.form.value);
     this.registrationService.submitRegistration(reg).first().subscribe(
-      reg => this.router.navigate(['/registration', reg.id]),
+      reg => this.router.navigate(['/anmeldung', reg.id]),
       err => this.error = err.message
     );
   }
