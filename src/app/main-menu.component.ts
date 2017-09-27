@@ -2,7 +2,7 @@ import { Component, OnDestroy } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 
-import { AuthenticationService, AuthenticationProvider, User } from './authentication.service';
+import { AuthenticationService, AuthenticationProvider, User } from './auth/authentication.service';
 
 
 @Component({

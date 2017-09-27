@@ -9,9 +9,8 @@ import { Observable } from 'rxjs/Observable';
 import { AngularFireDatabase } from 'angularfire2/database';
 import * as firebase from 'firebase';
 
-import { AuthenticationService, User } from './authentication.service';
 import { WaiverService } from './waiver.service';
-import { Registration, Approval, ShirtSize } from './model';
+import { Registration } from './model';
 
 
 function toData(obj: any): any {
@@ -30,7 +29,6 @@ function toPromise<T>(promise: firebase.Promise<T>): Promise<T> {
 export class RegistrationService {
   constructor(
     private db: AngularFireDatabase,
-    private auth: AuthenticationService,
     private waiverService: WaiverService
   ) {}
 
@@ -46,34 +44,11 @@ export class RegistrationService {
     return Observable.fromPromise(promise).mergeMap(id => this.getRegistration(id));
   }
 
-  getRegistrations(): Observable<Registration[]> {
-    return this.db.list('/registrations').map(datas => datas.map(data => new Registration(data)));
-  }
-
-  setPaymentReceived(id: string, received: boolean): Promise<any> {
-    return this.setApproval(id, 'payment', received);
-  }
-
-  setWaiverReceived(id: string, received: boolean): Promise<any> {
-    return this.setApproval(id, 'waiver', received);
-  }
-
   getWaiver(reg: Registration): Promise<Blob> {
     try {
       return Promise.resolve(this.waiverService.createWaiver(reg));
     } catch (err) {
       return Promise.reject(err);
-    }
-  }
-
-  private setApproval(id: string, type: string, received: boolean) {
-    // FIXME validate permissions!
-    const ref = this.db.object(`/registrations/${id}/${type}`);
-
-    if (received) {
-      return this.auth.user.first().mergeMap(user => Observable.fromPromise(ref.set({ timestamp: firebase.database.ServerValue.TIMESTAMP, user: user.label }))).toPromise();
-    } else {
-      return toPromise(ref.set(null));
     }
   }
 }
