@@ -2,6 +2,10 @@
   <div class="container">
     <h1 class="display-3">Anmeldungen</h1>
     <p class="lead" *ngIf="registrations | async">{{ (registrations | async).length }} Anmeldung{{ (registrations | async).length > 1 ? 'en' : '' }}</p>
+    <button class="btn btn-primary" (click)="export()">
+      <i class="fa fa-table mr-1"></i>
+      Daten herunterladen
+    </button>
   </div>
 </div>
 
