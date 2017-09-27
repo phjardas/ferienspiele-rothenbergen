@@ -10,7 +10,7 @@ import { RegistrationDetailsComponent } from './registration-details.component';
 
 const routes: Routes = [
   {
-    path: 'office',
+    path: '',
     component: OfficeComponent,
     canActivate: [RoleGuard],
     data: { roles: ['office'] },

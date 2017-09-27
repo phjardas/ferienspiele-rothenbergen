@@ -10,7 +10,6 @@ import { environment } from '../environments/environment';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AuthModule } from './auth/auth.module';
-import { OfficeModule } from './office/office.module';
 
 import { RegistrationService } from './registration.service';
 import { WaiverService } from './waiver.service';
@@ -40,7 +39,6 @@ import { RegistrationDetailsComponent } from './registration-details.component';
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     AuthModule,
-    OfficeModule,
     AppRoutingModule,
   ],
   providers: [
