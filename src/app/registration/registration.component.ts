@@ -4,9 +4,9 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-import { RegistrationService } from './registration.service';
-import { CustomValidators } from './validators';
-import { Registration, ShirtSize, Price, PriceElement } from './model';
+import { RegistrationService } from '../registration.service';
+import { CustomValidators } from '../validators';
+import { Registration, ShirtSize, Price, PriceElement } from '../model';
 
 
 @Component({
