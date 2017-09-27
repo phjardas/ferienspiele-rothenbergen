@@ -45,12 +45,6 @@ export class AuthenticationService {
       icon: 'google',
       providerFactory: () => new firebase.auth.GoogleAuthProvider(),
     },
-    {
-      id: 'github',
-      label: 'GitHub',
-      icon: 'github',
-      providerFactory: () => new firebase.auth.GithubAuthProvider(),
-    },
   ];
 
   constructor(private db: AngularFireDatabase, private auth: AngularFireAuth) {

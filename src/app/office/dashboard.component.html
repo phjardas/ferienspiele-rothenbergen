@@ -23,7 +23,7 @@
     <tbody>
       <tr *ngFor="let reg of registrations | async">
         <td>
-          <a [routerLink]="['/registration', reg.id]">{{ reg.child.lastName }}, {{ reg.child.firstName }}</a>
+          <a [routerLink]="['anmeldung', reg.id]">{{ reg.child.lastName }}, {{ reg.child.firstName }}</a>
         </td>
         <td>{{ reg.child.gender.label }}</td>
         <td>{{ reg.child.dateOfBirth | date }}</td>

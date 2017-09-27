@@ -12,7 +12,6 @@ import { AuthenticationService, AuthenticationProvider } from './authentication.
 
 
 @Component({
-  selector: 'login',
   templateUrl: './login.component.html'
 })
 export class LoginComponent implements OnDestroy {

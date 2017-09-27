@@ -5,7 +5,6 @@ import { Registration } from './model';
 @Injectable()
 export class WaiverService {
   createWaiver(reg: Registration): Blob {
-    console.log('creating waiver for %s', reg.id);
     const doc = new PDF({
       orientation: 'portrait',
       unit: 'mm',
