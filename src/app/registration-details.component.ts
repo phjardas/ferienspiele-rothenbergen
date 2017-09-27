@@ -26,7 +26,11 @@ export class RegistrationDetailsComponent implements OnDestroy {
   }
 
   printWaiver() {
-    alert('FIXME: not implemented yet!');
+    this.registrationService.getWaiver(this.reg)
+      .then(blob => {
+        const url = URL.createObjectURL(blob);
+        window.location.href = url;
+      });
   }
 
   setPaymentReceived(received: boolean) {

@@ -7,8 +7,11 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 
 import { environment } from '../environments/environment';
+
 import { AuthenticationService } from './authentication.service';
 import { RegistrationService } from './registration.service';
+import { WaiverService } from './waiver.service';
+
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard.component';
 import { LoginComponent } from './login.component';
@@ -44,8 +47,9 @@ const routes: Routes = [
     AngularFireAuthModule,
   ],
   providers: [
-    RegistrationService,
     AuthenticationService,
+    RegistrationService,
+    WaiverService,
   ],
   bootstrap: [AppComponent]
 })
