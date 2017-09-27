@@ -28,7 +28,12 @@ body {
   background: #e9ecef;
   padding: 1rem 0;
 
-  .badge {
-    font-size: .7rem;
+  .version {
+    display: none;
   }
+}
+
+@media(max-width: 575px) {
+  .display-3 { font-size: 3rem; }
+  .lead { font-size: 1rem; }
 }

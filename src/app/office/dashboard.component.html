@@ -23,8 +23,12 @@
         </td>
         <td>{{ reg.child.gender.label }}</td>
         <td>{{ reg.child.dateOfBirth | date }}</td>
-        <td>{{ reg.payment ? 'ja' : 'nein' }}</td>
-        <td>{{ reg.waiver ? 'ja' : 'nein' }}</td>
+        <td>
+          <i class="fa fa-times mr-1" aria-hidden="true" [ngClass]="{ 'fa-check': !!reg.payment, 'fa-times': !reg.payment }"></i>
+        </td>
+        <td>
+          <i class="fa fa-times mr-1" aria-hidden="true" [ngClass]="{ 'fa-check': !!reg.waiver, 'fa-times': !reg.waiver }"></i>
+        </td>
       </tr>
     </tbody>
   </table>

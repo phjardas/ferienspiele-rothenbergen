@@ -10,6 +10,7 @@ import { AngularFireDatabase } from 'angularfire2/database';
 import * as firebase from 'firebase';
 
 import { AuthenticationService, User } from './authentication.service';
+import { WaiverService } from './waiver.service';
 import { Registration, Approval, ShirtSize } from './model';
 
 
@@ -27,7 +28,11 @@ function toPromise<T>(promise: firebase.Promise<T>): Promise<T> {
 
 @Injectable()
 export class RegistrationService {
-  constructor(private db: AngularFireDatabase, private auth: AuthenticationService) {}
+  constructor(
+    private db: AngularFireDatabase,
+    private auth: AuthenticationService,
+    private waiverService: WaiverService
+  ) {}
 
   getRegistration(id: string): Observable<Registration> {
     return this.db.object(`/registrations/${id}`).map(data => new Registration(data));
@@ -51,6 +56,14 @@ export class RegistrationService {
 
   setWaiverReceived(id: string, received: boolean): Promise<any> {
     return this.setApproval(id, 'waiver', received);
+  }
+
+  getWaiver(reg: Registration): Promise<Blob> {
+    try {
+      return Promise.resolve(this.waiverService.createWaiver(reg));
+    } catch (err) {
+      return Promise.reject(err);
+    }
   }
 
   private setApproval(id: string, type: string, received: boolean) {
