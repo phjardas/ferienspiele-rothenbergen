@@ -37,7 +37,7 @@ function toPromise<T>(promise: firebase.Promise<T>): Promise<T> {
 
 @Injectable()
 export class AuthenticationService {
-  public user = new BehaviorSubject<User>(null);
+  public user: Observable<User>;
   public providers : AuthenticationProvider[] = [
     {
       id: 'google',
@@ -48,11 +48,12 @@ export class AuthenticationService {
   ];
 
   constructor(private db: AngularFireDatabase, private auth: AngularFireAuth) {
-    auth.authState.mergeMap(user => this.loadDetails(user)).subscribe(this.user.next.bind(this.user));
+    this.user = auth.authState.mergeMap(user => user ? this.loadDetails(user) : Observable.of(null));
   }
 
   private loadDetails(user: firebase.User): Observable<User> {
-    return (user !== null ? this.db.object(`/users/${user.uid}`).first() : Observable.of(null))
+    return this.db.object(`/users/${user.uid}`)
+      .first()
       .map(usr => {
         const roles = usr && usr.roles ? Object.keys(usr.roles).filter(role => usr.roles[role]) : [];
         return new User(user.uid, user.email, user.displayName, roles);
