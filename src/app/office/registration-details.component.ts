@@ -4,8 +4,8 @@ import { Component, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 
-import { AuthenticationService, User } from '../authentication.service';
-import { RegistrationService } from '../registration.service';
+import { AuthenticationService, User } from '../auth/authentication.service';
+import { RegistrationService } from './registration.service';
 import { Registration } from '../model';
 
 
@@ -17,7 +17,11 @@ export class RegistrationDetailsComponent implements OnDestroy {
   user: User;
   reg: Registration;
 
-  constructor(private route: ActivatedRoute, auth: AuthenticationService, private registrationService: RegistrationService) {
+  constructor(
+    private route: ActivatedRoute,
+    auth: AuthenticationService,
+    private registrationService: RegistrationService
+  ) {
     this.subscription = auth.user.subscribe(user => this.user = user);
     this.subscription.add(route.paramMap
       .mergeMap(params => this.registrationService.getRegistration(params.get('id')))

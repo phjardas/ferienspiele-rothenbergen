@@ -9,15 +9,15 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { environment } from '../environments/environment';
 
 import { AppRoutingModule } from './app-routing.module';
+import { AuthModule } from './auth/auth.module';
 import { OfficeModule } from './office/office.module';
 
-import { AuthenticationService } from './authentication.service';
 import { RegistrationService } from './registration.service';
 import { WaiverService } from './waiver.service';
 
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard.component';
-import { LoginComponent } from './login.component';
+import { LoginComponent } from './auth/login.component';
 import { MainMenuComponent } from './main-menu.component';
 import { PageNotFoundComponent } from './page-not-found.component';
 import { RegistrationComponent } from './registration.component';
@@ -27,7 +27,6 @@ import { RegistrationDetailsComponent } from './registration-details.component';
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
     DashboardComponent,
     MainMenuComponent,
     PageNotFoundComponent,
@@ -40,11 +39,11 @@ import { RegistrationDetailsComponent } from './registration-details.component';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
+    AuthModule,
     OfficeModule,
     AppRoutingModule,
   ],
   providers: [
-    AuthenticationService,
     RegistrationService,
     WaiverService,
   ],
