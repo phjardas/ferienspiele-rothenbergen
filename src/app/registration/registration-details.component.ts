@@ -4,8 +4,8 @@ import { Component, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 
-import { RegistrationService } from './registration.service';
-import { Registration } from './model';
+import { RegistrationService } from '../registration.service';
+import { Registration } from '../model';
 
 
 @Component({
