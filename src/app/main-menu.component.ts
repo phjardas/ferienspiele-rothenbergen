@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 
-import { AuthenticationService, AuthenticationProvider, User } from './auth/authentication.service';
+import { AuthenticationService, AuthenticationProvider, User } from './auth';
 
 
 @Component({

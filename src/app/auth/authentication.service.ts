@@ -1,6 +1,7 @@
 import 'rxjs/add/operator/first';
 import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/observable/of';
+import 'rxjs/add/observable/fromPromise';
 
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
@@ -9,24 +10,14 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase } from 'angularfire2/database';
 import * as firebase from 'firebase/app';
 
+import { User } from './user';
+
 
 export interface AuthenticationProvider {
   id: String,
   label: String,
   icon: String,
   providerFactory: () => firebase.auth.AuthProvider,
-}
-
-export class User {
-  constructor(public id: string, public email: string, public displayName: string, public roles: string[]) {}
-
-  get label(): string {
-    return this.displayName || this.email;
-  }
-
-  hasRole(role): boolean {
-    return this.roles.indexOf(role) >= 0;
-  }
 }
 
 
@@ -51,13 +42,26 @@ export class AuthenticationService {
     this.user = auth.authState.mergeMap(user => user ? this.loadDetails(user) : Observable.of(null));
   }
 
+  private maybeCreateUser(fb: firebase.User, usr: any): Observable<User> {
+    let data: any = {
+      $key: fb.uid,
+      email: fb.email,
+      displayName: fb.displayName,
+    };
+
+    if (usr.$exists()) {
+      Object.assign(data, usr);
+      return Observable.of(new User(data));
+    }
+
+    const user = new User(data);
+    return Observable.fromPromise(this.db.object(`/users/${fb.uid}`).set(user.toFirebase())).map(_=> user);
+  }
+
   private loadDetails(user: firebase.User): Observable<User> {
     return this.db.object(`/users/${user.uid}`)
       .first()
-      .map(usr => {
-        const roles = usr && usr.roles ? Object.keys(usr.roles).filter(role => usr.roles[role]) : [];
-        return new User(user.uid, user.email, user.displayName, roles);
-      });
+      .mergeMap(usr => this.maybeCreateUser(user, usr));
   }
 
   private getSigninProvider(type: string): firebase.auth.AuthProvider {

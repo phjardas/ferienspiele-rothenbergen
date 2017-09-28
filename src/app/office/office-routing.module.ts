@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { RoleGuard } from '../auth/guard';
+import { RoleGuard } from '../auth';
 
 import { DashboardComponent } from './dashboard.component';
 import { OfficeComponent } from './office.component';

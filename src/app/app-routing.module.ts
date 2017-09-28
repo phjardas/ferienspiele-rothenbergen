@@ -20,6 +20,12 @@ const routes: Routes = [
     canLoad: [RoleGuard],
     data: { roles: ['office']}
   },
+  {
+    path: 'admin',
+    loadChildren: 'app/admin/admin.module#AdminModule',
+    canLoad: [RoleGuard],
+    data: { roles: ['admin']}
+  },
   { path: '', component: DashboardComponent, pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent },
 ];
