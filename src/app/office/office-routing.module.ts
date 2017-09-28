@@ -16,7 +16,8 @@ const routes: Routes = [
     data: { roles: ['office'] },
     children: [
       { path: 'anmeldung/:id', component: RegistrationDetailsComponent },
-      { path: '', component: DashboardComponent },
+      { path: 'anmeldungen', component: DashboardComponent },
+      { path: '', redirectTo: 'anmeldungen' },
     ]
   },
 ];

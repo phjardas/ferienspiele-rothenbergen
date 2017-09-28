@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  template: `<router-outlet></router-outlet>`
+  templateUrl: 'office.component.html'
 })
 export class OfficeComponent {
 }
