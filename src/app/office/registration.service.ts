@@ -10,7 +10,7 @@ import { AngularFireDatabase } from 'angularfire2/database';
 import * as firebase from 'firebase';
 
 import { RegistrationService as BaseRegistrationService } from '../registration.service';
-import { AuthenticationService, User } from '../auth/authentication.service';
+import { AuthenticationService, User } from '../auth';
 import { Registration, Approval } from '../model';
 
 

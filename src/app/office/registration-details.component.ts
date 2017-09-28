@@ -4,7 +4,7 @@ import { Component, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 
-import { AuthenticationService, User } from '../auth/authentication.service';
+import { AuthenticationService, User } from '../auth';
 import { RegistrationService } from './registration.service';
 import { Registration } from '../model';
 
