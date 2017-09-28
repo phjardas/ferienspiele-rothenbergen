@@ -5,8 +5,9 @@ import { User } from 'firebase/app';
 import { version } from '../environments/version';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html'
+  selector: 'app',
+  templateUrl: './app.component.html',
+  host: { 'class': '' }
 })
 export class AppComponent {
   version = version;
