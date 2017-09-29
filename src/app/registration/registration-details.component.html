@@ -10,19 +10,32 @@
   <div class="jumbotron jumbotron-fluid">
     <div class="container">
       <h2 class="display-3">{{reg.child.firstName}} {{reg.child.lastName}}</h2>
-      <p>Angemeldet am {{ reg.registeredAt | date }}</p>
+      <p class="lead">
+        <i class="fa fa-child mr-1" aria-hidden="true"></i>
+        Hurra! Sie haben {{ reg.child.firstName }} am {{ reg.registeredAt | date }} angemeldet.
+      </p>
+
+      <div *ngIf="!reg.payment || !reg.waiver">
+        <p class="text-danger">
+          <i class="fa fa-exclamation-triangle mr-1" aria-hidden="true"></i>
+          <strong>Die Anmeldung ist noch nicht vollständig!</strong>
+        </p>
+        <p>Bitte führen Sie folgende Schritte durch, um die Anmeldung abzuschließen:</p>
+        <ul class="mb-0">
+          <li *ngIf="!reg.payment">Bitte bezahlen Sie den Teilnahmebeitrag von € {{ reg.price.total | number:'1.2-2' }}.</li>
+          <li *ngIf="!reg.waiver">Bitte unterschreiben Sie die Einverständniserklärung bis zum {{ waiverDeadline | date }}.</li>
+        </ul>
+      </div>
+      <div *ngIf="reg.payment && reg.waiver">
+        <p class="text-success">
+          <i class="fa fa-check mr-1" aria-hidden="true"></i>
+          <strong>Die Anmeldung ist vollständig abgeschlossen. Wir freuen uns auf {{ reg.child.firstName }}!</strong>
+        </p>
+      </div>
     </div>
   </div>
 
   <div class="container">
-    <div class="alert alert-danger" *ngIf="!reg.payment || !reg.waiver">
-      <strong>Die Anmeldung ist noch nicht vollständig:</strong>
-      <ul class="mb-0">
-        <li *ngIf="!reg.payment">Bitte bezahlen Sie den Teilnahmebeitrag von € {{ reg.price.total | number:'1.2-2' }}.</li>
-        <li *ngIf="!reg.waiver">Bitte unterschreiben Sie die Einverständniserklärung bis zum {{ waiverDeadline | date }}.</li>
-      </ul>
-    </div>
-
     <div class="row">
       <div class="col-lg-6 mb-3">
         <div class="card" [ngClass]="{ 'border-danger': !reg.payment }">
