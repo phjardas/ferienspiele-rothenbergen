@@ -9,6 +9,7 @@ import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AuthModule } from './auth';
 
+import { ConfigurationService } from './configuration.service';
 import { RegistrationService } from './registration.service';
 import { WaiverService } from './waiver.service';
 
@@ -16,6 +17,7 @@ import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard.component';
 import { MainMenuComponent } from './main-menu.component';
 import { PageNotFoundComponent } from './page-not-found.component';
+import { SpinnerComponent } from './spinner.component';
 
 
 @NgModule({
@@ -32,8 +34,10 @@ import { PageNotFoundComponent } from './page-not-found.component';
     DashboardComponent,
     MainMenuComponent,
     PageNotFoundComponent,
+    SpinnerComponent,
   ],
   providers: [
+    ConfigurationService,
     RegistrationService,
     WaiverService,
   ],
