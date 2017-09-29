@@ -1,11 +1,11 @@
 <div class="jumbotron jumbotron-fluid">
   <div class="container">
-    <h2 class="display-3">Wunderbar gemacht!</h2>
+    <spinner *ngIf="!(title|async)"></spinner>
 
-    <div class="mt-5">
-      <div *ngIf="(registrationOpen|async) === null">
-        <spinner></spinner>
-      </div>
+    <div *ngIf="(title|async)">
+      <h2 class="display-3">{{ title|async }}</h2>
+
+      <spinner *ngIf="(registrationOpen|async) === null"></spinner>
 
       <div *ngIf="(registrationOpen|async) === 'ok'">
         <p class="lead">Anmeldeschluss ist am {{ registrationDeadline | async | date }}</p>
