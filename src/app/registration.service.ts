@@ -54,7 +54,8 @@ export class RegistrationService {
   }
 
   getRegistration(id: string): Observable<Registration> {
-    return this.db.object(`/registrations/${id}`).map(data => new Registration(data));
+    return this.db.object(`/registrations/${id}`)
+      .map(data => data.$exists() ? new Registration(data) : null);
   }
 
   submitRegistration(reg: Registration): Observable<Registration> {

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule }   from '@angular/common';
 
+import { PageNotFoundComponent } from './page-not-found.component';
 import { SpinnerComponent } from './spinner.component';
 
 
@@ -9,9 +10,11 @@ import { SpinnerComponent } from './spinner.component';
     CommonModule,
   ],
   declarations: [
+    PageNotFoundComponent,
     SpinnerComponent,
   ],
   exports: [
+    PageNotFoundComponent,
     SpinnerComponent,
   ]
 })
