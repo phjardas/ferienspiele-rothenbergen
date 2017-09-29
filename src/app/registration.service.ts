@@ -32,14 +32,16 @@ export class RegistrationService {
   private registrationCount: Observable<number>;
   public registrationOpen: Observable<string>;
   public registrationDeadline: Observable<string>;
+  public waiverDeadline: Observable<string>;
 
   constructor(
     private db: AngularFireDatabase,
-    config: ConfigurationService,
+    private config: ConfigurationService,
     private waiverService: WaiverService
   ) {
     this.registrationCount = db.object('/registrationCount').map(c => c.$value);
     this.registrationDeadline = config.configuration.map(c => c.registrationDeadline);
+    this.waiverDeadline = config.configuration.map(c => c.waiverDeadline);
     this.registrationOpen = Observable.combineLatest(
       this.registrationDeadline.map(d => d >= new Date().toISOString().substring(0, 10)),
       config.configuration.map(c => c.maxParticipants).mergeMap(max => this.registrationCount.map(reg => reg < max)),
@@ -65,7 +67,9 @@ export class RegistrationService {
 
   getWaiver(reg: Registration): Promise<Blob> {
     try {
-      return Promise.resolve(this.waiverService.createWaiver(reg));
+      return this.config.configuration.first()
+        .map(config => this.waiverService.createWaiver(reg, config))
+        .toPromise();
     } catch (err) {
       return Promise.reject(err);
     }

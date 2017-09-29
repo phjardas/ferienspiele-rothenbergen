@@ -2,6 +2,7 @@ import 'rxjs/add/operator/mergeMap';
 
 import { Component, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 
 import { RegistrationService } from '../registration.service';
@@ -14,11 +15,15 @@ import { Registration } from '../model';
 export class RegistrationDetailsComponent implements OnDestroy {
   subscription: Subscription;
   reg: Registration;
+  registrationDeadline: string;
+  waiverDeadline: string;
 
   constructor(private route: ActivatedRoute, private registrationService: RegistrationService) {
     this.subscription = route.paramMap
       .mergeMap(params => this.registrationService.getRegistration(params.get('id')))
       .subscribe(reg => this.reg = reg);
+    this.subscription.add(registrationService.registrationDeadline.subscribe(d => this.registrationDeadline = d));
+    this.subscription.add(registrationService.waiverDeadline.subscribe(d => this.waiverDeadline = d));
   }
 
   printWaiver() {

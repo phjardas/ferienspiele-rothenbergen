@@ -3,6 +3,7 @@ import 'rxjs/add/operator/first';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Observable } from 'rxjs/Observable';
 
 import { RegistrationService } from '../registration.service';
 import { CustomValidators } from '../validators';
@@ -17,8 +18,11 @@ export class RegistrationComponent {
   form: FormGroup;
   shirtSizes = ShirtSize.values;
   price: Price;
+  registrationDeadline: Observable<string>;
 
   constructor(private router: Router, private registrationService: RegistrationService, formBuilder: FormBuilder) {
+    this.registrationDeadline = registrationService.registrationDeadline;
+
     this.form = formBuilder.group({
       child: formBuilder.group({
         firstName: ['Testine', Validators.required],

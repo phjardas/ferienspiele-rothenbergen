@@ -6,6 +6,7 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 
 import { environment } from '../environments/environment';
 
+import { SharedModule } from './shared.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AuthModule } from './auth';
 
@@ -26,6 +27,7 @@ import { SpinnerComponent } from './spinner.component';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
+    SharedModule,
     AuthModule,
     AppRoutingModule,
   ],
@@ -34,7 +36,6 @@ import { SpinnerComponent } from './spinner.component';
     DashboardComponent,
     MainMenuComponent,
     PageNotFoundComponent,
-    SpinnerComponent,
   ],
   providers: [
     ConfigurationService,
