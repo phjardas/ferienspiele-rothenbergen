@@ -3,7 +3,12 @@
     <h1 class="display-3">Admin</h1>
 
     <nav class="nav nav-tabs mt-5">
-      <a class="nav-item nav-link" [routerLink]="['users']" routerLinkActive="active">Benutzer</a>
+      <a class="nav-item nav-link" [routerLink]="['config']" routerLinkActive="active">
+        <i class="fa fa-cog mr-1"></i> Einstellungen
+      </a>
+      <a class="nav-item nav-link" [routerLink]="['users']" routerLinkActive="active">
+        <i class="fa fa-user mr-1"></i> Benutzer
+      </a>
     </nav>
   </div>
 </div>

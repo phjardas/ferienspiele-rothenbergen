@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { RoleGuard } from '../auth';
 
 import { AdminComponent } from './admin.component';
+import { ConfigComponent } from './config.component';
 import { UsersComponent } from './users.component';
 
 
@@ -15,7 +16,8 @@ const routes: Routes = [
     data: { roles: ['admin'] },
     children: [
       { path: 'users', component: UsersComponent },
-      { path: '', redirectTo: 'users' },
+      { path: 'config', component: ConfigComponent },
+      { path: '', redirectTo: 'config' },
     ]
   },
 ];
