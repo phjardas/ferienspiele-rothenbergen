@@ -59,8 +59,6 @@ export class RegistrationService {
 
   submitRegistration(reg: Registration): Observable<Registration> {
     const regData = { ...toData(reg), registeredAt: firebase.database.ServerValue.TIMESTAMP };
-    console.log('submit:', regData);
-
     const promise: PromiseLike<string> = this.db.list('/registrations').push(regData).then(x => x.key);
     return Observable.fromPromise(promise).mergeMap(id => this.getRegistration(id));
   }
