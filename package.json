@@ -12,7 +12,9 @@
     "prebuild": "npm run version",
     "build": "ng build",
     "dist": "npm run build -- --prod --aot",
-    "deploy": "npm run dist && firebase deploy"
+    "deploy": "npm run dist && firebase deploy",
+    "deploy:hosting": "npm run dist && firebase deploy --only hosting",
+    "deploy:functions": "firebase deploy --only functions"
   },
   "dependencies": {
     "@angular/animations": "^4.2.4",
