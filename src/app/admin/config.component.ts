@@ -35,13 +35,13 @@ export class ConfigComponent {
     ];
 
     this.form = formBuilder.group({
-      title: '',
-      year: '',
-      startDate: '',
-      endDate: '',
-      maxParticipants: '',
-      registrationDeadline: '',
-      waiverDeadline: '',
+      title: ['', Validators.required],
+      year: ['', Validators.required],
+      startDate: ['', Validators.required],
+      endDate: ['', Validators.required],
+      maxParticipants: ['', Validators.required],
+      registrationDeadline: ['', Validators.required],
+      waiverDeadline: ['', Validators.required],
     });
 
     this.loadValues();

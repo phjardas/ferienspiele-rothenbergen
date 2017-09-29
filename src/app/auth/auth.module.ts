@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule }   from '@angular/common';
-import { ReactiveFormsModule }   from '@angular/forms';
 
+import { FormModule }   from '../form';
 import { AuthRoutingModule } from './auth-routing.module';
 
 import { AuthenticationService } from './authentication.service';
@@ -14,7 +14,7 @@ import { RegisterComponent } from './register.component';
 @NgModule({
   imports: [
     CommonModule,
-    ReactiveFormsModule,
+    FormModule,
     AuthRoutingModule,
   ],
   declarations: [
