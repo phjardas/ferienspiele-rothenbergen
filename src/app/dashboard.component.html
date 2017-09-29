@@ -1,9 +1,42 @@
 <div class="jumbotron jumbotron-fluid">
   <div class="container">
-    <h2 class="display-3">Ferienspiele Rothenbergen</h2>
+    <h2 class="display-3">Wunderbar gemacht!</h2>
 
-    <p class="lead mt-5">
-      <a class="btn btn-primary btn-lg" [routerLink]="['/anmeldung']">Jetzt anmelden!</a>
-    </p>
+    <div class="mt-5">
+      <div *ngIf="(registrationOpen|async) === null">
+        <spinner></spinner>
+      </div>
+
+      <div *ngIf="(registrationOpen|async) === 'ok'">
+        <p class="lead">Anmeldeschluss ist am {{ registrationDeadline | async | date }}</p>
+        <a class="btn btn-primary btn-lg" [routerLink]="['/anmeldung']">Jetzt anmelden!</a>
+      </div>
+
+      <div *ngIf="(registrationOpen|async) === 'deadlineExpired'">
+        <p class="lead">Leider ist die Anmeldefrist für die Kinderferienspiele abgelaufen.</p>
+        <p>Wir bitten um Ihr Verständnis, dass wir keine weiteren Anmeldungen entgegennehmen können.</p>
+      </div>
+
+      <div *ngIf="(registrationOpen|async) === 'maxParticipants'">
+        <p class="lead">Leider sind schon alle Plätze belegt.</p>
+        <p>Wir bitten um Ihr Verständnis, dass wir keine weiteren Anmeldungen entgegennehmen können.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-6">
+      <h3>Das Programm</h3>
+      <p>Wir treffen uns für vier Tage in der ersten Ferienwoche auf dem Grundstück der Evangelisch-methodistischen Kirche in der <a href="https://goo.gl/maps/HmJgc" target="_blank" rel="noopener">Kirchbergstraße 10</a>.</p>
+      <p>Beim gemeinsamen Abschluss am Freitag werden wir ab 17 Uhr eure Eltern erleben lassen, was wir die Woche alles getan haben und was uns besonderen Spaß gemacht hat, bevor uns die Jugendfeuerwehr Rothenbergen mit lecker Gegrilltem verpflegt.</p>
+    </div>
+    <div class="col-lg-6">
+      <h3>Infos</h3>
+      <p>Handzettel und Plakate gibt es in den Kirchen, in der Anton-Calaminus-Schule und in einer Reihe von Geschäften.</p>
+      <p>Anmelden kannst du dich online auf dieser Homepage. Wenn du die Einverständniserklärung der Eltern ausgefüllt hast und deine Eltern sie unterschrieben haben, dann gibst du sie (evtl. mit dem Geld) in einem verschlossenen Umschlag im Büro der Katholischen Kirche Christkönig, gegenüber der Schule, ab, oder wirfst es in den Briefkasten.</p>
+      <p>Du kommst aus einem anderen Ort? Das macht nichts! Wir freuen uns auch auf dich. Du gehörst zu keiner der drei Kirchen? Macht auch nichts. Du bist herzlich willkommen!</p>
+    </div>
   </div>
 </div>

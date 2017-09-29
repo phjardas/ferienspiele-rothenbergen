@@ -4,6 +4,7 @@
   "license": "UNLICENSED",
   "private": true,
   "scripts": {
+    "postinstall": "(cd functions && npm install)",
     "ng": "ng",
     "version": "ts-node git.version.ts",
     "prestart": "npm run version",

@@ -2,6 +2,7 @@ import 'rxjs/add/operator/first';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/operator/toPromise';
+import 'rxjs/add/observable/combineLatest';
 import 'rxjs/add/observable/fromPromise';
 
 import { Injectable } from '@angular/core';
@@ -9,6 +10,7 @@ import { Observable } from 'rxjs/Observable';
 import { AngularFireDatabase } from 'angularfire2/database';
 import * as firebase from 'firebase';
 
+import { ConfigurationService, Configuration } from './configuration.service';
 import { WaiverService } from './waiver.service';
 import { Registration } from './model';
 
@@ -27,10 +29,27 @@ function toPromise<T>(promise: firebase.Promise<T>): Promise<T> {
 
 @Injectable()
 export class RegistrationService {
+  private registrationCount: Observable<number>;
+  public registrationOpen: Observable<string>;
+  public registrationDeadline: Observable<string>;
+
   constructor(
     private db: AngularFireDatabase,
+    config: ConfigurationService,
     private waiverService: WaiverService
-  ) {}
+  ) {
+    this.registrationCount = db.object('/registrationCount').map(c => c.$value);
+    this.registrationDeadline = config.configuration.map(c => c.registrationDeadline);
+    this.registrationOpen = Observable.combineLatest(
+      this.registrationDeadline.map(d => d >= new Date().toISOString().substring(0, 10)),
+      config.configuration.map(c => c.maxParticipants).mergeMap(max => this.registrationCount.map(reg => reg < max)),
+      (deadline, count) => {
+        if (!deadline) return 'deadlineExpired';
+        if (!count) return 'maxParticipants';
+        return 'ok';
+      }
+    );
+  }
 
   getRegistration(id: string): Observable<Registration> {
     return this.db.object(`/registrations/${id}`).map(data => new Registration(data));
