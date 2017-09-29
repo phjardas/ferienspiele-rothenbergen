@@ -1,0 +1,16 @@
+<form [formGroup]="form" novalidate (ngSubmit)="submit()">
+  <div class="form-group" *ngFor="let field of formFields">
+    <label for="{{ field.name }}">{{ field.label }}</label>
+    <input class="form-control" name="{{ field.name }}" id="{{ field.name }}" formControlName="{{ field.name }}" type="{{ field.type }}" required>
+    <span class="form-text text-muted" *ngIf="field.description">{{ field.description }}</span>
+    <span class="form-text text-danger" *ngIf="form.get(field.name).invalid && (form.get(field.name).dirty || form.get(field.name).touched)">
+      {{ form.get(field.name).errors | json }}
+    </span>
+  </div>
+  <div class="mt-3 mb-5">
+    <div class="alert alert-danger" *ngIf="error">{{ error }}</div>
+    <div class="alert alert-info" *ngIf="saving"><i class="fa fa-spinner mr-1"></i> Die Änderungen werden gespeichert…</div>
+    <div class="alert alert-success" *ngIf="saved"><i class="fa fa-check mr-1"></i> Die Änderungen wurden gespeichert.</div>
+    <button class="btn btn-primary" [disabled]="saving || form.status !== 'VALID'">Speichern</button>
+  </div>
+</form>

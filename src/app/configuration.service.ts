@@ -24,11 +24,20 @@ export class Configuration {
 }
 
 
+function toPromise<T>(promise: firebase.Promise<T>): Promise<T> {
+  return new Promise((resolve, reject) => promise.then(resolve).catch(reject));
+}
+
+
 @Injectable()
 export class ConfigurationService {
   public configuration: Observable<Configuration>;
 
-  constructor(db: AngularFireDatabase) {
+  constructor(private db: AngularFireDatabase) {
     this.configuration = db.object('/config').map(data => new Configuration(data));
+  }
+
+  setConfiguration(key: string, value: any): Promise<any> {
+    return toPromise(this.db.object(`/config/${key}`).set(value));
   }
 }
