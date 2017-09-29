@@ -15,7 +15,7 @@ const routes: Routes = [
     canActivate: [RoleGuard],
     data: { roles: ['office'] },
     children: [
-      { path: 'anmeldung/:id', component: RegistrationDetailsComponent },
+      { path: 'anmeldungen/:id', component: RegistrationDetailsComponent },
       { path: 'anmeldungen', component: DashboardComponent },
       { path: '', redirectTo: 'anmeldungen' },
     ]

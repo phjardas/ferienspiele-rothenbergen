@@ -31,8 +31,16 @@ export class RegistrationDetailsComponent implements OnDestroy {
   printWaiver() {
     this.registrationService.getWaiver(this.reg)
       .then(blob => {
-        const url = URL.createObjectURL(blob);
-        window.location.href = url;
+        const { document } = window;
+        const url = URL.createObjectURL(blob)
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `Einverständniserklärung ${this.reg.child.firstName} ${this.reg.child.lastName}.pdf`;
+        a.style.display = 'none';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
       });
   }
 

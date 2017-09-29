@@ -32,7 +32,6 @@ export class ConfigComponent {
       { name: 'maxParticipants', label: 'Maximale Teilnehmeranzahl', type: 'number' },
       { name: 'registrationDeadline', label: 'Anmeldeschluss', type: 'date' },
       { name: 'waiverDeadline', label: 'Frist zur Abgabe der Einverständniserklärung', type: 'date' },
-      { name: 'paymentDeadline', label: 'Frist zur Bezahlung', type: 'date' },
     ];
 
     this.form = formBuilder.group({
@@ -43,7 +42,6 @@ export class ConfigComponent {
       maxParticipants: '',
       registrationDeadline: '',
       waiverDeadline: '',
-      paymentDeadline: '',
     });
 
     this.loadValues();

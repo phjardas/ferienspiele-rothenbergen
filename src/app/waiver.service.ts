@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
 import * as PDF from 'jspdf';
+
+import { Configuration } from './configuration.service';
 import { Registration } from './model';
 
 @Injectable()
 export class WaiverService {
-  createWaiver(reg: Registration): Blob {
+  createWaiver(reg: Registration, config: Configuration): Blob {
     const doc = new PDF({
       orientation: 'portrait',
       unit: 'mm',
@@ -22,13 +24,16 @@ export class WaiverService {
     const h1 = txt => text(txt, 18, 'bold');
     const h2 = txt => text(txt, 14, 'bold');
     const h3 = txt => text(txt, 10, 'bold');
+    const date = d => {
+      const [year, month, day] = d.split(/-/);
+      return `${day}.${month}.${year}`;
+    };
 
-    h1('Kinderferienspiele Rothenbergen 2018');
+    h1(`Kinderferienspiele Rothenbergen ${config.year}`);
     h2(`Einverständniserklärung für ${reg.child.firstName} ${reg.child.lastName}`);
 
-    // FIXME template
     normal(`Hiermit erkläre ich mich einverstanden, dass ${reg.child.gender.id === 'w' ? 'meine Tochter' : 'mein Sohn'} ${reg.child.firstName} ${reg.child.lastName} \n` +
-      `bei den Kinderferienspielen Rothenbergen vom 4. bis 7. Juli 2017 teilnehmen darf.`);
+      `bei den Kinderferienspielen Rothenbergen vom ${date(config.startDate)} bis ${date(config.endDate)} teilnehmen darf.`);
 
     offset += 5;
     h2('Teilnahmebedingungen');
@@ -44,9 +49,8 @@ export class WaiverService {
       'des jeweiligen Amtes.');
 
     h3('Absage');
-    // FIXME template
-    normal('Eine Absage durch den Veranstalter kann nur erfolgen, wenn die Teilnehmer die Bedingungen nicht erfüllen. Bei einer \n' +
-      'Absage durch die Teilnehmer kann die Rückerstattung des Betrages nach dem 11. Juni 2017 nicht garantiert werden.');
+    normal(`Eine Absage durch den Veranstalter kann nur erfolgen, wenn die Teilnehmer die Bedingungen nicht erfüllen. Bei einer \n` +
+      `Absage durch die Teilnehmer kann die Rückerstattung des Betrages nach dem ${date(config.registrationDeadline)} nicht garantiert werden.`);
 
     h3('Zuständigkeit');
     normal('Mein Kind (meine Kinder) ist von mir angewiesen, den Anordnungen der Aufsichtspersonen Folge zu leisten. Die \n' +
@@ -77,8 +81,7 @@ export class WaiverService {
     offset += 15;
     bold('Datum, Unterschrift');
 
-    // FIXME template
-    normal('Bitte schicken Sie diese Einverständniserklärung bis zum XX.XX.XXXX unterschrieben an das Gemeindebüro der katholischen \n' +
+    normal(`Bitte schicken Sie diese Einverständniserklärung bis zum ${date(config.waiverDeadline)} unterschrieben an das Gemeindebüro der katholischen \n` +
       'Kirche oder geben sie in einem verschlossenen Umschlag dort ab.');
     normal('Büro der Katholischen Kirche "Christkönig", Niedergründauer Straße 20, 63584 Rothenbergen, Einwurf in den Briefkasten genügt.');
     normal('Sie können das Geld und die Einverständniserklärung auch im Sekretariat der Anton Calaminus Schule in Rothenbergen abgeben.');
