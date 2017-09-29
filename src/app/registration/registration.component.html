@@ -43,64 +43,37 @@
         <p>Bitte geben Sie hier die persönlichen Daten <strong>Ihres Kindes</strong> ein.</p>
 
         <div class="form-row">
-          <div class="form-group col-md-6">
-            <label for="child.firstName">Vorname</label>
-            <input class="form-control" name="firstName" id="child.firstName" formControlName="firstName" required autofocus>
-            <span class="form-text text-danger" *ngIf="form.get('child.firstName').invalid && (form.get('child.firstName').dirty || form.get('child.firstName').touched)">
-              {{ form.get('child.firstName').errors | json }}
-            </span>
-          </div>
-
-          <div class="form-group col-md-6">
-            <label for="child.lastName">Nachname</label>
-            <input class="form-control" name="lastName" id="child.lastName" formControlName="lastName" required>
-            <span class="form-text text-danger" *ngIf="form.get('child.lastName').invalid && (form.get('child.lastName').dirty || form.get('child.lastName').touched)">
-              {{ form.get('child.lastName').errors | json }}
-            </span>
-          </div>
+          <form-field class="col-md-6" [formGroup]="form.get('child')" field="firstName" label="Vorname">
+            <input form-field-input formControlName="firstName" autofocus>
+          </form-field>
+          <form-field class="col-md-6" [formGroup]="form.get('child')" field="lastName" label="Nachname">
+            <input form-field-input formControlName="lastName">
+          </form-field>
         </div>
 
         <div class="form-row">
-          <div class="form-group col-md-6">
-            <label for="child.gender">Geschlecht</label>
-            <select class="form-control" name="gender" id="child.gender" formControlName="gender" required>
+          <form-field class="col-md-6" [formGroup]="form.get('child')" field="gender" label="Geschlecht">
+            <select form-field-input formControlName="gender">
               <option value="">[ bitte auswählen ]</option>
               <option value="w">weiblich</option>
               <option value="m">männlich</option>
             </select>
-            <span class="form-text text-danger" *ngIf="form.get('child.gender').invalid && (form.get('child.gender').dirty || form.get('child.gender').touched)">
-              {{ form.get('child.gender').errors | json }}
-            </span>
-          </div>
-
-          <div class="form-group col-md-6">
-            <label for="child.dateOfBirth">Geburtsdatum</label>
-            <input class="form-control" name="dateOfBirth" id="child.dateOfBirth" type="date" formControlName="dateOfBirth" required>
-            <span class="form-text text-danger" *ngIf="form.get('child.dateOfBirth').invalid && (form.get('child.dateOfBirth').dirty || form.get('child.dateOfBirth').touched)">
-              {{ form.get('child.dateOfBirth').errors | json }}
-            </span>
-          </div>
+          </form-field>
+          <form-field class="col-md-6" [formGroup]="form.get('child')" field="dateOfBirth" label="Geburtsdatum">
+            <input form-field-input formControlName="dateOfBirth" type="date">
+          </form-field>
         </div>
 
-        <div class="form-group">
-          <label for="child.shirtSize">T-Shirt-Größe</label>
-          <select class="form-control" name="shirtSize" id="child.shirtSize" formControlName="shirtSize" required>
+        <form-field [formGroup]="form.get('child')" field="shirtSize" label="T-Shirt-Größe">
+          <select form-field-input formControlName="shirtSize">
             <option value="">[ bitte auswählen ]</option>
             <option *ngFor="let shirtSize of shirtSizes" [value]="shirtSize.id">{{shirtSize.label}}</option>
           </select>
-          <span class="form-text text-danger" *ngIf="form.get('child.shirtSize').invalid && (form.get('child.shirtSize').dirty || form.get('child.shirtSize').touched)">
-            {{ form.get('child.shirtSize').errors | json }}
-          </span>
-        </div>
+        </form-field>
 
-        <div class="form-group">
-          <label for="child.miscellaneous">Besonderheiten <small>(optional)</small></label>
-          <textarea class="form-control" name="miscellaneous" id="child.miscellaneous" formControlName="miscellaneous"></textarea>
-          <span class="form-text text-muted">Muss Ihr Kind regelmäßig Medikamente zu sich nehmen? Gibt es Besonderheiten zu beachten? z.B. ADS, Allergien, Nahrungsunverträglichkeiten, religiöse Essensvorschriften, Einnässen etc.</span>
-          <span class="form-text text-danger" *ngIf="form.get('child.miscellaneous').invalid && (form.get('child.miscellaneous').dirty || form.get('child.miscellaneous').touched)">
-            {{ form.get('child.miscellaneous').errors | json }}
-          </span>
-        </div>
+        <form-field [formGroup]="form.get('child')" field="miscellaneous" label="Besonderheiten" description="Muss Ihr Kind regelmäßig Medikamente zu sich nehmen? Gibt es Besonderheiten zu beachten? z.B. ADS, Allergien, Nahrungsunverträglichkeiten, religiöse Essensvorschriften, Einnässen etc.">
+          <textarea form-field-input formControlName="miscellaneous"></textarea>
+        </form-field>
 
         <div class="form-group form-check">
           <label for="child.vegetarian" class="form-check-label">
@@ -128,47 +101,25 @@
         <p>Bitte geben Sie hier <strong>Ihre eigenen Daten</strong> als Erziehungsberechtigte(r) des Kindes ein.</p>
 
         <div class="form-row">
-          <div class="form-group col-md-6">
-            <label for="parent.phone">Telefonnummer</label>
-            <input class="form-control" name="phone" id="parent.phone" formControlName="phone" required>
-            <span class="form-text text-danger" *ngIf="form.get('parent.phone').invalid && (form.get('parent.phone').dirty || form.get('parent.phone').touched)">
-              {{ form.get('parent.phone').errors | json }}
-            </span>
-          </div>
-
-          <div class="form-group col-md-6">
-            <label for="parent.email">E-Mail-Adresse</label>
-            <input class="form-control" name="email" id="parent.email" formControlName="email" type="email" required>
-            <span class="form-text text-danger" *ngIf="form.get('parent.email').invalid && (form.get('parent.email').dirty || form.get('parent.email').touched)">
-              {{ form.get('parent.email').errors | json }}
-            </span>
-          </div>
+          <form-field class="col-md-6" [formGroup]="form.get('parent')" field="phone" label="Telefon">
+            <input form-field-input formControlName="phone" type="phone">
+          </form-field>
+          <form-field class="col-md-6" [formGroup]="form.get('parent')" field="email" label="E-Mail">
+            <input form-field-input formControlName="email" type="email">
+          </form-field>
         </div>
 
-        <div class="form-group">
-          <label for="parent.street">Straße</label>
-          <input class="form-control" name="street" id="parent.street" formControlName="street" required>
-          <span class="form-text text-danger" *ngIf="form.get('parent.street').invalid && (form.get('parent.street').dirty || form.get('parent.street').touched)">
-            {{ form.get('parent.street').errors | json }}
-          </span>
-        </div>
+        <form-field [formGroup]="form.get('parent')" field="street" label="Straße">
+          <input form-field-input formControlName="street">
+        </form-field>
 
         <div class="form-row">
-          <div class="form-group col-md-3">
-            <label for="parent.zip">PLZ</label>
-            <input class="form-control" name="zip" id="parent.zip" formControlName="zip" required>
-            <span class="form-text text-danger" *ngIf="form.get('parent.zip').invalid && (form.get('parent.zip').dirty || form.get('parent.zip').touched)">
-              {{ form.get('parent.zip').errors | json }}
-            </span>
-          </div>
-
-          <div class="form-group col-md-9">
-            <label for="parent.city">Wohnort</label>
-            <input class="form-control" name="city" id="parent.city" formControlName="city" required>
-            <span class="form-text text-danger" *ngIf="form.get('parent.city').invalid && (form.get('parent.city').dirty || form.get('parent.city').touched)">
-              {{ form.get('parent.city').errors | json }}
-            </span>
-          </div>
+          <form-field class="col-md-3" [formGroup]="form.get('parent')" field="zip" label="PLZ">
+            <input form-field-input formControlName="zip">
+          </form-field>
+          <form-field class="col-md-9" [formGroup]="form.get('parent')" field="city" label="Wohnort">
+            <input form-field-input formControlName="city">
+          </form-field>
         </div>
       </fieldset>
 
@@ -177,21 +128,12 @@
         <p>Bitte geben Sie hier ein, wen wir im Falle eines Notfalles anrufen sollen.</p>
 
         <div class="form-row">
-          <div class="form-group col-md-6">
-            <label for="emergencyContact.name">Name</label>
-            <input class="form-control" name="name" id="emergencyContact.name" formControlName="name" required>
-            <span class="form-text text-danger" *ngIf="form.get('emergencyContact.name').invalid && (form.get('emergencyContact.name').dirty || form.get('emergencyContact.name').touched)">
-              {{ form.get('emergencyContact.name').errors | json }}
-            </span>
-          </div>
-
-          <div class="form-group col-md-6">
-            <label for="emergencyContact.phone">Telefonnummer</label>
-            <input class="form-control" name="phone" id="emergencyContact.phone" formControlName="phone" required>
-            <span class="form-text text-danger" *ngIf="form.get('emergencyContact.phone').invalid && (form.get('emergencyContact.phone').dirty || form.get('emergencyContact.phone').touched)">
-              {{ form.get('emergencyContact.phone').errors | json }}
-            </span>
-          </div>
+          <form-field class="col-md-6" [formGroup]="form.get('emergencyContact')" field="name" label="Name">
+            <input form-field-input formControlName="name">
+          </form-field>
+          <form-field class="col-md-6" [formGroup]="form.get('emergencyContact')" field="phone" label="Telefon">
+            <input form-field-input formControlName="phone" type="phone">
+          </form-field>
         </div>
       </fieldset>
 
@@ -221,11 +163,11 @@
 
       <div class="mt-5 mb-5">
         <div class="alert alert-danger" *ngIf="error">
-          <i class="fa fa-cross mr-1"></i>
+          <i class="fa fa-exclamation-triangle mr-1"></i>
           {{ error }}
         </div>
         <div class="alert alert-danger" *ngIf="form.status !== 'VALID'">
-          <i class="fa fa-cross mr-1"></i>
+          <i class="fa fa-exclamation-triangle mr-1"></i>
           Bitte korrigieren Sie die Fehler im Formular.
         </div>
         <spinner *ngIf="submitting"></spinner>

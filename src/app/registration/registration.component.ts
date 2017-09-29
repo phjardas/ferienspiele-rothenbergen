@@ -28,25 +28,25 @@ export class RegistrationComponent {
 
     this.form = formBuilder.group({
       child: formBuilder.group({
-        firstName: ['Testine', Validators.required],
-        lastName: ['Tester', Validators.required],
-        gender: ['w', [Validators.required, CustomValidators.oneOf('m', 'w')]],
-        dateOfBirth: ['2010-04-01', Validators.required],
-        shirtSize: ['CHILDREN_S', [Validators.required, CustomValidators.oneOf(...ShirtSize.values.map(s => s.id))]],
+        firstName: ['', Validators.required],
+        lastName: ['', Validators.required],
+        gender: ['', [Validators.required, CustomValidators.oneOf('m', 'w')]],
+        dateOfBirth: ['', Validators.required],
+        shirtSize: ['', [Validators.required, CustomValidators.oneOf(...ShirtSize.values.map(s => s.id))]],
         vegetarian: false,
         miscellaneous: '',
         nextChild: false,
       }),
       parent: formBuilder.group({
-        phone: ['0123456789', Validators.required],
-        email: ['philipp@jardas.de', [Validators.required, Validators.email]],
-        street: ['Sackgasse 15', Validators.required],
-        zip: ['12345', Validators.required],
-        city: ['Musterhausen', Validators.required],
+        phone: ['', Validators.required],
+        email: ['', [Validators.required, Validators.email]],
+        street: ['', Validators.required],
+        zip: ['', Validators.required],
+        city: ['', Validators.required],
       }),
       emergencyContact: formBuilder.group({
-        name: ['Name', Validators.required],
-        phone: ['0123456789', Validators.required],
+        name: ['', Validators.required],
+        phone: ['', Validators.required],
       }),
     });
 
