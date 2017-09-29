@@ -1,10 +1,12 @@
-<div class="jumbotron jumbotron-fluid" *ngIf="reg == null">
+<div class="jumbotron jumbotron-fluid" *ngIf="!loaded">
   <div class="container">
     <spinner></spinner>
   </div>
 </div>
 
-<div *ngIf="reg != null">
+<page-not-found *ngIf="loaded && !reg"></page-not-found>
+
+<div *ngIf="loaded && reg">
   <div class="jumbotron jumbotron-fluid">
     <div class="container">
       <h2 class="display-3">{{reg.child.firstName}} {{reg.child.lastName}}</h2>

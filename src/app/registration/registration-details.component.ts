@@ -14,6 +14,7 @@ import { Registration } from '../model';
 })
 export class RegistrationDetailsComponent implements OnDestroy {
   subscription: Subscription;
+  loaded: boolean;
   reg: Registration;
   registrationDeadline: string;
   waiverDeadline: string;
@@ -21,7 +22,7 @@ export class RegistrationDetailsComponent implements OnDestroy {
   constructor(private route: ActivatedRoute, private registrationService: RegistrationService) {
     this.subscription = route.paramMap
       .mergeMap(params => this.registrationService.getRegistration(params.get('id')))
-      .subscribe(reg => this.reg = reg);
+      .subscribe(reg => { this.reg = reg; this.loaded = true; });
     this.subscription.add(registrationService.registrationDeadline.subscribe(d => this.registrationDeadline = d));
     this.subscription.add(registrationService.waiverDeadline.subscribe(d => this.waiverDeadline = d));
   }

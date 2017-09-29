@@ -35,7 +35,6 @@ import { SpinnerComponent } from './spinner.component';
     AppComponent,
     DashboardComponent,
     MainMenuComponent,
-    PageNotFoundComponent,
   ],
   providers: [
     ConfigurationService,
