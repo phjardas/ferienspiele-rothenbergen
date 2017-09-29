@@ -6,6 +6,7 @@ import { environment } from '../environments/environment';
 import { RoleGuard } from './auth/guard';
 
 import { DashboardComponent } from './dashboard.component';
+import { ImprintComponent } from './imprint.component';
 import { PageNotFoundComponent } from './page-not-found.component';
 
 
@@ -26,6 +27,7 @@ const routes: Routes = [
     canLoad: [RoleGuard],
     data: { roles: ['admin']}
   },
+  { path: 'impressum', component: ImprintComponent },
   { path: '', component: DashboardComponent, pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent },
 ];

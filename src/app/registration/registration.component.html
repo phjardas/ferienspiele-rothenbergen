@@ -1,215 +1,239 @@
-<div class="jumbotron jumbotron-fluid">
+<div *ngIf="(registrationOpen|async) === null" class="jumbotron jumbotron-fluid">
   <div class="container">
-    <h2 class="display-3">Anmeldung</h2>
-    <p class="lead">
-      Wir freuen uns, dass Sie Ihr Kind bei den Ferienspielen Rothenbergen anmelden wollen.
-      <strong>Anmeldeschluss ist {{ registrationDeadline | async | date }}</strong>
-    </p>
-    <p>
-      Bitte füllen Sie alle Felder aus, es sei denn sie sind mit "optional" gekennzeichnet.
-    </p>
+    <h2 class="display-3">Anmeldung <spinner class="ml-1"></spinner></h2>
   </div>
 </div>
 
-<div class="container mt-3 mb-3">
-  <form [formGroup]="form" novalidate (ngSubmit)="submit()">
-    <div class="alert alert-danger" *ngIf="error">{{ error }} </div>
+<div *ngIf="(registrationOpen|async) === 'deadlineExpired'" class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h2 class="display-3">Anmeldung</h2>
+    <p class="lead"><i class="fa fa-frown-o mr-1"></i> Leider ist die Anmeldefrist für die Kinderferienspiele abgelaufen.</p>
+    <p>Wir bitten um Ihr Verständnis, dass wir keine weiteren Anmeldungen entgegennehmen können.</p>
+  </div>
+</div>
 
-    <fieldset formGroupName="child" class="mt-5">
-      <legend><i class="fa fa-child mr-1"></i> Ihr Kind</legend>
-      <p>Bitte geben Sie hier die persönlichen Daten <strong>Ihres Kindes</strong> ein.</p>
+<div *ngIf="(registrationOpen|async) === 'maxParticipants'" class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h2 class="display-3">Anmeldung</h2>
+    <p class="lead"><i class="fa fa-frown-o mr-1"></i> Leider sind schon alle Plätze belegt.</p>
+    <p>Wir bitten um Ihr Verständnis, dass wir keine weiteren Anmeldungen entgegennehmen können.</p>
+  </div>
+</div>
 
-      <div class="form-row">
-        <div class="form-group col-md-6">
-          <label for="child.firstName">Vorname</label>
-          <input class="form-control" name="firstName" id="child.firstName" formControlName="firstName" required autofocus>
-          <span class="form-text text-danger" *ngIf="form.get('child.firstName').invalid && (form.get('child.firstName').dirty || form.get('child.firstName').touched)">
-            {{ form.get('child.firstName').errors | json }}
-          </span>
+<div *ngIf="(registrationOpen|async) === 'ok'">
+  <div class="jumbotron jumbotron-fluid">
+    <div class="container">
+      <h2 class="display-3">Anmeldung</h2>
+      <p class="lead">
+        Wir freuen uns, dass Sie Ihr Kind bei den Ferienspielen Rothenbergen anmelden wollen.
+        <strong>Anmeldeschluss ist {{ registrationDeadline | async | date }}</strong>
+      </p>
+      <p>
+        Bitte füllen Sie alle Felder aus, es sei denn sie sind mit "optional" gekennzeichnet.
+      </p>
+    </div>
+  </div>
+
+  <div class="container mt-3 mb-3">
+    <form [formGroup]="form" novalidate (ngSubmit)="submit()">
+      <div class="alert alert-danger" *ngIf="error">{{ error }} </div>
+
+      <fieldset formGroupName="child" class="mt-5">
+        <legend><i class="fa fa-child mr-1"></i> Ihr Kind</legend>
+        <p>Bitte geben Sie hier die persönlichen Daten <strong>Ihres Kindes</strong> ein.</p>
+
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="child.firstName">Vorname</label>
+            <input class="form-control" name="firstName" id="child.firstName" formControlName="firstName" required autofocus>
+            <span class="form-text text-danger" *ngIf="form.get('child.firstName').invalid && (form.get('child.firstName').dirty || form.get('child.firstName').touched)">
+              {{ form.get('child.firstName').errors | json }}
+            </span>
+          </div>
+
+          <div class="form-group col-md-6">
+            <label for="child.lastName">Nachname</label>
+            <input class="form-control" name="lastName" id="child.lastName" formControlName="lastName" required>
+            <span class="form-text text-danger" *ngIf="form.get('child.lastName').invalid && (form.get('child.lastName').dirty || form.get('child.lastName').touched)">
+              {{ form.get('child.lastName').errors | json }}
+            </span>
+          </div>
         </div>
 
-        <div class="form-group col-md-6">
-          <label for="child.lastName">Nachname</label>
-          <input class="form-control" name="lastName" id="child.lastName" formControlName="lastName" required>
-          <span class="form-text text-danger" *ngIf="form.get('child.lastName').invalid && (form.get('child.lastName').dirty || form.get('child.lastName').touched)">
-            {{ form.get('child.lastName').errors | json }}
-          </span>
-        </div>
-      </div>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="child.gender">Geschlecht</label>
+            <select class="form-control" name="gender" id="child.gender" formControlName="gender" required>
+              <option value="">[ bitte auswählen ]</option>
+              <option value="w">weiblich</option>
+              <option value="m">männlich</option>
+            </select>
+            <span class="form-text text-danger" *ngIf="form.get('child.gender').invalid && (form.get('child.gender').dirty || form.get('child.gender').touched)">
+              {{ form.get('child.gender').errors | json }}
+            </span>
+          </div>
 
-      <div class="form-row">
-        <div class="form-group col-md-6">
-          <label for="child.gender">Geschlecht</label>
-          <select class="form-control" name="gender" id="child.gender" formControlName="gender" required>
+          <div class="form-group col-md-6">
+            <label for="child.dateOfBirth">Geburtsdatum</label>
+            <input class="form-control" name="dateOfBirth" id="child.dateOfBirth" type="date" formControlName="dateOfBirth" required>
+            <span class="form-text text-danger" *ngIf="form.get('child.dateOfBirth').invalid && (form.get('child.dateOfBirth').dirty || form.get('child.dateOfBirth').touched)">
+              {{ form.get('child.dateOfBirth').errors | json }}
+            </span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="child.shirtSize">T-Shirt-Größe</label>
+          <select class="form-control" name="shirtSize" id="child.shirtSize" formControlName="shirtSize" required>
             <option value="">[ bitte auswählen ]</option>
-            <option value="w">weiblich</option>
-            <option value="m">männlich</option>
+            <option *ngFor="let shirtSize of shirtSizes" [value]="shirtSize.id">{{shirtSize.label}}</option>
           </select>
-          <span class="form-text text-danger" *ngIf="form.get('child.gender').invalid && (form.get('child.gender').dirty || form.get('child.gender').touched)">
-            {{ form.get('child.gender').errors | json }}
+          <span class="form-text text-danger" *ngIf="form.get('child.shirtSize').invalid && (form.get('child.shirtSize').dirty || form.get('child.shirtSize').touched)">
+            {{ form.get('child.shirtSize').errors | json }}
           </span>
         </div>
 
-        <div class="form-group col-md-6">
-          <label for="child.dateOfBirth">Geburtsdatum</label>
-          <input class="form-control" name="dateOfBirth" id="child.dateOfBirth" type="date" formControlName="dateOfBirth" required>
-          <span class="form-text text-danger" *ngIf="form.get('child.dateOfBirth').invalid && (form.get('child.dateOfBirth').dirty || form.get('child.dateOfBirth').touched)">
-            {{ form.get('child.dateOfBirth').errors | json }}
-          </span>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label for="child.shirtSize">T-Shirt-Größe</label>
-        <select class="form-control" name="shirtSize" id="child.shirtSize" formControlName="shirtSize" required>
-          <option value="">[ bitte auswählen ]</option>
-          <option *ngFor="let shirtSize of shirtSizes" [value]="shirtSize.id">{{shirtSize.label}}</option>
-        </select>
-        <span class="form-text text-danger" *ngIf="form.get('child.shirtSize').invalid && (form.get('child.shirtSize').dirty || form.get('child.shirtSize').touched)">
-          {{ form.get('child.shirtSize').errors | json }}
-        </span>
-      </div>
-
-      <div class="form-group">
-        <label for="child.miscellaneous">Besonderheiten <small>(optional)</small></label>
-        <textarea class="form-control" name="miscellaneous" id="child.miscellaneous" formControlName="miscellaneous"></textarea>
-        <span class="form-text text-muted">Muss Ihr Kind regelmäßig Medikamente zu sich nehmen? Gibt es Besonderheiten zu beachten? z.B. ADS, Allergien, Nahrungsunverträglichkeiten, religiöse Essensvorschriften, Einnässen etc.</span>
-        <span class="form-text text-danger" *ngIf="form.get('child.miscellaneous').invalid && (form.get('child.miscellaneous').dirty || form.get('child.miscellaneous').touched)">
-          {{ form.get('child.miscellaneous').errors | json }}
-        </span>
-      </div>
-
-      <div class="form-group form-check">
-        <label for="child.vegetarian" class="form-check-label">
-          <input type="checkbox" name="vegetarian" id="child.vegetarian" formControlName="vegetarian" class="form-check-input">
-          Mein Kind soll vegetarisch essen
-        </label>
-        <span class="form-text text-danger" *ngIf="form.get('child.vegetarian').invalid && (form.get('child.vegetarian').dirty || form.get('child.vegetarian').touched)">
-          {{ form.get('child.vegetarian').errors | json }}
-        </span>
-      </div>
-
-      <div class="form-group form-check">
-        <label for="child.nextChild" class="form-check-label">
-          <input type="checkbox" name="nextChild" id="child.nextChild" formControlName="nextChild" class="form-check-input">
-          Wir haben bereits ein anderes Kind unserer Familie bei den Ferienspielen angemeldet
-        </label>
-        <span class="form-text text-danger" *ngIf="form.get('child.nextChild').invalid && (form.get('child.nextChild').dirty || form.get('child.nextChild').touched)">
-          {{ form.get('child.nextChild').errors | json }}
-        </span>
-      </div>
-    </fieldset>
-
-    <fieldset formGroupName="parent" class="mt-5">
-      <legend><i class="fa fa-user mr-1"></i> Erziehungsberechtigte(r)</legend>
-      <p>Bitte geben Sie hier <strong>Ihre eigenen Daten</strong> als Erziehungsberechtigte(r) des Kindes ein.</p>
-
-      <div class="form-row">
-        <div class="form-group col-md-6">
-          <label for="parent.phone">Telefonnummer</label>
-          <input class="form-control" name="phone" id="parent.phone" formControlName="phone" required>
-          <span class="form-text text-danger" *ngIf="form.get('parent.phone').invalid && (form.get('parent.phone').dirty || form.get('parent.phone').touched)">
-            {{ form.get('parent.phone').errors | json }}
+        <div class="form-group">
+          <label for="child.miscellaneous">Besonderheiten <small>(optional)</small></label>
+          <textarea class="form-control" name="miscellaneous" id="child.miscellaneous" formControlName="miscellaneous"></textarea>
+          <span class="form-text text-muted">Muss Ihr Kind regelmäßig Medikamente zu sich nehmen? Gibt es Besonderheiten zu beachten? z.B. ADS, Allergien, Nahrungsunverträglichkeiten, religiöse Essensvorschriften, Einnässen etc.</span>
+          <span class="form-text text-danger" *ngIf="form.get('child.miscellaneous').invalid && (form.get('child.miscellaneous').dirty || form.get('child.miscellaneous').touched)">
+            {{ form.get('child.miscellaneous').errors | json }}
           </span>
         </div>
 
-        <div class="form-group col-md-6">
-          <label for="parent.email">E-Mail-Adresse</label>
-          <input class="form-control" name="email" id="parent.email" formControlName="email" type="email" required>
-          <span class="form-text text-danger" *ngIf="form.get('parent.email').invalid && (form.get('parent.email').dirty || form.get('parent.email').touched)">
-            {{ form.get('parent.email').errors | json }}
-          </span>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label for="parent.street">Straße</label>
-        <input class="form-control" name="street" id="parent.street" formControlName="street" required>
-        <span class="form-text text-danger" *ngIf="form.get('parent.street').invalid && (form.get('parent.street').dirty || form.get('parent.street').touched)">
-          {{ form.get('parent.street').errors | json }}
-        </span>
-      </div>
-
-      <div class="form-row">
-        <div class="form-group col-md-3">
-          <label for="parent.zip">PLZ</label>
-          <input class="form-control" name="zip" id="parent.zip" formControlName="zip" required>
-          <span class="form-text text-danger" *ngIf="form.get('parent.zip').invalid && (form.get('parent.zip').dirty || form.get('parent.zip').touched)">
-            {{ form.get('parent.zip').errors | json }}
+        <div class="form-group form-check">
+          <label for="child.vegetarian" class="form-check-label">
+            <input type="checkbox" name="vegetarian" id="child.vegetarian" formControlName="vegetarian" class="form-check-input">
+            Mein Kind soll vegetarisch essen
+          </label>
+          <span class="form-text text-danger" *ngIf="form.get('child.vegetarian').invalid && (form.get('child.vegetarian').dirty || form.get('child.vegetarian').touched)">
+            {{ form.get('child.vegetarian').errors | json }}
           </span>
         </div>
 
-        <div class="form-group col-md-9">
-          <label for="parent.city">Wohnort</label>
-          <input class="form-control" name="city" id="parent.city" formControlName="city" required>
-          <span class="form-text text-danger" *ngIf="form.get('parent.city').invalid && (form.get('parent.city').dirty || form.get('parent.city').touched)">
-            {{ form.get('parent.city').errors | json }}
+        <div class="form-group form-check">
+          <label for="child.nextChild" class="form-check-label">
+            <input type="checkbox" name="nextChild" id="child.nextChild" formControlName="nextChild" class="form-check-input">
+            Wir haben bereits ein anderes Kind unserer Familie bei den Ferienspielen angemeldet
+          </label>
+          <span class="form-text text-danger" *ngIf="form.get('child.nextChild').invalid && (form.get('child.nextChild').dirty || form.get('child.nextChild').touched)">
+            {{ form.get('child.nextChild').errors | json }}
           </span>
         </div>
-      </div>
-    </fieldset>
+      </fieldset>
 
-    <fieldset formGroupName="emergencyContact" class="mt-5">
-      <legend><i class="fa fa-medkit mr-1"></i> Notfallkontakt</legend>
-      <p>Bitte geben Sie hier ein, wen wir im Falle eines Notfalles anrufen sollen.</p>
+      <fieldset formGroupName="parent" class="mt-5">
+        <legend><i class="fa fa-user mr-1"></i> Erziehungsberechtigte(r)</legend>
+        <p>Bitte geben Sie hier <strong>Ihre eigenen Daten</strong> als Erziehungsberechtigte(r) des Kindes ein.</p>
 
-      <div class="form-row">
-        <div class="form-group col-md-6">
-          <label for="emergencyContact.name">Name</label>
-          <input class="form-control" name="name" id="emergencyContact.name" formControlName="name" required>
-          <span class="form-text text-danger" *ngIf="form.get('emergencyContact.name').invalid && (form.get('emergencyContact.name').dirty || form.get('emergencyContact.name').touched)">
-            {{ form.get('emergencyContact.name').errors | json }}
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="parent.phone">Telefonnummer</label>
+            <input class="form-control" name="phone" id="parent.phone" formControlName="phone" required>
+            <span class="form-text text-danger" *ngIf="form.get('parent.phone').invalid && (form.get('parent.phone').dirty || form.get('parent.phone').touched)">
+              {{ form.get('parent.phone').errors | json }}
+            </span>
+          </div>
+
+          <div class="form-group col-md-6">
+            <label for="parent.email">E-Mail-Adresse</label>
+            <input class="form-control" name="email" id="parent.email" formControlName="email" type="email" required>
+            <span class="form-text text-danger" *ngIf="form.get('parent.email').invalid && (form.get('parent.email').dirty || form.get('parent.email').touched)">
+              {{ form.get('parent.email').errors | json }}
+            </span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="parent.street">Straße</label>
+          <input class="form-control" name="street" id="parent.street" formControlName="street" required>
+          <span class="form-text text-danger" *ngIf="form.get('parent.street').invalid && (form.get('parent.street').dirty || form.get('parent.street').touched)">
+            {{ form.get('parent.street').errors | json }}
           </span>
         </div>
 
-        <div class="form-group col-md-6">
-          <label for="emergencyContact.phone">Telefonnummer</label>
-          <input class="form-control" name="phone" id="emergencyContact.phone" formControlName="phone" required>
-          <span class="form-text text-danger" *ngIf="form.get('emergencyContact.phone').invalid && (form.get('emergencyContact.phone').dirty || form.get('emergencyContact.phone').touched)">
-            {{ form.get('emergencyContact.phone').errors | json }}
-          </span>
+        <div class="form-row">
+          <div class="form-group col-md-3">
+            <label for="parent.zip">PLZ</label>
+            <input class="form-control" name="zip" id="parent.zip" formControlName="zip" required>
+            <span class="form-text text-danger" *ngIf="form.get('parent.zip').invalid && (form.get('parent.zip').dirty || form.get('parent.zip').touched)">
+              {{ form.get('parent.zip').errors | json }}
+            </span>
+          </div>
+
+          <div class="form-group col-md-9">
+            <label for="parent.city">Wohnort</label>
+            <input class="form-control" name="city" id="parent.city" formControlName="city" required>
+            <span class="form-text text-danger" *ngIf="form.get('parent.city').invalid && (form.get('parent.city').dirty || form.get('parent.city').touched)">
+              {{ form.get('parent.city').errors | json }}
+            </span>
+          </div>
         </div>
-      </div>
-    </fieldset>
+      </fieldset>
 
-    <div class="mt-5">
-      <h4>Preis</h4>
-      <table class="table">
-        <thead>
-          <tr>
-            <th>Posten</th>
-            <th class="number">Preis</th>
-          </tr>
-        </thead>
-        <tfoot>
-          <tr>
-            <th>Gesamtbetrag</th>
-            <th class="number">{{ price.total | number:'1.2-2' }}</th>
-          </tr>
-        </tfoot>
-        <tbody>
-          <tr *ngFor="let el of price.elements">
-            <td>{{ el.label }}</td>
-            <td class="number">{{ el.price | number:'1.2-2' }}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+      <fieldset formGroupName="emergencyContact" class="mt-5">
+        <legend><i class="fa fa-medkit mr-1"></i> Notfallkontakt</legend>
+        <p>Bitte geben Sie hier ein, wen wir im Falle eines Notfalles anrufen sollen.</p>
 
-    <div class="mt-5 mb-5">
-      <div class="alert alert-danger" *ngIf="error">
-        <i class="fa fa-cross mr-1"></i>
-        {{ error }}
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="emergencyContact.name">Name</label>
+            <input class="form-control" name="name" id="emergencyContact.name" formControlName="name" required>
+            <span class="form-text text-danger" *ngIf="form.get('emergencyContact.name').invalid && (form.get('emergencyContact.name').dirty || form.get('emergencyContact.name').touched)">
+              {{ form.get('emergencyContact.name').errors | json }}
+            </span>
+          </div>
+
+          <div class="form-group col-md-6">
+            <label for="emergencyContact.phone">Telefonnummer</label>
+            <input class="form-control" name="phone" id="emergencyContact.phone" formControlName="phone" required>
+            <span class="form-text text-danger" *ngIf="form.get('emergencyContact.phone').invalid && (form.get('emergencyContact.phone').dirty || form.get('emergencyContact.phone').touched)">
+              {{ form.get('emergencyContact.phone').errors | json }}
+            </span>
+          </div>
+        </div>
+      </fieldset>
+
+      <div class="mt-5">
+        <h4>Preis</h4>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Posten</th>
+              <th class="number">Preis</th>
+            </tr>
+          </thead>
+          <tfoot>
+            <tr>
+              <th>Gesamtbetrag</th>
+              <th class="number">{{ price.total | number:'1.2-2' }}</th>
+            </tr>
+          </tfoot>
+          <tbody>
+            <tr *ngFor="let el of price.elements">
+              <td>{{ el.label }}</td>
+              <td class="number">{{ el.price | number:'1.2-2' }}</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
-      <div class="alert alert-danger" *ngIf="form.status !== 'VALID'">
-        <i class="fa fa-cross mr-1"></i>
-        Bitte korrigieren Sie die Fehler im Formular.
+
+      <div class="mt-5 mb-5">
+        <div class="alert alert-danger" *ngIf="error">
+          <i class="fa fa-cross mr-1"></i>
+          {{ error }}
+        </div>
+        <div class="alert alert-danger" *ngIf="form.status !== 'VALID'">
+          <i class="fa fa-cross mr-1"></i>
+          Bitte korrigieren Sie die Fehler im Formular.
+        </div>
+        <spinner *ngIf="submitting"></spinner>
+        <button class="btn btn-primary" [disabled]="form.status !== 'VALID'" *ngIf="!submitting">
+          <i class="fa fa-check mr-1"></i>
+          Kostenpflichtig anmelden
+        </button>
       </div>
-      <spinner *ngIf="submitting"></spinner>
-      <button class="btn btn-primary" [disabled]="form.status !== 'VALID'" *ngIf="!submitting">
-        <i class="fa fa-check mr-1"></i>
-        Kostenpflichtig anmelden
-      </button>
-    </div>
-  </form>
+    </form>
+  </div>
 </div>

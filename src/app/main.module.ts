@@ -16,6 +16,7 @@ import { WaiverService } from './waiver.service';
 
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard.component';
+import { ImprintComponent } from './imprint.component';
 import { MainMenuComponent } from './main-menu.component';
 import { PageNotFoundComponent } from './page-not-found.component';
 import { SpinnerComponent } from './spinner.component';
@@ -34,6 +35,7 @@ import { SpinnerComponent } from './spinner.component';
   declarations: [
     AppComponent,
     DashboardComponent,
+    ImprintComponent,
     MainMenuComponent,
   ],
   providers: [
