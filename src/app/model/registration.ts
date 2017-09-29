@@ -57,6 +57,7 @@ export class Registration implements FirebaseModel {
       payment: this.payment ? this.payment.toFirebase() : null,
       waiver: this.waiver ? this.waiver.toFirebase() : null,
       registeredAt: this.registeredAt,
+      price: this.price.toFirebase(),
     };
   }
 }
