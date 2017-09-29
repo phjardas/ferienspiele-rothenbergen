@@ -200,7 +200,8 @@
     <div class="mt-5 mb-5">
       <div class="alert alert-danger" *ngIf="error">{{ error }} </div>
       <div class="alert alert-danger" *ngIf="form.status !== 'VALID'">Bitte korrigieren Sie die Fehler im Formular.</div>
-      <button class="btn btn-primary" [disabled]="form.status !== 'VALID'">Kostenpflichtig anmelden</button>
+      <div class="alert alert-info" *ngIf="submitting"><i class="fa fa-spinner mr-1"></i> Die Anmeldung wird durchgeführt…</div>
+      <button class="btn btn-primary" [disabled]="form.status !== 'VALID'" *ngIf="!submitting">Kostenpflichtig anmelden</button>
     </div>
   </form>
 </div>

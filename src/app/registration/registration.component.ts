@@ -16,6 +16,7 @@ import { Registration, ShirtSize, Price, PriceElement } from '../model';
 export class RegistrationComponent {
   error: string;
   form: FormGroup;
+  submitting: boolean;
   shirtSizes = ShirtSize.values;
   price: Price;
   registrationDeadline: Observable<string>;
@@ -54,10 +55,11 @@ export class RegistrationComponent {
 
   submit() {
     this.error = null;
+    this.submitting = true;
     const reg = new Registration(this.form.value);
     this.registrationService.submitRegistration(reg).first().subscribe(
       reg => this.router.navigate(['/anmeldung', reg.id]),
-      err => this.error = err.message
+      err => { this.submitting = false; this.error = err.message; }
     );
   }
 }
