@@ -16,6 +16,7 @@ export class RegistrationDetailsComponent implements OnDestroy {
   subscription: Subscription;
   user: User;
   reg: Registration;
+  waiverWorking: boolean;
 
   constructor(
     private route: ActivatedRoute,
@@ -29,6 +30,7 @@ export class RegistrationDetailsComponent implements OnDestroy {
   }
 
   printWaiver() {
+    this.waiverWorking = true;
     this.registrationService.getWaiver(this.reg)
       .then(blob => {
         const { document } = window;
@@ -41,6 +43,7 @@ export class RegistrationDetailsComponent implements OnDestroy {
         a.click();
         document.body.removeChild(a);
         URL.revokeObjectURL(url);
+        this.waiverWorking = false;
       });
   }
 

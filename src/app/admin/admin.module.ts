@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule }   from '@angular/common';
 
+import { SharedModule } from '../shared.module';
 import { FormModule }   from '../form';
 import { AdminRoutingModule } from './admin-routing.module';
 
@@ -14,6 +15,7 @@ import { UsersComponent } from './users.component';
 @NgModule({
   imports: [
     CommonModule,
+    SharedModule,
     FormModule,
     AdminRoutingModule,
   ],
