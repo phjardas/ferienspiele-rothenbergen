@@ -10,8 +10,9 @@ import { Registration } from '../model';
 @Component({ templateUrl: 'dashboard.component.html' })
 export class DashboardComponent {
   registrations: Observable<Registration[]>;
+  exportWorking = false;
 
-  constructor(registrationService: RegistrationService) {
+  constructor(private registrationService: RegistrationService) {
     this.registrations = registrationService.getRegistrations()
       .map(regs => regs.sort(this.compareRegistrations));
   }
@@ -23,42 +24,21 @@ export class DashboardComponent {
   }
 
   export() {
-    this.registrations
-      .map(regs => this.renderRegistrationsCSV(regs))
+    this.exportWorking = true;
+    this.registrationService.exportRegistrations()
       .first()
       .subscribe(blob => {
         const { document } = window;
         const url = URL.createObjectURL(blob)
         const a = document.createElement('a');
         a.href = url;
-        a.download = `Ferienspiele Rothenbergen Anmeldungen.csv`;
+        a.download = `Ferienspiele Rothenbergen Anmeldungen.xlsx`;
         a.style.display = 'none';
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);
         URL.revokeObjectURL(url);
+        this.exportWorking = false;
       });
-  }
-
-  private renderRegistrationsCSV(regs: Registration[]): Blob {
-    const toCSV: (Registration) => any[] = reg => [
-      reg.id, reg.registeredAt.toISOString(),
-      reg.child.lastName, reg.child.firstName, reg.child.gender.label, reg.child.dateOfBirth, reg.child.shirtSize.label,
-      reg.parent.email, reg.parent.phone, reg.parent.street, reg.parent.zip, reg.parent.city,
-      reg.child.miscellaneous || '', reg.child.vegetarian ? 'ja' : 'nein', reg.child.nextChild ? 'ja' : 'nein',
-      reg.price.total, reg.waiver ? 'ja' : 'nein', reg.payment ? 'ja' : 'nein',
-    ];
-
-    const rows: any[][] = [[
-      'ID', 'Registrierungs-Datum',
-      'Nachname', 'Vorname', 'Geschlecht', 'Geburtsdatum', 'T-Shirt-Größe',
-      'Email', 'Telefon', 'Straße', 'PLZ', 'Wohnort', 'Notfall Name', 'Notfall Telefon',
-      'Besonderheiten', 'Vegetarisch', 'Geschwisterkind',
-      'Betrag', 'Einverständnis', 'Bezahlung',
-    ]];
-
-    regs.map(toCSV).forEach(row => rows.push(row));
-    const parts = rows.map(row => row.map(cell => typeof cell === 'string' ? `"${cell.replace(/"/g, '""')}"` : cell).join(',') + '\r\n');
-    return new Blob(parts, { type: 'text/csv' });
   }
 }

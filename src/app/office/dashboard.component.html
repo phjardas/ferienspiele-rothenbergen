@@ -5,7 +5,8 @@
     <span class="float-right">{{ ((registrations | async) || []).length }} Anmeldungen</span>
 
     <button class="btn btn-primary" (click)="export()">
-      <i class="fa fa-table mr-1"></i>
+      <spinner inverse class="mr-3" *ngIf="exportWorking"></spinner>
+      <i class="fa fa-table mr-1" *ngIf="!exportWorking"></i>
       Daten herunterladen
     </button>
   </p>

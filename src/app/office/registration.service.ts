@@ -12,6 +12,7 @@ import * as firebase from 'firebase';
 import { RegistrationService as BaseRegistrationService } from '../registration.service';
 import { AuthenticationService, User } from '../auth';
 import { Registration, Approval } from '../model';
+import { ExcelService } from './excel.service';
 
 
 function toPromise<T>(promise: firebase.Promise<T>): Promise<T> {
@@ -24,7 +25,8 @@ export class RegistrationService {
   constructor(
     private base: BaseRegistrationService,
     private db: AngularFireDatabase,
-    private auth: AuthenticationService
+    private auth: AuthenticationService,
+    private excelService: ExcelService
   ) {}
 
   getRegistration(id: string): Observable<Registration> {
@@ -38,6 +40,10 @@ export class RegistrationService {
   getRegistrations(): Observable<Registration[]> {
     return this.db.list('/registrations')
       .map(datas => datas.map(data => new Registration(data)));
+  }
+
+  exportRegistrations(): Observable<Blob> {
+    return this.getRegistrations().map(regs => this.excelService.exportRegistrations(regs));
   }
 
   setPaymentReceived(id: string, received: boolean): Promise<any> {
