@@ -5,6 +5,7 @@
 
 export const environment = {
   production: false,
+  enableRouterTracing: false,
   firebase: {
     apiKey: "AIzaSyDLYUActhO0rHtTMYSHJd8pArejHM9p3bg",
     authDomain: "ferienspiele-rothenbergen.firebaseapp.com",
