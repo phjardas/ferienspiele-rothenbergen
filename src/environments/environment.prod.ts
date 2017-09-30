@@ -8,5 +8,8 @@ export const environment = {
     projectId: "ferienspiele-rothenbergen",
     storageBucket: "",
     messagingSenderId: "1062224739286"
-  }
+  },
+  paypal: {
+    clientId: null,
+  },
 };

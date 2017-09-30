@@ -13,5 +13,8 @@ export const environment = {
     projectId: "ferienspiele-rothenbergen",
     storageBucket: "",
     messagingSenderId: "1062224739286"
-  }
+  },
+  paypal: {
+    clientId: 'AVtfgkP923kAX7lSyCjL8HrVjMEsIozW2ZebWqK5RJgeclf0ofHe2y3k1aRMY3bSXHjEJD951XBMCJ6g',
+  },
 };

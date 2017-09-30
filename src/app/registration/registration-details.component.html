@@ -44,23 +44,31 @@
           <div class="card-body">
             <h3 class="card-title">Teilnahmebeitrag € {{ reg.price.total | number:'1.2-2' }}</h3>
             <div *ngIf="reg.payment">
-              <p class="card-text">Wir haben Ihren Teilnahmebeitrag am {{ reg.payment.timestamp | date }} erhalten. Vielen Dank!</p>
+              <p>Wir haben Ihren Teilnahmebeitrag am {{ reg.payment.timestamp | date }} erhalten. Vielen Dank!</p>
             </div>
             <div *ngIf="!reg.payment">
               <p class="card-text text-danger">Wir haben Ihren Teilnahmebeitrag noch nicht erhalten.</p>
-              <p class="card-text">Bitte überweisen Sie den Betrag auf das folgende Konto:</p>
-              <p class="card-text">
+              <div *ngIf="paypalAvailable">
+                <p>Sie können den Teilnahmebeitrag jetzt sofort bequem mit PayPal bezahlen.</p>
+                <div id="paypal-button" class="mb-3"></div>
+                <hr>
+                <p>Sie können den Betrag auch auf das folgende Konto überweisen:</p>
+              </div>
+              <p *ngIf="!paypalAvailable">Bitte überweisen Sie den Betrag auf das folgende Konto:</p>
+              <p><small>
                 Empfänger: EMK Rothenbergen<br>
                 IBAN: DE38507500940027050992<br>
                 BIC: HELADEF1GEL<br>
                 Verwendungszweck: "Ferienspiele {{reg.child.firstName}} {{reg.child.lastName}}"
-              </p>
-              <p class="card-text">Sie können den Teilnahmebeitrag auch in bar bezahlen:</p>
-              <p class="card-text">
+              </small></p>
+              <hr>
+              <p>Sie können den Teilnahmebeitrag auch in bar bezahlen:</p>
+              <p><small>
                 Büro der Katholischen Kirche "Christkönig"<br>
                 Niedergründauer Straße 20<br>
                 63584 Rothenbergen
-              </p>
+              </small></p>
+              <hr>
               <p class="card-text">Sie können das Geld und die Einverstädniserklärung auch im Sekretariat der Anton Calaminus Schule in Rothenbergen abgeben.</p>
             </div>
           </div>
@@ -74,13 +82,13 @@
               <p class="card-text">Wir haben Ihre Einverständniserklärung am {{ reg.waiver.timestamp | date }} erhalten.</p>
             </div>
             <div *ngIf="!reg.waiver">
-              <p class="card-text text-danger">Wir haben Ihre Einverständniserklärung noch nicht erhalten.</p>
-              <p class="card-text">Bitte drucken Sie jetzt die Einverständniserklärung aus und schicken Sie sie <strong>bis zum {{ waiverDeadline | date }}</strong> unterschrieben an uns zurück oder bringen Sie sie im Gemeindebüro vorbei.</p>
-              <p class="card-text">Sie können das Geld und die Einverstädniserklärung auch im Sekretariat der Anton Calaminus Schule in Rothenbergen abgeben.</p>
-              <button class="btn btn-primary mt-3" (click)="printWaiver()">
+              <p class="text-danger">Wir haben Ihre Einverständniserklärung noch nicht erhalten.</p>
+              <button class="btn btn-primary mb-3" (click)="printWaiver()">
                 <i class="fa fa-print mr-1" aria-hidden="true"></i>
                 Einverständniserklärung drucken
               </button>
+              <p>Bitte drucken Sie jetzt die Einverständniserklärung aus und schicken Sie sie <strong>bis zum {{ waiverDeadline | date }}</strong> unterschrieben an uns zurück oder bringen Sie sie im Gemeindebüro vorbei.</p>
+              <p class="card-text">Sie können das Geld und die Einverstädniserklärung auch im Sekretariat der Anton Calaminus Schule in Rothenbergen abgeben.</p>
             </div>
           </div>
         </div>
