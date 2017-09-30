@@ -64,6 +64,20 @@ export class RegistrationService {
     return Observable.fromPromise(promise).mergeMap(id => this.getRegistration(id));
   }
 
+  handlePaypalPayment(registrationId: string, payment: any) {
+    this.db.object(`/registrations/${registrationId}/payment`)
+      .set({
+        type: 'paypal',
+        timestamp: firebase.database.ServerValue.TIMESTAMP,
+        paypal: {
+          id: payment.id,
+          timestamp: payment.create_time,
+          cart: payment.cart,
+          state: payment.state,
+        },
+      })
+  }
+
   getWaiver(reg: Registration): Promise<Blob> {
     try {
       return this.config.configuration.first()

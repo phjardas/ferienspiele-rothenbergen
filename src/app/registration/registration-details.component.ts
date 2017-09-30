@@ -1,9 +1,13 @@
 import 'rxjs/add/operator/mergeMap';
+import 'rxjs/add/observable/empty';
+import 'rxjs/add/observable/fromPromise';
 
 import { Component, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
+
+import { environment } from '../../environments/environment';
 
 import { RegistrationService } from '../registration.service';
 import { Registration } from '../model';
@@ -18,13 +22,17 @@ export class RegistrationDetailsComponent implements OnDestroy {
   reg: Registration;
   registrationDeadline: string;
   waiverDeadline: string;
+  paypalAvailable = !!environment.paypal.clientId;
+  private paypalButton: Observable<any>;
+  private paypalButtonRendered = false;
 
   constructor(private route: ActivatedRoute, private registrationService: RegistrationService) {
-    this.subscription = route.paramMap
-      .mergeMap(params => this.registrationService.getRegistration(params.get('id')))
-      .subscribe(reg => { this.reg = reg; this.loaded = true; });
+    const regObs = route.paramMap
+      .mergeMap(params => this.registrationService.getRegistration(params.get('id')));
+    this.subscription = regObs.subscribe(reg => { this.reg = reg; this.loaded = true; });
     this.subscription.add(registrationService.registrationDeadline.subscribe(d => this.registrationDeadline = d));
     this.subscription.add(registrationService.waiverDeadline.subscribe(d => this.waiverDeadline = d));
+    this.subscription.add(regObs.filter(reg => reg != null).filter(reg => !reg.payment).subscribe(_=> this.renderPaypalButton()));
   }
 
   printWaiver() {
@@ -41,6 +49,60 @@ export class RegistrationDetailsComponent implements OnDestroy {
         document.body.removeChild(a);
         URL.revokeObjectURL(url);
       });
+  }
+
+  private loadPaypalButton(url: string): Observable<any> {
+    if (!this.paypalAvailable) {
+      return Observable.empty();
+    }
+
+    if (!this.paypalButton) {
+      this.paypalButton = Observable.fromPromise(new Promise(resolve => {
+        const el = document.createElement('script');
+        el.src = url;
+        el.onload = () => resolve((window as any).paypal);
+        document.body.appendChild(el);
+      }));
+    }
+
+    return this.paypalButton;
+  }
+
+  private renderPaypalButton() {
+    if (this.paypalButtonRendered) return;
+    this.paypalButtonRendered = true;
+
+    this.loadPaypalButton('https://www.paypalobjects.com/api/checkout.js')
+    .subscribe(({ Button }) => {
+      const env = environment.production ? 'production' : 'sandbox';
+
+      Button.render({
+        env: env,
+        client: {
+          [env]: environment.paypal.clientId,
+        },
+        commit: true,
+        payment: (data, actions) => {
+          const payment = {
+            payment: {
+              transactions: [
+                {
+                  amount: { total: this.reg.price.total, currency: 'EUR' },
+                  purchase_order: this.reg.id,
+                  description: `Teilnahmebeitrag für ${this.reg.child.firstName} ${this.reg.child.lastName}`,
+                }
+              ]
+            }
+          };
+          return actions.payment.create(payment);
+        },
+        onAuthorize: (data, actions) => {
+          return actions.payment.execute().then(payment => {
+            this.registrationService.handlePaypalPayment(this.reg.id, payment);
+          });
+        },
+      }, '#paypal-button');
+    });
   }
 
   ngOnDestroy() {

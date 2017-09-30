@@ -4,7 +4,6 @@ import { Component, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 
-import { AuthenticationService, User } from '../auth';
 import { RegistrationService } from './registration.service';
 import { Registration } from '../model';
 
@@ -14,19 +13,16 @@ import { Registration } from '../model';
 })
 export class RegistrationDetailsComponent implements OnDestroy {
   subscription: Subscription;
-  user: User;
   reg: Registration;
   waiverWorking: boolean;
 
   constructor(
     private route: ActivatedRoute,
-    auth: AuthenticationService,
     private registrationService: RegistrationService
   ) {
-    this.subscription = auth.user.subscribe(user => this.user = user);
-    this.subscription.add(route.paramMap
+    this.subscription = route.paramMap
       .mergeMap(params => this.registrationService.getRegistration(params.get('id')))
-      .subscribe(reg => this.reg = reg));
+      .subscribe(reg => this.reg = reg);
   }
 
   printWaiver() {

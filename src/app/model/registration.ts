@@ -23,12 +23,29 @@ export class Approval implements FirebaseModel {
 }
 
 
+export class Payment extends Approval {
+  type: string;
+
+  constructor(data) {
+    super(data);
+    this.type = data.type;
+  }
+
+  toFirebase(): any {
+    return {
+      ...super.toFirebase(),
+      type: this.type,
+    };
+  }
+}
+
+
 export class Registration implements FirebaseModel {
   public id: string;
   public child: Child;
   public parent: Parent;
   public emergencyContact: EmergencyContact;
-  public payment: Approval;
+  public payment: Payment;
   public waiver: Approval;
   public registeredAt: Date;
 
@@ -37,7 +54,7 @@ export class Registration implements FirebaseModel {
     this.child = new Child(data.child);
     this.parent = new Parent(data.parent);
     this.emergencyContact = new EmergencyContact(data.emergencyContact);
-    this.payment = data.payment ? new Approval(data.payment) : null;
+    this.payment = data.payment ? new Payment(data.payment) : null;
     this.waiver = data.waiver ? new Approval(data.waiver) : null;
     this.registeredAt = new Date(data.registeredAt);
   }
