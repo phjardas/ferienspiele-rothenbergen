@@ -170,9 +170,9 @@
           <i class="fa fa-exclamation-triangle mr-1"></i>
           Bitte korrigieren Sie die Fehler im Formular.
         </div>
-        <spinner *ngIf="submitting"></spinner>
-        <button class="btn btn-primary" [disabled]="form.status !== 'VALID'" *ngIf="!submitting">
-          <i class="fa fa-check mr-1"></i>
+        <button class="btn btn-primary" [disabled]="submitting || form.status !== 'VALID'">
+          <i class="fa fa-check mr-1" *ngIf="!submitting"></i>
+          <spinner inverse class="mr-3" *ngIf="submitting"></spinner>
           Kostenpflichtig anmelden
         </button>
       </div>

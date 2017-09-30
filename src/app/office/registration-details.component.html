@@ -55,7 +55,8 @@
           <div *ngIf="!reg.waiver">
             <p class="card-text text-danger">Wir haben Ihre Einverständniserklärung noch nicht erhalten.</p>
             <button class="btn btn-primary mt-3" (click)="printWaiver()">
-              <i class="fa fa-print mr-1" aria-hidden="true"></i>
+              <spinner inverse class="mr-3" *ngIf="waiverWorking"></spinner>
+              <i class="fa fa-print mr-1" aria-hidden="true" *ngIf="!waiverWorking"></i>
               Einverständniserklärung drucken
             </button>
             <div *ngIf="user && user.hasRole('office')" class="mt-3">
