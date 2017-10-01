@@ -9,6 +9,7 @@ import { RegistrationService } from '../registration.service';
 import { ConfigurationService } from '../configuration.service';
 import { CustomValidators } from '../validators';
 import { Registration, ShirtSize, Price, PriceElement } from '../model';
+import { createTestData } from './testdata';
 
 
 interface InitialDataProvider {
@@ -17,27 +18,7 @@ interface InitialDataProvider {
 
 class TestDataProvider implements InitialDataProvider {
   createInitialData() {
-    console.log('testdata: create');
-    return {
-      child: {
-        firstName: 'Testine',
-        lastName: 'Tester',
-        gender: 'w',
-        dateOfBirth: '2010-04-01',
-        shirtSize: 'CHILDREN_S',
-      },
-      parent: {
-        phone: '01234-567890',
-        email: 'ferienspiele-rothenbergen@mailinator.com',
-        street: 'Mustergasse 12',
-        zip: '67890',
-        city: 'Musterhausen',
-      },
-      emergencyContact: {
-        name: 'Martina Mustermann',
-        phone: '01234-567890',
-      },
-    };
+    return createTestData();
   }
 }
 
@@ -59,6 +40,7 @@ export class RegistrationComponent {
   price: Price;
   registrationStatus: Observable<string>;
   registrationDeadline: Observable<string>;
+  enableTestData: Observable<boolean>;
 
   constructor(
     private router: Router,
@@ -93,15 +75,19 @@ export class RegistrationComponent {
       }),
     });
 
-    config.configuration
-      .map(c => c.enableTestData ? new TestDataProvider() : new NoDataProvider())
-      .first()
-      .map(p => p.createInitialData())
-      .subscribe(data => this.form.patchValue(data));
+    this.enableTestData = config.configuration
+      .map(c => c.enableTestData);
 
     const updatePrice = values => this.price = new Registration(values).price;
     this.form.valueChanges.forEach(updatePrice);
     updatePrice(this.form.value);
+  }
+
+  createTestData() {
+    this.enableTestData.map(enable => enable ? new TestDataProvider() : new NoDataProvider())
+      .first()
+      .map(p => p.createInitialData())
+      .subscribe(data => this.form.patchValue(data));
   }
 
   submit() {
