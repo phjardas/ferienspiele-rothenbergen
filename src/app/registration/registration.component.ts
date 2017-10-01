@@ -6,8 +6,46 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
 
 import { RegistrationService } from '../registration.service';
+import { ConfigurationService } from '../configuration.service';
 import { CustomValidators } from '../validators';
 import { Registration, ShirtSize, Price, PriceElement } from '../model';
+
+
+interface InitialDataProvider {
+  createInitialData(): any;
+}
+
+class TestDataProvider implements InitialDataProvider {
+  createInitialData() {
+    console.log('testdata: create');
+    return {
+      child: {
+        firstName: 'Testine',
+        lastName: 'Tester',
+        gender: 'w',
+        dateOfBirth: '2010-04-01',
+        shirtSize: 'CHILDREN_S',
+      },
+      parent: {
+        phone: '01234-567890',
+        email: 'ferienspiele-rothenbergen@mailinator.com',
+        street: 'Mustergasse 12',
+        zip: '67890',
+        city: 'Musterhausen',
+      },
+      emergencyContact: {
+        name: 'Martina Mustermann',
+        phone: '01234-567890',
+      },
+    };
+  }
+}
+
+class NoDataProvider implements InitialDataProvider {
+  createInitialData() {
+    return {};
+  }
+}
 
 
 @Component({
@@ -22,7 +60,12 @@ export class RegistrationComponent {
   registrationStatus: Observable<string>;
   registrationDeadline: Observable<string>;
 
-  constructor(private router: Router, private registrationService: RegistrationService, formBuilder: FormBuilder) {
+  constructor(
+    private router: Router,
+    private registrationService: RegistrationService,
+    config: ConfigurationService,
+    formBuilder: FormBuilder
+  ) {
     this.registrationStatus = registrationService.registrationStatus;
     this.registrationDeadline = registrationService.registrationDeadline;
 
@@ -49,6 +92,12 @@ export class RegistrationComponent {
         phone: ['', Validators.required],
       }),
     });
+
+    config.configuration
+      .map(c => c.enableTestData ? new TestDataProvider() : new NoDataProvider())
+      .first()
+      .map(p => p.createInitialData())
+      .subscribe(data => this.form.patchValue(data));
 
     const updatePrice = values => this.price = new Registration(values).price;
     this.form.valueChanges.forEach(updatePrice);
