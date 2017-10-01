@@ -48,28 +48,45 @@
             </div>
             <div *ngIf="!reg.payment">
               <p class="card-text text-danger">Wir haben Ihren Teilnahmebeitrag noch nicht erhalten.</p>
-              <div *ngIf="paypalAvailable">
-                <p>Sie können den Teilnahmebeitrag jetzt sofort bequem mit PayPal bezahlen.</p>
-                <div id="paypal-button" class="mb-3"></div>
-                <hr>
-                <p>Sie können den Betrag auch auf das folgende Konto überweisen:</p>
+
+              <ul class="nav nav-tabs nav-justified">
+                <li class="nav-item" *ngIf="paypalConfig.enabled">
+                  <a href="" class="nav-link" [ngClass]="{ active: paymentMethod === 'paypal' }" (click)="paymentMethod = 'paypal'; false">PayPal</a>
+                </li>
+                <li class="nav-item">
+                  <a href="" class="nav-link" [ngClass]="{ active: paymentMethod === 'transfer' }" (click)="paymentMethod = 'transfer'; false">Überweisung</a>
+                </li>
+                <li class="nav-item">
+                  <a href="" class="nav-link" [ngClass]="{ active: paymentMethod === 'cash' }" (click)="paymentMethod = 'cash'; false">Bar</a>
+                </li>
+              </ul>
+              <div class="tab-content mt-3" id="payment-method">
+                <div class="tab-pane" [ngClass]="{ 'active': paymentMethod === 'paypal' }">
+                  <p>Sie können den Teilnahmebeitrag jetzt sofort bequem mit PayPal bezahlen.</p>
+                  <div id="paypal-button"></div>
+                  <p *ngIf="paypalConfig.testUser" class="card-text">
+                    <small>Benutzer für Tests: {{paypalConfig.testUser.email}} / {{paypalConfig.testUser.password}}</small>
+                  </p>
+                </div>
+                <div class="tab-pane" [ngClass]="{ 'active': paymentMethod === 'transfer' }">
+                  <p>Bitte überweisen Sie den Betrag auf das folgende Konto:</p>
+                  <p class="card-text"><small>
+                    Empfänger: EMK Rothenbergen<br>
+                    IBAN: DE38507500940027050992<br>
+                    BIC: HELADEF1GEL<br>
+                    Verwendungszweck: "Ferienspiele {{reg.child.firstName}} {{reg.child.lastName}}"
+                  </small></p>
+                </div>
+                <div class="tab-pane" [ngClass]="{ 'active': paymentMethod === 'cash' }">
+                  <p>Sie können den Teilnahmebeitrag in bar bezahlen:</p>
+                  <p><small>
+                    Büro der Katholischen Kirche "Christkönig"<br>
+                    Niedergründauer Straße 20<br>
+                    63584 Rothenbergen
+                  </small></p>
+                  <p class="card-text">Sie können das Geld und die Einverstädniserklärung auch im Sekretariat der Anton Calaminus Schule in Rothenbergen abgeben.</p>
+                </div>
               </div>
-              <p *ngIf="!paypalAvailable">Bitte überweisen Sie den Betrag auf das folgende Konto:</p>
-              <p><small>
-                Empfänger: EMK Rothenbergen<br>
-                IBAN: DE38507500940027050992<br>
-                BIC: HELADEF1GEL<br>
-                Verwendungszweck: "Ferienspiele {{reg.child.firstName}} {{reg.child.lastName}}"
-              </small></p>
-              <hr>
-              <p>Sie können den Teilnahmebeitrag auch in bar bezahlen:</p>
-              <p><small>
-                Büro der Katholischen Kirche "Christkönig"<br>
-                Niedergründauer Straße 20<br>
-                63584 Rothenbergen
-              </small></p>
-              <hr>
-              <p class="card-text">Sie können das Geld und die Einverstädniserklärung auch im Sekretariat der Anton Calaminus Schule in Rothenbergen abgeben.</p>
             </div>
           </div>
         </div>

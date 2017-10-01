@@ -22,7 +22,8 @@ export class RegistrationDetailsComponent implements OnDestroy {
   reg: Registration;
   registrationDeadline: string;
   waiverDeadline: string;
-  paypalAvailable = !!environment.paypal.clientId;
+  paypalConfig = environment.paypal;
+  private paymentMethod = this.paypalConfig.enabled ? 'paypal' : 'transfer';
   private paypalButton: Observable<any>;
   private paypalButtonRendered = false;
 
@@ -52,7 +53,7 @@ export class RegistrationDetailsComponent implements OnDestroy {
   }
 
   private loadPaypalButton(url: string): Observable<any> {
-    if (!this.paypalAvailable) {
+    if (!this.paypalConfig.enabled) {
       return Observable.empty();
     }
 
@@ -74,7 +75,7 @@ export class RegistrationDetailsComponent implements OnDestroy {
 
     this.loadPaypalButton('https://www.paypalobjects.com/api/checkout.js')
     .subscribe(({ Button }) => {
-      const env = environment.production ? 'production' : 'sandbox';
+      const env = this.paypalConfig.environment;
 
       Button.render({
         env: env,
@@ -82,6 +83,11 @@ export class RegistrationDetailsComponent implements OnDestroy {
           [env]: environment.paypal.clientId,
         },
         commit: true,
+        locale: 'de_DE',
+        style: {
+          color: 'blue',
+          shape: 'rect',
+        },
         payment: (data, actions) => {
           const payment = {
             payment: {
