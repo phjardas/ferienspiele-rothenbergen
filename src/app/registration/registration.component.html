@@ -31,6 +31,9 @@
       <p>
         Bitte füllen Sie alle Felder aus, es sei denn sie sind mit "optional" gekennzeichnet.
       </p>
+      <button class="btn btn-outline-primary" *ngIf="enableTestData" (click)="createTestData()">
+        Testdaten erzeugen
+      </button>
     </div>
   </div>
 
