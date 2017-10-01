@@ -6,6 +6,7 @@ import { RoleGuard } from '../auth';
 import { DashboardComponent } from './dashboard.component';
 import { OfficeComponent } from './office.component';
 import { RegistrationDetailsComponent } from './registration-details.component';
+import { StatisticsComponent } from './statistics.component';
 
 
 const routes: Routes = [
@@ -17,6 +18,7 @@ const routes: Routes = [
     children: [
       { path: 'anmeldungen/:id', component: RegistrationDetailsComponent },
       { path: 'anmeldungen', component: DashboardComponent },
+      { path: 'statistics', component: StatisticsComponent },
       { path: '', redirectTo: 'anmeldungen' },
     ]
   },

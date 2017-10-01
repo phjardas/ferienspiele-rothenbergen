@@ -1,0 +1,56 @@
+<div class="row">
+  <div class="col-md-6 col-lg-4 mb-3">
+    <div class="card">
+      <div class="card-header">Geschlecht</div>
+      <div class="card-body">
+        <spinner *ngIf="!charts.gender.dataTable"></spinner>
+        <google-chart [data]="charts.gender" *ngIf="charts.gender.dataTable"></google-chart>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6 col-lg-4 mb-3">
+    <div class="card">
+      <div class="card-header">Alter <small>(am ersten Tag)</small></div>
+      <div class="card-body">
+        <spinner *ngIf="!charts.age.dataTable"></spinner>
+        <google-chart [data]="charts.age" *ngIf="charts.age.dataTable"></google-chart>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6 col-lg-4 mb-3">
+    <div class="card">
+      <div class="card-header">Vegetarier</div>
+      <div class="card-body">
+        <spinner *ngIf="!charts.vegetarian.dataTable"></spinner>
+        <google-chart [data]="charts.vegetarian" *ngIf="charts.vegetarian.dataTable"></google-chart>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6 col-lg-4 mb-3">
+    <div class="card">
+      <div class="card-header">Wohnort</div>
+      <div class="card-body">
+        <spinner *ngIf="!charts.city.dataTable"></spinner>
+        <google-chart [data]="charts.city" *ngIf="charts.city.dataTable"></google-chart>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6 col-lg-4 mb-3">
+    <div class="card">
+      <div class="card-header">Teilnahmebeitrag</div>
+      <div class="card-body">
+        <spinner *ngIf="!charts.payment.dataTable"></spinner>
+        <google-chart [data]="charts.payment" *ngIf="charts.payment.dataTable"></google-chart>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6 col-lg-4 mb-3">
+    <div class="card">
+      <div class="card-header">Einverständniserklärung</div>
+      <div class="card-body">
+        <spinner *ngIf="!charts.waiver.dataTable"></spinner>
+        <google-chart [data]="charts.waiver" *ngIf="charts.waiver.dataTable"></google-chart>
+      </div>
+    </div>
+  </div>
+</div>

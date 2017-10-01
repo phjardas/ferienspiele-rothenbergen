@@ -8,6 +8,7 @@ const maleNames = ["Liam","Milan","Jonas","Elias","Julian","Levi","Tim","Michael
 const allNames = [...femaleNames, ...maleNames];
 
 const lastNames = ['Müller', 'Meier', 'Schmidt', 'Krause'];
+const cities = ['Niedergründau', 'Rothenbergen', 'Langenselbold', 'Büdingen', 'Gründau-Lieblos', 'Mittel-Gründau', 'Hain-Gründau'];
 
 
 function randomBoolean(): boolean {

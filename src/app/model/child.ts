@@ -1,3 +1,5 @@
+import * as moment from 'moment';
+
 import { FirebaseModel } from './firebase-model';
 import { Gender } from './gender';
 import { ShirtSize } from './shirt-size';
@@ -20,6 +22,10 @@ export class Child implements FirebaseModel {
     this.shirtSize = ShirtSize.valueOf(data.shirtSize);
     this.vegetarian = data.vegetarian;
     this.nextChild = data.nextChild;
+  }
+
+  getAge(date: string): number {
+    return moment(date).diff(this.dateOfBirth, 'years');
   }
 
   toFirebase(): any {
