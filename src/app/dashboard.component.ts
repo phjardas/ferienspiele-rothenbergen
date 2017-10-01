@@ -10,12 +10,12 @@ import { RegistrationService } from './registration.service';
 })
 export class DashboardComponent {
   title: Observable<string>;
-  registrationOpen: Observable<string>;
+  registrationStatus: Observable<string>;
   registrationDeadline: Observable<string>;
 
   constructor(config: ConfigurationService, reg: RegistrationService) {
     this.title = config.configuration.map(c => c.title);
     this.registrationDeadline = reg.registrationDeadline;
-    this.registrationOpen = reg.registrationOpen;
+    this.registrationStatus = reg.registrationStatus;
   }
 }

@@ -3,10 +3,10 @@
     <div>
       <h2 class="display-3">
         {{ title|async }}
-        <spinner *ngIf="!(title|async) || (registrationOpen|async) === null" class="ml-1"></spinner>
+        <spinner *ngIf="!(title|async) || (registrationStatus|async) === null" class="ml-1"></spinner>
       </h2>
 
-      <div *ngIf="(registrationOpen|async) === 'ok'">
+      <div *ngIf="(registrationStatus|async) === 'open'">
         <p class="lead">Anmeldeschluss ist am {{ registrationDeadline | async | date }}</p>
         <a class="btn btn-primary btn-lg" [routerLink]="['/anmeldung']">
           <i class="fa fa-child mr-1" aria-hidden="true"></i>
@@ -14,12 +14,12 @@
         </a>
       </div>
 
-      <div *ngIf="(registrationOpen|async) === 'deadlineExpired'">
+      <div *ngIf="(registrationStatus|async) === 'deadlineExpired'">
         <p class="lead"><i class="fa fa-frown-o mr-1"></i> Leider ist die Anmeldefrist für die Kinderferienspiele abgelaufen.</p>
         <p>Wir bitten um Ihr Verständnis, dass wir keine weiteren Anmeldungen entgegennehmen können.</p>
       </div>
 
-      <div *ngIf="(registrationOpen|async) === 'maxParticipants'">
+      <div *ngIf="(registrationStatus|async) === 'maxParticipants'">
         <p class="lead"><i class="fa fa-frown-o mr-1"></i> Leider sind schon alle Plätze belegt.</p>
         <p>Wir bitten um Ihr Verständnis, dass wir keine weiteren Anmeldungen entgegennehmen können.</p>
       </div>

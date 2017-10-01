@@ -9,5 +9,5 @@ function registerFunctions(name) {
     .forEach(key => exports[key] = obj[key]);
 }
 
-registerFunctions('updateRegistrationCount');
+registerFunctions('updateRegistrationStatus');
 registerFunctions('sendRegistrationMail');
