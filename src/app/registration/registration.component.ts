@@ -19,11 +19,11 @@ export class RegistrationComponent {
   submitting: boolean;
   shirtSizes = ShirtSize.values;
   price: Price;
-  registrationOpen: Observable<string>;
+  registrationStatus: Observable<string>;
   registrationDeadline: Observable<string>;
 
   constructor(private router: Router, private registrationService: RegistrationService, formBuilder: FormBuilder) {
-    this.registrationOpen = registrationService.registrationOpen;
+    this.registrationStatus = registrationService.registrationStatus;
     this.registrationDeadline = registrationService.registrationDeadline;
 
     this.form = formBuilder.group({

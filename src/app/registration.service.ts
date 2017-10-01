@@ -2,7 +2,6 @@ import 'rxjs/add/operator/first';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/operator/toPromise';
-import 'rxjs/add/observable/combineLatest';
 import 'rxjs/add/observable/fromPromise';
 
 import { Injectable } from '@angular/core';
@@ -30,7 +29,7 @@ function toPromise<T>(promise: firebase.Promise<T>): Promise<T> {
 @Injectable()
 export class RegistrationService {
   private registrationCount: Observable<number>;
-  public registrationOpen: Observable<string>;
+  public registrationStatus: Observable<string>;
   public registrationDeadline: Observable<string>;
   public waiverDeadline: Observable<string>;
 
@@ -40,17 +39,9 @@ export class RegistrationService {
     private waiverService: WaiverService
   ) {
     this.registrationCount = db.object('/registrationCount').map(c => c.$value);
+    this.registrationStatus = db.object('/registrationStatus').map(c => c.$value);
     this.registrationDeadline = config.configuration.map(c => c.registrationDeadline);
     this.waiverDeadline = config.configuration.map(c => c.waiverDeadline);
-    this.registrationOpen = Observable.combineLatest(
-      this.registrationDeadline.map(d => d >= new Date().toISOString().substring(0, 10)),
-      config.configuration.map(c => c.maxParticipants).mergeMap(max => this.registrationCount.map(reg => reg < max)),
-      (deadline, count) => {
-        if (!deadline) return 'deadlineExpired';
-        if (!count) return 'maxParticipants';
-        return 'ok';
-      }
-    );
   }
 
   getRegistration(id: string): Observable<Registration> {

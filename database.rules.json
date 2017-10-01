@@ -1,6 +1,52 @@
 {
   "rules": {
-    ".read": "true",
-    ".write": "true"
+    "config": {
+      ".read": "true",
+      // allow write for admins
+      ".write": "root.child('/users/'+auth.uid+'/roles/admin').val() == true"
+    },
+    "emails": {
+      // allow read for admins
+      ".read": "root.child('/users/'+auth.uid+'/roles/admin').val() == true",
+      "$id": {
+        // only allow inserts
+        ".write": "!data.exists() && newData.exists()"
+      }
+    },
+    "registrationCount": {
+      ".read": "true"
+    },
+    "registrationStatus": {
+      ".read": "true"
+    },
+    "registrations": {
+      // allow read for office
+      ".read": "root.child('/users/'+auth.uid+'/roles/office').val() == true",
+      "$id": {
+        // everyone can read specific registrations
+        ".read": "true",
+        // only allow inserts
+        ".write": "!data.exists() && newData.exists()",
+        "payment": {
+          // allow inserts for everyone (needed for paypal) and full editing for office
+          ".write": "!data.exists() && newData.exists() || root.child('/users/'+auth.uid+'/roles/office').val() == true"
+        },
+        "waiver": {
+          // allow write for office
+          ".write": "root.child('/users/'+auth.uid+'/roles/office').val() == true"
+        }
+      }
+    },
+    "users": {
+      // allow full access to admins
+      ".read": "root.child('/users/'+auth.uid+'/roles/admin').val() == true",
+      ".write": "root.child('/users/'+auth.uid+'/roles/admin').val() == true",
+      "$user_id": {
+        // allow reads to own user
+        ".read": "$user_id === auth.uid",
+        // only allow inserts, not updates
+        ".write": "$user_id === auth.uid && !data.exists() && newData.exists()"
+      }
+    }
   }
 }

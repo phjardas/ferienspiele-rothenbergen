@@ -1,10 +1,10 @@
-<div *ngIf="(registrationOpen|async) === null" class="jumbotron jumbotron-fluid">
+<div *ngIf="(registrationStatus|async) === null" class="jumbotron jumbotron-fluid">
   <div class="container">
     <h2 class="display-3">Anmeldung <spinner class="ml-1"></spinner></h2>
   </div>
 </div>
 
-<div *ngIf="(registrationOpen|async) === 'deadlineExpired'" class="jumbotron jumbotron-fluid">
+<div *ngIf="(registrationStatus|async) === 'deadlineExpired'" class="jumbotron jumbotron-fluid">
   <div class="container">
     <h2 class="display-3">Anmeldung</h2>
     <p class="lead"><i class="fa fa-frown-o mr-1"></i> Leider ist die Anmeldefrist für die Kinderferienspiele abgelaufen.</p>
@@ -12,7 +12,7 @@
   </div>
 </div>
 
-<div *ngIf="(registrationOpen|async) === 'maxParticipants'" class="jumbotron jumbotron-fluid">
+<div *ngIf="(registrationStatus|async) === 'maxParticipants'" class="jumbotron jumbotron-fluid">
   <div class="container">
     <h2 class="display-3">Anmeldung</h2>
     <p class="lead"><i class="fa fa-frown-o mr-1"></i> Leider sind schon alle Plätze belegt.</p>
@@ -20,7 +20,7 @@
   </div>
 </div>
 
-<div *ngIf="(registrationOpen|async) === 'ok'">
+<div *ngIf="(registrationStatus|async) === 'open'">
   <div class="jumbotron jumbotron-fluid">
     <div class="container">
       <h2 class="display-3">Anmeldung</h2>
