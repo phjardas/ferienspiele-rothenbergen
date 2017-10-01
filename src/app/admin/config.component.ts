@@ -32,6 +32,7 @@ export class ConfigComponent {
       { name: 'maxParticipants', label: 'Maximale Teilnehmeranzahl', type: 'number' },
       { name: 'registrationDeadline', label: 'Anmeldeschluss', type: 'date' },
       { name: 'waiverDeadline', label: 'Frist zur Abgabe der Einverständniserklärung', type: 'date' },
+      { name: 'enableTestData', label: 'Ermögliche die Erzeugung von Testdaten in der Anmeldung', type: 'check' },
     ];
 
     this.form = formBuilder.group({
@@ -42,6 +43,7 @@ export class ConfigComponent {
       maxParticipants: ['', Validators.required],
       registrationDeadline: ['', Validators.required],
       waiverDeadline: ['', Validators.required],
+      enableTestData: false,
     });
 
     this.loadValues();

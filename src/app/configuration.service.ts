@@ -11,6 +11,7 @@ export class Configuration {
   public maxParticipants: number;
   public registrationDeadline: string;
   public waiverDeadline: string;
+  public enableTestData: boolean;
 
   constructor(data: any) {
     this.year = parseInt(data.year);
@@ -20,6 +21,7 @@ export class Configuration {
     this.maxParticipants = parseInt(data.maxParticipants);
     this.registrationDeadline = data.registrationDeadline;
     this.waiverDeadline = data.waiverDeadline;
+    this.enableTestData = !!data.enableTestData;
   }
 }
 
