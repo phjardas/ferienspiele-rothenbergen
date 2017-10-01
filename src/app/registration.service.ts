@@ -8,6 +8,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { AngularFireDatabase } from 'angularfire2/database';
 import * as firebase from 'firebase';
+import { createId } from './id';
 
 import { ConfigurationService, Configuration } from './configuration.service';
 import { WaiverService } from './waiver.service';
@@ -50,9 +51,10 @@ export class RegistrationService {
   }
 
   submitRegistration(reg: Registration): Observable<Registration> {
-    const regData = { ...toData(reg), registeredAt: firebase.database.ServerValue.TIMESTAMP };
-    const promise: PromiseLike<string> = this.db.list('/registrations').push(regData).then(x => x.key);
-    return Observable.fromPromise(promise).mergeMap(id => this.getRegistration(id));
+    const id = createId();
+    const regData = { ...toData(reg), id, registeredAt: firebase.database.ServerValue.TIMESTAMP };
+    const promise: PromiseLike<void> = this.db.object(`/registrations/${regData.id}`).set(regData);
+    return Observable.fromPromise(promise).mergeMap(_=> this.getRegistration(id));
   }
 
   handlePaypalPayment(registrationId: string, payment: any) {
