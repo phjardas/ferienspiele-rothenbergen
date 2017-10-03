@@ -22,20 +22,27 @@
             Teilnahmebeitrag € {{ reg.price.total | number:'1.2-2' }}
           </h3>
           <div *ngIf="reg.payment">
-            <p class="card-text">
+            <p>
               Erhalten am {{ reg.payment.timestamp | date }}
               <span *ngIf="reg.payment && reg.payment.type === 'paypal'">per PayPal</span>.
             </p>
-            <button class="btn btn-primary mt-3" (click)="setPaymentReceived(false)">
-              <i class="fa fa-times mr-1" aria-hidden="true"></i>
+            <button class="btn btn-primary" (click)="setPaymentNotReceived()">
+              <spinner inverse class="mr-3" *ngIf="paymentWorking === 'reset'"></spinner>
+              <i class="fa fa-times mr-1" *ngIf="paymentWorking !== 'reset'"></i>
               doch nicht erhalten
             </button>
           </div>
           <div *ngIf="!reg.payment">
-            <p class="card-text">Noch nicht erhalten.</p>
-            <button class="btn btn-primary mt-3" (click)="setPaymentReceived(true)">
-              <i class="fa fa-check mr-1" aria-hidden="true"></i>
-              erhalten
+            <p>Noch nicht erhalten.</p>
+            <button class="btn btn-primary" (click)="setPaymentReceived('cash')">
+              <spinner inverse class="mr-3" *ngIf="paymentWorking === 'cash'"></spinner>
+              <i class="fa fa-check mr-1" *ngIf="paymentWorking !== 'cash'"></i>
+              bar erhalten
+            </button>
+            <button class="btn btn-primary" (click)="setPaymentReceived('transfer')">
+              <spinner inverse class="mr-3" *ngIf="paymentWorking === 'transfer'"></spinner>
+              <i class="fa fa-check mr-1" *ngIf="paymentWorking !== 'transfer'"></i>
+              per Überweisung erhalten
             </button>
           </div>
         </div>
@@ -53,15 +60,15 @@
           <div class="mt-3">
             <button class="btn btn-primary" (click)="printWaiver()">
               <spinner inverse class="mr-3" *ngIf="waiverWorking"></spinner>
-              <i class="fa fa-print mr-1" aria-hidden="true" *ngIf="!waiverWorking"></i>
+              <i class="fa fa-print mr-1" *ngIf="!waiverWorking"></i>
               drucken
             </button>
             <button class="btn btn-primary" (click)="setWaiverReceived(true)" *ngIf="!reg.waiver">
-              <i class="fa fa-check mr-1" aria-hidden="true"></i>
+              <i class="fa fa-check mr-1"></i>
               erhalten
             </button>
             <button class="btn btn-primary" (click)="setWaiverReceived(false)" *ngIf="reg.waiver">
-              <i class="fa fa-times mr-1" aria-hidden="true"></i>
+              <i class="fa fa-times mr-1"></i>
               doch nicht erhalten
             </button>
           </div>

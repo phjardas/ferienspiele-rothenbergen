@@ -46,7 +46,7 @@ export class StatisticsComponent {
         chartArea: { left: 0, top: 0, width: '100%', height: '100%' },
       },
     },
-    city: {
+    paymentType: {
       chartType: 'PieChart',
       dataTable: null,
       options: {
@@ -81,7 +81,7 @@ export class StatisticsComponent {
     this.subscription = registrations.subscribe(regs => {
       this.updateGenderData(regs);
       this.updateVegetarianData(regs);
-      this.updateCityData(regs);
+      this.updatePaymentTypeData(regs);
       this.updatePaymentData(regs);
       this.updateWaiverData(regs);
     });
@@ -115,12 +115,13 @@ export class StatisticsComponent {
     this.charts.vegetarian.dataTable = [header].concat(data);
   }
 
-  private updateCityData(regs: Registration[]) {
-    const header: any[] = ['Wohnort', 'Anzahl'];
-    const counts = regs.map(reg => reg.parent.city)
+  private updatePaymentTypeData(regs: Registration[]) {
+    const labels = { cash: 'Bar', transfer: 'Überweisung' };
+    const header: any[] = ['Bezahlart', 'Anzahl'];
+    const counts = regs.filter(reg => reg.payment).map(reg => reg.payment.type)
       .reduce((cnts, val) => (cnts[val] = (cnts[val] || 0) + 1) && cnts, {});
-    const data = Object.keys(counts).sort().map(val => [val, counts[val]]);
-    this.charts.city.dataTable = [header].concat(data);
+    const data = Object.keys(counts).sort().map(val => [labels[val], counts[val]]);
+    this.charts.paymentType.dataTable = [header].concat(data);
   }
 
   private updatePaymentData(regs: Registration[]) {

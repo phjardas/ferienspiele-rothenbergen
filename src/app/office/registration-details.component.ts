@@ -14,6 +14,7 @@ import { Registration } from '../model';
 export class RegistrationDetailsComponent implements OnDestroy {
   subscription: Subscription;
   reg: Registration;
+  paymentWorking: string;
   waiverWorking: boolean;
 
   constructor(
@@ -43,8 +44,16 @@ export class RegistrationDetailsComponent implements OnDestroy {
       });
   }
 
-  setPaymentReceived(received: boolean) {
-    this.registrationService.setPaymentReceived(this.reg.id, received);
+  setPaymentReceived(type: string) {
+    this.paymentWorking = type;
+    this.registrationService.setPaymentReceived(this.reg.id, type)
+      .then(_=> this.paymentWorking = null);
+  }
+
+  setPaymentNotReceived() {
+    this.paymentWorking = 'reset';
+    this.registrationService.setPaymentNotReceived(this.reg.id)
+      .then(_=> this.paymentWorking = null);
   }
 
   setWaiverReceived(received: boolean) {
