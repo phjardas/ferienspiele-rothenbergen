@@ -8,7 +8,7 @@ const maleNames = ["Liam","Milan","Jonas","Elias","Julian","Levi","Tim","Michael
 const allNames = [...femaleNames, ...maleNames];
 
 // https://de.wikipedia.org/wiki/Liste_der_h%C3%A4ufigsten_Familiennamen_in_Deutschland
-const lastNames = ['Müller', 'Schmidt', 'Schneier', 'Fischer'. 'Weber', 'Meyer', 'Wagner', 'Becker', 'Schulz', 'Hoffmann', 'Schäfer', 'Koch', 'Bauer', 'Richter', 'Klein', 'Wolf', 'Schröder'];
+const lastNames = ['Müller', 'Schmidt', 'Schneier', 'Fischer', 'Weber', 'Meyer', 'Wagner', 'Becker', 'Schulz', 'Hoffmann', 'Schäfer', 'Koch', 'Bauer', 'Richter', 'Klein', 'Wolf', 'Schröder'];
 const cities = ['Niedergründau', 'Rothenbergen', 'Langenselbold', 'Büdingen', 'Gründau-Lieblos', 'Mittel-Gründau', 'Hain-Gründau'];
 
 
