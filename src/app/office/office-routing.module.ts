@@ -3,8 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { RoleGuard } from '../auth';
 
-import { DashboardComponent } from './dashboard.component';
 import { OfficeComponent } from './office.component';
+import { RegistrationsComponent } from './registrations.component';
 import { RegistrationDetailsComponent } from './registration-details.component';
 import { StatisticsComponent } from './statistics.component';
 
@@ -17,7 +17,7 @@ const routes: Routes = [
     data: { roles: ['office'] },
     children: [
       { path: 'anmeldungen/:id', component: RegistrationDetailsComponent },
-      { path: 'anmeldungen', component: DashboardComponent },
+      { path: 'anmeldungen', component: RegistrationsComponent },
       { path: 'statistics', component: StatisticsComponent },
       { path: '', redirectTo: 'anmeldungen' },
     ]
