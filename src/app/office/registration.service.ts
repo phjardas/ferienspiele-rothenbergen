@@ -46,15 +46,19 @@ export class RegistrationService {
     return this.getRegistrations().map(regs => this.excelService.exportRegistrations(regs));
   }
 
-  setPaymentReceived(id: string, received: boolean): Promise<any> {
-    return this.setApproval(id, 'payment', received);
+  setPaymentReceived(id: string, type: string): Promise<any> {
+    return this.setApproval(id, 'payment', true, { type });
+  }
+
+  setPaymentNotReceived(id: string): Promise<any> {
+    return this.setApproval(id, 'payment', false);
   }
 
   setWaiverReceived(id: string, received: boolean): Promise<any> {
     return this.setApproval(id, 'waiver', received);
   }
 
-  private setApproval(id: string, type: string, received: boolean): Promise<any> {
+  private setApproval(id: string, type: string, received: boolean, additionalData?: {}): Promise<any> {
     // FIXME validate permissions!
     const ref = this.db.object(`/registrations/${id}/${type}`);
 
@@ -62,7 +66,11 @@ export class RegistrationService {
       return this.auth.user
         .filter(user => user != null)
         .first()
-        .mergeMap(user => Observable.fromPromise(ref.set({ timestamp: firebase.database.ServerValue.TIMESTAMP, user: user.label })))
+        .mergeMap(user => {
+          const data = { timestamp: firebase.database.ServerValue.TIMESTAMP, user: user.label };
+          if (additionalData) Object.assign(data, additionalData);
+          return Observable.fromPromise(ref.set(data));
+        })
         .toPromise();
     } else {
       return toPromise(ref.set(null));
