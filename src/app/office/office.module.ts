@@ -9,7 +9,7 @@ import { ExcelService } from './excel.service';
 import { RegistrationService } from './registration.service';
 
 import { OfficeComponent } from './office.component';
-import { DashboardComponent } from './dashboard.component';
+import { RegistrationsComponent } from './registrations.component';
 import { StatisticsComponent } from './statistics.component';
 import { RegistrationDetailsComponent } from './registration-details.component';
 
@@ -22,7 +22,7 @@ import { RegistrationDetailsComponent } from './registration-details.component';
     OfficeRoutingModule,
   ],
   declarations: [
-    DashboardComponent,
+    RegistrationsComponent,
     OfficeComponent,
     StatisticsComponent,
     RegistrationDetailsComponent,

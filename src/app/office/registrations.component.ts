@@ -7,8 +7,8 @@ import { RegistrationService } from './registration.service';
 import { Registration } from '../model';
 
 
-@Component({ templateUrl: 'dashboard.component.html' })
-export class DashboardComponent {
+@Component({ templateUrl: 'registrations.component.html' })
+export class RegistrationsComponent {
   registrations: Observable<Registration[]>;
   exportWorking = false;
 
