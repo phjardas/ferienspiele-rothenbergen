@@ -1,10 +1,10 @@
-<div *ngIf="(registrationStatus|async) === null" class="jumbotron jumbotron-fluid">
+<div *ngIf="registrationStatus === null" class="jumbotron jumbotron-fluid">
   <div class="container">
     <h2 class="display-3">Anmeldung <spinner class="ml-1"></spinner></h2>
   </div>
 </div>
 
-<div *ngIf="(registrationStatus|async) === 'deadlineExpired'" class="jumbotron jumbotron-fluid">
+<div *ngIf="registrationStatus === 'deadlineExpired'" class="jumbotron jumbotron-fluid">
   <div class="container">
     <h2 class="display-3">Anmeldung</h2>
     <p class="lead"><i class="fa fa-frown-o mr-1"></i> Leider ist die Anmeldefrist für die Kinderferienspiele abgelaufen.</p>
@@ -12,7 +12,7 @@
   </div>
 </div>
 
-<div *ngIf="(registrationStatus|async) === 'maxParticipants'" class="jumbotron jumbotron-fluid">
+<div *ngIf="registrationStatus === 'maxParticipants'" class="jumbotron jumbotron-fluid">
   <div class="container">
     <h2 class="display-3">Anmeldung</h2>
     <p class="lead"><i class="fa fa-frown-o mr-1"></i> Leider sind schon alle Plätze belegt.</p>
@@ -20,13 +20,19 @@
   </div>
 </div>
 
-<div *ngIf="(registrationStatus|async) === 'open'">
+<div class="container" *ngIf="registrationCode && registrationCode.used">
+  <div class="alert alert-danger">
+    Der Anmeldungs-Code {{registrationCode.id}} wurde bereits für eine Anmeldung verwendet.
+  </div>
+</div>
+
+<div *ngIf="registrationStatus === 'open' || registrationCode && !registrationCode?.used">
   <div class="jumbotron jumbotron-fluid">
     <div class="container">
       <h2 class="display-3">Anmeldung</h2>
       <p class="lead">
         Wir freuen uns, dass Sie Ihr Kind bei den Ferienspielen Rothenbergen anmelden wollen.
-        <strong>Anmeldeschluss ist {{ registrationDeadline | async | date }}</strong>
+        <strong>Anmeldeschluss ist {{ registrationDeadline | date }}</strong>
       </p>
       <p>
         Bitte füllen Sie alle Felder aus, es sei denn sie sind mit "optional" gekennzeichnet.
