@@ -11,3 +11,4 @@ function registerFunctions(name) {
 
 registerFunctions('updateRegistrationStatus');
 registerFunctions('sendRegistrationMail');
+registerFunctions('sendNewUserMail');
