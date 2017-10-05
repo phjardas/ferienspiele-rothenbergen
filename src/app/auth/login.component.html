@@ -13,11 +13,12 @@
       <form-field class="col-md-6" [formGroup]="form" field="email" label="E-Mail">
         <input form-field-input formControlName="email" type="email" autofocus>
       </form-field>
-      <form-field class="col-md-6" [formGroup]="form" field="password" label="Kennwort">
+      <form-field class="col-md-6" [formGroup]="form" field="password" label="Passwort">
         <input form-field-input formControlName="password" type="password">
       </form-field>
     </div>
-    <button class="btn btn-primary" [disabled]="form.status !== 'VALID'">Anmelden</button>
+    <button class="btn btn-primary mr-3" [disabled]="form.status !== 'VALID'">Anmelden</button>
+    <a routerLink="/password-reset"><small>Passwort vergessen?</small></a>
   </form>
 
   <p>Sie können sich auch mit einer der folgenden Anwendungen anmelden.</p>
