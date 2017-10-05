@@ -11,4 +11,5 @@ pipelines:
         - export PATH=$HOME/.yarn/bin:$PATH
         - yarn install --frozen-lockfile --non-interactive
         - npm run dist
+        - 'echo "Firebase token: $FIREBASE_TOKEN"'
         - node_modules/.bin/firebase deploy --token "$FIREBASE_TOKEN"
