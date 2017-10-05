@@ -70,15 +70,23 @@ export class AuthenticationService {
     return match.providerFactory();
   }
 
-  signinWithEmail(email, password): Promise<any> {
+  signinWithEmail(email: string, password: string): Promise<any> {
     return toPromise(this.auth.auth.signInWithEmailAndPassword(email, password));
   }
 
-  createUserWithEmail(email, password): Promise<any> {
+  createUserWithEmail(email: string, password: string): Promise<any> {
     return toPromise(this.auth.auth.createUserWithEmailAndPassword(email, password));
   }
 
-  signinWithProvider(type): Promise<any> {
+  sendPasswordResetEmail(email: string): Promise<any> {
+    return toPromise(this.auth.auth.sendPasswordResetEmail(email));
+  }
+
+  confirmPasswordReset(code: string, password: string): Promise<any> {
+    return toPromise(this.auth.auth.confirmPasswordReset(code, password));
+  }
+
+  signinWithProvider(type: string): Promise<any> {
     const provider = this.getSigninProvider(type);
     return toPromise(this.auth.auth.signInWithPopup(provider));
   }
