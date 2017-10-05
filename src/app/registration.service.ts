@@ -12,7 +12,7 @@ import { createId } from './id';
 
 import { ConfigurationService, Configuration } from './configuration.service';
 import { WaiverService } from './waiver.service';
-import { Registration } from './model';
+import { Registration, RegistrationCode } from './model';
 
 
 function toData(obj: any): any {
@@ -29,7 +29,6 @@ function toPromise<T>(promise: firebase.Promise<T>): Promise<T> {
 
 @Injectable()
 export class RegistrationService {
-  private registrationCount: Observable<number>;
   public registrationStatus: Observable<string>;
   public registrationDeadline: Observable<string>;
   public waiverDeadline: Observable<string>;
@@ -39,7 +38,6 @@ export class RegistrationService {
     private config: ConfigurationService,
     private waiverService: WaiverService
   ) {
-    this.registrationCount = db.object('/registrationCount').map(c => c.$value);
     this.registrationStatus = db.object('/registrationStatus').map(c => c.$value);
     this.registrationDeadline = config.configuration.map(c => c.registrationDeadline);
     this.waiverDeadline = config.configuration.map(c => c.waiverDeadline);
@@ -50,11 +48,32 @@ export class RegistrationService {
       .map(data => data.$exists() ? new Registration(data) : null);
   }
 
-  submitRegistration(reg: Registration): Observable<Registration> {
+  submitRegistration(reg: Registration, code?: string): Observable<Registration> {
     const id = createId();
     const regData = { ...toData(reg), id, registeredAt: firebase.database.ServerValue.TIMESTAMP };
     const promise: PromiseLike<void> = this.db.object(`/registrations/${regData.id}`).set(regData);
-    return Observable.fromPromise(promise).mergeMap(_=> this.getRegistration(id));
+    const result = Observable.fromPromise(promise).mergeMap(_=> this.getRegistration(id).first());
+
+    if (code) {
+      result.subscribe(r => this.invalidateRegistrationCode(code, r));
+    }
+
+    return result;
+  }
+
+  getRegistrationCode(code: string): Observable<RegistrationCode> {
+    return this.db.object(`/registrationCodes/${code}`)
+      .map(data => data.$exists() ? new RegistrationCode(data) : null);
+  }
+
+  invalidateRegistrationCode(code: string, reg: Registration) {
+    console.log('invalidating code %s with', code, reg.id);
+    this.db.object(`/registrationCodes/${code}`).update({
+      used: true,
+      usedAt: firebase.database.ServerValue.TIMESTAMP,
+      usedBy: `${reg.child.firstName} ${reg.child.lastName}`,
+      registrationId: reg.id,
+    });
   }
 
   handlePaypalPayment(registrationId: string, payment: any) {

@@ -1,55 +1,59 @@
 import 'rxjs/add/operator/first';
+import 'rxjs/add/observable/combineLatest';
+import 'rxjs/add/observable/of';
 
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
+import { Subscription } from 'rxjs/Subscription';
 
 import { RegistrationService } from '../registration.service';
 import { ConfigurationService } from '../configuration.service';
 import { CustomValidators } from '../validators';
-import { Registration, ShirtSize, Price, PriceElement } from '../model';
+import { Registration, ShirtSize, Price, PriceElement, RegistrationCode } from '../model';
 import { createTestData } from './testdata';
-
-
-interface InitialDataProvider {
-  createInitialData(): any;
-}
-
-class TestDataProvider implements InitialDataProvider {
-  createInitialData() {
-    return createTestData();
-  }
-}
-
-class NoDataProvider implements InitialDataProvider {
-  createInitialData() {
-    return {};
-  }
-}
 
 
 @Component({
   templateUrl: 'registration.component.html'
 })
 export class RegistrationComponent {
+  private subscription: Subscription;
   error: string;
   form: FormGroup;
   submitting: boolean;
   shirtSizes = ShirtSize.values;
   price: Price;
-  registrationStatus: Observable<string>;
-  registrationDeadline: Observable<string>;
-  enableTestData: Observable<boolean>;
+  registrationStatus: string;
+  registrationDeadline: string;
+  registrationCode: RegistrationCode;
+  enableTestData: boolean;
 
   constructor(
     private router: Router,
+    route: ActivatedRoute,
     private registrationService: RegistrationService,
     config: ConfigurationService,
     formBuilder: FormBuilder
   ) {
-    this.registrationStatus = registrationService.registrationStatus;
-    this.registrationDeadline = registrationService.registrationDeadline;
+    const registrationCodeObs = route.paramMap.map(params => params.get('code'))
+      .mergeMap(code => code ? registrationService.getRegistrationCode(code) : Observable.of(null));
+    this.subscription = registrationCodeObs.subscribe(code => this.registrationCode = code);
+
+    this.subscription.add(
+      Observable.combineLatest(registrationService.registrationStatus, registrationCodeObs)
+      .map(results => {
+        const [ status, code ] = results;
+        if (status !== 'ok' && code && !code.used) return 'code';
+        return status;
+      })
+      .subscribe(status => this.registrationStatus = status)
+    );
+
+    this.subscription.add(
+      registrationService.registrationDeadline.subscribe(deadline => this.registrationDeadline)
+    );
 
     this.form = formBuilder.group({
       child: formBuilder.group({
@@ -75,8 +79,11 @@ export class RegistrationComponent {
       }),
     });
 
-    this.enableTestData = config.configuration
-      .map(c => c.enableTestData);
+    this.subscription.add(
+      config.configuration
+      .map(c => c.enableTestData)
+      .subscribe(enable => this.enableTestData = enable)
+    );
 
     const updatePrice = values => this.price = new Registration(values).price;
     this.form.valueChanges.forEach(updatePrice);
@@ -84,19 +91,23 @@ export class RegistrationComponent {
   }
 
   createTestData() {
-    this.enableTestData.map(enable => enable ? new TestDataProvider() : new NoDataProvider())
-      .first()
-      .map(p => p.createInitialData())
-      .subscribe(data => this.form.patchValue(data));
+    if (this.enableTestData) {
+      this.form.patchValue(createTestData());
+    }
   }
 
   submit() {
     this.error = null;
     this.submitting = true;
     const reg = new Registration(this.form.value);
-    this.registrationService.submitRegistration(reg).first().subscribe(
+    const code = this.registrationCode ? this.registrationCode.id : null
+    this.registrationService.submitRegistration(reg, code).first().subscribe(
       reg => this.router.navigate(['/anmeldung', reg.id]),
       err => { this.submitting = false; this.error = err.message; }
     );
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 }

@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { RoleGuard } from '../auth';
 
+import { CodesComponent } from './codes.component';
 import { OfficeComponent } from './office.component';
 import { RegistrationsComponent } from './registrations.component';
 import { RegistrationDetailsComponent } from './registration-details.component';
@@ -18,6 +19,7 @@ const routes: Routes = [
     children: [
       { path: 'anmeldungen/:id', component: RegistrationDetailsComponent },
       { path: 'anmeldungen', component: RegistrationsComponent },
+      { path: 'codes', component: CodesComponent },
       { path: 'statistics', component: StatisticsComponent },
       { path: '', redirectTo: 'anmeldungen' },
     ]

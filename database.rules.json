@@ -37,6 +37,16 @@
         }
       }
     },
+    "registrationCodes": {
+      // allow read and write for office
+      ".read": "root.child('/users/'+auth.uid+'/roles/office').val() == true",
+      ".write": "root.child('/users/'+auth.uid+'/roles/office').val() == true",
+      "$id": {
+        // allow access to individual codes
+        ".read": "true",
+        ".write": "true"
+      }
+    },
     "users": {
       // allow full access to admins
       ".read": "root.child('/users/'+auth.uid+'/roles/admin').val() == true",

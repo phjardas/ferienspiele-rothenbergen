@@ -11,7 +11,7 @@ import * as firebase from 'firebase';
 
 import { RegistrationService as BaseRegistrationService } from '../registration.service';
 import { AuthenticationService, User } from '../auth';
-import { Registration, Approval } from '../model';
+import { Registration, Approval, RegistrationCode } from '../model';
 import { ExcelService } from './excel.service';
 
 
@@ -44,6 +44,24 @@ export class RegistrationService {
 
   exportRegistrations(): Observable<Blob> {
     return this.getRegistrations().map(regs => this.excelService.exportRegistrations(regs));
+  }
+
+  getRegistrationCodes(): Observable<RegistrationCode[]> {
+    return this.db.list('/registrationCodes')
+      .map(datas => datas.map(data => new RegistrationCode(data)));
+  }
+
+  createRegistrationCode(label: string): Promise<string> {
+    const length = 8;
+    const alphabet = '0123456789';
+    let code = '';
+    for (let i = 0; i < length; i++) {
+      code += alphabet[Math.floor(Math.random() * alphabet.length)];
+    }
+
+    const ref = this.db.object(`/registrationCodes/${code}`);
+    return toPromise(ref.set(new RegistrationCode({ code, label }).toFirebase()))
+      .then(_=> code);
   }
 
   setPaymentReceived(id: string, type: string): Promise<any> {
