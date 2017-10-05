@@ -19,7 +19,7 @@ exports.sendNewUserMail = functions.auth.user().onCreate(event => {
     E-Mail: ${email}
     Name: ${displayName}
 
-    https://ferienspiele-rothenbergen.de/admin/users/#${uid}`,
+    https://ferienspiele-rothenbergen.de/admin/users;id=${uid}`,
   };
 
   return mailTransport.sendMail(mail).then(_=> console.info('User registration email sent:', mail));
