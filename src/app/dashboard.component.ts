@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
+import { environment } from '../environments/environment';
 import { ConfigurationService } from './configuration.service';
 import { RegistrationService } from './registration.service';
 
@@ -9,12 +10,12 @@ import { RegistrationService } from './registration.service';
   templateUrl: 'dashboard.component.html'
 })
 export class DashboardComponent {
-  title: Observable<string>;
+  title: string;
   registrationStatus: Observable<string>;
   registrationDeadline: Observable<string>;
 
   constructor(config: ConfigurationService, reg: RegistrationService) {
-    this.title = config.configuration.map(c => c.title);
+    this.title = environment.title;
     this.registrationDeadline = reg.registrationDeadline;
     this.registrationStatus = reg.registrationStatus;
   }

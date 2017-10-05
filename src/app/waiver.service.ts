@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import * as PDF from 'jspdf';
 
+import { environment } from '../environments/environment';
 import { Configuration } from './configuration.service';
 import { Registration } from './model';
 
@@ -29,7 +30,7 @@ export class WaiverService {
       return `${day}.${month}.${year}`;
     };
 
-    h1(`Kinderferienspiele Rothenbergen ${config.year}`);
+    h1(`Kinderferienspiele Rothenbergen ${environment.year}`);
     h2(`Einverständniserklärung für ${reg.child.firstName} ${reg.child.lastName}`);
 
     normal(`Hiermit erkläre ich mich einverstanden, dass ${reg.child.gender.id === 'w' ? 'meine Tochter' : 'mein Sohn'} ${reg.child.firstName} ${reg.child.lastName} \n` +

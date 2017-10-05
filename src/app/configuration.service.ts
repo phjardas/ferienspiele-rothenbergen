@@ -4,8 +4,6 @@ import { AngularFireDatabase } from 'angularfire2/database';
 
 
 export class Configuration {
-  public year: number;
-  public title: string;
   public startDate: string;
   public endDate: string;
   public maxParticipants: number;
@@ -14,8 +12,6 @@ export class Configuration {
   public enableTestData: boolean;
 
   constructor(data: any) {
-    this.year = parseInt(data.year);
-    this.title = data.title;
     this.startDate = data.startDate;
     this.endDate = data.endDate;
     this.maxParticipants = parseInt(data.maxParticipants);
