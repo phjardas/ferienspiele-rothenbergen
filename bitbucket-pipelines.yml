@@ -13,7 +13,7 @@ pipelines:
         caches:
         - node
         script:
-        - yarn
+        - yarn install --frozen-lockfile --non-interactive
     - step:
         name: Build
         caches:
