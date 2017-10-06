@@ -52,7 +52,7 @@ export class RegistrationComponent {
     );
 
     this.subscription.add(
-      registrationService.registrationDeadline.subscribe(deadline => this.registrationDeadline)
+      registrationService.registrationDeadline.subscribe(deadline => this.registrationDeadline = deadline)
     );
 
     this.form = formBuilder.group({
