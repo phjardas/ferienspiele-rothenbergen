@@ -5,10 +5,9 @@ import { Subscription } from 'rxjs/Subscription';
 
 import { AuthenticationService, AuthenticationProvider, User } from './auth';
 
-
 @Component({
   selector: 'main-menu',
-  templateUrl: './main-menu.component.html'
+  templateUrl: './main-menu.component.html',
 })
 export class MainMenuComponent implements OnDestroy {
   subscription: Subscription;
@@ -16,7 +15,7 @@ export class MainMenuComponent implements OnDestroy {
   authenticationProviders: AuthenticationProvider[];
 
   constructor(private authenticationService: AuthenticationService, private router: Router) {
-    this.subscription = authenticationService.user.subscribe(user => this.user = user);
+    this.subscription = authenticationService.user.subscribe(user => (this.user = user));
     this.authenticationProviders = authenticationService.providers;
   }
 

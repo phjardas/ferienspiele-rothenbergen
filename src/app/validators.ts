@@ -13,7 +13,7 @@ export class CustomValidators {
       }
 
       if (values.indexOf(control.value) < 0) {
-        return { oneOf: { values, actual: control.value }};
+        return { oneOf: { values, actual: control.value } };
       }
 
       return null;

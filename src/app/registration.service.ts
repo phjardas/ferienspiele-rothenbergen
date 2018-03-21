@@ -14,18 +14,13 @@ import { ConfigurationService, Configuration } from './configuration.service';
 import { WaiverService } from './waiver.service';
 import { Registration, RegistrationCode } from './model';
 
-
 function toData(obj: any): any {
   const data = typeof obj.toFirebase === 'function' ? obj.toFirebase() : JSON.parse(JSON.stringify(obj));
-  Object.keys(data).filter(key => typeof data[key] === 'undefined').forEach(key => delete data[key]);
+  Object.keys(data)
+    .filter(key => typeof data[key] === 'undefined')
+    .forEach(key => delete data[key]);
   return data;
 }
-
-
-function toPromise<T>(promise: firebase.Promise<T>): Promise<T> {
-  return new Promise((resolve, reject) => promise.then(resolve).catch(reject));
-}
-
 
 @Injectable()
 export class RegistrationService {
@@ -33,26 +28,28 @@ export class RegistrationService {
   public registrationDeadline: Observable<string>;
   public waiverDeadline: Observable<string>;
 
-  constructor(
-    private db: AngularFireDatabase,
-    private config: ConfigurationService,
-    private waiverService: WaiverService
-  ) {
-    this.registrationStatus = db.object('/registrationStatus').map(c => c.$value);
+  constructor(private db: AngularFireDatabase, private config: ConfigurationService, private waiverService: WaiverService) {
+    this.registrationStatus = db.object<string>('/registrationStatus').valueChanges();
     this.registrationDeadline = config.configuration.map(c => c.registrationDeadline);
     this.waiverDeadline = config.configuration.map(c => c.waiverDeadline);
   }
 
   getRegistration(id: string): Observable<Registration> {
-    return this.db.object(`/registrations/${id}`)
-      .map(data => data.$exists() ? new Registration(data) : null);
+    return this.db
+      .object(`/registrations/${id}`)
+      .valueChanges()
+      .map(data => (data ? new Registration(data) : null));
   }
 
   submitRegistration(reg: Registration, code?: string): Observable<Registration> {
     const id = createId();
-    const regData = { ...toData(reg), id, registeredAt: firebase.database.ServerValue.TIMESTAMP };
+    const regData = {
+      ...toData(reg),
+      id,
+      registeredAt: firebase.database.ServerValue.TIMESTAMP,
+    };
     const promise: PromiseLike<void> = this.db.object(`/registrations/${regData.id}`).set(regData);
-    const result = Observable.fromPromise(promise).mergeMap(_=> this.getRegistration(id).first());
+    const result = Observable.fromPromise(promise).mergeMap(_ => this.getRegistration(id).first());
 
     if (code) {
       result.subscribe(r => this.invalidateRegistrationCode(code, r));
@@ -62,8 +59,10 @@ export class RegistrationService {
   }
 
   getRegistrationCode(code: string): Observable<RegistrationCode> {
-    return this.db.object(`/registrationCodes/${code}`)
-      .map(data => data.$exists() ? new RegistrationCode(data) : null);
+    return this.db
+      .object(`/registrationCodes/${code}`)
+      .valueChanges()
+      .map(data => (data ? new RegistrationCode(data) : null));
   }
 
   invalidateRegistrationCode(code: string, reg: Registration) {
@@ -77,22 +76,22 @@ export class RegistrationService {
   }
 
   handlePaypalPayment(registrationId: string, payment: any) {
-    this.db.object(`/registrations/${registrationId}/payment`)
-      .set({
-        type: 'paypal',
-        timestamp: firebase.database.ServerValue.TIMESTAMP,
-        paypal: {
-          id: payment.id,
-          timestamp: payment.create_time,
-          cart: payment.cart,
-          state: payment.state,
-        },
-      })
+    this.db.object(`/registrations/${registrationId}/payment`).set({
+      type: 'paypal',
+      timestamp: firebase.database.ServerValue.TIMESTAMP,
+      paypal: {
+        id: payment.id,
+        timestamp: payment.create_time,
+        cart: payment.cart,
+        state: payment.state,
+      },
+    });
   }
 
   getWaiver(reg: Registration): Promise<Blob> {
     try {
-      return this.config.configuration.first()
+      return this.config.configuration
+        .first()
         .map(config => this.waiverService.createWaiver(reg, config))
         .toPromise();
     } catch (err) {

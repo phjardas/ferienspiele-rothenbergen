@@ -12,24 +12,17 @@ import * as firebase from 'firebase/app';
 
 import { User } from './user';
 
-
 export interface AuthenticationProvider {
-  id: String,
-  label: String,
-  icon: String,
-  providerFactory: () => firebase.auth.AuthProvider,
+  id: String;
+  label: String;
+  icon: String;
+  providerFactory: () => firebase.auth.AuthProvider;
 }
-
-
-function toPromise<T>(promise: firebase.Promise<T>): Promise<T> {
-  return new Promise((resolve, reject) => promise.then(resolve).catch(reject));
-}
-
 
 @Injectable()
 export class AuthenticationService {
   public user: Observable<User>;
-  public providers : AuthenticationProvider[] = [
+  public providers: AuthenticationProvider[] = [
     {
       id: 'google',
       label: 'Google',
@@ -39,7 +32,7 @@ export class AuthenticationService {
   ];
 
   constructor(private db: AngularFireDatabase, private auth: AngularFireAuth) {
-    this.user = auth.authState.mergeMap(user => user ? this.loadDetails(user) : Observable.of(null));
+    this.user = auth.authState.mergeMap(user => (user ? this.loadDetails(user) : Observable.of(null)));
   }
 
   private maybeCreateUser(fb: firebase.User, usr: any): Observable<User> {
@@ -49,17 +42,19 @@ export class AuthenticationService {
       displayName: fb.displayName,
     };
 
-    if (usr.$exists()) {
+    if (usr) {
       Object.assign(data, usr);
       return Observable.of(new User(data));
     }
 
     const user = new User(data);
-    return Observable.fromPromise(this.db.object(`/users/${fb.uid}`).set(user.toFirebase())).map(_=> user);
+    return Observable.fromPromise(this.db.object(`/users/${fb.uid}`).set(user.toFirebase())).map(_ => user);
   }
 
   private loadDetails(user: firebase.User): Observable<User> {
-    return this.db.object(`/users/${user.uid}`)
+    return this.db
+      .object(`/users/${user.uid}`)
+      .valueChanges()
       .first()
       .mergeMap(usr => this.maybeCreateUser(user, usr));
   }
@@ -71,24 +66,24 @@ export class AuthenticationService {
   }
 
   signinWithEmail(email: string, password: string): Promise<any> {
-    return toPromise(this.auth.auth.signInWithEmailAndPassword(email, password));
+    return this.auth.auth.signInWithEmailAndPassword(email, password);
   }
 
   createUserWithEmail(email: string, password: string): Promise<any> {
-    return toPromise(this.auth.auth.createUserWithEmailAndPassword(email, password));
+    return this.auth.auth.createUserWithEmailAndPassword(email, password);
   }
 
   sendPasswordResetEmail(email: string): Promise<any> {
-    return toPromise(this.auth.auth.sendPasswordResetEmail(email));
+    return this.auth.auth.sendPasswordResetEmail(email);
   }
 
   confirmPasswordReset(code: string, password: string): Promise<any> {
-    return toPromise(this.auth.auth.confirmPasswordReset(code, password));
+    return this.auth.auth.confirmPasswordReset(code, password);
   }
 
   signinWithProvider(type: string): Promise<any> {
     const provider = this.getSigninProvider(type);
-    return toPromise(this.auth.auth.signInWithPopup(provider));
+    return this.auth.auth.signInWithPopup(provider);
   }
 
   signout() {

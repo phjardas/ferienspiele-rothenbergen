@@ -7,21 +7,15 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { AuthenticationService, AuthenticationProvider } from './authentication.service';
 
-
 @Component({
-  templateUrl: './login.component.html'
+  templateUrl: './login.component.html',
 })
 export class LoginComponent {
   form: FormGroup;
   formError: string;
   authenticationProviders: AuthenticationProvider[];
 
-  constructor(
-    private auth: AuthenticationService,
-    private router: Router,
-    private route: ActivatedRoute,
-    formBuilder: FormBuilder
-  ) {
+  constructor(private auth: AuthenticationService, private router: Router, private route: ActivatedRoute, formBuilder: FormBuilder) {
     this.form = formBuilder.group({
       email: ['', Validators.required],
       password: ['', Validators.required],
@@ -32,15 +26,17 @@ export class LoginComponent {
   signin() {
     this.formError = null;
     const { email, password } = this.form.value;
-    this.auth.signinWithEmail(email, password)
-      .then(_=> this.navigateAfterSignin())
-      .catch(err => this.formError = err.message);
+    this.auth
+      .signinWithEmail(email, password)
+      .then(_ => this.navigateAfterSignin())
+      .catch(err => (this.formError = err.message));
   }
 
   signinWithProvider(type) {
-    this.auth.signinWithProvider(type)
-      .then(_=> this.navigateAfterSignin())
-      .catch(err => this.formError = err.message);
+    this.auth
+      .signinWithProvider(type)
+      .then(_ => this.navigateAfterSignin())
+      .catch(err => (this.formError = err.message));
   }
 
   private navigateAfterSignin() {

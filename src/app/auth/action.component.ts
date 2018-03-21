@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-
 @Component({
-  template: `<reset-password [code]="code" *ngIf="mode === 'resetPassword'"></reset-password>`
+  template: `<reset-password [code]="code" *ngIf="mode === 'resetPassword'"></reset-password>`,
 })
 export class ActionComponent {
   mode: string;

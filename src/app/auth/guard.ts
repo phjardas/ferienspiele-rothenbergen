@@ -7,27 +7,22 @@ import { Observable } from 'rxjs/Observable';
 
 import { AuthenticationService } from './authentication.service';
 
-
 function hasAnyRole(roles: string[], requiredRoles: string[]): boolean {
   return roles.some(role => requiredRoles.indexOf(role) >= 0);
 }
-
 
 @Injectable()
 export class RoleGuard implements CanActivate, CanLoad {
   constructor(private auth: AuthenticationService, private router: Router) {}
 
   private hasAnyRole(roles: string[]): Observable<boolean> {
-    return this.auth.user
-      .first()
-      .map(user => user && hasAnyRole(user.roles, roles));
+    return this.auth.user.first().map(user => user && hasAnyRole(user.roles, roles));
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
-    return this.hasAnyRole(route.data.roles || [])
-      .do(ok => {
-        if (!ok) this.router.navigate(['/login'], { queryParams: { from: route.url }});
-      });
+    return this.hasAnyRole(route.data.roles || []).do(ok => {
+      if (!ok) this.router.navigate(['/login'], { queryParams: { from: route.url } });
+    });
   }
 
   canLoad(route: Route): Observable<boolean> {

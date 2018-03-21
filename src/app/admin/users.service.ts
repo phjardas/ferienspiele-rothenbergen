@@ -4,13 +4,14 @@ import { AngularFireDatabase } from 'angularfire2/database';
 
 import { User, Role } from '../auth';
 
-
 @Injectable()
 export class UsersService {
   constructor(private db: AngularFireDatabase) {}
 
   getUsers(): Observable<User[]> {
-    return this.db.list('/users')
+    return this.db
+      .list('/users')
+      .valueChanges()
       .map(users => users.map(user => new User(user)));
   }
 

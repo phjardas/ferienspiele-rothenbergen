@@ -9,7 +9,6 @@ import { RegistrationsComponent } from './registrations.component';
 import { RegistrationDetailsComponent } from './registration-details.component';
 import { StatisticsComponent } from './statistics.component';
 
-
 const routes: Routes = [
   {
     path: '',
@@ -22,16 +21,12 @@ const routes: Routes = [
       { path: 'codes', component: CodesComponent },
       { path: 'statistics', component: StatisticsComponent },
       { path: '', redirectTo: 'anmeldungen' },
-    ]
+    ],
   },
 ];
 
 @NgModule({
-  imports: [
-    RouterModule.forChild(routes)
-  ],
-  exports: [
-    RouterModule
-  ]
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule],
 })
 export class OfficeRoutingModule {}

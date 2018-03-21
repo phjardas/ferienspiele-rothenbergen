@@ -9,7 +9,6 @@ import { DashboardComponent } from './dashboard.component';
 import { ImprintComponent } from './imprint.component';
 import { PageNotFoundComponent } from './page-not-found.component';
 
-
 const routes: Routes = [
   {
     path: 'anmeldung',
@@ -19,13 +18,13 @@ const routes: Routes = [
     path: 'office',
     loadChildren: 'app/office/office.module#OfficeModule',
     canLoad: [RoleGuard],
-    data: { roles: ['office']}
+    data: { roles: ['office'] },
   },
   {
     path: 'admin',
     loadChildren: 'app/admin/admin.module#AdminModule',
     canLoad: [RoleGuard],
-    data: { roles: ['admin']}
+    data: { roles: ['admin'] },
   },
   { path: 'impressum', component: ImprintComponent },
   { path: '', component: DashboardComponent, pathMatch: 'full' },
@@ -37,10 +36,8 @@ const routes: Routes = [
     RouterModule.forRoot(routes, {
       enableTracing: environment.enableRouterTracing,
       preloadingStrategy: PreloadAllModules,
-    })
+    }),
   ],
-  exports: [
-    RouterModule
-  ]
+  exports: [RouterModule],
 })
 export class AppRoutingModule {}

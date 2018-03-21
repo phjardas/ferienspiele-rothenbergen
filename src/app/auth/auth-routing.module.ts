@@ -6,7 +6,6 @@ import { LoginComponent } from './login.component';
 import { PasswordResetComponent } from './password-reset.component';
 import { RegisterComponent } from './register.component';
 
-
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'password-reset', component: PasswordResetComponent },
@@ -15,11 +14,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [
-    RouterModule.forChild(routes)
-  ],
-  exports: [
-    RouterModule
-  ]
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule],
 })
 export class AuthRoutingModule {}

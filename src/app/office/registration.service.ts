@@ -14,12 +14,6 @@ import { AuthenticationService, User } from '../auth';
 import { Registration, Approval, RegistrationCode } from '../model';
 import { ExcelService } from './excel.service';
 
-
-function toPromise<T>(promise: firebase.Promise<T>): Promise<T> {
-  return new Promise((resolve, reject) => promise.then(resolve).catch(reject));
-}
-
-
 @Injectable()
 export class RegistrationService {
   constructor(
@@ -38,7 +32,9 @@ export class RegistrationService {
   }
 
   getRegistrations(): Observable<Registration[]> {
-    return this.db.list('/registrations')
+    return this.db
+      .list('/registrations')
+      .valueChanges()
       .map(datas => datas.map(data => new Registration(data)));
   }
 
@@ -47,7 +43,9 @@ export class RegistrationService {
   }
 
   getRegistrationCodes(): Observable<RegistrationCode[]> {
-    return this.db.list('/registrationCodes')
+    return this.db
+      .list('/registrationCodes')
+      .valueChanges()
       .map(datas => datas.map(data => new RegistrationCode(data)));
   }
 
@@ -60,8 +58,7 @@ export class RegistrationService {
     }
 
     const ref = this.db.object(`/registrationCodes/${code}`);
-    return toPromise(ref.set(new RegistrationCode({ code, label }).toFirebase()))
-      .then(_=> code);
+    return ref.set(new RegistrationCode({ code, label }).toFirebase()).then(_ => code);
   }
 
   setPaymentReceived(id: string, type: string): Promise<any> {
@@ -91,7 +88,7 @@ export class RegistrationService {
         })
         .toPromise();
     } else {
-      return toPromise(ref.set(null));
+      return ref.set(null);
     }
   }
 }

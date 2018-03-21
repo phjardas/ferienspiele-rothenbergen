@@ -7,20 +7,15 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { AuthenticationService, AuthenticationProvider } from './authentication.service';
 
-
 @Component({
-  templateUrl: './register.component.html'
+  templateUrl: './register.component.html',
 })
 export class RegisterComponent {
   form: FormGroup;
   formError: string;
   authenticationProviders: AuthenticationProvider[];
 
-  constructor(
-    private auth: AuthenticationService,
-    private router: Router,
-    formBuilder: FormBuilder
-  ) {
+  constructor(private auth: AuthenticationService, private router: Router, formBuilder: FormBuilder) {
     this.form = formBuilder.group({
       email: ['', Validators.required],
       password: ['', Validators.required],
@@ -31,14 +26,16 @@ export class RegisterComponent {
   signin() {
     this.formError = null;
     const { email, password } = this.form.value;
-    this.auth.createUserWithEmail(email, password)
-      .then(_=> this.router.navigate(['/']))
-      .catch(err => this.formError = err.message);
+    this.auth
+      .createUserWithEmail(email, password)
+      .then(_ => this.router.navigate(['/']))
+      .catch(err => (this.formError = err.message));
   }
 
   signinWithProvider(type) {
-    this.auth.signinWithProvider(type)
-      .then(_=> this.router.navigate(['/']))
-      .catch(err => this.formError = err.message);
+    this.auth
+      .signinWithProvider(type)
+      .then(_ => this.router.navigate(['/']))
+      .catch(err => (this.formError = err.message));
   }
 }

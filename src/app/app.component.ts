@@ -7,7 +7,7 @@ import { version } from '../environments/version';
 @Component({
   selector: 'app',
   templateUrl: './app.component.html',
-  host: { 'class': '' }
+  host: { class: '' },
 })
 export class AppComponent {
   version = version;
