@@ -14,9 +14,8 @@ import { CustomValidators } from '../validators';
 import { Registration, ShirtSize, Price, PriceElement, RegistrationCode } from '../model';
 import { createTestData } from './testdata';
 
-
 @Component({
-  templateUrl: 'registration.component.html'
+  templateUrl: 'registration.component.html',
 })
 export class RegistrationComponent {
   private subscription: Subscription;
@@ -37,23 +36,22 @@ export class RegistrationComponent {
     config: ConfigurationService,
     formBuilder: FormBuilder
   ) {
-    const registrationCodeObs = route.paramMap.map(params => params.get('code'))
-      .mergeMap(code => code ? registrationService.getRegistrationCode(code) : Observable.of(null));
-    this.subscription = registrationCodeObs.subscribe(code => this.registrationCode = code);
+    const registrationCodeObs = route.paramMap
+      .map(params => params.get('code'))
+      .mergeMap(code => (code ? registrationService.getRegistrationCode(code) : Observable.of(null)));
+    this.subscription = registrationCodeObs.subscribe(code => (this.registrationCode = code));
 
     this.subscription.add(
       Observable.combineLatest(registrationService.registrationStatus, registrationCodeObs)
-      .map(results => {
-        const [ status, code ] = results;
-        if (status !== 'ok' && code && !code.used) return 'code';
-        return status;
-      })
-      .subscribe(status => this.registrationStatus = status)
+        .map(results => {
+          const [status, code] = results;
+          if (status !== 'ok' && code && !code.used) return 'code';
+          return status;
+        })
+        .subscribe(status => (this.registrationStatus = status))
     );
 
-    this.subscription.add(
-      registrationService.registrationDeadline.subscribe(deadline => this.registrationDeadline = deadline)
-    );
+    this.subscription.add(registrationService.registrationDeadline.subscribe(deadline => (this.registrationDeadline = deadline)));
 
     this.form = formBuilder.group({
       child: formBuilder.group({
@@ -79,13 +77,9 @@ export class RegistrationComponent {
       }),
     });
 
-    this.subscription.add(
-      config.configuration
-      .map(c => c.enableTestData)
-      .subscribe(enable => this.enableTestData = enable)
-    );
+    this.subscription.add(config.configuration.map(c => c.enableTestData).subscribe(enable => (this.enableTestData = enable)));
 
-    const updatePrice = values => this.price = new Registration(values).price;
+    const updatePrice = values => (this.price = new Registration(values).price);
     this.form.valueChanges.forEach(updatePrice);
     updatePrice(this.form.value);
   }
@@ -100,11 +94,17 @@ export class RegistrationComponent {
     this.error = null;
     this.submitting = true;
     const reg = new Registration(this.form.value);
-    const code = this.registrationCode ? this.registrationCode.id : null
-    this.registrationService.submitRegistration(reg, code).first().subscribe(
-      reg => this.router.navigate(['/anmeldung', reg.id]),
-      err => { this.submitting = false; this.error = err.message; }
-    );
+    const code = this.registrationCode ? this.registrationCode.id : null;
+    this.registrationService
+      .submitRegistration(reg, code)
+      .first()
+      .subscribe(
+        reg => this.router.navigate(['/anmeldung', reg.id]),
+        err => {
+          this.submitting = false;
+          this.error = err.message;
+        }
+      );
   }
 
   ngOnDestroy() {

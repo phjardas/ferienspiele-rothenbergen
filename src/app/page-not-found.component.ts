@@ -10,7 +10,6 @@ import { Component } from '@angular/core';
       </h2>
       <p class="lead">Tut uns sehr leid, aber diese Seite gibt es nicht.</p>
     </div>
-  </div>`
+  </div>`,
 })
-export class PageNotFoundComponent {
-}
+export class PageNotFoundComponent {}

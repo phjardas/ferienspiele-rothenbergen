@@ -1,7 +1,7 @@
 export class ShirtSize {
   constructor(public id: string, public label: string) {}
 
-  static values : ShirtSize[] = [
+  static values: ShirtSize[] = [
     new ShirtSize('WOMEN_XS', 'Damen XS'),
     new ShirtSize('WOMEN_S', 'Damen S'),
     new ShirtSize('WOMEN_M', 'Damen M'),

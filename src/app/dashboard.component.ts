@@ -5,9 +5,8 @@ import { environment } from '../environments/environment';
 import { ConfigurationService } from './configuration.service';
 import { RegistrationService } from './registration.service';
 
-
 @Component({
-  templateUrl: 'dashboard.component.html'
+  templateUrl: 'dashboard.component.html',
 })
 export class DashboardComponent {
   title: string;

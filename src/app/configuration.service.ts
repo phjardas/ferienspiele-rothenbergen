@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { AngularFireDatabase } from 'angularfire2/database';
 
-
 export class Configuration {
   public startDate: string;
   public endDate: string;
@@ -21,21 +20,18 @@ export class Configuration {
   }
 }
 
-
-function toPromise<T>(promise: firebase.Promise<T>): Promise<T> {
-  return new Promise((resolve, reject) => promise.then(resolve).catch(reject));
-}
-
-
 @Injectable()
 export class ConfigurationService {
   public configuration: Observable<Configuration>;
 
   constructor(private db: AngularFireDatabase) {
-    this.configuration = db.object('/config').map(data => new Configuration(data));
+    this.configuration = db
+      .object('/config')
+      .valueChanges()
+      .map(data => new Configuration(data));
   }
 
   setConfiguration(key: string, value: any): Promise<any> {
-    return toPromise(this.db.object(`/config/${key}`).set(value));
+    return this.db.object(`/config/${key}`).set(value);
   }
 }

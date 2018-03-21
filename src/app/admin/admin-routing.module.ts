@@ -7,7 +7,6 @@ import { AdminComponent } from './admin.component';
 import { ConfigComponent } from './config.component';
 import { UsersComponent } from './users.component';
 
-
 const routes: Routes = [
   {
     path: '',
@@ -18,16 +17,12 @@ const routes: Routes = [
       { path: 'users', component: UsersComponent },
       { path: 'config', component: ConfigComponent },
       { path: '', redirectTo: 'config' },
-    ]
+    ],
   },
 ];
 
 @NgModule({
-  imports: [
-    RouterModule.forChild(routes)
-  ],
-  exports: [
-    RouterModule
-  ]
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule],
 })
 export class AdminRoutingModule {}

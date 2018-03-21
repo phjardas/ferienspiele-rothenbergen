@@ -20,5 +20,5 @@ export interface PayPalConfig {
   enabled: boolean;
   environment?: string;
   clientId?: string;
-  testUser?: { email: string, password: string };
+  testUser?: { email: string; password: string };
 }

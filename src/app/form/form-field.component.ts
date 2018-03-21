@@ -1,10 +1,23 @@
-import { Component, ContentChild, Directive, ElementRef, forwardRef, Host, Input, OnChanges, OnDestroy, QueryList, Renderer, ViewChild, ViewContainerRef, ViewEncapsulation } from '@angular/core';
+import {
+  Component,
+  ContentChild,
+  Directive,
+  ElementRef,
+  forwardRef,
+  Host,
+  Input,
+  OnChanges,
+  OnDestroy,
+  QueryList,
+  Renderer,
+  ViewChild,
+  ViewContainerRef,
+  ViewEncapsulation,
+} from '@angular/core';
 import { AbstractControl, FormGroup } from '@angular/forms';
-
 
 @Directive({ selector: '[form-field-input]' })
 export class FormFieldInputDirective {}
-
 
 @Component({
   selector: 'form-field',
@@ -24,7 +37,7 @@ export class FormFieldInputDirective {}
     </div>
   `,
   encapsulation: ViewEncapsulation.None,
-  host: { 'class': 'form-group' },
+  host: { class: 'form-group' },
 })
 export class FormFieldComponent {
   @Input() field: string;
@@ -33,13 +46,12 @@ export class FormFieldComponent {
   @Input() formGroup: FormGroup;
   @Input() debug: boolean;
   @ViewChild('inputWrapper') private inputWrapper: ElementRef;
-  @ContentChild(FormFieldInputDirective, { read: ElementRef }) private input: ElementRef;
+  @ContentChild(FormFieldInputDirective, { read: ElementRef })
+  private input: ElementRef;
   control: any;
   errors: any = {};
 
-  constructor(
-    private renderer: Renderer
-  ) {}
+  constructor(private renderer: Renderer) {}
 
   ngOnInit() {
     const inputEl = this.input.nativeElement;
@@ -47,7 +59,7 @@ export class FormFieldComponent {
     this.renderer.setElementClass(inputEl, 'form-control', true);
 
     const control = this.formGroup.get(this.field);
-    this.control=control;
+    this.control = control;
 
     const updateValidationState = () => {
       this.errors = control.errors || {};

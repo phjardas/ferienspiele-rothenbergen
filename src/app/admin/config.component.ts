@@ -4,7 +4,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { ConfigurationService, Configuration } from '../configuration.service';
 
-
 interface FormField {
   name: string;
   label: string;
@@ -12,9 +11,8 @@ interface FormField {
   description?: string;
 }
 
-
 @Component({
-  templateUrl: 'config.component.html'
+  templateUrl: 'config.component.html',
 })
 export class ConfigComponent {
   formFields: FormField[];
@@ -56,7 +54,7 @@ export class ConfigComponent {
 
     const values = this.form.value;
     Promise.all(Object.keys(values).map(key => this.configService.setConfiguration(key, values[key])))
-      .then(_=> {
+      .then(_ => {
         this.saved = true;
         this.saving = false;
         this.loadValues();

@@ -2,7 +2,6 @@ import * as firebase from 'firebase/app';
 
 import { FirebaseModel } from '../model';
 
-
 export class User implements FirebaseModel {
   public id: string;
   public email: string;
@@ -31,7 +30,7 @@ export class User implements FirebaseModel {
       email: this.email,
       displayName: this.displayName,
       registeredAt: this.registeredAt ? this.registeredAt.getTime() : firebase.database.ServerValue.TIMESTAMP,
-      roles: this.roles.reduce((a, b) => a[b] = true && a, {}),
+      roles: this.roles.reduce((a, b) => (a[b] = true && a), {}),
     };
   }
 }

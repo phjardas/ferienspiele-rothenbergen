@@ -7,7 +7,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RegistrationService } from './registration.service';
 import { RegistrationCode } from '../model';
 
-
 @Component({ templateUrl: 'codes.component.html' })
 export class CodesComponent {
   form: FormGroup;
@@ -15,14 +14,13 @@ export class CodesComponent {
   formSubmitting = false;
   createdCode: string;
   codes: Observable<RegistrationCode[]>;
-  urlCopied: string
+  urlCopied: string;
 
   constructor(private registrationService: RegistrationService, formBuilder: FormBuilder) {
     this.form = formBuilder.group({
       label: ['', Validators.required],
     });
-    this.codes = registrationService.getRegistrationCodes()
-      .map(codes => codes.sort(this.compareRegistrationCodes));
+    this.codes = registrationService.getRegistrationCodes().map(codes => codes.sort(this.compareRegistrationCodes));
   }
 
   private compareRegistrationCodes(a: RegistrationCode, b: RegistrationCode): number {
@@ -35,7 +33,8 @@ export class CodesComponent {
     this.formError = null;
     const { label } = this.form.value;
 
-    this.registrationService.createRegistrationCode(label)
+    this.registrationService
+      .createRegistrationCode(label)
       .then(code => {
         console.log('created:', code);
         this.formSubmitting = false;

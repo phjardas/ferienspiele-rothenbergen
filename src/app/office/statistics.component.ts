@@ -9,7 +9,6 @@ import { ConfigurationService } from '../configuration.service';
 import { RegistrationService } from './registration.service';
 import { Registration } from '../model';
 
-
 @Component({ templateUrl: 'statistics.component.html' })
 export class StatisticsComponent {
   private subscription: Subscription;
@@ -33,7 +32,7 @@ export class StatisticsComponent {
           format: '#',
           gridlines: {
             count: 2,
-          }
+          },
         },
       },
     },
@@ -86,56 +85,69 @@ export class StatisticsComponent {
       this.updateWaiverData(regs);
     });
 
-    this.subscription.add(Observable.combineLatest(registrations, config)
-      .subscribe(values => this.updateAgeData(values[0], values[1].startDate)));
+    this.subscription.add(
+      Observable.combineLatest(registrations, config).subscribe(values => this.updateAgeData(values[0], values[1].startDate))
+    );
   }
 
   private updateGenderData(regs: Registration[]) {
     const header: any[] = ['Geschlecht', 'Anzahl'];
-    const counts = regs.map(reg => reg.child.gender.label)
-      .reduce((cnts, gender) => (cnts[gender] = (cnts[gender] || 0) + 1) && cnts, {});
-    const data = Object.keys(counts).sort().map(gender => [gender, counts[gender]]);
+    const counts = regs.map(reg => reg.child.gender.label).reduce((cnts, gender) => (cnts[gender] = (cnts[gender] || 0) + 1) && cnts, {});
+    const data = Object.keys(counts)
+      .sort()
+      .map(gender => [gender, counts[gender]]);
     this.charts.gender.dataTable = [header].concat(data);
   }
 
   private updateAgeData(regs: Registration[], startDate: string) {
     const header: any[] = ['Alter', 'Anzahl'];
-    const counts = regs.map(reg => reg.child.getAge(startDate))
-      .reduce((cnts, age) => (cnts[age] = (cnts[age] || 0) + 1) && cnts, {});
-    const data = Object.keys(counts).sort((a, b) => parseInt(a) - parseInt(b))
+    const counts = regs.map(reg => reg.child.getAge(startDate)).reduce((cnts, age) => (cnts[age] = (cnts[age] || 0) + 1) && cnts, {});
+    const data = Object.keys(counts)
+      .sort((a, b) => parseInt(a) - parseInt(b))
       .map(age => [`${age} J.`, counts[age]]);
     this.charts.age.dataTable = [header].concat(data);
   }
 
   private updateVegetarianData(regs: Registration[]) {
     const header: any[] = ['Vegetarisch', 'Anzahl'];
-    const counts = regs.map(reg => reg.child.vegetarian ? 'ja' : 'nein')
+    const counts = regs
+      .map(reg => (reg.child.vegetarian ? 'ja' : 'nein'))
       .reduce((cnts, val) => (cnts[val] = (cnts[val] || 0) + 1) && cnts, {});
-    const data = Object.keys(counts).sort().map(val => [val, counts[val]]);
+    const data = Object.keys(counts)
+      .sort()
+      .map(val => [val, counts[val]]);
     this.charts.vegetarian.dataTable = [header].concat(data);
   }
 
   private updatePaymentTypeData(regs: Registration[]) {
     const labels = { cash: 'Bar', transfer: 'Überweisung' };
     const header: any[] = ['Bezahlart', 'Anzahl'];
-    const counts = regs.filter(reg => reg.payment).map(reg => reg.payment.type)
+    const counts = regs
+      .filter(reg => reg.payment)
+      .map(reg => reg.payment.type)
       .reduce((cnts, val) => (cnts[val] = (cnts[val] || 0) + 1) && cnts, {});
-    const data = Object.keys(counts).sort().map(val => [labels[val], counts[val]]);
+    const data = Object.keys(counts)
+      .sort()
+      .map(val => [labels[val], counts[val]]);
     this.charts.paymentType.dataTable = [header].concat(data);
   }
 
   private updatePaymentData(regs: Registration[]) {
     const header: any[] = ['Teilnahmebeitrag bezahlt', 'Anzahl'];
-    const counts = regs.map(reg => reg.payment ? 'bezahlt' : 'nicht bezahlt')
-      .reduce((cnts, val) => (cnts[val] = cnts[val] + 1) && cnts, { 'bezahlt': 0, 'nicht bezahlt': 0 });
-    const data = Object.keys(counts).sort().map(val => [val, counts[val]]);
+    const counts = regs
+      .map(reg => (reg.payment ? 'bezahlt' : 'nicht bezahlt'))
+      .reduce((cnts, val) => (cnts[val] = cnts[val] + 1) && cnts, { bezahlt: 0, 'nicht bezahlt': 0 });
+    const data = Object.keys(counts)
+      .sort()
+      .map(val => [val, counts[val]]);
     this.charts.payment.dataTable = [header].concat(data);
   }
 
   private updateWaiverData(regs: Registration[]) {
     const header: any[] = ['Vegetarisch', 'Anzahl'];
-    const counts = regs.map(reg => reg.waiver ? 'abgegeben' : 'nicht abgegeben')
-      .reduce((cnts, val) => (cnts[val] = cnts[val] + 1) && cnts, { 'abgegeben': 0, 'nicht abgegeben': 0 });
+    const counts = regs
+      .map(reg => (reg.waiver ? 'abgegeben' : 'nicht abgegeben'))
+      .reduce((cnts, val) => (cnts[val] = cnts[val] + 1) && cnts, { abgegeben: 0, 'nicht abgegeben': 0 });
     const data = Object.keys(counts).map(val => [val, counts[val]]);
     this.charts.waiver.dataTable = [header].concat(data);
   }

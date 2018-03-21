@@ -1,5 +1,5 @@
-import uuid from 'uuid-base62';
+import { v4 } from 'uuid-base62';
 
 export function createId() {
-  return uuid.v4().replace(/-/g, '');
+  return v4().replace(/-/g, '');
 }

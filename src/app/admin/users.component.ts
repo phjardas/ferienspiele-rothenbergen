@@ -6,9 +6,8 @@ import { ActivatedRoute } from '@angular/router';
 import { User, Role } from '../auth';
 import { UsersService } from './users.service';
 
-
 @Component({
-  templateUrl: 'users.component.html'
+  templateUrl: 'users.component.html',
 })
 export class UsersComponent {
   private subscription: Subscription;
@@ -17,7 +16,7 @@ export class UsersComponent {
   highlightUserId: string;
 
   constructor(private usersService: UsersService, route: ActivatedRoute) {
-    this.subscription = route.paramMap.subscribe(params => this.highlightUserId = params.get('id'));
+    this.subscription = route.paramMap.subscribe(params => (this.highlightUserId = params.get('id')));
     this.users = usersService.getUsers().map(users => users.sort((a, b) => a.label.localeCompare(b.label)));
   }
 

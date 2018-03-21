@@ -4,7 +4,6 @@ import { EmergencyContact } from './emergency-contact';
 import { Parent } from './parent';
 import { Price, PriceElement } from './price';
 
-
 export class Approval implements FirebaseModel {
   timestamp: Date;
   user: string;
@@ -22,7 +21,6 @@ export class Approval implements FirebaseModel {
   }
 }
 
-
 export class Payment extends Approval {
   type: string;
 
@@ -39,7 +37,6 @@ export class Payment extends Approval {
   }
 }
 
-
 export class Registration implements FirebaseModel {
   public id: string;
   public child: Child;
@@ -50,7 +47,7 @@ export class Registration implements FirebaseModel {
   public registeredAt: Date;
 
   constructor(data: any) {
-    this.id = data.$key;
+    this.id = data.id;
     this.child = new Child(data.child);
     this.parent = new Parent(data.parent);
     this.emergencyContact = new EmergencyContact(data.emergencyContact);
@@ -62,7 +59,7 @@ export class Registration implements FirebaseModel {
   get price(): Price {
     const elements: PriceElement[] = [{ label: 'Teilnahmebeitrag', price: 30 }];
     if (this.child.nextChild) elements.push({ label: 'Ermäßigung für Geschwisterkind', price: -5 });
-    const totalPrice = elements.reduce((a, b) => a += b.price, 0);
+    const totalPrice = elements.reduce((a, b) => (a += b.price), 0);
     return new Price(totalPrice, elements);
   }
 

@@ -21,7 +21,6 @@ import { MainMenuComponent } from './main-menu.component';
 import { PageNotFoundComponent } from './page-not-found.component';
 import { SpinnerComponent } from './spinner.component';
 
-
 @NgModule({
   imports: [
     BrowserModule,
@@ -32,17 +31,8 @@ import { SpinnerComponent } from './spinner.component';
     AuthModule,
     AppRoutingModule,
   ],
-  declarations: [
-    AppComponent,
-    DashboardComponent,
-    ImprintComponent,
-    MainMenuComponent,
-  ],
-  providers: [
-    ConfigurationService,
-    RegistrationService,
-    WaiverService,
-  ],
-  bootstrap: [AppComponent]
+  declarations: [AppComponent, DashboardComponent, ImprintComponent, MainMenuComponent],
+  providers: [ConfigurationService, RegistrationService, WaiverService],
+  bootstrap: [AppComponent],
 })
-export class MainModule { }
+export class MainModule {}
