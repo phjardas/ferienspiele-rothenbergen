@@ -7,6 +7,7 @@ pipelines:
         caches:
         - node
         script:
+        - npm install --global npm@latest
         - npm ci
         - npm run dist
         - npx firebase deploy --token $FIREBASE_TOKEN
