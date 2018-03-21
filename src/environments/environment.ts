@@ -20,7 +20,7 @@ export const environment: Environment = {
     messagingSenderId: '1062224739286',
   },
   paypal: {
-    enabled: true,
+    enabled: false,
     environment: 'sandbox',
     clientId: 'AVtfgkP923kAX7lSyCjL8HrVjMEsIozW2ZebWqK5RJgeclf0ofHe2y3k1aRMY3bSXHjEJD951XBMCJ6g',
     testUser: { email: 'philipp+buyer@jardas.de', password: 'sicheres-kennwort' },
