@@ -10,4 +10,5 @@ pipelines:
         - npm install -g npm@latest
         - npm ci
         - npm run dist
-        - npx firebase deploy --token $FIREBASE_TOKEN
+        - npm run deploy:functions -- --token $FIREBASE_TOKEN
+        - npm run deploy:hosting -- --token $FIREBASE_TOKEN
