@@ -88,14 +88,8 @@ export class RegistrationService {
     });
   }
 
-  getWaiver(reg: Registration): Promise<Blob> {
-    try {
-      return this.config.configuration
-        .first()
-        .map(config => this.waiverService.createWaiver(reg, config))
-        .toPromise();
-    } catch (err) {
-      return Promise.reject(err);
-    }
+  async getWaiver(reg: Registration): Promise<Blob> {
+    const config = await this.config.config;
+    return this.waiverService.createWaiver(reg, config);
   }
 }

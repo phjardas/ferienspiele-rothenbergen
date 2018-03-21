@@ -1,5 +1,7 @@
-import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/publishBehavior';
+
+import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from 'angularfire2/database';
 
 export class Configuration {
@@ -29,6 +31,15 @@ export class ConfigurationService {
       .object('/config')
       .valueChanges()
       .map(data => new Configuration(data));
+  }
+
+  get config(): Promise<Configuration> {
+    return this.db
+      .object('/config')
+      .valueChanges()
+      .first()
+      .map(data => new Configuration(data))
+      .toPromise();
   }
 
   setConfiguration(key: string, value: any): Promise<any> {

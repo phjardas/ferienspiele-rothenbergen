@@ -43,18 +43,21 @@ export class RegistrationDetailsComponent implements OnDestroy {
   }
 
   printWaiver() {
-    this.registrationService.getWaiver(this.reg).then(blob => {
-      const { document } = window;
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = `Einverständniserklärung ${this.reg.child.firstName} ${this.reg.child.lastName}.pdf`;
-      a.style.display = 'none';
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      URL.revokeObjectURL(url);
-    });
+    this.registrationService
+      .getWaiver(this.reg)
+      .then(blob => {
+        const { document } = window;
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `Einverständniserklärung ${this.reg.child.firstName} ${this.reg.child.lastName}.pdf`;
+        a.style.display = 'none';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+      })
+      .catch(err => console.error('Error printing waiver:', err));
   }
 
   private loadPaypalButton(url: string): Observable<any> {
