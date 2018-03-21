@@ -1,4 +1,4 @@
-image: node:8.6.0
+image: node:9.8
 
 pipelines:
   branches:
@@ -7,7 +7,6 @@ pipelines:
         caches:
         - node
         script:
-        - npm install --global npm@latest
         - npm ci
         - npm run dist
         - npx firebase deploy --token $FIREBASE_TOKEN
