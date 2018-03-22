@@ -12,6 +12,7 @@ import { AuthModule } from './auth';
 
 import { ConfigurationService } from './configuration.service';
 import { RegistrationService } from './registration.service';
+import { KuchenService } from './kuchen.service';
 import { WaiverService } from './waiver.service';
 
 import { AppComponent } from './app.component';
@@ -32,7 +33,7 @@ import { SpinnerComponent } from './spinner.component';
     AppRoutingModule,
   ],
   declarations: [AppComponent, DashboardComponent, ImprintComponent, MainMenuComponent],
-  providers: [ConfigurationService, RegistrationService, WaiverService],
+  providers: [ConfigurationService, RegistrationService, KuchenService, WaiverService],
   bootstrap: [AppComponent],
 })
 export class MainModule {}

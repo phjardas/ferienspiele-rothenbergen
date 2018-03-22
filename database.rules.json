@@ -13,6 +13,9 @@
         ".write": "!data.exists() && newData.exists()"
       }
     },
+    "kuchen": {
+      ".read": "true"
+    },
     "registrationCount": {
       ".read": "true"
     },

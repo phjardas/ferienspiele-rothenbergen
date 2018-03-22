@@ -11,6 +11,7 @@ export class Configuration {
   public registrationDeadline: string;
   public waiverDeadline: string;
   public enableTestData: boolean;
+  public requiredKuchen: { [date: string]: number };
 
   constructor(data: any) {
     this.startDate = data.startDate;
@@ -19,6 +20,7 @@ export class Configuration {
     this.registrationDeadline = data.registrationDeadline;
     this.waiverDeadline = data.waiverDeadline;
     this.enableTestData = !!data.enableTestData;
+    this.requiredKuchen = data.requiredKuchen || {};
   }
 }
 
