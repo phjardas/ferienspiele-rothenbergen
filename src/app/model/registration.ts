@@ -37,11 +37,26 @@ export class Payment extends Approval {
   }
 }
 
+export type KuchenSelection = 'kuchen' | 'none' | 'geschwister';
+
+export class Kuchen {
+  selection: KuchenSelection;
+  date?: string;
+  name?: string;
+
+  constructor(data?: any) {
+    this.selection = data ? data.selection : 'none';
+    this.date = data.date;
+    this.name = data.name;
+  }
+}
+
 export class Registration implements FirebaseModel {
   public id: string;
   public child: Child;
   public parent: Parent;
   public emergencyContact: EmergencyContact;
+  public kuchen?: Kuchen;
   public payment: Payment;
   public waiver: Approval;
   public registeredAt: Date;
@@ -50,6 +65,7 @@ export class Registration implements FirebaseModel {
     this.id = data.id;
     this.child = new Child(data.child);
     this.parent = new Parent(data.parent);
+    this.kuchen = new Kuchen(data.kuchen);
     this.emergencyContact = new EmergencyContact(data.emergencyContact);
     this.payment = data.payment ? new Payment(data.payment) : null;
     this.waiver = data.waiver ? new Approval(data.waiver) : null;
@@ -68,6 +84,7 @@ export class Registration implements FirebaseModel {
       child: this.child.toFirebase(),
       parent: this.parent.toFirebase(),
       emergencyContact: this.emergencyContact.toFirebase(),
+      kuchen: this.kuchen,
       payment: this.payment ? this.payment.toFirebase() : null,
       waiver: this.waiver ? this.waiver.toFirebase() : null,
       registeredAt: this.registeredAt,

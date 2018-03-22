@@ -10,6 +10,7 @@ import { Subscription } from 'rxjs/Subscription';
 
 import { RegistrationService } from '../registration.service';
 import { ConfigurationService } from '../configuration.service';
+import { KuchenService, DailyKuchenStatus } from '../kuchen.service';
 import { CustomValidators } from '../validators';
 import { Registration, ShirtSize, Price, PriceElement, RegistrationCode } from '../model';
 import { createTestData } from './testdata';
@@ -28,12 +29,15 @@ export class RegistrationComponent {
   registrationDeadline: string;
   registrationCode: RegistrationCode;
   enableTestData: boolean;
+  kuchenDates: { date: string; required: number; actual: number }[];
+  kuchenStats: { [date: string]: DailyKuchenStatus };
 
   constructor(
     private router: Router,
     route: ActivatedRoute,
     private registrationService: RegistrationService,
     config: ConfigurationService,
+    kuchenService: KuchenService,
     formBuilder: FormBuilder
   ) {
     const registrationCodeObs = route.paramMap
@@ -52,6 +56,13 @@ export class RegistrationComponent {
     );
 
     this.subscription.add(registrationService.registrationDeadline.subscribe(deadline => (this.registrationDeadline = deadline)));
+
+    this.subscription.add(
+      kuchenService.stats.subscribe(kuchenStats => {
+        this.kuchenDates = kuchenStats.days.sort((a, b) => a.date.localeCompare(b.date));
+        this.kuchenStats = kuchenStats.days.reduce((a, s) => ({ ...a, [s.date]: s }), {});
+      })
+    );
 
     this.form = formBuilder.group({
       child: formBuilder.group({
@@ -75,6 +86,20 @@ export class RegistrationComponent {
         name: ['', Validators.required],
         phone: ['', Validators.required],
       }),
+      kuchen: formBuilder.group(
+        {
+          date: ['', Validators.required],
+          name: [''],
+        },
+        {
+          validator(group: FormGroup) {
+            const { date, name } = group.value;
+            if (date && date !== 'none' && date !== 'geschwister' && !name) {
+              group.get('name').setErrors({ required: true });
+            }
+          },
+        }
+      ),
     });
 
     this.subscription.add(config.configuration.map(c => c.enableTestData).subscribe(enable => (this.enableTestData = enable)));
@@ -93,7 +118,13 @@ export class RegistrationComponent {
   submit() {
     this.error = null;
     this.submitting = true;
-    const reg = new Registration(this.form.value);
+
+    const value = this.form.value;
+    const { kuchen } = value;
+    value.kuchen =
+      kuchen.date === 'none' || kuchen.date === 'geschwister' ? { selection: kuchen.date } : { selection: 'kuchen', ...kuchen };
+
+    const reg = new Registration(value);
     const code = this.registrationCode ? this.registrationCode.id : null;
     this.registrationService
       .submitRegistration(reg, code)
