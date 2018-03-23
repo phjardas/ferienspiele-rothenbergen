@@ -1,11 +1,11 @@
 const functions = require('firebase-functions');
 const nodemailer = require('nodemailer');
 
-const mailSender = '"Philipp Jardas" <phjardas@gmail.com>';
+const mailSender = '"Ferienspiele Rothenbergen" <ferienspiele.rothenbergen@gmail.com>';
 const gmailConfig = functions.config().gmail;
 const mailTransport = nodemailer.createTransport(
-  `smtps://${encodeURIComponent(gmailConfig.email)}:${encodeURIComponent(gmailConfig.password)}@smtp.gmail.com`);
-
+  `smtps://${encodeURIComponent(gmailConfig.email)}:${encodeURIComponent(gmailConfig.password)}@smtp.gmail.com`
+);
 
 exports.sendNewUserMail = functions.auth.user().onCreate(event => {
   const { uid, email, displayName } = event.data;
@@ -22,5 +22,5 @@ exports.sendNewUserMail = functions.auth.user().onCreate(event => {
     https://ferienspiele-rothenbergen.de/admin/users;id=${uid}`,
   };
 
-  return mailTransport.sendMail(mail).then(_=> console.info('User registration email sent:', mail));
+  return mailTransport.sendMail(mail).then(_ => console.info('User registration email sent:', mail));
 });

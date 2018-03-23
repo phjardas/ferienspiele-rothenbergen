@@ -1,7 +1,7 @@
 const functions = require('firebase-functions');
 const nodemailer = require('nodemailer');
 
-const mailSender = '"Philipp Jardas" <phjardas@gmail.com>';
+const mailSender = '"Ferienspiele Rothenbergen" <ferienspiele.rothenbergen@gmail.com>';
 const gmailConfig = functions.config().gmail;
 const mailTransport = nodemailer.createTransport(
   `smtps://${encodeURIComponent(gmailConfig.email)}:${encodeURIComponent(gmailConfig.password)}@smtp.gmail.com`
