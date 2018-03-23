@@ -70,21 +70,27 @@
                 </div>
                 <div class="tab-pane" [ngClass]="{ 'active': paymentMethod === 'transfer' }">
                   <p>Bitte überweisen Sie den Betrag auf das folgende Konto:</p>
-                  <p class="card-text"><small>
-                    Empfänger: EMK Rothenbergen<br>
-                    IBAN: DE38507500940027050992<br>
-                    BIC: HELADEF1GEL<br>
-                    Verwendungszweck: "Ferienspiele {{reg.child.firstName}} {{reg.child.lastName}}"
-                  </small></p>
+                  <p class="card-text">
+                    <small>
+                      Empfänger: EMK Rothenbergen
+                      <br> IBAN: DE38507500940027050992
+                      <br> BIC: HELADEF1GEL
+                      <br> Verwendungszweck: "Ferienspiele {{reg.child.firstName}} {{reg.child.lastName}}"
+                    </small>
+                  </p>
                 </div>
                 <div class="tab-pane" [ngClass]="{ 'active': paymentMethod === 'cash' }">
                   <p>Sie können den Teilnahmebeitrag in bar bezahlen:</p>
-                  <p><small>
-                    Büro der Katholischen Kirche "Christkönig"<br>
-                    Niedergründauer Straße 20<br>
-                    63584 Rothenbergen
-                  </small></p>
-                  <p class="card-text">Sie können das Geld und die Einverstädniserklärung auch im Sekretariat der Anton Calaminus Schule in Rothenbergen abgeben.</p>
+                  <p>
+                    <small>
+                      Büro der Katholischen Kirche "Christkönig"
+                      <br> Niedergründauer Straße 20
+                      <br> 63584 Rothenbergen
+                    </small>
+                  </p>
+                  <p class="card-text">Sie können das Geld und die Einverstädniserklärung auch im Sekretariat der Anton Calaminus Schule in Rothenbergen
+                    abgeben.
+                  </p>
                 </div>
               </div>
             </div>
@@ -104,9 +110,28 @@
                 <i class="fa fa-print mr-1" aria-hidden="true"></i>
                 Einverständniserklärung drucken
               </button>
-              <p>Bitte drucken Sie jetzt die Einverständniserklärung aus und schicken Sie sie <strong>bis zum {{ waiverDeadline | date }}</strong> unterschrieben an uns zurück oder bringen Sie sie im Gemeindebüro vorbei.</p>
-              <p class="card-text">Sie können das Geld und die Einverstädniserklärung auch im Sekretariat der Anton Calaminus Schule in Rothenbergen abgeben.</p>
+              <p>Bitte drucken Sie jetzt die Einverständniserklärung aus und schicken Sie sie
+                <strong>bis zum {{ waiverDeadline | date }}</strong> unterschrieben an uns zurück oder bringen Sie sie im Gemeindebüro
+                vorbei.
+              </p>
+              <p class="card-text">Sie können das Geld und die Einverstädniserklärung auch im Sekretariat der Anton Calaminus Schule in Rothenbergen
+                abgeben.
+              </p>
             </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 mb-3">
+        <div class="card">
+          <div class="card-body">
+            <h3 class="card-title">Kuchen</h3>
+            <ng-container [ngSwitch]="reg.kuchen.selection">
+              <p *ngSwitchCase="'none'">Sie bringen leider keinen Kuchen mit.</p>
+              <p *ngSwitchCase="'geschwister'">Sie bringen schon für ein Geschwisterkind einen Kuchen mit.</p>
+              <div *ngSwitchDefault>Sie bringen am
+                <strong>{{ reg.kuchen.date | date:'EEEE' }} {{ reg.kuchen.date | date }}</strong> eine(n)
+                <strong>{{ reg.kuchen.name }}</strong> mit. Vielen Dank!</div>
+            </ng-container>
           </div>
         </div>
       </div>
