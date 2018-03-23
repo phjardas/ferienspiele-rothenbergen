@@ -13,12 +13,12 @@ function createWelcomeMail(reg, config) {
     return `${day}.${month}.${year}`;
   }
 
-  const { id, child, price } = reg;
+  const { id, child, price, kuchen } = reg;
   const { waiverDeadline } = config;
 
   let text = `Herzlichen Dank für die Anmeldung ${child.gender === 'w' ? 'Ihrer Tochter' : 'Ihres Sohnes'} ${child.firstName} ${
     child.lastName
-  } zu den Ferienspielen Rothenbergen\n`;
+  } zu den Ferienspielen Rothenbergen!\n`;
   text += '\n';
   text += 'Bitte beachten Sie, dass Sie für die vollständige Anmeldung noch folgende Schritte durchführen müssen:\n';
   text += '\n';
@@ -29,6 +29,23 @@ function createWelcomeMail(reg, config) {
   text += `3. Bitte drucken und unterschreiben Sie die Einverständniserklärung und geben Sie sie bis zum ${date(
     waiverDeadline
   )} bei uns ab.\n`;
+  text += '\n';
+
+  text += 'Kuchen\n';
+  text += '======\n';
+  text += '\n';
+  switch (kuchen.selection) {
+    case 'none':
+      text += 'Sie bringen leider keinen Kuchen mit.\n';
+      break;
+    case 'geschwister':
+      text += 'Sie bringen schon für ein Geschwisterkind einen Kuchen mit.\n';
+      break;
+    default:
+      text += `Sie bringen am ${date(kuchen.date)} eine(n) ${kuchen.name} mit. Vielen Dank!\n`;
+      break;
+  }
+
   text += '\n';
   text += 'Mit freundlichen Grüßen\n';
   text += 'Ihr Ferienspiele-Team\n';
