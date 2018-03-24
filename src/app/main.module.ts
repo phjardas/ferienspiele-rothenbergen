@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, LOCALE_ID } from '@angular/core';
+
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
@@ -33,7 +34,13 @@ import { SpinnerComponent } from './spinner.component';
     AppRoutingModule,
   ],
   declarations: [AppComponent, DashboardComponent, ImprintComponent, MainMenuComponent],
-  providers: [ConfigurationService, RegistrationService, KuchenService, WaiverService],
+  providers: [
+    { provide: LOCALE_ID, useValue: environment.locale },
+    ConfigurationService,
+    RegistrationService,
+    KuchenService,
+    WaiverService,
+  ],
   bootstrap: [AppComponent],
 })
 export class MainModule {}

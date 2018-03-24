@@ -3,8 +3,9 @@ export * from './model';
 
 export const environment: Environment = {
   production: true,
+  locale: 'de',
   enableRouterTracing: false,
-  title: 'Wunderbar gemacht!',
+  title: 'Natur pur!',
   year: 2018,
   firebase: {
     apiKey: 'AIzaSyDLYUActhO0rHtTMYSHJd8pArejHM9p3bg',
