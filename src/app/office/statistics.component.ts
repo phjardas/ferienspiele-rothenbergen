@@ -9,6 +9,11 @@ import { ConfigurationService } from '../configuration.service';
 import { RegistrationService } from './registration.service';
 import { Registration } from '../model';
 
+const colors = {
+  blue: '#007bff',
+  red: '#dc3545',
+};
+
 @Component({ templateUrl: 'statistics.component.html' })
 export class StatisticsComponent {
   private subscription: Subscription;
@@ -18,7 +23,7 @@ export class StatisticsComponent {
       dataTable: null,
       options: {
         legend: 'none',
-        colors: ['#007bff', '#e6007e'],
+        colors: [colors.blue, colors.red],
         chartArea: { left: 0, top: 0, width: '100%', height: '100%' },
       },
     },
@@ -41,7 +46,7 @@ export class StatisticsComponent {
       dataTable: null,
       options: {
         legend: 'none',
-        colors: ['#007bff', '#e6007e'],
+        colors: [colors.blue, colors.red],
         chartArea: { left: 0, top: 0, width: '100%', height: '100%' },
       },
     },
@@ -58,7 +63,7 @@ export class StatisticsComponent {
       dataTable: null,
       options: {
         legend: 'none',
-        colors: ['#007bff', '#e6007e'],
+        colors: [colors.blue, colors.red],
         chartArea: { left: 0, top: 0, width: '100%', height: '100%' },
       },
     },
@@ -67,7 +72,7 @@ export class StatisticsComponent {
       dataTable: null,
       options: {
         legend: 'none',
-        colors: ['#007bff', '#e6007e'],
+        colors: [colors.blue, colors.red],
         chartArea: { left: 0, top: 0, width: '100%', height: '100%' },
       },
     },

@@ -9,6 +9,7 @@ import { RegistrationService } from './registration.service';
 
 @Component({
   templateUrl: 'dashboard.component.html',
+  styleUrls: ['dashboard.component.scss'],
 })
 export class DashboardComponent implements OnDestroy {
   title: string;
