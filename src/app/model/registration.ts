@@ -39,7 +39,7 @@ export class Payment extends Approval {
 
 export type KuchenSelection = 'kuchen' | 'none' | 'geschwister';
 
-export class Kuchen {
+export class Kuchen implements FirebaseModel {
   selection: KuchenSelection;
   date?: string;
   name?: string;
@@ -48,6 +48,13 @@ export class Kuchen {
     this.selection = data ? data.selection : 'none';
     this.date = data.date;
     this.name = data.name;
+  }
+
+  toFirebase(): any {
+    const val: any = { selection: this.selection };
+    if (this.date) val.date = this.date;
+    if (this.name) val.name = this.name;
+    return val;
   }
 }
 
@@ -84,7 +91,7 @@ export class Registration implements FirebaseModel {
       child: this.child.toFirebase(),
       parent: this.parent.toFirebase(),
       emergencyContact: this.emergencyContact.toFirebase(),
-      kuchen: this.kuchen,
+      kuchen: this.kuchen.toFirebase(),
       payment: this.payment ? this.payment.toFirebase() : null,
       waiver: this.waiver ? this.waiver.toFirebase() : null,
       registeredAt: this.registeredAt,
