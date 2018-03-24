@@ -1,5 +1,6 @@
 export interface Environment {
   production: boolean;
+  locale: string;
   title: string;
   year: number;
   enableRouterTracing: boolean;

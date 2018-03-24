@@ -2,24 +2,29 @@
   <div class="container">
     <div>
       <h2 class="display-3">{{ title }}</h2>
+      <p class="lead">Ökumenische Ferienspiele in Rothenbergen</p>
+      <p *ngIf="startDate && endDate">Von {{ startDate | date:'fullDate' }} bis {{ endDate | date:'fullDate' }}</p>
 
-      <spinner *ngIf="(registrationStatus|async) === null"></spinner>
+      <spinner *ngIf="!registrationStatus"></spinner>
 
-      <div *ngIf="(registrationStatus|async) === 'open'">
-        <p class="lead">Anmeldeschluss ist am {{ registrationDeadline | async | date }}</p>
+      <div *ngIf="registrationStatus === 'open'">
         <a class="btn btn-primary btn-lg" [routerLink]="['/anmeldung']">
           <i class="fa fa-child mr-1" aria-hidden="true"></i>
           Jetzt anmelden!
         </a>
+
+        <span class="ml-3">Anmeldeschluss ist am {{ registrationDeadline | date:'fullDate' }}</span>
       </div>
 
-      <div *ngIf="(registrationStatus|async) === 'deadlineExpired'">
-        <p class="lead"><i class="fa fa-frown-o mr-1"></i> Leider ist die Anmeldefrist für die Kinderferienspiele abgelaufen.</p>
+      <div *ngIf="registrationStatus === 'deadlineExpired'">
+        <p>
+          <i class="fa fa-frown-o mr-1"></i> Leider ist die Anmeldefrist für die Kinderferienspiele abgelaufen.</p>
         <p>Wir bitten um Ihr Verständnis, dass wir keine weiteren Anmeldungen entgegennehmen können.</p>
       </div>
 
-      <div *ngIf="(registrationStatus|async) === 'maxParticipants'">
-        <p class="lead"><i class="fa fa-frown-o mr-1"></i> Leider sind schon alle Plätze belegt.</p>
+      <div *ngIf="registrationStatus === 'maxParticipants'">
+        <p>
+          <i class="fa fa-frown-o mr-1"></i> Leider sind schon alle Plätze belegt.</p>
         <p>Wir bitten um Ihr Verständnis, dass wir keine weiteren Anmeldungen entgegennehmen können.</p>
       </div>
     </div>
@@ -28,16 +33,34 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-lg-6">
+    <div class="col-lg-4">
       <h3>Das Programm</h3>
-      <p>Wir treffen uns für vier Tage in der ersten Ferienwoche auf dem Grundstück der Evangelisch-methodistischen Kirche in der <a href="https://goo.gl/maps/HmJgc" target="_blank" rel="noopener">Kirchbergstraße 10 <i class="fa fa-external-link ml-1"></i></a>.</p>
-      <p>Beim gemeinsamen Abschluss am Freitag werden wir ab 17 Uhr eure Eltern erleben lassen, was wir die Woche alles getan haben und was uns besonderen Spaß gemacht hat, bevor uns die Jugendfeuerwehr Rothenbergen mit lecker Gegrilltem verpflegt.</p>
+      <p>Fünf Tage lang dreht sich bei den Ferienspielen in Rothenbergen alles um die Natur: Um Vögel, um Bienen und andere
+        Insekten, um Kräuter und Wald, um das Leben im Boden, im Wasser und vieles mehr. Ein Höhepunkt der Woche wird unsere
+        Fledermaus- und Eulenführung – wenn Ihr mögt, auch mit Übernachtung im Zelt, Lagerfeuer und noch mehr Abenteuer.</p>
     </div>
-    <div class="col-lg-6">
-      <h3>Infos</h3>
-      <p>Handzettel und Plakate gibt es in den Kirchen, in der Anton-Calaminus-Schule und in einer Reihe von Geschäften.</p>
-      <p>Anmelden kannst du dich online auf dieser Homepage. Wenn du die Einverständniserklärung der Eltern ausgefüllt hast und deine Eltern sie unterschrieben haben, dann gibst du sie (evtl. mit dem Geld) in einem verschlossenen Umschlag im Büro der Katholischen Kirche Christkönig, gegenüber der Schule, ab, oder wirfst es in den Briefkasten.</p>
-      <p>Du kommst aus einem anderen Ort? Das macht nichts! Wir freuen uns auch auf dich. Du gehörst zu keiner der drei Kirchen? Macht auch nichts. Du bist herzlich willkommen!</p>
+    <div class="col-lg-4">
+      <h3>Wer genau?</h3>
+      <p>
+        <strong>IHR, die Kinder:</strong> Im Alter von 7 bis 12 Jahren seid Ihr sehr herzlich eingeladen, bei uns mitzumachen – ganz
+        gleich, woher Ihr kommt oder welcher Konfession oder Religion Ihr angehört: Wir freuen uns auf Euch!</p>
+      <p>
+        <strong>WIR, das Team:</strong> Eine fröhliche Mischung aus Jugendlichen und Erwachsenen, ehrenamtlich und voller Energie
+        – sowie Pfarrerin Caroline Miesner (ev. Kirchengemeinde Auf dem Berg), Pastorin Gillian Horton-Krüger (Evangelisch-Methodistische
+        Friedenskirche) und Gemeindereferentin Rita Kunzmann (kath. Gemeinde Christkönig).</p>
+    </div>
+    <div class="col-lg-4">
+      <h3>Wo genau?</h3>
+      <p>Auf dem Gelände der Evangelisch-Methodistischen Friedenskirche Rothenbergen,
+        <a href="https://goo.gl/maps/HmJgc" target="_blank" rel="noopener">Kirchbergstraße 10
+          <i class="fa fa-external-link ml-1"></i>
+        </a>.</p>
+
+      <h3>Wie viel kostet das?</h3>
+      <p>Die Teilnahme an den Ferienspielen kostet 30 Euro und eine Kuchenspende. Geschwisterkinder sind ermäßigt (zweites und
+        weitere Kinder je 25 Euro). Darin enthalten sind neben dem Programm und dem Material auch das Mittagessen, Getränke,
+        Snacks für zwischendurch und ein tolles Ferienspiel-Shirt. Der fantastisch niedrige Preis wird übrigens ermöglicht
+        durch viel ehrenamtliches Engagement, die drei beteiligten Kirchen, die Gemeinde Gründau – und unsere Sponsoren!</p>
     </div>
   </div>
 </div>
