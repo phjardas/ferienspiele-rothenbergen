@@ -1,4 +1,4 @@
-<div class="jumbotron jumbotron-fluid">
+<div class="jumbotron jumbotron-fluid dashboard__jumbotron">
   <div class="container">
     <div>
       <h2 class="display-3">{{ title }}</h2>
@@ -8,12 +8,15 @@
       <spinner *ngIf="!registrationStatus"></spinner>
 
       <div *ngIf="registrationStatus === 'open'">
-        <a class="btn btn-primary btn-lg" [routerLink]="['/anmeldung']">
-          <i class="fa fa-child mr-1" aria-hidden="true"></i>
-          Jetzt anmelden!
-        </a>
-
-        <span class="ml-3">Anmeldeschluss ist am {{ registrationDeadline | date:'fullDate' }}</span>
+        <p>
+          <a class="btn btn-primary btn-lg" [routerLink]="['/anmeldung']">
+            <i class="fa fa-child mr-1" aria-hidden="true"></i>
+            Jetzt anmelden!
+          </a>
+        </p>
+        <p *ngIf="registrationDeadline">
+          Anmeldeschluss ist am {{ registrationDeadline | date:'fullDate' }}
+        </p>
       </div>
 
       <div *ngIf="registrationStatus === 'deadlineExpired'">
@@ -60,7 +63,8 @@
       <p>Die Teilnahme an den Ferienspielen kostet 30 Euro und eine Kuchenspende. Geschwisterkinder sind ermäßigt (zweites und
         weitere Kinder je 25 Euro). Darin enthalten sind neben dem Programm und dem Material auch das Mittagessen, Getränke,
         Snacks für zwischendurch und ein tolles Ferienspiel-Shirt. Der fantastisch niedrige Preis wird übrigens ermöglicht
-        durch viel ehrenamtliches Engagement, die drei beteiligten Kirchen, die Gemeinde Gründau – und unsere Sponsoren!</p>
+        durch viel ehrenamtliches Engagement, die drei beteiligten Kirchen, die Gemeinde Gründau – und unsere Sponsoren!
+      </p>
     </div>
   </div>
 </div>
