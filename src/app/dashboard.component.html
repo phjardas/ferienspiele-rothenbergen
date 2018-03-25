@@ -8,25 +8,30 @@
 
     <div *ngIf="registrationStatus === 'open'">
       <p>
-        <a class="btn btn-primary btn-lg" [routerLink]="['/anmeldung']">
+        <a class="btn btn-primary btn-lg mt-3" [routerLink]="['/anmeldung']">
           <i class="fa fa-child mr-1" aria-hidden="true"></i>
           Jetzt anmelden!
         </a>
+        <a class="btn btn-outline-light btn-lg mt-3" href="#content">Weitere Informationen</a>
       </p>
       <p *ngIf="registrationDeadline">
         Anmeldeschluss ist am {{ registrationDeadline | date:'fullDate' }}
       </p>
     </div>
 
-    <div *ngIf="registrationStatus === 'deadlineExpired'">
+    <div class="alert alert-light" *ngIf="registrationStatus === 'deadlineExpired'">
       <p>
-        <i class="fa fa-frown-o mr-1"></i> Leider ist die Anmeldefrist für die Kinderferienspiele abgelaufen.</p>
+        <strong>
+          <i class="fa fa-frown-o mr-1"></i> Leider ist die Anmeldefrist für die Kinderferienspiele abgelaufen.</strong>
+      </p>
       <p>Wir bitten um Ihr Verständnis, dass wir keine weiteren Anmeldungen entgegennehmen können.</p>
     </div>
 
-    <div *ngIf="registrationStatus === 'maxParticipants'">
+    <div class="alert alert-light" *ngIf="registrationStatus === 'maxParticipants'">
       <p>
-        <i class="fa fa-frown-o mr-1"></i> Leider sind schon alle Plätze belegt.</p>
+        <strong>
+          <i class="fa fa-frown-o mr-1"></i> Leider sind schon alle Plätze belegt.</strong>
+      </p>
       <p>Wir bitten um Ihr Verständnis, dass wir keine weiteren Anmeldungen entgegennehmen können.</p>
     </div>
   </div>
