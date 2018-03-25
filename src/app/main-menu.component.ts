@@ -18,7 +18,7 @@ export class MainMenuComponent implements OnDestroy {
   constructor(private authenticationService: AuthenticationService, private router: Router, route: ActivatedRoute) {
     this.subscription = authenticationService.user.subscribe(user => (this.user = user));
     this.authenticationProviders = authenticationService.providers;
-    this.visible = router.events.filter(evt => evt instanceof NavigationEnd).map((evt: NavigationEnd) => evt.url !== '/');
+    this.visible = router.events.filter(evt => evt instanceof NavigationEnd).map((evt: NavigationEnd) => !evt.url.match(/^\/(#.+)?$/));
   }
 
   signout() {
