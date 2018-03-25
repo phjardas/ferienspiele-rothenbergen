@@ -1,5 +1,6 @@
 export interface Environment {
   production: boolean;
+  hmr: boolean;
   locale: string;
   title: string;
   year: number;

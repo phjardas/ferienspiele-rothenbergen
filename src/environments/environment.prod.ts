@@ -3,6 +3,7 @@ export * from './model';
 
 export const environment: Environment = {
   production: true,
+  hmr: false,
   locale: 'de',
   enableRouterTracing: false,
   title: 'Natur pur!',
