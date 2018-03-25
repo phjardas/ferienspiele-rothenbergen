@@ -4,7 +4,6 @@ pipelines:
   branches:
     master:
     - step:
-        name: Build
         caches:
         - node
         script:
@@ -12,10 +11,5 @@ pipelines:
         - npm ci
         - (cd functions && npm ci)
         - npm run dist
-    - step:
-        name: Deploy
-        caches:
-        - node
-        script:
         - npm run deploy -- --token $FIREBASE_TOKEN
         deployment: production
