@@ -157,7 +157,8 @@
         <legend>
           <i class="fa fa-birthday-cake mr-1"></i> Kuchen</legend>
         <p>
-          <strong>TODO</strong> Einleitender Text zur Erklärung der Kuchen.</p>
+          Um die Ferienspiele lecker und abwechslungsreich zu gestalten, sind auch Sie gefragt! Wir benötigen insgesamt über 50 Beiträge
+          zum Essen von den Eltern. Damit wir gut planen können, bitten wir Sie hier um Ihren Eintrag. Vielen Dank!</p>
         <div class="form-group form-check d-flex flex-column">
           <label *ngFor="let date of kuchenDates" class="form-check-label">
             <input type="radio" formControlName="date" [value]="date.date" [disabled]="date.actual >= date.required" class="form-radio-input"> Ich bringe am {{ date.date | date:'EEEE' }} {{ date.date | date }} einen Kuchen mit.
