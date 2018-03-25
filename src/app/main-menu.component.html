@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md navbar-dark bg-primary">
+<nav class="navbar navbar-expand-md navbar-dark bg-primary" *ngIf="visible | async">
   <div class="container">
     <a class="navbar-brand" [routerLink]="['/']">Ferienspiele Rothenbergen</a>
 
@@ -22,7 +22,8 @@
             <i class="fa fa-user mr-1"></i> {{user.label}}
           </a>
           <div class="dropdown-menu">
-            <button class="dropdown-item" href="#" (click)="signout()"><i class="fa fa-sign-out mr-1"></i> Sign out</button>
+            <button class="dropdown-item" href="#" (click)="signout()">
+              <i class="fa fa-sign-out mr-1"></i> Sign out</button>
           </div>
         </li>
       </ul>
