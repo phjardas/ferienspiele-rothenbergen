@@ -1,8 +1,15 @@
 {
   "name": "ferienspiele-rothenbergen",
   "version": "2018.0.0",
+  "description": "Ferienspiele Rothenbergen",
   "license": "UNLICENSED",
   "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/phjardas/ferienspiele-rothenbergen.git"
+  },
+  "author": "Philipp Jardas <philipp@jardas.de> (https://github.com/phjardas)",
+  "homepage": "https://ferienspiele-rothenbergen.de/",
   "scripts": {
     "postinstall": "(cd functions && npm install)",
     "ng": "ng",
