@@ -12,9 +12,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AuthModule } from './auth';
 
 import { ConfigurationService } from './configuration.service';
-import { RegistrationService } from './registration.service';
-import { KuchenService } from './kuchen.service';
-import { WaiverService } from './waiver.service';
+import { RegistrationStatusService } from './registration-status.service';
 
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard.component';
@@ -34,13 +32,7 @@ import { SpinnerComponent } from './spinner.component';
     AppRoutingModule,
   ],
   declarations: [AppComponent, DashboardComponent, ImprintComponent, MainMenuComponent],
-  providers: [
-    { provide: LOCALE_ID, useValue: environment.locale },
-    ConfigurationService,
-    RegistrationService,
-    KuchenService,
-    WaiverService,
-  ],
+  providers: [{ provide: LOCALE_ID, useValue: environment.locale }, ConfigurationService, RegistrationStatusService],
   bootstrap: [AppComponent],
 })
 export class MainModule {}

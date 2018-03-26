@@ -9,7 +9,7 @@ import { Observable } from 'rxjs/Observable';
 import { AngularFireDatabase } from 'angularfire2/database';
 import * as firebase from 'firebase';
 
-import { RegistrationService as BaseRegistrationService } from '../registration.service';
+import { RegistrationService as BaseRegistrationService } from '../registration/registration.service';
 import { AuthenticationService, User } from '../auth';
 import { Registration, Approval, RegistrationCode } from '../model';
 import { ExcelService } from './excel.service';

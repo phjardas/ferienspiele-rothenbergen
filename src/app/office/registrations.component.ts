@@ -1,18 +1,23 @@
+import { Observable } from 'rxjs/Observable';
+import { Subscription } from 'rxjs/Subscription';
 import 'rxjs/add/operator/map';
 
-import { Component } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+import { Component, OnDestroy } from '@angular/core';
 
 import { RegistrationService } from './registration.service';
 import { Registration } from '../model';
 
 @Component({ templateUrl: 'registrations.component.html' })
-export class RegistrationsComponent {
-  registrations: Observable<Registration[]>;
+export class RegistrationsComponent implements OnDestroy {
+  registrations: Registration[];
   exportWorking = false;
+  private sub: Subscription;
 
   constructor(private registrationService: RegistrationService) {
-    this.registrations = registrationService.getRegistrations().map(regs => regs.sort(this.compareRegistrations));
+    this.sub = registrationService
+      .getRegistrations()
+      .map(regs => regs.sort(this.compareRegistrations))
+      .subscribe(registrations => (this.registrations = registrations));
   }
 
   private compareRegistrations(a: Registration, b: Registration): number {
@@ -39,5 +44,9 @@ export class RegistrationsComponent {
         URL.revokeObjectURL(url);
         this.exportWorking = false;
       });
+  }
+
+  ngOnDestroy() {
+    this.sub.unsubscribe();
   }
 }

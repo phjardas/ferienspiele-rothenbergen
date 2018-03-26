@@ -8,9 +8,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 
-import { RegistrationService } from '../registration.service';
+import { RegistrationService } from './registration.service';
+import { RegistrationStatusService, RegistrationStatus } from '../registration-status.service';
 import { ConfigurationService } from '../configuration.service';
-import { KuchenService, DailyKuchenStatus } from '../kuchen.service';
+import { KuchenService, DailyKuchenStatus } from './kuchen.service';
 import { CustomValidators } from '../validators';
 import { Registration, ShirtSize, Price, PriceElement, RegistrationCode } from '../model';
 import { createTestData } from './testdata';
@@ -25,7 +26,7 @@ export class RegistrationComponent {
   submitting: boolean;
   shirtSizes = ShirtSize.values;
   price: Price;
-  registrationStatus: string;
+  registrationStatus: RegistrationStatus['status'] | 'code';
   registrationDeadline: string;
   registrationCode: RegistrationCode;
   enableTestData: boolean;
@@ -36,6 +37,7 @@ export class RegistrationComponent {
     private router: Router,
     route: ActivatedRoute,
     private registrationService: RegistrationService,
+    registrationStatusService: RegistrationStatusService,
     config: ConfigurationService,
     kuchenService: KuchenService,
     formBuilder: FormBuilder
@@ -46,16 +48,18 @@ export class RegistrationComponent {
     this.subscription = registrationCodeObs.subscribe(code => (this.registrationCode = code));
 
     this.subscription.add(
-      Observable.combineLatest(registrationService.registrationStatus, registrationCodeObs)
+      Observable.combineLatest(registrationStatusService.status, registrationCodeObs)
         .map(results => {
           const [status, code] = results;
-          if (status !== 'ok' && code && !code.used) return 'code';
-          return status;
+          if (status.status !== 'open' && code && !code.used) return 'code';
+          return status.status;
         })
         .subscribe(status => (this.registrationStatus = status))
     );
 
-    this.subscription.add(registrationService.registrationDeadline.subscribe(deadline => (this.registrationDeadline = deadline)));
+    this.subscription.add(
+      registrationStatusService.status.subscribe(({ registrationDeadline }) => (this.registrationDeadline = registrationDeadline))
+    );
 
     this.subscription.add(
       kuchenService.stats.subscribe(kuchenStats => {
@@ -125,7 +129,7 @@ export class RegistrationComponent {
       kuchen.date === 'none' || kuchen.date === 'geschwister' ? { selection: kuchen.date } : { selection: 'kuchen', ...kuchen };
 
     const reg = new Registration(value);
-    const code = this.registrationCode ? this.registrationCode.id : null;
+    const code = this.registrationCode ? this.registrationCode.code : null;
     this.registrationService
       .submitRegistration(reg, code)
       .first()

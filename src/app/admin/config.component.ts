@@ -23,8 +23,6 @@ export class ConfigComponent {
 
   constructor(private configService: ConfigurationService, formBuilder: FormBuilder) {
     this.formFields = [
-      { name: 'startDate', label: 'Erster Tag der Ferienspiele', type: 'date' },
-      { name: 'endDate', label: 'Letzter Tag der Ferienspiele', type: 'date' },
       { name: 'maxParticipants', label: 'Maximale Teilnehmeranzahl', type: 'number' },
       { name: 'registrationDeadline', label: 'Anmeldeschluss', type: 'date' },
       { name: 'waiverDeadline', label: 'Frist zur Abgabe der Einverständniserklärung', type: 'date' },
@@ -32,8 +30,6 @@ export class ConfigComponent {
     ];
 
     this.form = formBuilder.group({
-      startDate: ['', Validators.required],
-      endDate: ['', Validators.required],
       maxParticipants: ['', Validators.required],
       registrationDeadline: ['', Validators.required],
       waiverDeadline: ['', Validators.required],

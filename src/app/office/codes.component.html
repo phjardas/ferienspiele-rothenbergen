@@ -3,7 +3,9 @@
 <p>Jeder Code kann nur ein mal verwendet werden!</p>
 
 <div class="mb-5">
-  <p><strong>Neuen Anmeldungs-Code erzeugen</strong></p>
+  <p>
+    <strong>Neuen Anmeldungs-Code erzeugen</strong>
+  </p>
   <div class="alert alert-danger" *ngIf="formError">{{ formError }}</div>
 
   <form [formGroup]="form" novalidate (ngSubmit)="createCode()" class="form-inline">
@@ -23,12 +25,12 @@
   </div>
 </div>
 
-<spinner *ngIf="(codes | async) === null"></spinner>
+<spinner *ngIf="!codes"></spinner>
 
-<div *ngIf="(codes | async) !== null">
-  <p *ngIf="!(codes | async).length">Es gibt noch keine Anmelde-Codes.</p>
+<div *ngIf="codes">
+  <p *ngIf="!codes.length">Es gibt noch keine Anmelde-Codes.</p>
 
-  <table class="table" *ngIf="(codes | async).length">
+  <table class="table" *ngIf="codes.length">
     <thead>
       <tr>
         <th>Code</th>
@@ -38,14 +40,14 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let code of codes | async">
+      <tr *ngFor="let code of codes">
         <td>
-          {{ code.id }}
+          {{ code.code }}
           <br>
           <small *ngIf="!code.used">
-            <a [routerLink]="['/anmeldung', { code: code.id }]" id="code_{{code.id}}_url"></a>
-            <a href="" (click)="copyURL(code.id); false">URL kopieren</a>
-            <span class="badge badge-success" *ngIf="urlCopied === code.id">ok</span>
+            <a [routerLink]="['/anmeldung', { code: code.code }]" id="code_{{code.code}}_url"></a>
+            <a href="" (click)="copyURL(code.code); false">URL kopieren</a>
+            <span class="badge badge-success" *ngIf="urlCopied === code.code">ok</span>
           </small>
         </td>
         <td>{{ code.label }}</td>
