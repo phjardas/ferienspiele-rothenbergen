@@ -5,8 +5,6 @@ import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from 'angularfire2/database';
 
 export class Configuration {
-  public startDate: string;
-  public endDate: string;
   public maxParticipants: number;
   public registrationDeadline: string;
   public waiverDeadline: string;
@@ -14,8 +12,6 @@ export class Configuration {
   public requiredKuchen: { [date: string]: number };
 
   constructor(data: any) {
-    this.startDate = data.startDate;
-    this.endDate = data.endDate;
     this.maxParticipants = parseInt(data.maxParticipants);
     this.registrationDeadline = data.registrationDeadline;
     this.waiverDeadline = data.waiverDeadline;

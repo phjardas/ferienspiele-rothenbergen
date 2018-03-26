@@ -12,6 +12,8 @@ export const environment: Environment = {
   locale: 'de',
   enableRouterTracing: false,
   title: 'Natur pur!',
+  startDate: '2018-06-25',
+  endDate: '2018-06-29',
   year: 2018,
   firebase: {
     apiKey: 'AIzaSyDLYUActhO0rHtTMYSHJd8pArejHM9p3bg',

@@ -9,7 +9,8 @@ import { Subscription } from 'rxjs/Subscription';
 
 import { environment } from '../../environments/environment';
 
-import { RegistrationService } from '../registration.service';
+import { RegistrationStatusService } from '../registration-status.service';
+import { RegistrationService } from './registration.service';
 import { Registration } from '../model';
 
 @Component({
@@ -19,21 +20,23 @@ export class RegistrationDetailsComponent implements OnDestroy {
   subscription: Subscription;
   loaded: boolean;
   reg: Registration;
-  registrationDeadline: string;
   waiverDeadline: string;
   paypalConfig = environment.paypal;
   private paymentMethod = this.paypalConfig.enabled ? 'paypal' : 'transfer';
   private paypalButton: Observable<any>;
   private paypalButtonRendered = false;
 
-  constructor(private route: ActivatedRoute, private registrationService: RegistrationService) {
+  constructor(
+    private route: ActivatedRoute,
+    private registrationService: RegistrationService,
+    registrationStatusService: RegistrationStatusService
+  ) {
     const regObs = route.paramMap.mergeMap(params => this.registrationService.getRegistration(params.get('id')));
     this.subscription = regObs.subscribe(reg => {
       this.reg = reg;
       this.loaded = true;
     });
-    this.subscription.add(registrationService.registrationDeadline.subscribe(d => (this.registrationDeadline = d)));
-    this.subscription.add(registrationService.waiverDeadline.subscribe(d => (this.waiverDeadline = d)));
+    this.subscription.add(registrationStatusService.status.subscribe(({ waiverDeadline }) => (this.waiverDeadline = waiverDeadline)));
     this.subscription.add(
       regObs
         .filter(reg => reg != null)

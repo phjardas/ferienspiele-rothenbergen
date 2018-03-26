@@ -80,7 +80,7 @@ export class Registration implements FirebaseModel {
   }
 
   get price(): Price {
-    const elements: PriceElement[] = [{ label: 'Teilnahmebeitrag', price: 30 }];
+    const elements: PriceElement[] = [{ label: 'Teilnahmebeitrag', price: 35 }];
     if (this.child.nextChild) elements.push({ label: 'Ermäßigung für Geschwisterkind', price: -5 });
     const totalPrice = elements.reduce((a, b) => (a += b.price), 0);
     return new Price(totalPrice, elements);

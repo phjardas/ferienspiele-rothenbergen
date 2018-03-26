@@ -24,16 +24,16 @@
           <div *ngIf="reg.payment">
             <p>
               Erhalten am {{ reg.payment.timestamp | date }}
-              <span *ngIf="reg.payment && reg.payment.type === 'paypal'">per PayPal</span>.
+              <span *ngIf="reg.payment && reg.payment.type === 'paypal'">per PayPal</span>
             </p>
-            <button class="btn btn-primary" (click)="setPaymentNotReceived()">
+            <button class="btn btn-outline-primary" (click)="setPaymentNotReceived()">
               <spinner inverse class="mr-3" *ngIf="paymentWorking === 'reset'"></spinner>
               <i class="fa fa-times mr-1" *ngIf="paymentWorking !== 'reset'"></i>
               doch nicht erhalten
             </button>
           </div>
           <div *ngIf="!reg.payment">
-            <p>Noch nicht erhalten.</p>
+            <p>Noch nicht erhalten</p>
             <button class="btn btn-primary" (click)="setPaymentReceived('cash')">
               <spinner inverse class="mr-3" *ngIf="paymentWorking === 'cash'"></spinner>
               <i class="fa fa-check mr-1" *ngIf="paymentWorking !== 'cash'"></i>
@@ -55,8 +55,8 @@
             <i class="fa fa-check mr-1" [ngClass]="{ 'fa-check': !!reg.waiver, 'fa-times': !reg.waiver }"></i>
             Einverständniserklärung
           </h3>
-          <p class="card-text" *ngIf="reg.waiver">Erhalten am {{ reg.waiver.timestamp | date }}.</p>
-          <p class="card-text" *ngIf="!reg.waiver">Noch nicht erhalten.</p>
+          <p class="card-text" *ngIf="reg.waiver">Erhalten am {{ reg.waiver.timestamp | date }}</p>
+          <p class="card-text" *ngIf="!reg.waiver">Noch nicht erhalten</p>
           <div class="mt-3">
             <button class="btn btn-primary" (click)="printWaiver()">
               <spinner inverse class="mr-3" *ngIf="waiverWorking"></spinner>
@@ -67,7 +67,7 @@
               <i class="fa fa-check mr-1"></i>
               erhalten
             </button>
-            <button class="btn btn-primary" (click)="setWaiverReceived(false)" *ngIf="reg.waiver">
+            <button class="btn btn-outline-primary" (click)="setWaiverReceived(false)" *ngIf="reg.waiver">
               <i class="fa fa-times mr-1"></i>
               doch nicht erhalten
             </button>
@@ -82,24 +82,41 @@
       <div class="col-lg-6">
         <h4>Kind</h4>
         <dl class="row">
-          <dt class="col-sm-3">Geburtsdatum</dt><dd class="col-sm-9">{{ reg.child.dateOfBirth | date }}</dd>
-          <dt class="col-sm-3">Geschlecht</dt><dd class="col-sm-9">{{ reg.child.gender.label }}</dd>
-          <dt class="col-sm-3">T-Shirt</dt><dd class="col-sm-9">{{ reg.child.shirtSize.label }}</dd>
-          <dt class="col-sm-3">Vegetarisch</dt><dd class="col-sm-9">{{ reg.child.vegetarian ? 'ja' : 'nein' }}</dd>
-          <dt class="col-sm-3">Geschwister</dt><dd class="col-sm-9">{{ reg.child.nextChild ? 'ja' : 'nein' }}</dd>
+          <dt class="col-sm-3">Geburtsdatum</dt>
+          <dd class="col-sm-9">{{ reg.child.dateOfBirth | date }}</dd>
+          <dt class="col-sm-3">Geschlecht</dt>
+          <dd class="col-sm-9">{{ reg.child.gender.label }}</dd>
+          <dt class="col-sm-3">T-Shirt</dt>
+          <dd class="col-sm-9">{{ reg.child.shirtSize.label }}</dd>
+          <dt class="col-sm-3">Vegetarisch</dt>
+          <dd class="col-sm-9">{{ reg.child.vegetarian ? 'ja' : 'nein' }}</dd>
+          <dt class="col-sm-3">Geschwister</dt>
+          <dd class="col-sm-9">{{ reg.child.nextChild ? 'ja' : 'nein' }}</dd>
         </dl>
       </div>
       <div class="col-lg-6">
         <h4>Erziehungsberechtigte(r)</h4>
         <dl class="row">
-          <dt class="col-sm-3">Telefon</dt><dd class="col-sm-9"><a href="tel:{{ reg.parent.phone }}">{{ reg.parent.phone }}</a></dd>
-          <dt class="col-sm-3">Email</dt><dd class="col-sm-9"><a href="mailto:{{ reg.parent.email }}">{{ reg.parent.email }}</a></dd>
-          <dt class="col-sm-3">Adresse</dt><dd class="col-sm-9">{{ reg.parent.street }}<br>{{ reg.parent.plz }} {{ reg.parent.city }}</dd>
+          <dt class="col-sm-3">Telefon</dt>
+          <dd class="col-sm-9">
+            <a href="tel:{{ reg.parent.phone }}">{{ reg.parent.phone }}</a>
+          </dd>
+          <dt class="col-sm-3">Email</dt>
+          <dd class="col-sm-9">
+            <a href="mailto:{{ reg.parent.email }}">{{ reg.parent.email }}</a>
+          </dd>
+          <dt class="col-sm-3">Adresse</dt>
+          <dd class="col-sm-9">{{ reg.parent.street }}
+            <br>{{ reg.parent.plz }} {{ reg.parent.city }}</dd>
         </dl>
         <h4>Notfallkontakt</h4>
         <dl class="row">
-          <dt class="col-sm-3">Name</dt><dd class="col-sm-9">{{ reg.emergencyContact.name }}</dd>
-          <dt class="col-sm-3">Telefon</dt><dd class="col-sm-9"><a href="tel:{{ reg.emergencyContact.phone }}">{{ reg.emergencyContact.phone }}</a></dd>
+          <dt class="col-sm-3">Name</dt>
+          <dd class="col-sm-9">{{ reg.emergencyContact.name }}</dd>
+          <dt class="col-sm-3">Telefon</dt>
+          <dd class="col-sm-9">
+            <a href="tel:{{ reg.emergencyContact.phone }}">{{ reg.emergencyContact.phone }}</a>
+          </dd>
         </dl>
       </div>
     </div>

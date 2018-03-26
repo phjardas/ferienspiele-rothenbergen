@@ -4,6 +4,8 @@ export interface Environment {
   locale: string;
   title: string;
   year: number;
+  startDate: string;
+  endDate: string;
   enableRouterTracing: boolean;
   firebase: FirebaseConfig;
   paypal: PayPalConfig;

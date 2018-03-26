@@ -14,11 +14,20 @@ export class MainMenuComponent implements OnDestroy {
   user: User;
   authenticationProviders: AuthenticationProvider[];
   visible: Observable<boolean>;
+  expanded = false;
 
   constructor(private authenticationService: AuthenticationService, private router: Router, route: ActivatedRoute) {
     this.subscription = authenticationService.user.subscribe(user => (this.user = user));
     this.authenticationProviders = authenticationService.providers;
     this.visible = router.events.filter(evt => evt instanceof NavigationEnd).map((evt: NavigationEnd) => !evt.url.match(/^\/(#.+)?$/));
+  }
+
+  hide() {
+    this.expanded = false;
+  }
+
+  show() {
+    this.expanded = true;
   }
 
   signout() {

@@ -1,7 +1,6 @@
 <spinner *ngIf="(users | async) === null"></spinner>
 
 <div *ngIf="(users | async) !== null">
-  <p>Highlight: {{highlightUserId}}</p>
   <table class="table">
     <thead>
       <tr>

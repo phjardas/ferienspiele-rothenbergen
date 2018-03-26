@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import * as PDF from 'jspdf';
 
-import { environment } from '../environments/environment';
-import { Configuration } from './configuration.service';
-import { Registration } from './model';
+import { environment } from '../../environments/environment';
+import { Configuration } from '../configuration.service';
+import { Registration } from '../model';
 
 @Injectable()
 export class WaiverService {
@@ -39,7 +39,8 @@ export class WaiverService {
     normal(
       `Hiermit erkläre ich mich einverstanden, dass ${reg.child.gender.id === 'w' ? 'meine Tochter' : 'mein Sohn'} ${reg.child.firstName} ${
         reg.child.lastName
-      } \n` + `bei den Kinderferienspielen Rothenbergen vom ${date(config.startDate)} bis ${date(config.endDate)} teilnehmen darf.`
+      } \n` +
+        `bei den Kinderferienspielen Rothenbergen vom ${date(environment.startDate)} bis ${date(environment.endDate)} teilnehmen darf.`
     );
 
     offset += 5;

@@ -8,6 +8,7 @@ import { Subscription } from 'rxjs/Subscription';
 import { ConfigurationService } from '../configuration.service';
 import { RegistrationService } from './registration.service';
 import { Registration } from '../model';
+import { environment } from '../../environments/environment';
 
 const colors = {
   blue: '#007bff',
@@ -90,9 +91,7 @@ export class StatisticsComponent {
       this.updateWaiverData(regs);
     });
 
-    this.subscription.add(
-      Observable.combineLatest(registrations, config).subscribe(values => this.updateAgeData(values[0], values[1].startDate))
-    );
+    this.subscription.add(registrations.subscribe(registrations => this.updateAgeData(registrations, environment.startDate)));
   }
 
   private updateGenderData(regs: Registration[]) {

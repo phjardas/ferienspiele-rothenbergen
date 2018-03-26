@@ -1,26 +1,31 @@
+import { Observable } from 'rxjs/Observable';
+import { Subscription } from 'rxjs/Subscription';
 import 'rxjs/add/operator/map';
 
-import { Component } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+import { Component, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { RegistrationService } from './registration.service';
 import { RegistrationCode } from '../model';
 
 @Component({ templateUrl: 'codes.component.html' })
-export class CodesComponent {
+export class CodesComponent implements OnDestroy {
   form: FormGroup;
   formError: string;
   formSubmitting = false;
   createdCode: string;
-  codes: Observable<RegistrationCode[]>;
+  codes: RegistrationCode[];
   urlCopied: string;
+  private sub: Subscription;
 
   constructor(private registrationService: RegistrationService, formBuilder: FormBuilder) {
     this.form = formBuilder.group({
       label: ['', Validators.required],
     });
-    this.codes = registrationService.getRegistrationCodes().map(codes => codes.sort(this.compareRegistrationCodes));
+    this.sub = registrationService
+      .getRegistrationCodes()
+      .map(codes => codes.sort(this.compareRegistrationCodes))
+      .subscribe(codes => (this.codes = codes));
   }
 
   private compareRegistrationCodes(a: RegistrationCode, b: RegistrationCode): number {
@@ -62,5 +67,9 @@ export class CodesComponent {
 
     document.body.removeChild(input);
     this.urlCopied = code;
+  }
+
+  ngOnDestroy() {
+    this.sub.unsubscribe();
   }
 }

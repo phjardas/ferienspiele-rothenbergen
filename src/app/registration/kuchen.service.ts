@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from 'angularfire2/database';
 import * as firebase from 'firebase';
 
-import { ConfigurationService, Configuration } from './configuration.service';
+import { ConfigurationService, Configuration } from '../configuration.service';
 
 export interface KuchenDetails {
   readonly registrationId: string;

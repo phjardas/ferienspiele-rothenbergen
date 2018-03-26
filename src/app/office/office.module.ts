@@ -4,6 +4,7 @@ import { Ng2GoogleChartsModule } from 'ng2-google-charts';
 
 import { SharedModule } from '../shared.module';
 import { FormModule } from '../form';
+import { RegistrationServiceModule } from '../registration/registration-service.module';
 import { OfficeRoutingModule } from './office-routing.module';
 
 import { ExcelService } from './excel.service';
@@ -16,7 +17,7 @@ import { StatisticsComponent } from './statistics.component';
 import { RegistrationDetailsComponent } from './registration-details.component';
 
 @NgModule({
-  imports: [CommonModule, Ng2GoogleChartsModule, SharedModule, FormModule, OfficeRoutingModule],
+  imports: [CommonModule, Ng2GoogleChartsModule, SharedModule, FormModule, RegistrationServiceModule, OfficeRoutingModule],
   declarations: [CodesComponent, OfficeComponent, RegistrationsComponent, RegistrationDetailsComponent, StatisticsComponent],
   providers: [ExcelService, RegistrationService],
 })
