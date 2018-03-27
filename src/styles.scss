@@ -21,10 +21,6 @@ $theme-colors: ('primary': #28a745);
 @import 'node_modules/bootstrap/scss/utilities';
 @import 'node_modules/bootstrap/scss/transitions';
 
-// Font Awesome
-$fa-font-path: '~font-awesome/fonts';
-@import '~font-awesome/scss/font-awesome';
-
 // custom styles
 html {
   height: 100%;
