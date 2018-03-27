@@ -118,6 +118,21 @@
             <a href="tel:{{ reg.emergencyContact.phone }}">{{ reg.emergencyContact.phone }}</a>
           </dd>
         </dl>
+        <h4>Übernachtung</h4>
+        <dl class="row">
+          <dt class="col-sm-3">Führung</dt>
+          <dd class="col-sm-9">{{ reg.uebernachtung.type === 'fuehrung' || reg.uebernachtung.type === 'uebernachtung' ? 'ja' : 'nein' }}</dd>
+          <dt class="col-sm-3">Übernachtung</dt>
+          <dd class="col-sm-9">{{ reg.uebernachtung.type === 'uebernachtung' ? 'ja' : 'nein' }}</dd>
+          <dt class="col-sm-3">Bringt Zelt mit</dt>
+          <dd class="col-sm-9">{{ reg.uebernachtung.tent ? 'ja' : 'nein' }}</dd>
+        </dl>
+        <h4>Kuchen</h4>
+        <ng-container [ngSwitch]="reg.kuchen.selection">
+          <p *ngSwitchCase="'none'">Bringt keinen Kuchen mit.</p>
+          <p *ngSwitchCase="'geschwister'">Bringt schon für ein Geschwisterkind einen Kuchen mit.</p>
+          <p *ngSwitchCase="'kuchen'">Bringt am {{ reg.kuchen.date | date:'EEEE' }} {{ reg.kuchen.date | date }} einen {{ reg.kuchen.name }} mit.</p>
+        </ng-container>
       </div>
     </div>
   </div>

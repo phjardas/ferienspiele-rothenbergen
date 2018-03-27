@@ -9,9 +9,11 @@ import { ConfigurationService } from '../configuration.service';
 import { RegistrationService } from './registration.service';
 import { Registration } from '../model';
 import { environment } from '../../environments/environment';
+import { UebernachtungType } from '../model/registration';
 
 const colors = {
   blue: '#007bff',
+  violet: '#7340FF',
   red: '#dc3545',
 };
 
@@ -33,6 +35,7 @@ export class StatisticsComponent {
       dataTable: null,
       options: {
         legend: 'none',
+        colors: [colors.blue, colors.red],
         xchartArea: { left: 10, top: 10, width: '90%', height: '90%' },
         vAxis: {
           format: '#',
@@ -51,11 +54,21 @@ export class StatisticsComponent {
         chartArea: { left: 0, top: 0, width: '100%', height: '100%' },
       },
     },
+    uebernachtung: {
+      chartType: 'PieChart',
+      dataTable: null,
+      options: {
+        legend: 'none',
+        colors: [colors.blue, colors.violet, colors.red],
+        chartArea: { left: 0, top: 0, width: '100%', height: '100%' },
+      },
+    },
     paymentType: {
       chartType: 'PieChart',
       dataTable: null,
       options: {
         legend: 'none',
+        colors: [colors.blue, colors.red],
         chartArea: { left: 0, top: 0, width: '100%', height: '100%' },
       },
     },
@@ -86,7 +99,8 @@ export class StatisticsComponent {
     this.subscription = registrations.subscribe(regs => {
       this.updateGenderData(regs);
       this.updateVegetarianData(regs);
-      this.updatePaymentTypeData(regs);
+      this.updateUebernachtungData(regs);
+      // this.updatePaymentTypeData(regs);
       this.updatePaymentData(regs);
       this.updateWaiverData(regs);
     });
@@ -121,6 +135,26 @@ export class StatisticsComponent {
       .sort()
       .map(val => [val, counts[val]]);
     this.charts.vegetarian.dataTable = [header].concat(data);
+  }
+
+  private updateUebernachtungData(regs: Registration[]) {
+    const header: any[] = ['Teilnahme', 'Anzahl'];
+    const counts = regs
+      .map(reg => {
+        switch (reg.uebernachtung.type) {
+          case 'uebernachtung':
+            return 'Führung und Übernachtung';
+          case 'fuehrung':
+            return 'nur Führung';
+          default:
+            return 'keine';
+        }
+      })
+      .reduce((cnts, val) => (cnts[val] = (cnts[val] || 0) + 1) && cnts, {});
+    const data = Object.keys(counts)
+      .sort()
+      .map(val => [val, counts[val]]);
+    this.charts.uebernachtung.dataTable = [header].concat(data);
   }
 
   private updatePaymentTypeData(regs: Registration[]) {
