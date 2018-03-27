@@ -90,6 +90,10 @@ export class RegistrationComponent {
         name: ['', Validators.required],
         phone: ['', Validators.required],
       }),
+      uebernachtung: formBuilder.group({
+        type: ['', Validators.required],
+        tent: false,
+      }),
       kuchen: formBuilder.group(
         {
           date: ['', Validators.required],

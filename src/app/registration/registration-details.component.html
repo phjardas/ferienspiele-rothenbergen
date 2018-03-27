@@ -121,7 +121,8 @@
           </div>
         </div>
       </div>
-      <div class="col-12 mb-3">
+
+      <div class="col-md-6 mb-3">
         <div class="card">
           <div class="card-body">
             <h3 class="card-title">Kuchen</h3>
@@ -132,6 +133,23 @@
                 <strong>{{ reg.kuchen.date | date:'EEEE' }} {{ reg.kuchen.date | date }}</strong> eine(n)
                 <strong>{{ reg.kuchen.name }}</strong> mit. Vielen Dank!</div>
             </ng-container>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 mb-3">
+        <div class="card">
+          <div class="card-body">
+            <h3 class="card-title">Übernachtung</h3>
+            <ng-container [ngSwitch]="reg.uebernachtung.type">
+              <p *ngSwitchCase="'none'">{{ reg.child.firstName }} nimmt weder an der Führung noch an der Übernachtung teil und wird zur gewohnten Uhrzeit
+                abgeholt.
+              </p>
+              <p *ngSwitchCase="'fuehrung'">{{ reg.child.firstName }} nimmt nur an der Fledermaus- und Eulen-Führung und wird um ca.
+                <strong>TODO</strong> Uhr abgeholt.</p>
+              <p *ngSwitchCase="'uebernachtung'">{{ reg.child.firstName }} nimmt sowohl an der Fledermaus- und Eulen-Führung als auch an der Übernachtung teil.</p>
+            </ng-container>
+
+            <p *ngIf="reg.uebernachtung.tent">Sie stellen ein Zelt zur Verfügung. Vielen Dank! Wir werden uns mit Ihnen in Verbindung setzen.</p>
           </div>
         </div>
       </div>

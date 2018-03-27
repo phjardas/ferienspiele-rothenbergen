@@ -10,7 +10,9 @@
   </div>
   <div class="col-md-6 col-lg-4 mb-3">
     <div class="card">
-      <div class="card-header">Alter <small>(am ersten Tag)</small></div>
+      <div class="card-header">Alter
+        <small>(am ersten Tag)</small>
+      </div>
       <div class="card-body">
         <spinner *ngIf="!charts.age.dataTable"></spinner>
         <google-chart [data]="charts.age" *ngIf="charts.age.dataTable"></google-chart>
@@ -26,12 +28,23 @@
       </div>
     </div>
   </div>
+  <!--
   <div class="col-md-6 col-lg-4 mb-3">
     <div class="card">
       <div class="card-header">Bezahlart</div>
       <div class="card-body">
         <spinner *ngIf="!charts.paymentType.dataTable"></spinner>
         <google-chart [data]="charts.paymentType" *ngIf="charts.paymentType.dataTable"></google-chart>
+      </div>
+    </div>
+  </div>
+  -->
+  <div class="col-md-6 col-lg-4 mb-3">
+    <div class="card">
+      <div class="card-header">Übernachtung</div>
+      <div class="card-body">
+        <spinner *ngIf="!charts.uebernachtung.dataTable"></spinner>
+        <google-chart [data]="charts.uebernachtung" *ngIf="charts.uebernachtung.dataTable"></google-chart>
       </div>
     </div>
   </div>

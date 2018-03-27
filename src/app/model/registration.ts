@@ -58,12 +58,25 @@ export class Kuchen implements FirebaseModel {
   }
 }
 
+export type UebernachtungType = 'uebernachtung' | 'fuehrung' | 'none';
+
+export class Uebernachtung {
+  type: UebernachtungType;
+  tent: boolean;
+
+  constructor(data: any) {
+    this.type = data.type;
+    this.tent = data.tent;
+  }
+}
+
 export class Registration implements FirebaseModel {
   public id: string;
   public child: Child;
   public parent: Parent;
   public emergencyContact: EmergencyContact;
-  public kuchen?: Kuchen;
+  public uebernachtung: Uebernachtung;
+  public kuchen: Kuchen;
   public payment: Payment;
   public waiver: Approval;
   public registeredAt: Date;
@@ -72,6 +85,7 @@ export class Registration implements FirebaseModel {
     this.id = data.id;
     this.child = new Child(data.child);
     this.parent = new Parent(data.parent);
+    this.uebernachtung = new Uebernachtung(data.uebernachtung);
     this.kuchen = new Kuchen(data.kuchen);
     this.emergencyContact = new EmergencyContact(data.emergencyContact);
     this.payment = data.payment ? new Payment(data.payment) : null;
@@ -91,6 +105,7 @@ export class Registration implements FirebaseModel {
       child: this.child.toFirebase(),
       parent: this.parent.toFirebase(),
       emergencyContact: this.emergencyContact.toFirebase(),
+      uebernachtung: this.uebernachtung,
       kuchen: this.kuchen.toFirebase(),
       payment: this.payment ? this.payment.toFirebase() : null,
       waiver: this.waiver ? this.waiver.toFirebase() : null,

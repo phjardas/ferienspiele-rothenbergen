@@ -153,6 +153,39 @@
         </div>
       </fieldset>
 
+      <fieldset formGroupName="uebernachtung" class="mt-5">
+        <legend>
+          <i class="fa fa-moon mr-1"></i> Übernachtung</legend>
+        <p>Am
+          <strong>TODO</strong> bieten wir den Kindern ein besonders Highlight: eine Fledermaus- und Eulen-Führung mit anschließender
+          Übernachtung im Zelt auf dem Gelände der EMK.</p>
+
+        <div class="form-row">
+          <div class="form-group form-check d-flex flex-column">
+            <label class="form-check-label">
+              <input type="radio" formControlName="type" value="uebernachtung" class="form-radio-input"> Mein Kind nimmt sowohl an der Fledermaus- und Eulen-Führung als auch der Übernachtung teil.
+            </label>
+            <label class="form-check-label">
+              <input type="radio" formControlName="type" value="fuehrung" class="form-radio-input"> Mein Kind nimmt nur an der Fledermaus- und Eulen-Führung und wird um ca.
+              <strong>TODO</strong> Uhr abgeholt.
+            </label>
+            <label class="form-check-label">
+              <input type="radio" formControlName="type" value="none" class="form-radio-input"> Mein Kind nimmt weder an der Führung noch an der Übernachtung teil und wird zur gewohnten Uhrzeit abgeholt.
+            </label>
+            <span class="form-text text-danger" *ngIf="form.get('uebernachtung.type').invalid && (form.get('uebernachtung.type').dirty || form.get('uebernachtung.type').touched)">
+              {{ form.get('uebernachtung.type').errors | json }}
+            </span>
+          </div>
+        </div>
+
+        <p>Für die Übernachtung benötigen wir Zelte. Können Sie uns dabei helfen?</p>
+        <div class="form-group form-check">
+          <label class="form-check-label">
+            <input type="checkbox" formControlName="tent" class="form-check-input"> Wir stellen für die Übernachtung ein Zelt zur Verfügung.
+          </label>
+        </div>
+      </fieldset>
+
       <fieldset formGroupName="kuchen" class="mt-5">
         <legend>
           <i class="fa fa-birthday-cake mr-1"></i> Kuchen</legend>
