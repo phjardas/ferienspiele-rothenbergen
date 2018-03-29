@@ -12,9 +12,10 @@ import { RegistrationStatusService, RegistrationStatus } from './registration-st
   styleUrls: ['dashboard.component.scss'],
 })
 export class DashboardComponent implements OnDestroy {
-  title: string = environment.title;
-  startDate: string = environment.startDate;
-  endDate: string = environment.endDate;
+  title = environment.title;
+  startDate = environment.startDate;
+  endDate = environment.endDate;
+  prices = environment.price;
   registrationStatus: RegistrationStatus['status'];
   registrationDeadline: string;
   private sub: Subscription;

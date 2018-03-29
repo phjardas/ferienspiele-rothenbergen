@@ -15,6 +15,11 @@ export const environment: Environment = {
   startDate: '2018-06-25',
   endDate: '2018-06-29',
   year: 2018,
+  price: {
+    base: 35,
+    sibling: -5,
+    kuchen: 10,
+  },
   firebase: {
     apiKey: 'AIzaSyDLYUActhO0rHtTMYSHJd8pArejHM9p3bg',
     authDomain: 'ferienspiele-rothenbergen.firebaseapp.com',

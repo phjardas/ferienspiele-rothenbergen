@@ -1,3 +1,4 @@
+import { environment } from '../../environments/environment';
 import { FirebaseModel } from './firebase-model';
 import { Child } from './child';
 import { EmergencyContact } from './emergency-contact';
@@ -94,8 +95,17 @@ export class Registration implements FirebaseModel {
   }
 
   get price(): Price {
-    const elements: PriceElement[] = [{ label: 'Teilnahmebeitrag', price: 35 }];
-    if (this.child.nextChild) elements.push({ label: 'Ermäßigung für Geschwisterkind', price: -5 });
+    console.log('reg:', this);
+    const elements: PriceElement[] = [{ label: 'Teilnahmebeitrag', price: environment.price.base }];
+
+    if (this.child.nextChild) {
+      elements.push({ label: 'Ermäßigung für Geschwisterkind', price: environment.price.sibling });
+    }
+
+    if (this.kuchen.selection === 'none' || this.kuchen.date === 'none') {
+      elements.push({ label: 'Entfall Kuchenspende', price: environment.price.kuchen });
+    }
+
     const totalPrice = elements.reduce((a, b) => (a += b.price), 0);
     return new Price(totalPrice, elements);
   }

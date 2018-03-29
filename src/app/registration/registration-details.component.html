@@ -43,6 +43,26 @@
         <div class="card" [ngClass]="{ 'border-danger': !reg.payment }">
           <div class="card-body">
             <h3 class="card-title">Teilnahmebeitrag € {{ reg.price.total | number:'1.2-2' }}</h3>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Posten</th>
+                  <th class="number">Preis</th>
+                </tr>
+              </thead>
+              <tfoot>
+                <tr>
+                  <th>Gesamtbetrag</th>
+                  <th class="number">{{ reg.price.total | number:'1.2-2' }}</th>
+                </tr>
+              </tfoot>
+              <tbody>
+                <tr *ngFor="let el of reg.price.elements">
+                  <td>{{ el.label }}</td>
+                  <td class="number">{{ el.price | number:'1.2-2' }}</td>
+                </tr>
+              </tbody>
+            </table>
             <div *ngIf="reg.payment">
               <p>Wir haben Ihren Teilnahmebeitrag am {{ reg.payment.timestamp | date }} erhalten. Vielen Dank!</p>
             </div>
