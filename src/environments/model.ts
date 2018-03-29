@@ -6,9 +6,16 @@ export interface Environment {
   year: number;
   startDate: string;
   endDate: string;
+  price: PriceConfig;
   enableRouterTracing: boolean;
   firebase: FirebaseConfig;
   paypal: PayPalConfig;
+}
+
+export interface PriceConfig {
+  base: number;
+  sibling: number;
+  kuchen: number;
 }
 
 export interface FirebaseConfig {
