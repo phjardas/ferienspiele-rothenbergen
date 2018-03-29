@@ -8,6 +8,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 
+import { environment } from '../../environments/environment';
 import { RegistrationService } from './registration.service';
 import { RegistrationStatusService, RegistrationStatus } from '../registration-status.service';
 import { ConfigurationService } from '../configuration.service';
@@ -21,6 +22,8 @@ import { createTestData } from './testdata';
 })
 export class RegistrationComponent {
   private subscription: Subscription;
+  startDate = environment.startDate;
+  endDate = environment.endDate;
   error: string;
   form: FormGroup;
   submitting: boolean;
