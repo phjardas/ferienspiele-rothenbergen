@@ -35,11 +35,40 @@
     <div class="container">
       <h2 class="display-3">Anmeldung</h2>
       <p class="lead">
-        Wir freuen uns, dass Sie Ihr Kind bei den Ferienspielen Rothenbergen anmelden wollen.
-        <strong>Anmeldeschluss ist {{ registrationDeadline | date }}</strong>
+        Wir freuen uns, dass Sie Ihr Kind bei den Ferienspielen Rothenbergen vom {{ startDate | date }} bis {{ endDate | date }}
+        anmelden wollen.
+        <strong>Anmeldeschluss ist am {{ registrationDeadline | date:'EEEE' }} {{ registrationDeadline | date }} - oder wenn alle
+          Plätze belegt sind.</strong>
+      </p>
+      <p>Nach der Anmeldung erhalten Sie von uns eine Email mit der Anmeldebestätigung sowie der Einverständniserklärung.</p>
+      <div class="row">
+        <div class="col-md-6">
+          <p>Die
+            <strong>Einverständniserklärung</strong> lassen Sie uns bitte unterschrieben von einem/einer Erziehungsberechtigten an
+            folgende Adresse zukommen:
+          </p>
+          <p>Gemeindebüro Christkönig
+            <br/>Niedergründauer Straße 20
+            <br/>63584 Gründau</p>
+        </div>
+        <div class="col-md-6">
+          <p>Den
+            <strong>Teilnahmebeitrag</strong> können Sie in bar der Einverständniserklärung beilegen – oder Sie überweisen ihn direkt
+            an:
+          </p>
+          <p>EmK Bezirk Rothenbergen
+            <br />IBAN: DE38 5075 0094 0027 0509 92
+            <br />Betreff: NAME DES KINDES, Ferienspiele 2018</p>
+        </div>
+      </div>
+      <p> Bitte beachten Sie, dass die Anmeldung erst vollständig ist, wenn Einverständniserklärung und Teilnahmebeitrag bei
+        uns eingegangen sind!</p>
+      <p>Bei nachträglichen Änderungen nehmen Sie bitte telefonisch
+        <strong class="text-danger">(TODO: Wer?)</strong> oder per Email
+        <strong class="text-danger">(TODO: Wer?)</strong> Kontakt mit uns auf.
       </p>
       <p>
-        Bitte füllen Sie alle Felder aus, es sei denn sie sind mit "optional" gekennzeichnet.
+        <small>Bitte füllen Sie alle Felder aus, es sei denn sie sind mit "optional" gekennzeichnet.</small>
       </p>
       <button class="btn btn-outline-primary" *ngIf="enableTestData" (click)="createTestData()">
         Testdaten erzeugen
