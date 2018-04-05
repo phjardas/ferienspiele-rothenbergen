@@ -38,6 +38,7 @@
     "@fortawesome/fontawesome": "^1.1.5",
     "@fortawesome/fontawesome-free-solid": "^5.0.9",
     "angularfire2": "^5.0.0-rc.6",
+    "base-x": "^3.0.4",
     "bootstrap": "^4.0.0",
     "core-js": "^2.5.3",
     "firebase": "^4.12.0",
@@ -45,7 +46,7 @@
     "moment": "^2.21.0",
     "ng2-google-charts": "^3.4.0",
     "rxjs": "^5.5.7",
-    "uuid-base62": "^0.1.0",
+    "uuid": "^3.2.1",
     "xlsx": "^0.12.6",
     "zone.js": "^0.8.20"
   },
