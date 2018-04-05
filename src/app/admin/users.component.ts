@@ -11,13 +11,18 @@ import { UsersService } from './users.service';
 })
 export class UsersComponent {
   private subscription: Subscription;
-  users: Observable<User[]>;
+  users: User[];
   roles = Role.values.sort((a, b) => a.label.localeCompare(b.label));
   highlightUserId: string;
 
   constructor(private usersService: UsersService, route: ActivatedRoute) {
     this.subscription = route.paramMap.subscribe(params => (this.highlightUserId = params.get('id')));
-    this.users = usersService.getUsers().map(users => users.sort((a, b) => a.label.localeCompare(b.label)));
+    this.subscription.add(
+      usersService
+        .getUsers()
+        //.map(users => users.sort((a, b) => a.label.localeCompare(b.label)))
+        .subscribe(users => (this.users = users))
+    );
   }
 
   assignRole(user: User, role: Role) {
