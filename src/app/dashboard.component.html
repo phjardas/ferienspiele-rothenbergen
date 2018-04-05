@@ -2,7 +2,7 @@
   <div class="container">
     <h2 class="display-3">{{ title }}</h2>
     <p class="lead">Ökumenische Ferienspiele in Rothenbergen</p>
-    <p>Von {{ startDate | date:'fullDate' }} bis {{ endDate | date:'fullDate' }}</p>
+    <p>Von {{ startDate | date:'EEEE, dd. MMMM' }} bis {{ endDate | date:'EEEE, dd. MMMM yyyy' }}</p>
 
     <spinner *ngIf="!registrationStatus" inverse></spinner>
 
@@ -51,6 +51,12 @@
         <br/>
         <strong class="text-danger">TODO: Groben Tagesplan einfügen</strong>
       </p>
+
+      <h3 class="mt-5">Wann genau?</h3>
+      <p>Von {{ startDate | date:'EEEE, dd. MMMM' }} bis {{ endDate | date:'EEEE, dd. MMMM' }} sind wir jeweils von 9.30 Uhr
+        bis 17.00 Uhr für Euch da. Am Donnerstag könnt Ihr zusätzlich an einer Übernachtung teilnehmen. Am Freitag um 17
+        Uhr ist noch längst nicht Schluss – sondern wir laden Eure Familien zum Abschlussgottesdienst und anschließendem
+        Grillfest ein!</p>
     </div>
 
     <div class="col-lg-4 mb-5">
