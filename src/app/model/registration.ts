@@ -95,7 +95,6 @@ export class Registration implements FirebaseModel {
   }
 
   get price(): Price {
-    console.log('reg:', this);
     const elements: PriceElement[] = [{ label: 'Teilnahmebeitrag', price: environment.price.base }];
 
     if (this.child.nextChild) {
