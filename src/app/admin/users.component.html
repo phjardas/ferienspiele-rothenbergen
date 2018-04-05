@@ -1,6 +1,6 @@
-<spinner *ngIf="(users | async) === null"></spinner>
+<spinner *ngIf="users === null"></spinner>
 
-<div *ngIf="(users | async) !== null">
+<div *ngIf="users !== null">
   <table class="table">
     <thead>
       <tr>
@@ -10,7 +10,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let user of users | async" [ngClass]="{ 'table-primary': user.id === highlightUserId }">
+      <tr *ngFor="let user of users" [ngClass]="{ 'table-primary': user.id === highlightUserId }">
         <td>{{ user.displayName }}</td>
         <td>{{ user.email }}</td>
         <td *ngFor="let role of roles">

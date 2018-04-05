@@ -11,8 +11,8 @@ export class UsersService {
   getUsers(): Observable<User[]> {
     return this.db
       .list('/users')
-      .valueChanges()
-      .map(users => users.map(user => new User(user)));
+      .snapshotChanges()
+      .map(snaps => snaps.map(snap => new User({ ...snap.payload.val(), id: snap.key })));
   }
 
   assignRole(user: User, role: Role) {
