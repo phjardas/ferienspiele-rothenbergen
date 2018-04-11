@@ -12,7 +12,7 @@ export const environment: Environment = {
   year: 2018,
   price: {
     base: 35,
-    sibling: -5,
+    sibling: -10,
     kuchen: 10,
   },
   firebase: {
