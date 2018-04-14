@@ -39,68 +39,47 @@ export class WaiverService {
     normal(
       `Hiermit erkläre ich mich einverstanden, dass ${reg.child.gender.id === 'w' ? 'meine Tochter' : 'mein Sohn'} ${reg.child.firstName} ${
         reg.child.lastName
-      } \n` +
-        `bei den Kinderferienspielen Rothenbergen vom ${date(environment.startDate)} bis ${date(environment.endDate)} teilnehmen darf.`
+      } \n` + `an den Kinderferienspielen Rothenbergen vom ${date(environment.startDate)} bis ${date(environment.endDate)} teilnehmen darf.`
     );
 
     offset += 5;
-    h2('Teilnahmebedingungen');
 
-    h3('Anmeldung und Zahlung');
     normal(
-      'Die Anmeldung ist gültig, wenn der unterschriebene Anmeldezettel vorliegt und alle notwendigen Zahlungen geleistet \n' +
-        'sind. Eine Anmeldebestätigung ergeht nicht automatisch, kann aber telefonisch erbeten werden. Es erfolgen keine \n' +
-        'nachträglichen Preisveränderungen.'
+      `Mir ist bekannt, dass die Anmeldung erst gültig ist, wenn diese Einverständniserklärung unterschrieben vorliegt und alle
+notwendigen Zahlungen geleistet sind.`
+    );
+    normal(
+      `Bei einer Absage durch teilnehmende Personen kann die Rückerstattung des Beitrages nach dem ${date(
+        config.registrationDeadline
+      )} nicht
+garantiert werden.`
     );
 
-    h3('Zuschüsse und Abschläge');
     normal(
-      'Es gibt keine Rabatte, außer dem Mehrkinderrabatt, der bei der Anmeldung angeboten wurde. Zuschussfähige Familien \n' +
-        '(z.B. Hartz IV) bekommen unter Umständen die Maßnahme vom zuständigen Amt erstattet. Es gelten die Bestimmungen \n' +
-        'des jeweiligen Amtes.'
+      `Mein Kind ist von mir angewiesen, den Anordnungen der Aufsichtspersonen Folge zu leisten. Die Aufsichtsführenden haben
+das Recht, mein Kind bei fortwährender Missachtung von Regeln und Anweisungen nach Hause zu schicken und von der
+weiteren Teilnahme auszuschließen. Eine Beitragserstattung erfolgt in diesem Fall nicht.`
     );
 
-    h3('Absage');
+    normal(`Ich garantiere, dass unter der Telefonnummer des Notfallkontaktes jederzeit jemand erreichbar ist.`);
+
     normal(
-      `Eine Absage durch den Veranstalter kann nur erfolgen, wenn die Teilnehmer die Bedingungen nicht erfüllen. Bei einer \n` +
-        `Absage durch die Teilnehmer kann die Rückerstattung des Betrages nach dem ${date(
-          config.registrationDeadline
-        )} nicht garantiert werden.`
+      `Mir ist bewusst, dass in Ausnahmefällen die Aufsicht für kurze Zeit auch von einer minderjährigen Person wahrgenommen
+werden wird.`
     );
 
-    h3('Zuständigkeit');
+    normal(`Ich bin damit einverstanden, dass mein Kind in Ausnahmesituationen im privateigenen PKW befördert wird.`);
+
+    normal(`Meine Angaben in Bezug auf Allergien und Unverträglichkeiten sind vollständig.`);
+
+    normal(`Die Veranstalter haften nicht für den Verlust oder die Beschädigung von Gegenständen.`);
+
     normal(
-      'Mein Kind (meine Kinder) ist von mir angewiesen, den Anordnungen der Aufsichtspersonen Folge zu leisten. Die \n' +
-        'Aufsichtsführenden haben das Recht, dem Kind bei fortwährender Missachtung von Regeln und Anweisungen nach Hause \n' +
-        'zu schicken und von der weiteren Teilnahme auszuschließen. Auch darum garantiere ich, dass unter der Telefonnummer \n' +
-        'des Notfallkontaktes jederzeit jemand erreichbar ist. Eine Erstattung eines Restbetrages erfolgt nicht. Mir ist bewusst, \n' +
-        'dass in Ausnahmefällen die Aufsicht für kurze Zeit auch von einer minderjährigen Person wahrgenommen werden wird.'
+      `Es werden während der Ferienspiele Fotos gemacht. Ich bin mit deren Veröffentlichung auf den Homepages und in den
+Gemeindebriefen der drei ausrichtenden Kirchengemeinden einverstanden.`
     );
 
-    h3('Private Pkw');
-    normal('Ich bin damit einverstanden, dass mein Kind in Ausnahmesituationen im privateigenen Pkw befördert wird.');
-
-    h3('Öffentlichkeit');
-    normal('Es werden während der Ferienspiele Fotos gemacht. Ich bin mit deren Veröffentlichung einverstanden.');
-
-    h3('Gesundheit/Ansteckung');
-    normal('Meine Angaben in Bezug auf gesundheitliche Gefahren und Risiken sind vollständig.');
-
-    h3('Versicherungsschutz');
-    normal(
-      'Mitarbeitende und Kinder sind während der Veranstaltung (einschließlich Ausflüge) im gewöhnlichen Umfang Haftpflicht- \n' +
-        'und unfallversichert. Wir haften nicht für verschwundene Gegenstände. Bei Gebrauchselektronik (z.B. Handys) haften wir \n' +
-        'weder bei Bruch noch bei Diebstahl.'
-    );
-
-    h3('Schutz vor Übergriffen');
-    normal(
-      'In Bezug auf körperliche und sexuelle Gewalt sind alle MitarbeiterInnen in die geltenden gesetzlichen Bestimmungen \n' +
-        'eingeführt worden und haben diese per Unterschrift für sich auch als verbindlich erklärt. Alle MitarbeiterInnen haben \n' +
-        'gemäß § 72a SGB VIII ein polizeiliches Führungszeugnis vorgelegt.'
-    );
-
-    offset += 15;
+    offset += 20;
     bold('Datum, Unterschrift');
 
     normal(
