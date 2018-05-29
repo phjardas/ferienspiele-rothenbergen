@@ -1,11 +1,8 @@
-import { Observable } from 'rxjs/Observable';
+import { Component, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 import 'rxjs/add/operator/map';
-
-import { Component, OnDestroy } from '@angular/core';
-
-import { RegistrationService } from './registration.service';
 import { Registration } from '../model';
+import { RegistrationService } from './registration.service';
 
 @Component({ templateUrl: 'registrations.component.html' })
 export class RegistrationsComponent implements OnDestroy {
@@ -36,7 +33,7 @@ export class RegistrationsComponent implements OnDestroy {
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
-        a.download = `Ferienspiele Rothenbergen Anmeldungen.xlsx`;
+        a.download = `Ferienspiele Rothenbergen Anmeldungen.csv`;
         a.style.display = 'none';
         document.body.appendChild(a);
         a.click();

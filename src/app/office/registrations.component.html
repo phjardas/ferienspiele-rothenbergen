@@ -6,7 +6,9 @@
 
     <button class="btn btn-primary" (click)="export()">
       <spinner inverse class="mr-3" *ngIf="exportWorking"></spinner>
-      <i class="fa fa-table mr-1" *ngIf="!exportWorking"></i>
+      <span *ngIf="!exportWorking">
+        <i class="fa fa-table mr-1"></i>
+      </span>
       Daten herunterladen
     </button>
   </p>
