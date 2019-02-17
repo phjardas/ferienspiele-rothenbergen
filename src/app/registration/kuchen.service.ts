@@ -1,11 +1,9 @@
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/observable/combineLatest';
-
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from 'angularfire2/database';
-import * as firebase from 'firebase';
-
-import { ConfigurationService, Configuration } from '../configuration.service';
+import 'rxjs/add/observable/combineLatest';
+import 'rxjs/add/operator/map';
+import { Observable } from 'rxjs/Observable';
+import { ConfigurationService } from '../configuration.service';
 
 export interface KuchenDetails {
   readonly registrationId: string;
@@ -35,10 +33,10 @@ export class KuchenService {
 
     this.stats = Observable.combineLatest(config.configuration, actualKuchen).map(([cfg, actuals]) => {
       const { requiredKuchen } = cfg;
-      const days = Object.keys(cfg.requiredKuchen)
+      const days = Object.keys(requiredKuchen)
         .sort((a, b) => a.localeCompare(b))
         .map(date => {
-          const required = cfg.requiredKuchen[date];
+          const required = requiredKuchen[date];
           const actual = actuals[date] || { amount: 0, details: {} };
           const details = Object.keys(actual.details)
             .map(registrationId => ({ ...actual.details[registrationId], registrationId }))

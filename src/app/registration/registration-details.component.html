@@ -11,7 +11,7 @@
 <div *ngIf="loaded && reg">
   <div class="jumbotron jumbotron-fluid">
     <div class="container">
-      <h2 class="display-3">{{reg.child.firstName}} {{reg.child.lastName}}</h2>
+      <h2 class="display-3">{{ reg.child.firstName }} {{ reg.child.lastName }}</h2>
       <p class="lead">
         <i class="fa fa-child mr-1" aria-hidden="true"></i>
         Hurra! Sie haben {{ reg.child.firstName }} am {{ reg.registeredAt | date }} angemeldet.
@@ -24,7 +24,7 @@
         </p>
         <p>Bitte führen Sie folgende Schritte durch, um die Anmeldung abzuschließen:</p>
         <ul class="mb-0">
-          <li *ngIf="!reg.payment">Bitte bezahlen Sie den Teilnahmebeitrag von € {{ reg.price.total | number:'1.2-2' }}.</li>
+          <li *ngIf="!reg.payment">Bitte bezahlen Sie den Teilnahmebeitrag von € {{ reg.price.total | number: '1.2-2' }}.</li>
           <li *ngIf="!reg.waiver">Bitte unterschreiben Sie die Einverständniserklärung bis zum {{ waiverDeadline | date }}.</li>
         </ul>
       </div>
@@ -42,7 +42,7 @@
       <div class="col-lg-6 mb-3">
         <div class="card" [ngClass]="{ 'border-danger': !reg.payment }">
           <div class="card-body">
-            <h3 class="card-title">Teilnahmebeitrag € {{ reg.price.total | number:'1.2-2' }}</h3>
+            <h3 class="card-title">Teilnahmebeitrag € {{ reg.price.total | number: '1.2-2' }}</h3>
             <table class="table">
               <thead>
                 <tr>
@@ -53,13 +53,13 @@
               <tfoot>
                 <tr>
                   <th>Gesamtbetrag</th>
-                  <th class="number">{{ reg.price.total | number:'1.2-2' }}</th>
+                  <th class="number">{{ reg.price.total | number: '1.2-2' }}</th>
                 </tr>
               </tfoot>
               <tbody>
                 <tr *ngFor="let el of reg.price.elements">
                   <td>{{ el.label }}</td>
-                  <td class="number">{{ el.price | number:'1.2-2' }}</td>
+                  <td class="number">{{ el.price | number: '1.2-2' }}</td>
                 </tr>
               </tbody>
             </table>
@@ -71,44 +71,57 @@
 
               <ul class="nav nav-tabs nav-justified">
                 <li class="nav-item" *ngIf="paypalConfig.enabled">
-                  <a href="" class="nav-link" [ngClass]="{ active: paymentMethod === 'paypal' }" (click)="paymentMethod = 'paypal'; false">PayPal</a>
+                  <a href="" class="nav-link" [ngClass]="{ active: paymentMethod === 'paypal' }" (click)="paymentMethod = 'paypal'; (false)"
+                    >PayPal</a
+                  >
                 </li>
                 <li class="nav-item">
-                  <a href="" class="nav-link" [ngClass]="{ active: paymentMethod === 'transfer' }" (click)="paymentMethod = 'transfer'; false">Überweisung</a>
+                  <a
+                    href=""
+                    class="nav-link"
+                    [ngClass]="{ active: paymentMethod === 'transfer' }"
+                    (click)="paymentMethod = 'transfer'; (false)"
+                    >Überweisung</a
+                  >
                 </li>
                 <li class="nav-item">
-                  <a href="" class="nav-link" [ngClass]="{ active: paymentMethod === 'cash' }" (click)="paymentMethod = 'cash'; false">Bar</a>
+                  <a href="" class="nav-link" [ngClass]="{ active: paymentMethod === 'cash' }" (click)="paymentMethod = 'cash'; (false)"
+                    >Bar</a
+                  >
                 </li>
               </ul>
               <div class="tab-content mt-3" id="payment-method">
-                <div class="tab-pane" [ngClass]="{ 'active': paymentMethod === 'paypal' }">
+                <div class="tab-pane" [ngClass]="{ active: paymentMethod === 'paypal' }">
                   <p>Sie können den Teilnahmebeitrag jetzt sofort bequem mit PayPal bezahlen.</p>
                   <div id="paypal-button"></div>
                   <p *ngIf="paypalConfig.testUser" class="card-text">
-                    <small>Benutzer für Tests: {{paypalConfig.testUser.email}} / {{paypalConfig.testUser.password}}</small>
+                    <small>Benutzer für Tests: {{ paypalConfig.testUser.email }} / {{ paypalConfig.testUser.password }}</small>
                   </p>
                 </div>
-                <div class="tab-pane" [ngClass]="{ 'active': paymentMethod === 'transfer' }">
+                <div class="tab-pane" [ngClass]="{ active: paymentMethod === 'transfer' }">
                   <p>Bitte überweisen Sie den Betrag auf das folgende Konto:</p>
                   <p class="card-text">
                     <small>
                       Empfänger: EmK Rothenbergen
-                      <br> IBAN: DE38507500940027050992
-                      <br> BIC: HELADEF1GEL
-                      <br> Verwendungszweck: "Ferienspiele {{reg.child.firstName}} {{reg.child.lastName}}"
+                      <br />
+                      IBAN: DE38507500940027050992 <br />
+                      BIC: HELADEF1GEL <br />
+                      Verwendungszweck: "Ferienspiele {{ reg.child.firstName }} {{ reg.child.lastName }}"
                     </small>
                   </p>
                 </div>
-                <div class="tab-pane" [ngClass]="{ 'active': paymentMethod === 'cash' }">
+                <div class="tab-pane" [ngClass]="{ active: paymentMethod === 'cash' }">
                   <p>Sie können den Teilnahmebeitrag in bar bezahlen:</p>
                   <p>
                     <small>
                       Büro der Katholischen Kirche "Christkönig"
-                      <br> Niedergründauer Straße 20
-                      <br> 63584 Rothenbergen
+                      <br />
+                      Niedergründauer Straße 20 <br />
+                      63584 Rothenbergen
                     </small>
                   </p>
-                  <p class="card-text">Sie können das Geld und die Einverstädniserklärung auch im Sekretariat der Anton Calaminus Schule in Rothenbergen
+                  <p class="card-text">
+                    Sie können das Geld und die Einverstädniserklärung auch im Sekretariat der Anton Calaminus Schule in Rothenbergen
                     abgeben.
                   </p>
                 </div>
@@ -130,12 +143,13 @@
                 <i class="fa fa-print mr-1" aria-hidden="true"></i>
                 Einverständniserklärung drucken
               </button>
-              <p>Bitte drucken Sie jetzt die Einverständniserklärung aus und schicken Sie sie
+              <p>
+                Bitte drucken Sie jetzt die Einverständniserklärung aus und schicken Sie sie
                 <strong>bis zum {{ waiverDeadline | date }}</strong> unterschrieben an uns zurück oder bringen Sie sie im Gemeindebüro
                 vorbei.
               </p>
-              <p class="card-text">Sie können das Geld und die Einverstädniserklärung auch im Sekretariat der Anton Calaminus Schule in Rothenbergen
-                abgeben.
+              <p class="card-text">
+                Sie können das Geld und die Einverstädniserklärung auch im Sekretariat der Anton Calaminus Schule in Rothenbergen abgeben.
               </p>
             </div>
           </div>
@@ -149,9 +163,10 @@
             <ng-container [ngSwitch]="reg.kuchen.selection">
               <p *ngSwitchCase="'none'">Sie bringen leider keinen Kuchen mit.</p>
               <p *ngSwitchCase="'geschwister'">Sie bringen schon für ein Geschwisterkind einen Kuchen mit.</p>
-              <div *ngSwitchDefault>Sie bringen am
-                <strong>{{ reg.kuchen.date | date:'EEEE' }} {{ reg.kuchen.date | date }}</strong> eine(n)
-                <strong>{{ reg.kuchen.name }}</strong> mit. Vielen Dank!</div>
+              <div *ngSwitchDefault>
+                Sie bringen am <strong>{{ reg.kuchen.date | date: 'EEEE' }} {{ reg.kuchen.date | date }}</strong> eine(n)
+                <strong>{{ reg.kuchen.name }}</strong> mit. Vielen Dank!
+              </div>
             </ng-container>
           </div>
         </div>
@@ -161,14 +176,11 @@
           <div class="card-body">
             <h3 class="card-title">Übernachtung</h3>
             <ng-container [ngSwitch]="reg.uebernachtung.type">
-              <p *ngSwitchCase="'none'">{{ reg.child.firstName }} nimmt weder an der Führung noch an der Übernachtung teil und wird zur gewohnten Uhrzeit
-                abgeholt.
+              <p *ngSwitchCase="'none'">
+                {{ reg.child.firstName }} nimmt nicht an der Übernachtung teil und wird zur gewohnten Uhrzeit abgeholt.
               </p>
-              <p *ngSwitchCase="'fuehrung'">{{ reg.child.firstName }} nimmt nur an der Fledermaus- und Eulen-Führung und wird um ca. 23 Uhr abgeholt.</p>
-              <p *ngSwitchCase="'uebernachtung'">{{ reg.child.firstName }} nimmt sowohl an der Fledermaus- und Eulen-Führung als auch an der Übernachtung teil.</p>
+              <p *ngSwitchCase="'uebernachtung'">{{ reg.child.firstName }} nimmt an der Übernachtung teil.</p>
             </ng-container>
-
-            <p *ngIf="reg.uebernachtung.tent">Sie stellen ein Zelt zur Verfügung. Vielen Dank! Wir werden uns mit Ihnen in Verbindung setzen.</p>
           </div>
         </div>
       </div>

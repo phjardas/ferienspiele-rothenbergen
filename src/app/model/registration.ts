@@ -1,7 +1,7 @@
 import { environment } from '../../environments/environment';
-import { FirebaseModel } from './firebase-model';
 import { Child } from './child';
 import { EmergencyContact } from './emergency-contact';
+import { FirebaseModel } from './firebase-model';
 import { Parent } from './parent';
 import { Price, PriceElement } from './price';
 
@@ -59,15 +59,13 @@ export class Kuchen implements FirebaseModel {
   }
 }
 
-export type UebernachtungType = 'uebernachtung' | 'fuehrung' | 'none';
+export type UebernachtungType = 'uebernachtung' | 'none';
 
 export class Uebernachtung {
   type: UebernachtungType;
-  tent: boolean;
 
   constructor(data: any) {
     this.type = data.type;
-    this.tent = data.tent;
   }
 }
 

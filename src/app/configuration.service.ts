@@ -1,8 +1,9 @@
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/publishBehavior';
-
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from 'angularfire2/database';
+import 'rxjs/add/operator/first';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/publishBehavior';
+import { Observable } from 'rxjs/Observable';
 
 export class Configuration {
   public maxParticipants: number;
