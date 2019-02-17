@@ -1,6 +1,7 @@
 <div *ngIf="registrationStatus === null" class="jumbotron jumbotron-fluid">
   <div class="container">
-    <h2 class="display-3">Anmeldung
+    <h2 class="display-3">
+      Anmeldung
       <spinner class="ml-1"></spinner>
     </h2>
   </div>
@@ -9,10 +10,9 @@
 <div *ngIf="registrationStatus === 'deadlineExpired'" class="jumbotron jumbotron-fluid">
   <div class="container">
     <h2 class="display-3">Anmeldung</h2>
-    <p class="lead">
-      <i class="fa fa-frown mr-1"></i> Leider ist die Anmeldefrist für die Kinderferienspiele abgelaufen.</p>
-    <p>Für eventuelle Rückfragen nehmen Sie bitte telefonisch unter
-      <a href="tel:+4960512649">06051 2649</a> oder per Email unter
+    <p class="lead"><i class="fa fa-frown mr-1"></i> Leider ist die Anmeldefrist für die Kinderferienspiele abgelaufen.</p>
+    <p>
+      Für eventuelle Rückfragen nehmen Sie bitte telefonisch unter <a href="tel:+4960512649">06051 2649</a> oder per Email unter
       <a href="mailto:gillian.horton-krueger@emk-rothenbergen.de">gillian.horton-krueger@emk-rothenbergen.de</a> Kontakt mit uns auf.
     </p>
   </div>
@@ -21,53 +21,50 @@
 <div *ngIf="registrationStatus === 'maxParticipants'" class="jumbotron jumbotron-fluid">
   <div class="container">
     <h2 class="display-3">Anmeldung</h2>
-    <p class="lead">
-      <i class="fa fa-frown mr-1"></i> Leider sind schon alle Plätze belegt.</p>
+    <p class="lead"><i class="fa fa-frown mr-1"></i> Leider sind schon alle Plätze belegt.</p>
     <p>Wir bitten um Ihr Verständnis, dass wir keine weiteren Anmeldungen entgegennehmen können.</p>
   </div>
 </div>
 
 <div class="container" *ngIf="registrationCode && registrationCode.used">
-  <div class="alert alert-danger">
-    Der Anmeldungs-Code {{registrationCode.id}} wurde bereits für eine Anmeldung verwendet.
-  </div>
+  <div class="alert alert-danger">Der Anmeldungs-Code {{ registrationCode.id }} wurde bereits für eine Anmeldung verwendet.</div>
 </div>
 
-<div *ngIf="registrationStatus === 'open' || registrationCode && !registrationCode?.used">
+<div *ngIf="registrationStatus === 'open' || (registrationCode && !registrationCode?.used)">
   <div class="jumbotron jumbotron-fluid">
     <div class="container">
       <h2 class="display-3">Anmeldung</h2>
       <p class="lead">
         Wir freuen uns, dass Sie Ihr Kind bei den Ferienspielen Rothenbergen vom {{ startDate | date }} bis {{ endDate | date }}
         anmelden wollen.
-        <strong>Anmeldeschluss ist am {{ registrationDeadline | date:'EEEE' }} {{ registrationDeadline | date }} - oder wenn alle
-          Plätze belegt sind.</strong>
+        <strong
+          >Anmeldeschluss ist am {{ registrationDeadline | date: 'EEEE' }} {{ registrationDeadline | date }} - oder wenn alle Plätze belegt
+          sind.</strong
+        >
       </p>
       <p>Nach der Anmeldung erhalten Sie von uns eine Email mit der Anmeldebestätigung sowie der Einverständniserklärung.</p>
       <div class="row">
         <div class="col-md-6">
-          <p>Die
-            <strong>Einverständniserklärung</strong> lassen Sie uns bitte unterschrieben von einem/einer Erziehungsberechtigten an
+          <p>
+            Die <strong>Einverständniserklärung</strong> lassen Sie uns bitte unterschrieben von einem/einer Erziehungsberechtigten an
             folgende Adresse zukommen:
           </p>
-          <p>Gemeindebüro Christkönig
-            <br/>Niedergründauer Straße 20
-            <br/>63584 Gründau</p>
+          <p>Gemeindebüro Christkönig <br />Niedergründauer Straße 20 <br />63584 Gründau</p>
         </div>
         <div class="col-md-6">
-          <p>Den
-            <strong>Teilnahmebeitrag</strong> können Sie in bar der Einverständniserklärung beilegen – oder Sie überweisen ihn direkt
+          <p>
+            Den <strong>Teilnahmebeitrag</strong> können Sie in bar der Einverständniserklärung beilegen – oder Sie überweisen ihn direkt
             an:
           </p>
-          <p>EmK Bezirk Rothenbergen
-            <br />IBAN: DE38 5075 0094 0027 0509 92
-            <br />Betreff: NAME DES KINDES, Ferienspiele 2018</p>
+          <p>EmK Bezirk Rothenbergen <br />IBAN: DE38 5075 0094 0027 0509 92 <br />Betreff: NAME DES KINDES, Ferienspiele 2018</p>
         </div>
       </div>
-      <p> Bitte beachten Sie, dass die Anmeldung erst vollständig ist, wenn Einverständniserklärung und Teilnahmebeitrag bei
-        uns eingegangen sind!</p>
-      <p>Bei nachträglichen Änderungen nehmen Sie bitte telefonisch unter
-        <a href="tel:+4960512649">06051 2649</a> oder per Email unter
+      <p>
+        Bitte beachten Sie, dass die Anmeldung erst vollständig ist, wenn Einverständniserklärung und Teilnahmebeitrag bei uns eingegangen
+        sind!
+      </p>
+      <p>
+        Bei nachträglichen Änderungen nehmen Sie bitte telefonisch unter <a href="tel:+4960512649">06051 2649</a> oder per Email unter
         <a href="mailto:gillian.horton-krueger@emk-rothenbergen.de">gillian.horton-krueger@emk-rothenbergen.de</a> Kontakt mit uns auf.
       </p>
       <p>
@@ -81,20 +78,18 @@
 
   <div class="container mt-3 mb-3">
     <form [formGroup]="form" novalidate (ngSubmit)="submit()">
-      <div class="alert alert-danger" *ngIf="error">{{ error }} </div>
+      <div class="alert alert-danger" *ngIf="error">{{ error }}</div>
 
       <fieldset formGroupName="child" class="mt-5">
-        <legend>
-          <i class="fa fa-child mr-1"></i> Ihr Kind</legend>
-        <p>Bitte geben Sie hier die persönlichen Daten
-          <strong>Ihres Kindes</strong> ein.</p>
+        <legend><i class="fa fa-child mr-1"></i> Ihr Kind</legend>
+        <p>Bitte geben Sie hier die persönlichen Daten <strong>Ihres Kindes</strong> ein.</p>
 
         <div class="form-row">
           <form-field class="col-md-6" [formGroup]="form.get('child')" field="firstName" label="Vorname">
-            <input form-field-input formControlName="firstName">
+            <input form-field-input formControlName="firstName" />
           </form-field>
           <form-field class="col-md-6" [formGroup]="form.get('child')" field="lastName" label="Nachname">
-            <input form-field-input formControlName="lastName">
+            <input form-field-input formControlName="lastName" />
           </form-field>
         </div>
 
@@ -107,142 +102,161 @@
             </select>
           </form-field>
           <form-field class="col-md-6" [formGroup]="form.get('child')" field="dateOfBirth" label="Geburtsdatum">
-            <input form-field-input formControlName="dateOfBirth" type="date">
+            <input form-field-input formControlName="dateOfBirth" type="date" />
           </form-field>
         </div>
 
         <form-field [formGroup]="form.get('child')" field="shirtSize" label="T-Shirt-Größe">
           <select form-field-input formControlName="shirtSize">
             <option value="">[ bitte auswählen ]</option>
-            <option *ngFor="let shirtSize of shirtSizes" [value]="shirtSize.id">{{shirtSize.label}}</option>
+            <option *ngFor="let shirtSize of shirtSizes" [value]="shirtSize.id">{{ shirtSize.label }}</option>
           </select>
         </form-field>
 
-        <form-field [formGroup]="form.get('child')" field="miscellaneous" label="Besonderheiten" description="Muss Ihr Kind regelmäßig Medikamente zu sich nehmen? Gibt es Besonderheiten zu beachten? z.B. ADS, Allergien, Nahrungsunverträglichkeiten, religiöse Essensvorschriften, Einnässen etc.">
+        <form-field
+          [formGroup]="form.get('child')"
+          field="miscellaneous"
+          label="Besonderheiten"
+          description="Muss Ihr Kind regelmäßig Medikamente zu sich nehmen? Gibt es Besonderheiten zu beachten? z.B. ADS, Allergien, Nahrungsunverträglichkeiten, religiöse Essensvorschriften, Einnässen etc."
+        >
           <textarea form-field-input formControlName="miscellaneous"></textarea>
         </form-field>
 
         <div class="form-group form-check">
           <label for="child.vegetarian" class="form-check-label">
-            <input type="checkbox" name="vegetarian" id="child.vegetarian" formControlName="vegetarian" class="form-check-input"> Mein Kind soll vegetarisch essen
+            <input type="checkbox" name="vegetarian" id="child.vegetarian" formControlName="vegetarian" class="form-check-input" /> Mein
+            Kind soll vegetarisch essen
           </label>
-          <span class="form-text text-danger" *ngIf="form.get('child.vegetarian').invalid && (form.get('child.vegetarian').dirty || form.get('child.vegetarian').touched)">
+          <span
+            class="form-text text-danger"
+            *ngIf="form.get('child.vegetarian').invalid && (form.get('child.vegetarian').dirty || form.get('child.vegetarian').touched)"
+          >
             {{ form.get('child.vegetarian').errors | json }}
           </span>
         </div>
 
         <div class="form-group form-check">
           <label for="child.nextChild" class="form-check-label">
-            <input type="checkbox" name="nextChild" id="child.nextChild" formControlName="nextChild" class="form-check-input"> Wir haben bereits ein anderes Kind unserer Familie bei den Ferienspielen angemeldet
+            <input type="checkbox" name="nextChild" id="child.nextChild" formControlName="nextChild" class="form-check-input" /> Wir haben
+            bereits ein anderes Kind unserer Familie bei den Ferienspielen angemeldet
           </label>
-          <span class="form-text text-danger" *ngIf="form.get('child.nextChild').invalid && (form.get('child.nextChild').dirty || form.get('child.nextChild').touched)">
+          <span
+            class="form-text text-danger"
+            *ngIf="form.get('child.nextChild').invalid && (form.get('child.nextChild').dirty || form.get('child.nextChild').touched)"
+          >
             {{ form.get('child.nextChild').errors | json }}
           </span>
         </div>
       </fieldset>
 
       <fieldset formGroupName="parent" class="mt-5">
-        <legend>
-          <i class="fa fa-user mr-1"></i> Erziehungsberechtigte(r)</legend>
-        <p>Bitte geben Sie hier
-          <strong>Ihre eigenen Daten</strong> als Erziehungsberechtigte(r) des Kindes ein.</p>
+        <legend><i class="fa fa-user mr-1"></i> Erziehungsberechtigte(r)</legend>
+        <p>Bitte geben Sie hier <strong>Ihre eigenen Daten</strong> als Erziehungsberechtigte(r) des Kindes ein.</p>
 
         <div class="form-row">
           <form-field class="col-md-6" [formGroup]="form.get('parent')" field="phone" label="Telefon">
-            <input form-field-input formControlName="phone" type="phone">
+            <input form-field-input formControlName="phone" type="phone" />
           </form-field>
           <form-field class="col-md-6" [formGroup]="form.get('parent')" field="email" label="E-Mail">
-            <input form-field-input formControlName="email" type="email">
+            <input form-field-input formControlName="email" type="email" />
           </form-field>
         </div>
 
         <form-field [formGroup]="form.get('parent')" field="street" label="Straße">
-          <input form-field-input formControlName="street">
+          <input form-field-input formControlName="street" />
         </form-field>
 
         <div class="form-row">
           <form-field class="col-md-3" [formGroup]="form.get('parent')" field="zip" label="PLZ">
-            <input form-field-input formControlName="zip">
+            <input form-field-input formControlName="zip" />
           </form-field>
           <form-field class="col-md-9" [formGroup]="form.get('parent')" field="city" label="Wohnort">
-            <input form-field-input formControlName="city">
+            <input form-field-input formControlName="city" />
           </form-field>
         </div>
       </fieldset>
 
       <fieldset formGroupName="emergencyContact" class="mt-5">
-        <legend>
-          <i class="fa fa-medkit mr-1"></i> Notfallkontakt</legend>
+        <legend><i class="fa fa-medkit mr-1"></i> Notfallkontakt</legend>
         <p>Bitte geben Sie hier ein, wen wir im Falle eines Notfalles anrufen sollen.</p>
 
         <div class="form-row">
           <form-field class="col-md-6" [formGroup]="form.get('emergencyContact')" field="name" label="Name">
-            <input form-field-input formControlName="name">
+            <input form-field-input formControlName="name" />
           </form-field>
           <form-field class="col-md-6" [formGroup]="form.get('emergencyContact')" field="phone" label="Telefon">
-            <input form-field-input formControlName="phone" type="phone">
+            <input form-field-input formControlName="phone" type="phone" />
           </form-field>
         </div>
       </fieldset>
 
       <fieldset formGroupName="uebernachtung" class="mt-5">
-        <legend>
-          <i class="fa fa-moon mr-1"></i> Übernachtung</legend>
-        <p>Am Donnerstag bieten wir den Kindern ein besonders Highlight: eine Fledermaus- und Eulen-Führung mit anschließender
-          Übernachtung im Zelt auf dem Gelände der Bergkirche.</p>
+        <legend><i class="fa fa-moon mr-1"></i> Übernachtung</legend>
+        <p>Am Donnerstag bieten wir den Kindern ein besonders Highlight: eine Übernachtung in der Bergkirche.</p>
 
         <div class="form-row">
           <div class="form-group form-check d-flex flex-column">
             <label class="form-check-label">
-              <input type="radio" formControlName="type" value="uebernachtung" class="form-radio-input"> Mein Kind nimmt sowohl an der Fledermaus- und Eulen-Führung als auch der Übernachtung teil.
+              <input type="radio" formControlName="type" value="uebernachtung" class="form-radio-input" /> Mein Kind nimmt an der
+              Übernachtung teil.
             </label>
             <label class="form-check-label">
-              <input type="radio" formControlName="type" value="fuehrung" class="form-radio-input"> Mein Kind nimmt nur an der Fledermaus- und Eulen-Führung und wird um ca. 23 Uhr abgeholt.
+              <input type="radio" formControlName="type" value="none" class="form-radio-input" /> Mein Kind nimmt an der Übernachtung nicht
+              teil und wird zur gewohnten Uhrzeit abgeholt.
             </label>
-            <label class="form-check-label">
-              <input type="radio" formControlName="type" value="none" class="form-radio-input"> Mein Kind nimmt weder an der Führung noch an der Übernachtung teil und wird zur gewohnten Uhrzeit abgeholt.
-            </label>
-            <span class="form-text text-danger" *ngIf="form.get('uebernachtung.type').invalid && (form.get('uebernachtung.type').dirty || form.get('uebernachtung.type').touched)">
+            <span
+              class="form-text text-danger"
+              *ngIf="
+                form.get('uebernachtung.type').invalid && (form.get('uebernachtung.type').dirty || form.get('uebernachtung.type').touched)
+              "
+            >
               {{ form.get('uebernachtung.type').errors | json }}
             </span>
           </div>
         </div>
-
-        <p>Für die Übernachtung benötigen wir Zelte. Können Sie uns dabei helfen?</p>
-        <div class="form-group form-check">
-          <label class="form-check-label">
-            <input type="checkbox" formControlName="tent" class="form-check-input"> Wir stellen für die Übernachtung ein Zelt zur Verfügung.
-          </label>
-        </div>
       </fieldset>
 
       <fieldset formGroupName="kuchen" class="mt-5">
-        <legend>
-          <i class="fa fa-birthday-cake mr-1"></i> Kuchen</legend>
+        <legend><i class="fa fa-birthday-cake mr-1"></i> Kuchen</legend>
         <p>
-          Um die Ferienspiele lecker und abwechslungsreich zu gestalten, sind auch Sie gefragt! Wir benötigen insgesamt über 50 Kuchen
-          von den Eltern. Damit wir gut planen können, bitten wir Sie hier um Ihren Eintrag. Vielen Dank!</p>
+          Um die Ferienspiele lecker und abwechslungsreich zu gestalten, sind auch Sie gefragt! Wir benötigen insgesamt über 50 Kuchen von
+          den Eltern. Damit wir gut planen können, bitten wir Sie hier um Ihren Eintrag. Vielen Dank!
+        </p>
         <p>
           <strong>Bitte bringen Sie nur halbwegs trockene Rührkuchen mit, keine Torten oder Kuchen mit Sahne.</strong>
         </p>
         <div class="form-group form-check d-flex flex-column">
           <label *ngFor="let date of kuchenDates" class="form-check-label">
-            <input type="radio" formControlName="date" [value]="date.date" [disabled]="date.actual >= date.required" class="form-radio-input"> Ich bringe am {{ date.date | date:'EEEE' }} {{ date.date | date }} einen Kuchen mit.
+            <input
+              type="radio"
+              formControlName="date"
+              [value]="date.date"
+              [disabled]="date.actual >= date.required"
+              class="form-radio-input"
+            />
+            Ich bringe am {{ date.date | date: 'EEEE' }} {{ date.date | date }} einen Kuchen mit.
           </label>
           <label class="form-check-label">
-            <input type="radio" formControlName="date" value="none" class="form-radio-input"> Ich kann leider an keinem der Tage einen Kuchen mitbringen. (zzgl. € 10)
+            <input type="radio" formControlName="date" value="none" class="form-radio-input" /> Ich kann leider an keinem der Tage einen
+            Kuchen mitbringen. (zzgl. € 10)
           </label>
           <label class="form-check-label">
-            <input type="radio" formControlName="date" value="geschwister" class="form-radio-input"> Ich bringe bereits für ein Geschwisterkind einen Kuchen mit.
+            <input type="radio" formControlName="date" value="geschwister" class="form-radio-input" /> Ich bringe bereits für ein
+            Geschwisterkind einen Kuchen mit.
           </label>
-          <span class="form-text text-danger" *ngIf="form.get('kuchen.date').invalid && (form.get('kuchen.date').dirty || form.get('kuchen.date').touched)">
+          <span
+            class="form-text text-danger"
+            *ngIf="form.get('kuchen.date').invalid && (form.get('kuchen.date').dirty || form.get('kuchen.date').touched)"
+          >
             {{ form.get('kuchen.date').errors | json }}
           </span>
         </div>
-        <div *ngIf="form.value.kuchen.date !== '' && form.value.kuchen.date !== 'none' && form.value.kuchen.date !== 'geschwister'"
-          class="form-row">
+        <div
+          *ngIf="form.value.kuchen.date !== '' && form.value.kuchen.date !== 'none' && form.value.kuchen.date !== 'geschwister'"
+          class="form-row"
+        >
           <form-field [formGroup]="form.get('kuchen')" field="name" label="Beschreibung des Kuchens" class="col-md-6">
-            <input form-field-input formControlName="name">
+            <input form-field-input formControlName="name" />
           </form-field>
           <div *ngIf="kuchenStats && kuchenStats[form.value.kuchen.date] && kuchenStats[form.value.kuchen.date].actual" class="col-md-6">
             <p>Wir haben schon Zusagen für folgende Kuchen:</p>
@@ -265,13 +279,13 @@
           <tfoot>
             <tr>
               <th>Gesamtbetrag</th>
-              <th class="number">{{ price.total | number:'1.2-2' }}</th>
+              <th class="number">{{ price.total | number: '1.2-2' }}</th>
             </tr>
           </tfoot>
           <tbody>
             <tr *ngFor="let el of price.elements">
               <td>{{ el.label }}</td>
-              <td class="number">{{ el.price | number:'1.2-2' }}</td>
+              <td class="number">{{ el.price | number: '1.2-2' }}</td>
             </tr>
           </tbody>
         </table>

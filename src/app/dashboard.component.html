@@ -2,7 +2,7 @@
   <div class="container">
     <h2 class="display-3">{{ title }}</h2>
     <p class="lead">Ökumenische Ferienspiele in Rothenbergen</p>
-    <p>Von {{ startDate | date:'EEEE, dd. MMMM' }} bis {{ endDate | date:'EEEE, dd. MMMM yyyy' }}</p>
+    <p>Von {{ startDate | date: 'EEEE, dd. MMMM' }} bis {{ endDate | date: 'EEEE, dd. MMMM yyyy' }}</p>
 
     <spinner *ngIf="!registrationStatus" inverse></spinner>
 
@@ -14,26 +14,22 @@
         </a>
         <a class="btn btn-outline-light btn-lg mt-3" href="#content">Weitere Informationen</a>
       </p>
-      <p *ngIf="registrationDeadline">
-        Anmeldeschluss ist am {{ registrationDeadline | date:'fullDate' }}
-      </p>
+      <p *ngIf="registrationDeadline">Anmeldeschluss ist am {{ registrationDeadline | date: 'fullDate' }}</p>
     </div>
 
     <div class="alert alert-light" *ngIf="registrationStatus === 'deadlineExpired'">
       <p>
-        <strong>
-          <i class="fa fa-frown mr-1"></i> Leider ist die Anmeldefrist für die Kinderferienspiele abgelaufen.</strong>
+        <strong> <i class="fa fa-frown mr-1"></i> Leider ist die Anmeldefrist für die Kinderferienspiele abgelaufen.</strong>
       </p>
-      <p>Für eventuelle Rückfragen nehmen Sie bitte telefonisch unter
-        <a href="tel:+4960512649">06051 2649</a> oder per Email unter
+      <p>
+        Für eventuelle Rückfragen nehmen Sie bitte telefonisch unter <a href="tel:+4960512649">06051 2649</a> oder per Email unter
         <a href="mailto:gillian.horton-krueger@emk-rothenbergen.de">gillian.horton-krueger@emk-rothenbergen.de</a> Kontakt mit uns auf.
       </p>
     </div>
 
     <div class="alert alert-light" *ngIf="registrationStatus === 'maxParticipants'">
       <p>
-        <strong>
-          <i class="fa fa-frown mr-1"></i> Leider sind schon alle Plätze belegt.</strong>
+        <strong> <i class="fa fa-frown mr-1"></i> Leider sind schon alle Plätze belegt.</strong>
       </p>
       <p>Wir bitten um Ihr Verständnis, dass wir keine weiteren Anmeldungen entgegennehmen können.</p>
     </div>
@@ -48,44 +44,50 @@
   <div class="row">
     <div class="col-lg-4 mb-5">
       <h3>Das Programm</h3>
-      <p>Fünf Tage lang dreht sich bei den Ferienspielen in Rothenbergen alles um die Natur: Um Vögel, um Bienen und andere
-        Insekten, um Kräuter und Wald, um das Leben im Boden, im Wasser und vieles mehr. Ein Höhepunkt der Woche wird unsere
-        Fledermaus- und Eulenführung – wenn Ihr mögt, auch mit Übernachtung im Zelt, Lagerfeuer und noch mehr Abenteuer.
+      <p>
+        Fünf Tage lang dreht sich bei den Ferienspielen in Rothenbergen alles um die Helden des Alltags. Ein Höhepunkt der Woche wird unsere
+        Übernachtung in der Bergkirche sein.
       </p>
 
       <h3 class="mt-5">Wann genau?</h3>
-      <p>Von {{ startDate | date:'EEEE, dd. MMMM' }} bis {{ endDate | date:'EEEE, dd. MMMM' }} sind wir jeweils von 9.30 Uhr
-        bis 17.00 Uhr für Euch da. Am Donnerstag könnt Ihr zusätzlich an einer Übernachtung teilnehmen. Am Freitag um 17
-        Uhr ist noch längst nicht Schluss – sondern wir laden Eure Familien zum Abschlussgottesdienst und anschließendem
-        Grillfest ein!</p>
+      <p>
+        Von {{ startDate | date: 'EEEE, dd. MMMM' }} bis {{ endDate | date: 'EEEE, dd. MMMM' }} sind wir jeweils von 9.30 Uhr bis 17.00 Uhr
+        für Euch da. Am Donnerstag könnt Ihr zusätzlich an einer Übernachtung teilnehmen. Am Freitag um 17 Uhr ist noch längst nicht Schluss
+        – sondern wir laden Eure Familien zum Abschlussgottesdienst und anschließendem Grillfest ein!
+      </p>
     </div>
 
     <div class="col-lg-4 mb-5">
       <h3>Wer genau?</h3>
       <p>
-        <strong>IHR, die Kinder:</strong> Im Alter von 7 bis 12 Jahren seid Ihr sehr herzlich eingeladen, bei uns mitzumachen – ganz
-        gleich, woher Ihr kommt oder welcher Konfession oder Religion Ihr angehört: Wir freuen uns auf Euch!</p>
+        <strong>IHR, die Kinder:</strong> Im Alter von 7 bis 12 Jahren seid Ihr sehr herzlich eingeladen, bei uns mitzumachen – ganz gleich,
+        woher Ihr kommt oder welcher Konfession oder Religion Ihr angehört: Wir freuen uns auf Euch!
+      </p>
       <p>
-        <strong>WIR, das Team:</strong> Eine fröhliche Mischung aus Jugendlichen und Erwachsenen, ehrenamtlich und voller Energie
-        – sowie Pfarrerin Caroline Miesner (ev. Kirchengemeinde Auf dem Berg), Pastorin Gillian Horton-Krüger (Evangelisch-methodistische
-        Friedenskirche) und Gemeindereferentin Rita Kunzmann (kath. Gemeinde Christkönig).</p>
+        <strong>WIR, das Team:</strong> Eine fröhliche Mischung aus Jugendlichen und Erwachsenen, ehrenamtlich und voller Energie – sowie
+        Pfarrerin Caroline Miesner (ev. Kirchengemeinde Auf dem Berg), Pastorin Gillian Horton-Krüger (Evangelisch-methodistische
+        Friedenskirche) und Gemeindereferentin Rita Kunzmann (kath. Gemeinde Christkönig).
+      </p>
     </div>
 
     <div class="col-lg-4 mb-5">
       <h3>Wo genau?</h3>
-      <p>Auf dem Gelände der Evangelisch-methodistischen Friedenskirche Rothenbergen,
-        <a href="https://goo.gl/maps/HmJgc" target="_blank" rel="noopener">Kirchbergstraße 10
-          <i class="fa fa-external-link-alt ml-1"></i>
-        </a>.</p>
+      <p>
+        Auf dem Gelände der Evangelisch-methodistischen Friedenskirche Rothenbergen,
+        <a href="https://goo.gl/maps/HmJgc" target="_blank" rel="noopener"
+          >Kirchbergstraße 10 <i class="fa fa-external-link-alt ml-1"></i> </a
+        >.
+      </p>
 
       <h3 class="mt-5">Wie viel kostet das?</h3>
-      <p>Die Teilnahme an den Ferienspielen kostet {{prices.base}} Euro und eine Kuchenspende. Geschwisterkinder sind ermäßigt
-        (zweites und weitere Kinder je {{prices.base + prices.sibling}} Euro, keine weitere Kuchenspende nötig). Darin enthalten
-        sind neben dem Programm und dem Material auch das Mittagessen, Getränke, Snacks für zwischendurch und ein tolles
-        Ferienspiel-Shirt.
+      <p>
+        Die Teilnahme an den Ferienspielen kostet {{ prices.base }} € und eine Kuchenspende. Geschwisterkinder sind ermäßigt (zweites und
+        weitere Kinder je {{ prices.base + prices.sibling }} €, keine weitere Kuchenspende nötig). Darin enthalten sind neben dem Programm
+        und dem Material auch das Mittagessen, Getränke, Snacks für zwischendurch und ein tolles Ferienspiel-Shirt.
       </p>
-      <p>Der fantastisch niedrige Preis wird übrigens ermöglicht durch viel ehrenamtliches Engagement, die drei beteiligten
-        Kirchen, die Gemeinde Gründau – und unsere Sponsoren!
+      <p>
+        Der fantastisch niedrige Preis wird übrigens ermöglicht durch viel ehrenamtliches Engagement, die drei beteiligten Kirchen, die
+        Gemeinde Gründau – und unsere Sponsoren!
       </p>
     </div>
   </div>

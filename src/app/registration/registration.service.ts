@@ -1,19 +1,16 @@
+import { Injectable } from '@angular/core';
+import { AngularFireDatabase } from 'angularfire2/database';
+import * as firebase from 'firebase';
+import 'rxjs/add/observable/fromPromise';
 import 'rxjs/add/operator/first';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/operator/toPromise';
-import 'rxjs/add/observable/fromPromise';
-
-import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { AngularFireDatabase } from 'angularfire2/database';
-import * as firebase from 'firebase';
+import { ConfigurationService } from '../configuration.service';
 import { createId } from '../id';
-
-import { ConfigurationService, Configuration } from '../configuration.service';
-import { WaiverService } from './waiver.service';
 import { Registration, RegistrationCode } from '../model';
-import { RegistrationStatusService } from '../registration-status.service';
+import { WaiverService } from './waiver.service';
 
 function toData(obj: any): any {
   const data = typeof obj.toFirebase === 'function' ? obj.toFirebase() : JSON.parse(JSON.stringify(obj));
@@ -25,12 +22,7 @@ function toData(obj: any): any {
 
 @Injectable()
 export class RegistrationService {
-  constructor(
-    private db: AngularFireDatabase,
-    private config: ConfigurationService,
-    private statusService: RegistrationStatusService,
-    private waiverService: WaiverService
-  ) {}
+  constructor(private db: AngularFireDatabase, private config: ConfigurationService, private waiverService: WaiverService) {}
 
   getRegistration(id: string): Observable<Registration> {
     return this.db
