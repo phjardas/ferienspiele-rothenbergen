@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="theme-color" content="#000000" />
+    <title>Ferienspiele Rothenbergen</title>
+    <style>
+      .spinner {
+        display: inline-block;
+        width: 1em;
+        height: 1em;
+        position: relative;
+        text-align: center;
+
+        -webkit-animation: sk-rotate 2s infinite linear;
+        animation: sk-rotate 2s infinite linear;
+      }
+
+      .spinner .dot1,
+      .spinner .dot2 {
+        width: 60%;
+        height: 60%;
+        display: inline-block;
+        position: absolute;
+        top: 0;
+        background-color: #28a745;
+        border-radius: 100%;
+
+        -webkit-animation: sk-bounce 2s infinite ease-in-out;
+        animation: sk-bounce 2s infinite ease-in-out;
+      }
+
+      .spinner.inverse .dot1,
+      .spinner.inverse .dot2 {
+        background-color: white;
+      }
+
+      .spinner .dot2 {
+        top: auto;
+        bottom: 0;
+        -webkit-animation-delay: -1s;
+        animation-delay: -1s;
+      }
+
+      @-webkit-keyframes sk-rotate {
+        100% {
+          -webkit-transform: rotate(360deg);
+        }
+      }
+
+      @keyframes sk-rotate {
+        100% {
+          transform: rotate(360deg);
+          -webkit-transform: rotate(360deg);
+        }
+      }
+
+      @-webkit-keyframes sk-bounce {
+        0%,
+        100% {
+          -webkit-transform: scale(0);
+        }
+        50% {
+          -webkit-transform: scale(1);
+        }
+      }
+
+      @keyframes sk-bounce {
+        0%,
+        100% {
+          transform: scale(0);
+          -webkit-transform: scale(0);
+        }
+        50% {
+          transform: scale(1);
+          -webkit-transform: scale(1);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root">
+      <div class="loading-box">
+        <div class="spinner inverse">
+          <div class="dot1"></div>
+          <div class="dot2"></div>
+        </div>
+        <div class="loading-info">
+          Ferienspiele Rothenbergen
+        </div>
+      </div>
+      <style>
+        body {
+          font-size: 1rem;
+        }
+
+        #root {
+          position: absolute;
+          margin: 0;
+          padding: 0;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: #0035cf;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-family: -apple-system, system-ui, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+          font-size: 1rem;
+          line-height: 1;
+          opacity: 1;
+        }
+
+        .loading-box {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          color: white;
+          margin: 0;
+          padding: 0;
+        }
+
+        .loading-info {
+          margin-top: 2rem;
+        }
+
+        .spinner {
+          width: 60px;
+          height: 60px;
+        }
+      </style>
+    </div>
+  </body>
+</html>
