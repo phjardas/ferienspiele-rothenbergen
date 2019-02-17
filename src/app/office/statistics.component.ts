@@ -1,15 +1,11 @@
-import 'rxjs/add/operator/map';
-import 'rxjs/add/observable/combineLatest';
-
 import { Component } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/combineLatest';
+import 'rxjs/add/operator/map';
 import { Subscription } from 'rxjs/Subscription';
-
-import { ConfigurationService } from '../configuration.service';
-import { RegistrationService } from './registration.service';
-import { Registration } from '../model';
 import { environment } from '../../environments/environment';
-import { UebernachtungType } from '../model/registration';
+import { ConfigurationService } from '../configuration.service';
+import { Registration } from '../model';
+import { RegistrationService } from './registration.service';
 
 const colors = {
   blue: '#007bff',
@@ -144,8 +140,6 @@ export class StatisticsComponent {
         switch (reg.uebernachtung.type) {
           case 'uebernachtung':
             return 'Führung und Übernachtung';
-          case 'fuehrung':
-            return 'nur Führung';
           default:
             return 'keine';
         }
