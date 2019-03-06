@@ -1,5 +1,5 @@
+import { Mail as MailIcon, Phone as PhoneIcon } from '@material-ui/icons';
 import React from 'react';
-import Icon from '../components/Icon';
 import Layout from '../components/Layout';
 
 export default function Imprint() {
@@ -30,10 +30,10 @@ export default function Imprint() {
               <br /> 63584 Gründau-Rothenbergen
             </p>
             <p>
-              <Icon icon="phone" className="mr-2" />
+              <PhoneIcon />
               <a href="tel:+4960512649">06051 2649</a>
               <br />
-              <Icon icon="envelope" className="mr-2" />
+              <MailIcon />
               <a href="mailto:Karl-Heinz.Rothlaender@EmK-Grossenhausen.de">Karl-Heinz.Rothlaender@EmK-Grossenhausen.de</a>
             </p>
           </div>
@@ -50,10 +50,10 @@ export default function Imprint() {
             </p>
 
             <p>
-              <Icon icon="phone" className="mr-2" />
+              <PhoneIcon />
               <a href="tel:+4960512649">06051 2649</a>
               <br />
-              <Icon icon="envelope" className="mr-2" />
+              <MailIcon />
               <a href="mailto:Karl-Heinz.Rothlaender@EmK-Grossenhausen.de">Karl-Heinz.Rothlaender@EmK-Grossenhausen.de</a>
             </p>
           </div>
@@ -62,7 +62,7 @@ export default function Imprint() {
             <p>
               Diese Webseite wurde ehrenamtlich und kostenfrei entwickelt von{' '}
               <a href="https://jardas.de/" target="_blank" rel="noopener noreferrer">
-                Philipp Jardas <Icon icon="external-link-alt" className="ml-1" />
+                Philipp Jardas
               </a>
             </p>
           </div>

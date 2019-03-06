@@ -1,12 +1,14 @@
+import { TextField } from '@material-ui/core';
 import React from 'react';
-import { FormGroup, FormText, Input as BSInput, Label } from 'reactstrap';
 
-export default function Input({ input, meta, label, required, className }) {
+export default function Input({ input, meta, helpText, ...props }) {
   return (
-    <FormGroup className={className}>
-      <Label htmlFor={input.name}>{label}</Label>
-      <BSInput {...input} id={input.name} required={required} invalid={meta.touched && !!meta.error} />
-      {meta.touched && meta.error && <FormText color="danger">{meta.error}</FormText>}
-    </FormGroup>
+    <TextField
+      id={input.name}
+      {...input}
+      error={meta.touched && !!meta.error}
+      helperText={meta.touched && meta.error ? meta.error : helpText}
+      {...props}
+    />
   );
 }

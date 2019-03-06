@@ -1,22 +1,34 @@
+import { Button, CircularProgress, withStyles } from '@material-ui/core';
+import { Check as CheckIcon, Warning as WarningIcon } from '@material-ui/icons';
 import React from 'react';
-import { Alert, Button } from 'reactstrap';
-import Icon from '../Icon';
-import Spinner from '../Spinner';
+import Alert from '../Alert';
 
-export default function Actions({ invalid, submitting }) {
+function Actions({ invalid, submitting, classes }) {
   return (
-    <div className="mt-5 mb-5">
+    <>
       {invalid && (
-        <Alert color="danger">
-          <Icon icon="exclamation-triangle" className="mr-2" />
+        <Alert color="error" icon={WarningIcon} className={classes.alert}>
           Bitte korrigieren Sie die Fehler im Formular.
         </Alert>
       )}
-
-      <Button color="primary" disabled={invalid || submitting}>
-        {submitting ? <Spinner inverse className="mr-2" /> : <Icon icon="check" className="mr-2" />}
+      <Button type="submit" color="primary" variant="contained" disabled={invalid || submitting} className={classes.button}>
+        {submitting ? <CircularProgress className={classes.buttonIcon} /> : <CheckIcon className={classes.buttonIcon} />}
         Kostenpflichtig anmelden
       </Button>
-    </div>
+    </>
   );
 }
+
+const styles = ({ spacing }) => ({
+  alert: {
+    marginTop: spacing.unit * 2,
+  },
+  button: {
+    marginTop: spacing.unit * 2,
+  },
+  buttonIcon: {
+    marginRight: spacing.unit,
+  },
+});
+
+export default withStyles(styles)(Actions);

@@ -1,3 +1,3 @@
 export default function Currency({ amount }) {
-  return amount.toLocaleString('de-DE', { style: 'currency', currency: 'EUR', currencyDisplay: 'symbol' });
+  return amount.toLocaleString(navigator.languages, { style: 'currency', currency: 'EUR', currencyDisplay: 'symbol' });
 }
