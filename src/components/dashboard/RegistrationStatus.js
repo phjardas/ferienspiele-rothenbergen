@@ -1,9 +1,9 @@
+import { Typography } from '@material-ui/core';
 import { ChildCare as ChildIcon, Warning as WarningIcon } from '@material-ui/icons';
 import React from 'react';
 import config from '../../api/config';
 import ButtonLink from '../ButtonLink';
 import Date from '../Date';
-import P from '../P';
 
 export default function RegistrationStatus() {
   const { registrationDeadline } = config;
@@ -13,41 +13,41 @@ export default function RegistrationStatus() {
     case 'open':
       return (
         <>
-          <P>
+          <Typography paragraph>
             <ButtonLink to="/anmeldung" color="primary" variant="contained" icon={ChildIcon}>
               Jetzt anmelden!
             </ButtonLink>
-          </P>
-          <P>
+          </Typography>
+          <Typography paragraph>
             Anmeldeschluss ist am <Date value={registrationDeadline} />
-          </P>
+          </Typography>
         </>
       );
 
     case 'deadlineExpired':
       return (
         <>
-          <P>
+          <Typography paragraph>
             <strong>
               <WarningIcon /> Leider ist die Anmeldefrist für die Kinderferienspiele abgelaufen.
             </strong>
-          </P>
-          <P>
+          </Typography>
+          <Typography paragraph>
             Für eventuelle Rückfragen nehmen Sie bitte telefonisch unter <a href="tel:+4960512649">06051 2649</a> oder per Email unter
             <a href="mailto:gillian.horton-krueger@emk-rothenbergen.de">gillian.horton-krueger@emk-rothenbergen.de</a> Kontakt mit uns auf.
-          </P>
+          </Typography>
         </>
       );
 
     case 'maxParticipants':
       return (
         <>
-          <P>
+          <Typography paragraph>
             <strong>
               <WarningIcon /> Leider sind schon alle Plätze belegt.
             </strong>
-          </P>
-          <P>Wir bitten um Ihr Verständnis, dass wir keine weiteren Anmeldungen entgegennehmen können.</P>
+          </Typography>
+          <Typography paragraph>Wir bitten um Ihr Verständnis, dass wir keine weiteren Anmeldungen entgegennehmen können.</Typography>
         </>
       );
 
