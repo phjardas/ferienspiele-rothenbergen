@@ -1,5 +1,4 @@
 import Firebase from 'firebase/app';
-import React, { createContext, useContext } from 'react';
 
 const config = {
   apiKey: 'AIzaSyC4_vhhtoQRWFRHgcNT-P1TJAykd-bmUxs',
@@ -10,14 +9,5 @@ const config = {
   messagingSenderId: '527493473714',
 };
 
-const app = Firebase.initializeApp(config);
-
-const Context = createContext();
-
-export function FirebaseProvider({ children }) {
-  return <Context.Provider value={app}>{children}</Context.Provider>;
-}
-
-export function useFirebase() {
-  return useContext(Context);
-}
+export const firebase = Firebase.initializeApp(config);
+export { Firebase };

@@ -1,12 +1,11 @@
-import { Grid } from '@material-ui/core';
+import { Grid, MenuItem } from '@material-ui/core';
 import { ChildCare as ChildIcon } from '@material-ui/icons';
+import { Select, TextField } from 'final-form-material-ui';
 import React from 'react';
 import { Field } from 'react-final-form';
 import config from '../../api/config';
 import FieldSet from '../form/FieldSet';
-import Input from '../form/Input';
 import Radios from '../form/Radios';
-import Select from '../form/Select';
 import Switch from '../form/Switch';
 import { required } from '../form/validation';
 
@@ -23,26 +22,19 @@ export default function Child() {
     >
       <Grid container spacing={24}>
         <Grid item xs={12} md={6}>
-          <Field name="child.firstName" component={Input} label="Vorname" required fullWidth validate={required} />
+          <Field name="child.firstName" component={TextField} label="Vorname" required fullWidth validate={required} />
         </Grid>
         <Grid item xs={12} md={6}>
-          <Field name="child.lastName" component={Input} label="Nachname" required fullWidth validate={required} />
+          <Field name="child.lastName" component={TextField} label="Nachname" required fullWidth validate={required} />
         </Grid>
 
         <Grid item xs={12} md={6}>
-          <Radios
-            name="child.gender"
-            label="Geschlecht"
-            required
-            validate={required}
-            options={[{ value: 'm', label: 'männlich' }, { value: 'f', label: 'weiblich' }, { value: 'd', label: 'divers' }]}
-            row
-          />
+          <Radios name="child.gender" label="Geschlecht" required validate={required} options={config.genders} groupProps={{ row: true }} />
         </Grid>
         <Grid item xs={12} md={6}>
           <Field
             name="child.dateOfBirth"
-            component={Input}
+            component={TextField}
             type="date"
             label="Geburtsdatum"
             required
@@ -60,16 +52,21 @@ export default function Child() {
             component={Select}
             label="T-Shirt-Größe"
             required
-            fullWidth
+            formControlProps={{ fullWidth: true }}
             validate={required}
-            options={config.shirtSizes}
-          />
+          >
+            {config.shirtSizes.map(option => (
+              <MenuItem key={option.value} value={option.value}>
+                {option.label}
+              </MenuItem>
+            ))}
+          </Field>
         </Grid>
 
         <Grid item xs={12}>
           <Field
             name="child.miscellaneous"
-            component={Input}
+            component={TextField}
             label="Besonderheiten"
             multiline
             fullWidth

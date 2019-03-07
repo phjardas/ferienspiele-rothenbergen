@@ -1,15 +1,26 @@
 import React, { useState } from 'react';
 import { Form } from 'react-final-form';
 import { createTestData } from '../../api/testdata';
-import Container from '../Container';
 import Actions from './Actions';
 import Child from './Child';
+import EmergencyContact from './EmergencyContact';
+import Kuchen from './Kuchen';
 import Parents from './Parents';
+import Price from './Price';
+import { priceCalculator, withPrice } from './priceCalculator';
+import Uebernachtung from './Uebernachtung';
 import Welcome from './Welcome';
 
-export default function Registration() {
-  const [initialValues, setInitialValues] = useState(createTestData ? createTestData() : {});
+const emptyValues = {
+  child: {},
+  parent: {},
+  emergencyContact: {},
+  uebernachtung: {},
+  kuchen: {},
+};
 
+export default function Registration() {
+  const [initialValues, setInitialValues] = useState(withPrice(createTestData ? createTestData() : emptyValues));
   const updateTestData = createTestData && (() => setInitialValues(createTestData()));
 
   const submit = async data => {
@@ -18,18 +29,18 @@ export default function Registration() {
   };
 
   return (
-    <Form onSubmit={submit} initialValues={initialValues}>
-      {({ handleSubmit, invalid, submitting, errors, values }) => (
-        <Container>
-          <form onSubmit={handleSubmit} noValidate>
-            <Welcome createTestData={updateTestData} />
-            <Child />
-            <Parents />
-            <Actions invalid={invalid} submitting={submitting} />
-            <pre>{JSON.stringify(values, null, 2)}</pre>
-            <pre>{JSON.stringify(errors, null, 2)}</pre>
-          </form>
-        </Container>
+    <Form onSubmit={submit} initialValues={initialValues} decorators={[priceCalculator]}>
+      {({ handleSubmit, invalid, submitting }) => (
+        <form onSubmit={handleSubmit} noValidate>
+          <Welcome createTestData={updateTestData} />
+          <Child />
+          <Parents />
+          <EmergencyContact />
+          <Uebernachtung />
+          <Kuchen />
+          <Price />
+          <Actions invalid={invalid} submitting={submitting} />
+        </form>
       )}
     </Form>
   );

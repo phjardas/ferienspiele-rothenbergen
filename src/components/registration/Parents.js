@@ -1,9 +1,9 @@
 import { Grid } from '@material-ui/core';
 import { Person as PersonIcon } from '@material-ui/icons';
+import { TextField } from 'final-form-material-ui';
 import React from 'react';
 import { Field } from 'react-final-form';
 import FieldSet from '../form/FieldSet';
-import Input from '../form/Input';
 import { required } from '../form/validation';
 
 export default function Parents() {
@@ -19,10 +19,19 @@ export default function Parents() {
     >
       <Grid container spacing={24}>
         <Grid item xs={12} md={6}>
-          <Field name="parent.phone" component={Input} type="tel" label="Telefon" required fullWidth validate={required} />
+          <Field name="parent.phone" component={TextField} type="tel" label="Telefon" required fullWidth validate={required} />
         </Grid>
         <Grid item xs={12} md={6}>
-          <Field name="parent.email" component={Input} type="email" label="E-Mail-Adresse" required fullWidth validate={required} />
+          <Field name="parent.email" component={TextField} type="email" label="E-Mail-Adresse" required fullWidth validate={required} />
+        </Grid>
+        <Grid item xs={12}>
+          <Field name="parent.street" component={TextField} type="street" label="Straße" required fullWidth validate={required} />
+        </Grid>
+        <Grid item xs={12} md={6}>
+          <Field name="parent.zip" component={TextField} type="zip" label="PLZ" required fullWidth validate={required} />
+        </Grid>
+        <Grid item xs={12} md={6}>
+          <Field name="parent.city" component={TextField} type="city" label="Ort" required fullWidth validate={required} />
         </Grid>
       </Grid>
     </FieldSet>

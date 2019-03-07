@@ -1,19 +1,23 @@
 import React from 'react';
 import config from '../../api/config';
 import Date from '../Date';
+import H2 from '../H2';
+import P from '../P';
 import Infos from './Infos';
 import RegistrationStatus from './RegistrationStatus';
 
 export default function Dashboard() {
+  const { title, startDate, endDate } = config;
+
   return (
     <>
-      <h2>{config.title}</h2>
-      <p>Ökumenische Ferienspiele in Rothenbergen</p>
-      <p>
-        Von <Date value={config.startDate} /> bis <Date value={config.endDate} />
-      </p>
-      <RegistrationStatus registrationDeadline={config.registrationDeadline} />
-      <Infos startDate={config.startDate} endDate={config.endDate} prices={config.prices} />
+      <H2>{title}</H2>
+      <P>Ökumenische Ferienspiele in Rothenbergen</P>
+      <P>
+        Von <Date value={startDate} /> bis <Date value={endDate} />
+      </P>
+      <RegistrationStatus />
+      <Infos />
     </>
   );
 }

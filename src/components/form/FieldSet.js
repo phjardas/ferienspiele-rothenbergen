@@ -12,7 +12,8 @@ function FieldSet({ icon, title, subtitle, children, classes }) {
 
 const styles = ({ spacing }) => ({
   root: {
-    marginTop: spacing.unit * 2,
+    marginTop: spacing.unit * 3,
+    marginBottom: spacing.unit * 3,
   },
 });
 

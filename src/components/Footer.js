@@ -23,11 +23,13 @@ function Footer({ classes }) {
   );
 }
 
-const styles = ({ palette, spacing, typography }) => ({
+const styles = ({ mixins, palette, spacing, typography }) => ({
   root: {
     backgroundColor: palette.grey[200],
     ...typography.body2,
-    padding: spacing.unit,
+    ...mixins.gutters(),
+    paddingTop: spacing.unit,
+    paddingBottom: spacing.unit,
   },
 });
 

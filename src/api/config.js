@@ -8,8 +8,15 @@ export default {
   prices: {
     base: 35,
     sibling: -10,
+    noCake: 10,
   },
-  kuchen: [10, 10, 10, 10, 0],
+  kuchen: [
+    { date: '2019-07-01', amount: 10 },
+    { date: '2019-07-02', amount: 10 },
+    { date: '2019-07-03', amount: 10 },
+    { date: '2019-07-04', amount: 10 },
+  ],
+  genders: [{ value: 'm', label: 'männlich' }, { value: 'f', label: 'weiblich' }, { value: 'd', label: 'divers' }],
   shirtSizes: [
     { value: 'WOMEN_XS', label: 'Damen XS' },
     { value: 'WOMEN_S', label: 'Damen S' },

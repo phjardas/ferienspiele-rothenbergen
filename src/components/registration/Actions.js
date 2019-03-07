@@ -5,26 +5,26 @@ import Alert from '../Alert';
 
 function Actions({ invalid, submitting, classes }) {
   return (
-    <>
+    <div className={classes.root}>
       {invalid && (
         <Alert color="error" icon={WarningIcon} className={classes.alert}>
           Bitte korrigieren Sie die Fehler im Formular.
         </Alert>
       )}
-      <Button type="submit" color="primary" variant="contained" disabled={invalid || submitting} className={classes.button}>
-        {submitting ? <CircularProgress className={classes.buttonIcon} /> : <CheckIcon className={classes.buttonIcon} />}
+      <Button type="submit" color="primary" variant="contained" disabled={invalid || submitting}>
+        {submitting ? <CircularProgress size={24} className={classes.buttonIcon} /> : <CheckIcon className={classes.buttonIcon} />}
         Kostenpflichtig anmelden
       </Button>
-    </>
+    </div>
   );
 }
 
 const styles = ({ spacing }) => ({
-  alert: {
+  root: {
     marginTop: spacing.unit * 2,
   },
-  button: {
-    marginTop: spacing.unit * 2,
+  alert: {
+    marginBottom: spacing.unit * 2,
   },
   buttonIcon: {
     marginRight: spacing.unit,
