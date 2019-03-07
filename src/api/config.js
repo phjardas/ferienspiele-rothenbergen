@@ -1,5 +1,6 @@
 export default {
   title: 'Helden des Alltags',
+  year: 2019,
   startDate: new Date('2019-07-01'),
   endDate: new Date('2019-07-05'),
   registrationDeadline: new Date('2019-06-01'),

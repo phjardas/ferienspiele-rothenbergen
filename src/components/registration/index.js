@@ -10,6 +10,7 @@ import Price from './Price';
 import { priceCalculator, withPrice } from './priceCalculator';
 import Uebernachtung from './Uebernachtung';
 import Welcome from './Welcome';
+import { FORM_ERROR } from 'final-form';
 
 const emptyValues = {
   child: {},
@@ -19,18 +20,21 @@ const emptyValues = {
   kuchen: {},
 };
 
-export default function Registration() {
+export default function Registration({ onSubmit }) {
   const [initialValues, setInitialValues] = useState(withPrice(createTestData ? createTestData() : emptyValues));
   const updateTestData = createTestData && (() => setInitialValues(createTestData()));
 
   const submit = async data => {
-    console.log('submit:', data);
-    await new Promise(resolve => setTimeout(resolve, 3000));
+    try {
+      await onSubmit(data);
+    } catch (error) {
+      return { [FORM_ERROR]: error.message };
+    }
   };
 
   return (
     <Form onSubmit={submit} initialValues={initialValues} decorators={[priceCalculator]}>
-      {({ handleSubmit, invalid, submitting }) => (
+      {({ handleSubmit, invalid, submitting, submitError }) => (
         <form onSubmit={handleSubmit} noValidate>
           <Welcome createTestData={updateTestData} />
           <Child />
@@ -39,7 +43,7 @@ export default function Registration() {
           <Uebernachtung />
           <Kuchen />
           <Price />
-          <Actions invalid={invalid} submitting={submitting} />
+          <Actions invalid={invalid} submitting={submitting} submitError={submitError} />
         </form>
       )}
     </Form>

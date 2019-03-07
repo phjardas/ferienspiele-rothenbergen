@@ -1,5 +1,4 @@
 import { Grid } from '@material-ui/core';
-import { Place as PlaceIcon } from '@material-ui/icons';
 import React from 'react';
 import config from '../../api/config';
 import Currency from '../Currency';
@@ -45,7 +44,7 @@ export default function Infos() {
         <P>
           Auf dem Gelände der Evangelisch-methodistischen Friedenskirche Rothenbergen,{' '}
           <a href="https://goo.gl/maps/HmJgc" target="_blank" rel="noopener noreferrer">
-            Kirchbergstraße 10 <PlaceIcon />
+            Kirchbergstraße 10
           </a>
           .
         </P>

@@ -27,7 +27,7 @@ function KuchenInfo({ date, loading, error, data }) {
   if (!kuchen || !kuchen.length) return null;
   return (
     <>
-      <Typography variant="body1">
+      <Typography>
         Wir haben schon Zusagen für folgende Kuchen am <KuchenDate value={date} />:
       </Typography>
       <List dense>
@@ -72,7 +72,7 @@ export default function Kuchen() {
     <FieldSet icon={<CakeIcon />} title="Kuchen">
       <Grid container spacing={24}>
         <Grid item xs={12}>
-          <Typography variant="body1">
+          <Typography>
             Um die Ferienspiele lecker und abwechslungsreich zu gestalten, sind auch Sie gefragt! Wir benötigen insgesamt über 50 Kuchen von
             den Eltern. Damit wir gut planen können, bitten wir Sie hier um Ihren Eintrag. Vielen Dank!
           </Typography>

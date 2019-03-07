@@ -4,12 +4,14 @@ import { BrowserRouter } from 'react-router-dom';
 import { AuthProvider } from './api/auth';
 import GlobalLoader from './components/GlobalLoader';
 import Layout from './components/Layout';
+import NotFound from './pages/notfound';
 import './styles.css';
 import ThemeProvider from './Theme';
 
 const Home = lazy(() => import('./pages/index'));
 const Impressum = lazy(() => import('./pages/impressum'));
 const Anmeldung = lazy(() => import('./pages/anmeldung'));
+const AnmeldungDetails = lazy(() => import('./pages/anmeldung-details'));
 
 export default function App() {
   return (
@@ -19,9 +21,11 @@ export default function App() {
           <Layout>
             <Suspense fallback={<GlobalLoader />}>
               <Switch>
+                <Route path="/anmeldung/:id" component={AnmeldungDetails} />
                 <Route path="/anmeldung" component={Anmeldung} />
                 <Route path="/impressum" component={Impressum} />
                 <Route exact path="/" component={Home} />
+                <Route component={NotFound} />
               </Switch>
             </Suspense>
           </Layout>
