@@ -1,6 +1,6 @@
 import 'firebase/firestore';
-import { firebase, Firebase } from './firebase';
 import config from './config';
+import { firebase, Firebase } from './firebase';
 
 const firestore = firebase.firestore();
 const registrationsColl = firestore.collection('registration');
@@ -16,13 +16,13 @@ export async function storeRegistration(registration) {
   return toEntity(reg);
 }
 
-export async function getRegistration(id) {
-  const doc = registrationsColl.doc(id);
-  const reg = await doc.get();
-  if (!reg.exists) throw new Error(`Anmeldung nicht gefunden: ${id}`);
-  return toEntity(reg);
+export function getRegistration(id, next) {
+  return registrationsColl.doc(id).onSnapshot({
+    next: snapshot => next(null, toEntity(snapshot)),
+    error: next,
+  });
 }
 
 function toEntity(doc) {
-  return { ...doc.data(), id: doc.id };
+  return doc.exists ? { ...doc.data(), id: doc.id } : null;
 }
