@@ -1,19 +1,9 @@
 import { AppBar, Toolbar, Typography, withStyles } from '@material-ui/core';
 import React from 'react';
 import { useAuth } from '../api/auth';
+import AuthenticatedMenu from './AuthenticatedMenu';
 import ButtonLink from './ButtonLink';
-
-function AuthenticatedMenu(props) {
-  return <div {...props}>'authenticated'</div>;
-}
-
-function UnauthenticatedMenu(props) {
-  return (
-    <ButtonLink to="/signin" color="inherit" {...props}>
-      anmelden
-    </ButtonLink>
-  );
-}
+import UnauthenticatedMenu from './UnauthenticatedMenu';
 
 function MainMenu({ classes }) {
   const { user } = useAuth();

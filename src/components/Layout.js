@@ -9,8 +9,8 @@ function Layout({ children, classes }) {
       <div className={classes.page}>
         <MainMenu />
         <main className={classes.content}>{children}</main>
-        <Footer />
       </div>
+      <Footer />
     </div>
   );
 }

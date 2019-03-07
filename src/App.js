@@ -12,6 +12,7 @@ const Home = lazy(() => import('./pages/index'));
 const Impressum = lazy(() => import('./pages/impressum'));
 const Anmeldung = lazy(() => import('./pages/anmeldung'));
 const AnmeldungDetails = lazy(() => import('./pages/anmeldung-details'));
+const SignIn = lazy(() => import('./pages/signin'));
 
 export default function App() {
   return (
@@ -24,6 +25,7 @@ export default function App() {
                 <Route path="/anmeldung/:id" component={AnmeldungDetails} />
                 <Route path="/anmeldung" component={Anmeldung} />
                 <Route path="/impressum" component={Impressum} />
+                <Route path="/signin" component={SignIn} />
                 <Route exact path="/" component={Home} />
                 <Route component={NotFound} />
               </Switch>

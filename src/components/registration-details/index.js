@@ -40,12 +40,10 @@ export default function RegistrationDetails({ registration }) {
           <KuchenInfo {...registration} />
         </Grid>
         <Grid item xs={12}>
-          <H3>Uebernachtung</H3>
+          <H3>Übernachtung</H3>
           <UebernachtungInfo {...registration} />
         </Grid>
       </Grid>
-
-      <pre>{JSON.stringify(registration, null, 2)}</pre>
     </>
   );
 }

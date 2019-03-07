@@ -1,7 +1,8 @@
-import { Button, CircularProgress, withStyles } from '@material-ui/core';
+import { withStyles } from '@material-ui/core';
 import { Check as CheckIcon, Warning as WarningIcon } from '@material-ui/icons';
 import React from 'react';
 import Alert from '../Alert';
+import SpinningButton from '../SpinningButton';
 
 function Actions({ invalid, submitting, submitError, classes }) {
   return (
@@ -18,10 +19,9 @@ function Actions({ invalid, submitting, submitError, classes }) {
         </Alert>
       )}
 
-      <Button type="submit" color="primary" variant="contained" disabled={invalid || submitting}>
-        {submitting ? <CircularProgress size={24} className={classes.buttonIcon} /> : <CheckIcon className={classes.buttonIcon} />}
+      <SpinningButton type="submit" color="primary" variant="contained" icon={CheckIcon} spinning={submitting} disabled={invalid}>
         Kostenpflichtig anmelden
-      </Button>
+      </SpinningButton>
     </div>
   );
 }
@@ -32,9 +32,6 @@ const styles = ({ spacing }) => ({
   },
   alert: {
     marginBottom: spacing.unit * 2,
-  },
-  buttonIcon: {
-    marginRight: spacing.unit,
   },
 });
 

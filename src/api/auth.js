@@ -11,9 +11,21 @@ const providers = [
     id: 'google',
     label: 'Google',
     icon: 'google',
-    providerFactory: () => new Firebase.auth.GoogleAuthProvider(),
+    get provider() {
+      return new Firebase.auth.GoogleAuthProvider();
+    },
   },
 ];
+
+const signInWithEmailAndPassword = (email, password) => auth.signInWithEmailAndPassword(email, password);
+
+const signInWithProvider = providerId => {
+  const provider = providers.find(p => p.id === providerId);
+  if (!provider) throw new Error(`Invalid sign in provider: ${providerId}`);
+  return auth.signInWithPopup(provider.provider);
+};
+
+const signOut = () => auth.signOut();
 
 export function AuthProvider({ children }) {
   const [state, setState] = useState({ pending: true, authenticated: false });
@@ -28,6 +40,9 @@ export function AuthProvider({ children }) {
   const context = {
     ...state,
     providers,
+    signInWithEmailAndPassword,
+    signInWithProvider,
+    signOut,
   };
 
   return <Context.Provider value={context}>{children}</Context.Provider>;
