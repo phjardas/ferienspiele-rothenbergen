@@ -6,6 +6,7 @@ import GlobalLoader from './components/GlobalLoader';
 import Layout from './components/Layout';
 import ProtectedRoute from './components/ProtectedRoute';
 import NotFound from './pages/notfound';
+import { PageContextProvider } from './api/page';
 import './styles.css';
 import ThemeProvider from './Theme';
 
@@ -28,18 +29,20 @@ export default function App() {
             <Switch>
               <Route path="/signin" component={SignIn} />
               <Route path="/signup" component={SignUp} />
-              <Layout>
-                <Suspense fallback={<GlobalLoader />}>
-                  <Switch>
-                    <Route path="/anmeldung/:id" component={AnmeldungDetails} />
-                    <Route path="/anmeldung" component={Anmeldung} />
-                    <Route path="/impressum" component={Impressum} />
-                    <ProtectedRoute path="/office" allowed={authenticated} component={Office} />
-                    <Route exact path="/" component={Home} />
-                    <Route component={NotFound} />
-                  </Switch>
-                </Suspense>
-              </Layout>
+              <PageContextProvider>
+                <Layout>
+                  <Suspense fallback={<GlobalLoader />}>
+                    <Switch>
+                      <Route path="/anmeldung/:id" component={AnmeldungDetails} />
+                      <Route path="/anmeldung" component={Anmeldung} />
+                      <Route path="/impressum" component={Impressum} />
+                      <ProtectedRoute path="/office" allowed={authenticated} component={Office} />
+                      <Route exact path="/" component={Home} />
+                      <Route component={NotFound} />
+                    </Switch>
+                  </Suspense>
+                </Layout>
+              </PageContextProvider>
             </Switch>
           </Suspense>
         </AuthProvider>

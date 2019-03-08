@@ -14,7 +14,7 @@ function LabelIcon({ icon, label, classes, className, ...props }) {
 
 const styles = ({ spacing }) => ({
   root: {
-    display: 'flex',
+    display: 'inline-flex',
     alignItems: 'center',
   },
   iconWithLabel: {
