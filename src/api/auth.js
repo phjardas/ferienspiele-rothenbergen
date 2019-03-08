@@ -24,6 +24,8 @@ const signInWithProvider = providerId => {
   return auth.signInWithPopup(provider.provider);
 };
 
+const signUp = (email, password) => auth.createUserWithEmailAndPassword(email, password);
+
 const signOut = () => auth.signOut();
 
 export function AuthProvider({ children }) {
@@ -42,6 +44,7 @@ export function AuthProvider({ children }) {
     signInWithEmailAndPassword,
     signInWithProvider,
     signOut,
+    signUp,
   };
 
   return <Context.Provider value={context}>{children}</Context.Provider>;

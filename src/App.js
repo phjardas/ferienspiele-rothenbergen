@@ -13,6 +13,7 @@ const Impressum = lazy(() => import('./pages/impressum'));
 const Anmeldung = lazy(() => import('./pages/anmeldung'));
 const AnmeldungDetails = lazy(() => import('./pages/anmeldung-details'));
 const SignIn = lazy(() => import('./pages/signin'));
+const SignUp = lazy(() => import('./pages/signup'));
 
 export default function App() {
   return (
@@ -22,6 +23,7 @@ export default function App() {
           <Suspense fallback={<GlobalLoader />}>
             <Switch>
               <Route path="/signin" component={SignIn} />
+              <Route path="/signup" component={SignUp} />
               <Layout>
                 <Suspense fallback={<GlobalLoader />}>
                   <Switch>
