@@ -1,5 +1,4 @@
 import { Card, CardContent, CardHeader } from '@material-ui/core';
-import qs from 'query-string';
 import React from 'react';
 import { useRouter } from '../api/router';
 import SignUpForm from '../components/auth/SignUpForm';
@@ -7,7 +6,7 @@ import MiniLayout from '../components/MiniLayout';
 
 export default function SignUp() {
   const { location, history } = useRouter();
-  const { from = '/' } = qs.parse(location.search);
+  const from = (location.state && location.state.from) || { pathname: '/' };
   const onSignUp = () => history.push(from);
 
   return (

@@ -31,12 +31,7 @@ const signOut = () => auth.signOut();
 export function AuthProvider({ children }) {
   const [state, setState] = useState({ pending: true, authenticated: false });
 
-  useEffect(() => {
-    auth.onAuthStateChanged(user => {
-      console.info('[auth] current user:', user);
-      setState({ pending: false, authenticated: !!user, user });
-    });
-  }, []);
+  useEffect(() => auth.onAuthStateChanged(user => setState({ pending: false, authenticated: !!user, user })), []);
 
   const context = {
     ...state,

@@ -6,7 +6,7 @@ import ButtonLink from './ButtonLink';
 import UnauthenticatedMenu from './UnauthenticatedMenu';
 
 function MainMenu({ classes }) {
-  const { user } = useAuth();
+  const { pending, user } = useAuth();
   const Menu = user ? AuthenticatedMenu : UnauthenticatedMenu;
 
   return (
@@ -15,7 +15,7 @@ function MainMenu({ classes }) {
         <ButtonLink component={Typography} to="/" variant="h6" color="inherit" className={classes.title}>
           Ferienspiele Rothenbergen
         </ButtonLink>
-        <Menu className={classes.menu} />
+        {!pending && <Menu className={classes.menu} />}
       </Toolbar>
     </AppBar>
   );

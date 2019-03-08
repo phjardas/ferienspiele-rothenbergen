@@ -1,5 +1,4 @@
 import { Typography, withStyles } from '@material-ui/core';
-import qs from 'query-string';
 import React, { useState } from 'react';
 import { Form } from 'react-final-form';
 import { useAuth } from '../../api/auth';
@@ -65,7 +64,7 @@ function SignInForm({ from = '/', onSignIn, classes }) {
         </SpinningButton>
       ))}
       <Typography>
-        <ButtonLink to={`/signup?${qs.stringify({ from })}`} color="primary" fullWidth className={classes.signInButton}>
+        <ButtonLink to={{ pathname: '/signup', state: { from } }} color="primary" fullWidth className={classes.signInButton}>
           Neues Benutzerkonto erstellen
         </ButtonLink>
       </Typography>
