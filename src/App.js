@@ -19,18 +19,22 @@ export default function App() {
     <BrowserRouter>
       <ThemeProvider>
         <AuthProvider>
-          <Layout>
-            <Suspense fallback={<GlobalLoader />}>
-              <Switch>
-                <Route path="/anmeldung/:id" component={AnmeldungDetails} />
-                <Route path="/anmeldung" component={Anmeldung} />
-                <Route path="/impressum" component={Impressum} />
-                <Route path="/signin" component={SignIn} />
-                <Route exact path="/" component={Home} />
-                <Route component={NotFound} />
-              </Switch>
-            </Suspense>
-          </Layout>
+          <Suspense fallback={<GlobalLoader />}>
+            <Switch>
+              <Route path="/signin" component={SignIn} />
+              <Layout>
+                <Suspense fallback={<GlobalLoader />}>
+                  <Switch>
+                    <Route path="/anmeldung/:id" component={AnmeldungDetails} />
+                    <Route path="/anmeldung" component={Anmeldung} />
+                    <Route path="/impressum" component={Impressum} />
+                    <Route exact path="/" component={Home} />
+                    <Route component={NotFound} />
+                  </Switch>
+                </Suspense>
+              </Layout>
+            </Switch>
+          </Suspense>
         </AuthProvider>
       </ThemeProvider>
     </BrowserRouter>

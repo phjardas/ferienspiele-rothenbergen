@@ -24,7 +24,7 @@ function UnauthenticatedMenu({ classes, ...props }) {
       >
         <span className={classes.arrow} />
         <Paper className={classes.paper}>
-          <SignInForm dense />
+          <SignInForm />
         </Paper>
       </Popper>
     </>

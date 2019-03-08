@@ -10,7 +10,6 @@ const providers = [
   {
     id: 'google',
     label: 'Google',
-    icon: 'google',
     get provider() {
       return new Firebase.auth.GoogleAuthProvider();
     },
