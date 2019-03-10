@@ -31,7 +31,6 @@ export function getRegistrations({ sortField, sortDirection }, next) {
 }
 
 function toEntity(doc) {
-  console.log('doc:', doc);
   return doc && doc.exists ? { ...doc.data(), id: doc.id } : null;
 }
 
@@ -39,7 +38,6 @@ function removeUndefinedFields(obj) {
   Object.keys(obj).forEach(key => {
     const type = typeof obj[key];
     if (type === 'undefined') {
-      console.log('removing %s from', key, obj);
       delete obj[key];
     } else if (type === 'object') {
       removeUndefinedFields(obj[key]);

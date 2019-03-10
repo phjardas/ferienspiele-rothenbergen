@@ -1,4 +1,5 @@
 export default {
+  baseUrl: 'https://ferienspiele-rothenbergen-2.firebaseapp.com',
   title: 'Helden des Alltags',
   year: 2019,
   startDate: new Date('2019-07-01'),

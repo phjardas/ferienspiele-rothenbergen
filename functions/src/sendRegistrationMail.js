@@ -11,9 +11,11 @@ const mailTransport = nodemailer.createTransport(
 
 const emailsColl = admin.firestore().collection('emails');
 
-function date(d) {
-  const [year, month, day] = d.split(/-/);
-  return `${day}.${month}.${year}`;
+function date(value, options = { year: 'numeric', month: '2-digit', day: '2-digit' }) {
+  if (!value) return null;
+  if (typeof value !== 'string' && 'seconds' in value && 'nanoseconds' in value) value = new Date(value.seconds * 1000);
+  if (typeof value === 'string') value = new Date(value);
+  return value.toLocaleDateString('de-DE', options);
 }
 
 function createWelcomeMail(reg) {
@@ -24,7 +26,9 @@ function createWelcomeMail(reg) {
   text += '\n';
   text += 'Bitte beachten Sie, dass Sie für die vollständige Anmeldung noch folgende Schritte durchführen müssen:\n';
   text += '\n';
-  text += `1. Öffnen Sie die Seite https://ferienspiele-rothenbergen.de/anmeldung/${id}. Dort können Sie die Bankverbindung einsehen und die Einverständniserklärung ausdrucken.\n`;
+  text += `1. Öffnen Sie die Seite ${
+    config.baseUrl
+  }/anmeldung/${id}. Dort können Sie die Bankverbindung einsehen und die Einverständniserklärung ausdrucken.\n`;
   text += '\n';
   text += `2. Bitte bezahlen Sie den Teilnahmebeitrag von € ${price.total.toFixed(2)} gemäß den Anweisungen auf der obigen Seite.\n`;
   text += '\n';
@@ -78,4 +82,4 @@ async function sendWelcomeMail(snapshot) {
   }
 }
 
-functions.firestore.document('/registrations/{id}').onCreate(snapshot => sendWelcomeMail(snapshot));
+export const sendRegistrationMail = functions.firestore.document('/registrations/{id}').onCreate(snapshot => sendWelcomeMail(snapshot));

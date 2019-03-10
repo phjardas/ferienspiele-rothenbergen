@@ -2,9 +2,9 @@ import { Card, CardContent, CardHeader, Grid, Typography } from '@material-ui/co
 import { ChildCare as ChildIcon } from '@material-ui/icons';
 import React, { useEffect } from 'react';
 import { usePage } from '../../../api/page';
-import GenderIcon from '../../GenderIcon';
-import Date from '../../Date';
 import Age from '../../Age';
+import Date from '../../Date';
+import GenderIcon from '../../GenderIcon';
 
 export default function RegistrationDetails({ registration }) {
   const { setPage } = usePage();
