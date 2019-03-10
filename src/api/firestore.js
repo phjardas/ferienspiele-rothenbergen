@@ -3,17 +3,17 @@ import config from './config';
 import { firebase, Firebase } from './firebase';
 
 const firestore = firebase.firestore();
-const registrationsColl = firestore.collection('registration');
+const registrationsColl = firestore.collection('registrations');
 
 export async function storeRegistration(registration) {
   const doc = registrationsColl.doc();
-  const reg = await doc.set({
+  await doc.set({
     ...registration,
     year: config.year,
     registeredAt: Firebase.firestore.FieldValue.serverTimestamp(),
   });
 
-  return toEntity(reg);
+  return toEntity(doc);
 }
 
 export function getRegistration(id, next) {
@@ -24,5 +24,6 @@ export function getRegistration(id, next) {
 }
 
 function toEntity(doc) {
-  return doc.exists ? { ...doc.data(), id: doc.id } : null;
+  console.log('doc:', doc);
+  return doc && doc.exists ? { ...doc.data(), id: doc.id } : null;
 }

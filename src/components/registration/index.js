@@ -1,3 +1,4 @@
+import { FORM_ERROR } from 'final-form';
 import React, { useState } from 'react';
 import { Form } from 'react-final-form';
 import { createTestData } from '../../api/testdata';
@@ -10,7 +11,6 @@ import Price from './Price';
 import { priceCalculator, withPrice } from './priceCalculator';
 import Uebernachtung from './Uebernachtung';
 import Welcome from './Welcome';
-import { FORM_ERROR } from 'final-form';
 
 const emptyValues = {
   child: {},
@@ -28,6 +28,7 @@ export default function Registration({ onSubmit }) {
     try {
       await onSubmit(data);
     } catch (error) {
+      console.warn('Error submitting registration:', error);
       return { [FORM_ERROR]: error.message };
     }
   };
