@@ -1,13 +1,12 @@
-import { Typography, withStyles } from '@material-ui/core';
+import { withStyles } from '@material-ui/core';
 import React, { useState } from 'react';
 import { Form } from 'react-final-form';
 import { useAuth } from '../../api/auth';
 import Alert from '../Alert';
-import ButtonLink from '../ButtonLink';
 import SpinningButton from '../SpinningButton';
 import SignInField from './SignInField';
 
-function SignInForm({ from = '/', onSignIn, classes }) {
+function SignUpForm({ onSignUp, classes }) {
   const auth = useAuth();
   const [{ loading, error }, setState] = useState({});
 
@@ -16,21 +15,20 @@ function SignInForm({ from = '/', onSignIn, classes }) {
 
     try {
       await fn();
-      onSignIn && onSignIn();
+      onSignUp && onSignUp();
     } catch (error) {
       setState({ error });
     }
   };
 
-  const signInWithEmailAndPassword = async ({ email, password }) =>
-    signIn('password', () => auth.signInWithEmailAndPassword(email, password));
+  const signUpWithEmailAndPassword = async ({ email, password }) => signIn('password', () => auth.signUp(email, password));
 
-  const signInWithProvider = async providerId => signIn(providerId, () => auth.signInWithProvider(providerId));
+  const signUpWithProvider = async providerId => signIn(providerId, () => auth.signInWithProvider(providerId));
 
   return (
     <div className={classes.root}>
       {error && <Alert color="error">{error.message}</Alert>}
-      <Form onSubmit={signInWithEmailAndPassword}>
+      <Form onSubmit={signUpWithEmailAndPassword}>
         {({ handleSubmit, invalid }) => (
           <form onSubmit={handleSubmit} noValidate>
             <SignInField name="email" type="email" label="E-Mail-Adresse" required autoFocus />
@@ -42,9 +40,9 @@ function SignInForm({ from = '/', onSignIn, classes }) {
               disabled={!!loading || invalid}
               spinning={loading === 'password'}
               fullWidth
-              className={classes.signInButton}
+              className={classes.signUpButton}
             >
-              anmelden
+              Registrieren
             </SpinningButton>
           </form>
         )}
@@ -52,22 +50,17 @@ function SignInForm({ from = '/', onSignIn, classes }) {
       {auth.providers.map(provider => (
         <SpinningButton
           key={provider.id}
-          onClick={() => signInWithProvider(provider.id)}
+          onClick={() => signUpWithProvider(provider.id)}
           color="secondary"
           variant="outlined"
           disabled={!!loading}
           spinning={loading === provider.id}
           fullWidth
-          className={classes.signInButton}
+          className={classes.signUpButton}
         >
           Anmelden mit {provider.label}
         </SpinningButton>
       ))}
-      <Typography>
-        <ButtonLink to={{ pathname: '/signup', state: { from } }} color="primary" fullWidth className={classes.signInButton}>
-          Neues Benutzerkonto erstellen
-        </ButtonLink>
-      </Typography>
     </div>
   );
 }
@@ -76,9 +69,9 @@ const styles = ({ spacing }) => ({
   root: {
     maxWidth: 300,
   },
-  signInButton: {
+  signUpButton: {
     marginTop: spacing.unit * 2,
   },
 });
 
-export default withStyles(styles)(SignInForm);
+export default withStyles(styles)(SignUpForm);

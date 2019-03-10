@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { getRegistration } from '../api/firestore';
-import { useRouter } from '../api/router';
-import Alert from '../components/Alert';
-import GlobalLoader from '../components/GlobalLoader';
-import RegistrationDetails from '../components/registration-details';
+import { getRegistration } from '../../api/firestore';
+import { useRouter } from '../../api/router';
+import Alert from '../../components/Alert';
+import GlobalLoader from '../../components/GlobalLoader';
+import RegistrationDetails from '../../components/office/registration-details';
 
 export default function AnmeldungDetails() {
   const [{ loading, error, registration }, setState] = useState({ loading: true });

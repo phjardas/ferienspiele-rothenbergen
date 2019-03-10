@@ -10,7 +10,6 @@ const providers = [
   {
     id: 'google',
     label: 'Google',
-    icon: 'google',
     get provider() {
       return new Firebase.auth.GoogleAuthProvider();
     },
@@ -25,17 +24,14 @@ const signInWithProvider = providerId => {
   return auth.signInWithPopup(provider.provider);
 };
 
+const signUp = (email, password) => auth.createUserWithEmailAndPassword(email, password);
+
 const signOut = () => auth.signOut();
 
 export function AuthProvider({ children }) {
   const [state, setState] = useState({ pending: true, authenticated: false });
 
-  useEffect(() => {
-    auth.onAuthStateChanged(user => {
-      console.info('[auth] current user:', user);
-      setState({ pending: false, authenticated: !!user, user });
-    });
-  }, []);
+  useEffect(() => auth.onAuthStateChanged(user => setState({ pending: false, authenticated: !!user, user })), []);
 
   const context = {
     ...state,
@@ -43,6 +39,7 @@ export function AuthProvider({ children }) {
     signInWithEmailAndPassword,
     signInWithProvider,
     signOut,
+    signUp,
   };
 
   return <Context.Provider value={context}>{children}</Context.Provider>;

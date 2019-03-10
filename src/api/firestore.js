@@ -8,12 +8,12 @@ const registrationsColl = firestore.collection('registrations');
 export async function storeRegistration(registration) {
   const doc = registrationsColl.doc();
   await doc.set({
-    ...registration,
+    ...removeUndefinedFields(registration),
     year: config.year,
     registeredAt: Firebase.firestore.FieldValue.serverTimestamp(),
   });
 
-  return toEntity(doc);
+  return toEntity(await doc.get());
 }
 
 export function getRegistration(id, next) {
@@ -23,7 +23,28 @@ export function getRegistration(id, next) {
   });
 }
 
+export function getRegistrations({ sortField, sortDirection }, next) {
+  return registrationsColl.orderBy(sortField, sortDirection).onSnapshot({
+    next: snapshot => next(null, snapshot.docs.map(toEntity)),
+    error: next,
+  });
+}
+
 function toEntity(doc) {
   console.log('doc:', doc);
   return doc && doc.exists ? { ...doc.data(), id: doc.id } : null;
+}
+
+function removeUndefinedFields(obj) {
+  Object.keys(obj).forEach(key => {
+    const type = typeof obj[key];
+    if (type === 'undefined') {
+      console.log('removing %s from', key, obj);
+      delete obj[key];
+    } else if (type === 'object') {
+      removeUndefinedFields(obj[key]);
+    }
+  });
+
+  return obj;
 }

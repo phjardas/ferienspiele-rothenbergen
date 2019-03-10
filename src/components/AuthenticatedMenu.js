@@ -37,7 +37,7 @@ function AuthenticatedMenu({ classes, ...props }) {
           <CardHeader
             avatar={user.photoURL && <Avatar src={user.photoURL} />}
             title={user.displayName || user.email}
-            subheader={user.email}
+            subheader={user.displayName && user.email}
           />
           <CardActions>
             <Button onClick={doSignOut}>Abmelden</Button>
