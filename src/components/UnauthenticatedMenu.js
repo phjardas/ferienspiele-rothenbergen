@@ -10,7 +10,7 @@ function UnauthenticatedMenu({ classes, ...props }) {
   return (
     <>
       <Button color="inherit" aria-owns="login-menu" aria-haspopup="true" onClick={toggle} {...props}>
-        Anmelden
+        Login
       </Button>
       <Popper
         id="login-menu"

@@ -6,7 +6,7 @@ function Alert({ color, icon, children, className, classes }) {
   return (
     <div className={`${classes.root} ${classes[color]} ${className || ''}`}>
       {Icon && <Icon className={classes.icon} />}
-      {children}
+      <div>{children}</div>
     </div>
   );
 }
@@ -21,6 +21,9 @@ const styles = ({ palette, spacing, typography }) => ({
   error: {
     backgroundColor: palette.error.dark,
     color: palette.error.contrastText,
+    '& a': {
+      color: 'inherit',
+    },
   },
   icon: {
     marginRight: spacing.unit,

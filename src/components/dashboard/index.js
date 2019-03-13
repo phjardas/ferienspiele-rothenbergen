@@ -1,4 +1,4 @@
-import { Typography, withStyles } from '@material-ui/core';
+import { Grid, Typography, withStyles } from '@material-ui/core';
 import React from 'react';
 import config from '../../api/config';
 import Date from '../Date';
@@ -16,16 +16,18 @@ function Dashboard({ classes }) {
       <div className={classes.page}>
         <div className={classes.hero}>
           <MainMenu className={classes.mainMenu} />
-          <div className={classes.content}>
-            <H2>{title}</H2>
-            <Typography variant="body1" paragraph>
-              Ökumenische Ferienspiele in Rothenbergen
-            </Typography>
-            <Typography variant="body1" paragraph>
-              Von <Date value={startDate} /> bis <Date value={endDate} />
-            </Typography>
-            <RegistrationStatus />
-          </div>
+          <Grid container>
+            <Grid item xs={12} lg={5} className={classes.content}>
+              <H2>{title}</H2>
+              <Typography variant="body1" paragraph>
+                Ökumenische Ferienspiele in Rothenbergen
+              </Typography>
+              <Typography variant="body1" paragraph>
+                Von <Date value={startDate} /> bis <Date value={endDate} />
+              </Typography>
+              <RegistrationStatus />
+            </Grid>
+          </Grid>
         </div>
         <div className={classes.content}>
           <Infos />
