@@ -1,5 +1,5 @@
 import { Typography } from '@material-ui/core';
-import { ChildCare as ChildIcon, Warning as WarningIcon } from '@material-ui/icons';
+import { Warning as WarningIcon } from '@material-ui/icons';
 import React from 'react';
 import config from '../../api/config';
 import ButtonLink from '../ButtonLink';
@@ -14,7 +14,7 @@ export default function RegistrationStatus() {
       return (
         <>
           <Typography paragraph>
-            <ButtonLink to="/anmeldung" color="primary" variant="contained" icon={ChildIcon}>
+            <ButtonLink to="/anmeldung" color="primary" variant="contained" size="large">
               Jetzt anmelden!
             </ButtonLink>
           </Typography>

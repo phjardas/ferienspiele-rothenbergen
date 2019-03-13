@@ -26,10 +26,11 @@ export default function App() {
       <ThemeProvider>
         <AuthProvider>
           <Suspense fallback={<GlobalLoader />}>
-            <Switch>
-              <Route path="/signin" component={SignIn} />
-              <Route path="/signup" component={SignUp} />
-              <PageContextProvider>
+            <PageContextProvider>
+              <Switch>
+                <Route path="/signin" component={SignIn} />
+                <Route path="/signup" component={SignUp} />
+                <Route exact path="/" component={Home} />
                 <Layout>
                   <Suspense fallback={<GlobalLoader />}>
                     <Switch>
@@ -37,13 +38,12 @@ export default function App() {
                       <Route path="/anmeldung" component={Anmeldung} />
                       <Route path="/impressum" component={Impressum} />
                       <ProtectedRoute path="/office" allowed={authenticated} component={Office} />
-                      <Route exact path="/" component={Home} />
                       <Route component={NotFound} />
                     </Switch>
                   </Suspense>
                 </Layout>
-              </PageContextProvider>
-            </Switch>
+              </Switch>
+            </PageContextProvider>
           </Suspense>
         </AuthProvider>
       </ThemeProvider>

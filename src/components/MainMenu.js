@@ -7,13 +7,13 @@ import AuthenticatedMenu from './AuthenticatedMenu';
 import ButtonLink from './ButtonLink';
 import UnauthenticatedMenu from './UnauthenticatedMenu';
 
-function MainMenu({ classes }) {
+function MainMenu({ className, classes }) {
   const { title, back } = usePage();
   const { pending, user } = useAuth();
   const Menu = user ? AuthenticatedMenu : UnauthenticatedMenu;
 
   return (
-    <AppBar position="static">
+    <AppBar position="static" className={className}>
       <Toolbar>
         {back && (
           <ButtonLink {...back} component={IconButton} color="inherit" className={classes.backButton}>
