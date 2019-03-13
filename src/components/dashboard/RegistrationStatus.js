@@ -1,13 +1,14 @@
-import { Typography } from '@material-ui/core';
+import { Typography, CircularProgress } from '@material-ui/core';
 import React from 'react';
 import config from '../../api/config';
+import { useRegistrationStatus } from '../../api/firestore';
 import Alert from '../Alert';
 import ButtonLink from '../ButtonLink';
 import DateComp from '../Date';
 
 export default function RegistrationStatus() {
   const { registrationStart, registrationDeadline } = config;
-  const registrationStatus = 'open';
+  const { loading, error, data: { registrationStatus, spotsLeft } = {} } = useRegistrationStatus();
 
   if (Date.now() < registrationStart.getTime()) {
     return (
@@ -19,6 +20,9 @@ export default function RegistrationStatus() {
     );
   }
 
+  if (loading) return <CircularProgress />;
+  if (error) return <Alert color="error">Hoppla, da ist leider etwas schiefgegangen: {error.message}</Alert>;
+
   switch (registrationStatus) {
     case 'open':
       return (
@@ -27,9 +31,10 @@ export default function RegistrationStatus() {
             <ButtonLink to="/anmeldung" color="primary" variant="contained" size="large">
               Jetzt anmelden!
             </ButtonLink>
+            {spotsLeft < 10 && <span style={{ marginLeft: 16 }}>Nur noch {spotsLeft} Plätze frei!</span>}
           </Typography>
           <Typography variant="subtitle2" paragraph>
-            Anmeldeschluss ist am <DateComp value={registrationDeadline} />
+            Anmeldeschluss ist am <DateComp value={registrationDeadline} />.
           </Typography>
         </>
       );

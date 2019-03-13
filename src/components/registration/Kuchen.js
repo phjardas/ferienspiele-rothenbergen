@@ -1,9 +1,10 @@
 import { CircularProgress, Grid, List, ListItem, ListItemText, Typography } from '@material-ui/core';
 import { Cake as CakeIcon } from '@material-ui/icons';
 import { TextField } from 'final-form-material-ui';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Field } from 'react-final-form';
 import config from '../../api/config';
+import { useKuchenStatistics } from '../../api/firestore';
 import Alert from '../Alert';
 import Date from '../Date';
 import Condition from '../form/Condition';
@@ -19,7 +20,8 @@ function KuchenDate({ value }) {
   return <Date value={value} weekday="long" day="numeric" month="long" />;
 }
 
-function KuchenInfo({ date, loading, error, data }) {
+function KuchenInfo({ date }) {
+  const { loading, error, data } = useKuchenStatistics();
   if (loading) return <CircularProgress />;
   if (error) return <Alert color="error">{error.message}</Alert>;
 
@@ -42,32 +44,6 @@ function KuchenInfo({ date, loading, error, data }) {
 }
 
 export default function Kuchen() {
-  const [kuchen, setKuchen] = useState({ loading: true });
-
-  async function loadKuchen() {
-    try {
-      setKuchen({ loading: true });
-
-      // FIXME load Kuchen from API
-      setTimeout(
-        () =>
-          setKuchen({
-            loading: false,
-            data: {
-              '2019-07-01': ['Testkuchen', 'Ein komischer anderer Kuchen', 'Igitt-Igitt-Kuchen'],
-            },
-          }),
-        2000
-      );
-    } catch (error) {
-      setKuchen({ loading: false, error });
-    }
-  }
-
-  useEffect(() => {
-    loadKuchen();
-  }, []);
-
   return (
     <FieldSet icon={<CakeIcon />} title="Kuchen">
       <Grid container spacing={24}>
@@ -116,7 +92,7 @@ export default function Kuchen() {
                 />
               </Grid>
               <Grid item xs={12} lg={6}>
-                <KuchenInfo date={date} {...kuchen} />
+                <KuchenInfo date={date} />
               </Grid>
             </>
           )}

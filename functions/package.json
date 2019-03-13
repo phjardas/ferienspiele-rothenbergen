@@ -2,7 +2,7 @@
   "name": "functions",
   "private": true,
   "scripts": {
-    "build": "babel --out-dir build src"
+    "build": "cp ../src/api/config.js src && babel --out-dir build src"
   },
   "main": "build/index.js",
   "engines": {

@@ -3,6 +3,7 @@ import { AccountCircle as UserIcon } from '@material-ui/icons';
 import React, { useState } from 'react';
 import { useAuth } from '../api/auth';
 import { useRouter } from '../api/router';
+import ButtonLink from './ButtonLink';
 
 function AuthenticatedMenu({ classes, ...props }) {
   const { history } = useRouter();
@@ -18,8 +19,11 @@ function AuthenticatedMenu({ classes, ...props }) {
   };
 
   return (
-    <>
-      <IconButton color="inherit" aria-owns="user-menu" aria-haspopup="true" onClick={toggle} {...props}>
+    <div {...props}>
+      <ButtonLink to="/office" color="inherit">
+        Verwaltung
+      </ButtonLink>
+      <IconButton color="inherit" aria-owns="user-menu" aria-haspopup="true" onClick={toggle}>
         {user.photoURL ? <Avatar src={user.photoURL} /> : <UserIcon />}
       </IconButton>
       <Popper
@@ -44,7 +48,7 @@ function AuthenticatedMenu({ classes, ...props }) {
           </CardActions>
         </Card>
       </Popper>
-    </>
+    </div>
   );
 }
 

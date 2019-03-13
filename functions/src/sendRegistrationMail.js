@@ -58,10 +58,7 @@ function createWelcomeMail(reg) {
   return text;
 }
 
-async function sendWelcomeMail(snapshot) {
-  const id = snapshot.id;
-  const reg = { ...snapshot.data(), id };
-
+export default async function sendRegistrationMail(reg) {
   const email = {
     from: mailSender,
     to: reg.parent.email,
@@ -81,5 +78,3 @@ async function sendWelcomeMail(snapshot) {
     return emailsColl.add({ ...email, timestamp, registrationId: reg.id, success: false, error: error.message });
   }
 }
-
-export const sendRegistrationMail = functions.firestore.document('/registrations/{id}').onCreate(snapshot => sendWelcomeMail(snapshot));

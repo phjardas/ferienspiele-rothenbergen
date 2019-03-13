@@ -1,9 +1,30 @@
 import 'firebase/firestore';
+import { useState, useEffect } from 'react';
 import config from './config';
 import { firebase, Firebase } from './firebase';
 
 const firestore = firebase.firestore();
+const configDoc = firestore.collection('config').doc('config');
+const kuchenDoc = firestore.collection('kuchen').doc('kuchen');
 const registrationsColl = firestore.collection('registrations');
+
+export function useRegistrationStatus() {
+  return useDoc(configDoc);
+}
+
+export function useKuchenStatistics() {
+  return useDoc(kuchenDoc);
+}
+
+function useDoc(doc) {
+  const [state, setState] = useState({ loading: true });
+
+  useEffect(() => {
+    doc.get().then(snap => setState({ loading: false, data: snap.data() || {} }), error => setState({ loading: false, error }));
+  }, [doc]);
+
+  return state;
+}
 
 export async function storeRegistration(registration) {
   const doc = registrationsColl.doc();
