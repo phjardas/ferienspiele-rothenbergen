@@ -1,15 +1,15 @@
 language: node_js
 node_js:
-- '9'
+  - '9'
 cache:
   directories:
-  - node_modules
-  - functions/node_modules
+    - node_modules
+    - functions/node_modules
 install:
-- npm install -g npm@latest
-- npm ci
-- (cd functions && npm ci)
+  - npm install -g npm@latest
+  - npm ci
+  - (cd functions && npm ci)
 script:
-- npm run dist
+  - npm run build
 after_script:
-- ./travis-deploy.sh
+  - ./travis-deploy.sh
