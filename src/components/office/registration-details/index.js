@@ -1,13 +1,14 @@
-import { Card, CardContent, CardHeader, Grid, Typography } from '@material-ui/core';
-import { ChildCare as ChildIcon } from '@material-ui/icons';
+import { Grid } from '@material-ui/core';
 import React, { useEffect } from 'react';
+import { setPaymentReceived, setWaiverReceived } from '../../../api/firestore';
 import { usePage } from '../../../api/page';
-import Age from '../../Age';
-import Date from '../../Date';
-import GenderIcon from '../../GenderIcon';
+import ChildInfo from './ChildInfo';
+import PriceInfo from './PriceInfo';
+import WaiverInfo from './WaiverInfo';
 
 export default function RegistrationDetails({ registration }) {
   const { setPage } = usePage();
+
   useEffect(
     () =>
       setPage({
@@ -17,26 +18,25 @@ export default function RegistrationDetails({ registration }) {
     [registration]
   );
 
+  const doSetPaymentReceived = async received => setPaymentReceived(registration.id, received);
+  const doSetWaiverReceived = async received => setWaiverReceived(registration.id, received);
+
   return (
     <Grid container spacing={24}>
       <Grid item xs={12} lg={6}>
-        <Card>
-          <CardHeader avatar={<ChildIcon />} title={`${registration.child.firstName} ${registration.child.lastName}`} />
-          <CardContent>
-            <Typography paragraph>
-              Geschlecht: <GenderIcon gender={registration.child.gender} label />
-            </Typography>
-            <Typography paragraph>
-              Geburtstag: <Date value={registration.child.dateOfBirth} />
-            </Typography>
-            <Typography paragraph>
-              Alter: <Age dateOfBirth={registration.child.dateOfBirth} /> Jahre bei Beginn der Ferienspiele
-            </Typography>
-            <Typography paragraph>T-Shirt: {registration.child.shirtSize}</Typography>
-            <Typography paragraph>Vegetarisch: {registration.child.vegetarian ? 'ja' : 'nein'}</Typography>
-            {registration.child.miscellaneous && <Typography paragraph>Besonderheiten: {registration.child.miscellaneous}</Typography>}
-          </CardContent>
-        </Card>
+        <Grid container spacing={24}>
+          <ChildInfo registration={registration} />
+        </Grid>
+      </Grid>
+      <Grid item xs={12} lg={6}>
+        <Grid container spacing={24}>
+          <Grid item xs={12}>
+            <PriceInfo {...registration} setPaymentReceived={doSetPaymentReceived} />
+          </Grid>
+          <Grid item xs={12}>
+            <WaiverInfo {...registration} setWaiverReceived={doSetWaiverReceived} />
+          </Grid>
+        </Grid>
       </Grid>
     </Grid>
   );

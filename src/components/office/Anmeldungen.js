@@ -1,14 +1,13 @@
-import { Table, TableBody, TableCell, TableHead, TableRow, TableSortLabel, withStyles, Typography } from '@material-ui/core';
-import { Check as CheckIcon, Clear as MissingIcon } from '@material-ui/icons';
+import { Table, TableBody, TableCell, TableHead, TableRow, TableSortLabel, Typography, withStyles } from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
 import { getRegistrations } from '../../api/firestore';
 import { useRouter } from '../../api/router';
+import Age from '../Age';
 import Alert from '../Alert';
 import Date from '../Date';
-import Age from '../Age';
-import GlobalLoader from '../GlobalLoader';
 import GenderIcon from '../GenderIcon';
-import LabelIcon from '../LabelIcon';
+import GlobalLoader from '../GlobalLoader';
+import YesNoLabel from '../YesNoLabel';
 
 const columns = [
   {
@@ -32,10 +31,14 @@ const columns = [
     label: 'Registriert',
   },
   {
-    label: 'Einverständnis',
+    field: ['uebernachtung', 'type'],
+    label: 'Übernachtung',
   },
   {
     label: 'Bezahlung',
+  },
+  {
+    label: 'Einverständnis',
   },
 ];
 
@@ -63,11 +66,25 @@ function Anmeldungen({ classes }) {
 
   const openRegistration = reg => history.push(`${match.path}/${reg.id}`);
 
+  const paymentsMissing = registrations.filter(r => !r.payment).length;
+  const waiversMissing = registrations.filter(r => !r.waiver).length;
+
   return (
     <>
       <Typography paragraph>
         Es gibt insgesamt <strong>{registrations.length} Anmeldungen</strong>.
       </Typography>
+      {(paymentsMissing > 0 || waiversMissing > 0) && (
+        <Alert color="info">
+          Es {paymentsMissing + waiversMissing === 1 ? 'fehlt' : 'fehlen'} noch{' '}
+          {paymentsMissing > 0 && `${paymentsMissing} ${paymentsMissing === 1 ? 'Teilnahmebeitrag' : 'Teilnahmebeiträge'}`}{' '}
+          {waiversMissing > 0 &&
+            `${paymentsMissing > 0 ? 'und ' : ''}${waiversMissing} ${
+              waiversMissing === 1 ? 'Einverständniserklärung' : 'Einverständniserklärungen'
+            }`}
+          .
+        </Alert>
+      )}
       <Table padding="dense">
         <TableHead>
           <TableRow>
@@ -99,18 +116,21 @@ function Anmeldungen({ classes }) {
                 <Date value={reg.registeredAt} />
               </TableCell>
               <TableCell>
-                {reg.waiver && reg.waiver.receivedAt ? (
-                  <LabelIcon icon={CheckIcon} label={<Date value={reg.waiver.receivedAt} />} />
-                ) : (
-                  <LabelIcon icon={MissingIcon} label="fehlt" />
-                )}
+                <YesNoLabel value={reg.uebernachtung.type === 'uebernachtung'} />
               </TableCell>
               <TableCell>
-                {reg.payment && reg.payment.receivedAt ? (
-                  <LabelIcon icon={CheckIcon} label={<Date value={reg.payment.receivedAt} />} />
-                ) : (
-                  <LabelIcon icon={MissingIcon} label="fehlt" />
-                )}
+                <YesNoLabel
+                  value={reg.payment && reg.payment.receivedAt}
+                  noColor="error"
+                  label={reg.payment ? <Date value={reg.payment.receivedAt} /> : 'fehlt'}
+                />
+              </TableCell>
+              <TableCell>
+                <YesNoLabel
+                  value={reg.waiver && reg.waiver.receivedAt}
+                  noColor="error"
+                  label={reg.waiver ? <Date value={reg.waiver.receivedAt} /> : 'fehlt'}
+                />
               </TableCell>
             </TableRow>
           ))}

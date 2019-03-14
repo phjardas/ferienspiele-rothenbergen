@@ -20,7 +20,7 @@ function MainMenu({ className, classes }) {
             <BackIcon />
           </ButtonLink>
         )}
-        <ButtonLink component={Typography} to="/" variant="h6" color="inherit" className={classes.title}>
+        <ButtonLink component={Typography} to="/" {...back} variant="h6" color="inherit" className={classes.title}>
           {title}
         </ButtonLink>
         {!pending && <Menu className={classes.menu} />}

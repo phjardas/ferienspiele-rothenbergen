@@ -51,6 +51,26 @@ export function getRegistrations({ sortField, sortDirection }, next) {
   });
 }
 
+export async function setPaymentReceived(registrationId, received) {
+  await registrationsColl.doc(registrationId).update({
+    payment: received
+      ? {
+          receivedAt: Firebase.firestore.FieldValue.serverTimestamp(),
+        }
+      : Firebase.firestore.FieldValue.delete(),
+  });
+}
+
+export async function setWaiverReceived(registrationId, received) {
+  await registrationsColl.doc(registrationId).update({
+    waiver: received
+      ? {
+          receivedAt: Firebase.firestore.FieldValue.serverTimestamp(),
+        }
+      : Firebase.firestore.FieldValue.delete(),
+  });
+}
+
 function toEntity(doc) {
   return doc && doc.exists ? { ...doc.data(), id: doc.id } : null;
 }

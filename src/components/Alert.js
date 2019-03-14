@@ -18,6 +18,10 @@ const styles = ({ palette, spacing, typography }) => ({
     display: 'flex',
     alignItems: 'flex-start',
   },
+  info: {
+    backgroundColor: palette.primary.light,
+    color: palette.primary.contrastText,
+  },
   error: {
     backgroundColor: palette.error.dark,
     color: palette.error.contrastText,

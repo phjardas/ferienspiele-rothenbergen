@@ -3,11 +3,14 @@ import React from 'react';
 import Footer from './Footer';
 import MainMenu from './MainMenu';
 
-function Layout({ children, classes }) {
+function Layout({ heroImage, hero, children, classes }) {
   return (
     <div className={classes.wrapper}>
       <div className={classes.page}>
-        <MainMenu />
+        <div className={classes.hero} style={{ backgroundImage: `url(${heroImage})` }}>
+          <MainMenu className={heroImage ? classes.mainMenuWithHero : undefined} />
+          {hero}
+        </div>
         <main className={classes.content}>{children}</main>
       </div>
       <Footer />
@@ -15,7 +18,7 @@ function Layout({ children, classes }) {
   );
 }
 
-const styles = ({ breakpoints, mixins, palette, shadows, shape, spacing }) => ({
+const styles = ({ breakpoints, mixins, palette, shadows, shape, spacing, transitions }) => ({
   wrapper: {
     minHeight: '100%',
     display: 'flex',
@@ -35,6 +38,20 @@ const styles = ({ breakpoints, mixins, palette, shadows, shape, spacing }) => ({
       backgroundColor: palette.background.paper,
       borderRadius: shape.borderRadius,
     },
+  },
+  mainMenuWithHero: {
+    background: 'transparent',
+    boxShadow: 'none',
+    transition: `background ${transitions.duration.short}ms ${transitions.easing.sharp}`,
+    '&:hover': {
+      background: 'rgba(0, 0, 0, 0.2)',
+    },
+  },
+  hero: {
+    display: 'flex',
+    flexDirection: 'column',
+    backgroundSize: 'cover',
+    backgroundPosition: 'center center',
   },
   content: {
     flexGrow: 1,

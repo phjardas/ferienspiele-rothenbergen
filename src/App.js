@@ -2,17 +2,17 @@ import React, { lazy, Suspense } from 'react';
 import { Route, Switch } from 'react-router';
 import { BrowserRouter } from 'react-router-dom';
 import { AuthProvider } from './api/auth';
+import { PageContextProvider } from './api/page';
 import GlobalLoader from './components/GlobalLoader';
 import Layout from './components/Layout';
 import ProtectedRoute from './components/ProtectedRoute';
+import Home from './pages/index';
 import NotFound from './pages/notfound';
-import { PageContextProvider } from './api/page';
 import './styles.css';
 import ThemeProvider from './Theme';
 
 const authenticated = ({ user }) => !!user;
 
-const Home = lazy(() => import('./pages/index'));
 const Impressum = lazy(() => import('./pages/impressum'));
 const Anmeldung = lazy(() => import('./pages/anmeldung'));
 const AnmeldungDetails = lazy(() => import('./pages/anmeldung-details'));

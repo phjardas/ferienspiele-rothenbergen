@@ -6,13 +6,13 @@ import GlobalLoader from '../../components/GlobalLoader';
 import RegistrationDetails from '../../components/office/registration-details';
 
 export default function AnmeldungDetails() {
-  const [{ loading, error, registration }, setState] = useState({ loading: true });
-
   const {
     match: {
       params: { id },
     },
   } = useRouter();
+
+  const [{ loading, error, registration }, setState] = useState({ loading: true });
 
   useEffect(() => {
     setState({ loading: true });
@@ -22,5 +22,6 @@ export default function AnmeldungDetails() {
   if (loading) return <GlobalLoader />;
   if (error) return <Alert color="error">{error.message}</Alert>;
   if (!registration) return <Alert color="error">Ungültige Anmeldung-ID.</Alert>;
+
   return <RegistrationDetails registration={registration} />;
 }
