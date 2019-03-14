@@ -2,6 +2,7 @@ import { Grid, Typography, withStyles } from '@material-ui/core';
 import React from 'react';
 import config from '../../api/config';
 import Date from '../Date';
+import Footer from '../Footer';
 import H2 from '../H2';
 import MainMenu from '../MainMenu';
 import Infos from './Infos';
@@ -33,6 +34,7 @@ function Dashboard({ classes }) {
           <Infos />
         </div>
       </div>
+      <Footer />
     </div>
   );
 }
