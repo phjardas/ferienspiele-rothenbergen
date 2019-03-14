@@ -83,7 +83,7 @@ export default function Child() {
             name="child.nextChild"
             component={Switch}
             type="checkbox"
-            label="Wir haben bereits ein anderes Kind unserer Familie bei den Ferienspielen angemeldet"
+            label="Wir haben bereits ein Geschwisterkind bei den Ferienspielen angemeldet"
           />
         </Grid>
       </Grid>

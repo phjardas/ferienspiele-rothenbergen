@@ -1,13 +1,8 @@
 import * as admin from 'firebase-admin';
-import * as functions from 'firebase-functions';
-import * as nodemailer from 'nodemailer';
 import config from './config';
+import { mailTransport } from './email';
 
 const mailSender = '"Ferienspiele Rothenbergen" <ferienspiele.rothenbergen@gmail.com>';
-const gmailConfig = functions.config().gmail;
-const mailTransport = nodemailer.createTransport(
-  `smtps://${encodeURIComponent(gmailConfig.email)}:${encodeURIComponent(gmailConfig.password)}@smtp.gmail.com`
-);
 
 const emailsColl = admin.firestore().collection('emails');
 
