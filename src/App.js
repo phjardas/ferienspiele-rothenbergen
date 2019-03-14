@@ -6,6 +6,7 @@ import { PageContextProvider } from './api/page';
 import GlobalLoader from './components/GlobalLoader';
 import Layout from './components/Layout';
 import ProtectedRoute from './components/ProtectedRoute';
+import SentryWrapper from './components/SentryWrapper';
 import Home from './pages/index';
 import NotFound from './pages/notfound';
 import './styles.css';
@@ -22,31 +23,33 @@ const Office = lazy(() => import('./pages/office'));
 
 export default function App() {
   return (
-    <BrowserRouter>
-      <ThemeProvider>
-        <AuthProvider>
-          <Suspense fallback={<GlobalLoader />}>
-            <PageContextProvider>
-              <Switch>
-                <Route path="/signin" component={SignIn} />
-                <Route path="/signup" component={SignUp} />
-                <Route exact path="/" component={Home} />
-                <Layout>
-                  <Suspense fallback={<GlobalLoader />}>
-                    <Switch>
-                      <Route path="/anmeldung/:id" component={AnmeldungDetails} />
-                      <Route path="/anmeldung" component={Anmeldung} />
-                      <Route path="/impressum" component={Impressum} />
-                      <ProtectedRoute path="/office" allowed={authenticated} component={Office} />
-                      <Route component={NotFound} />
-                    </Switch>
-                  </Suspense>
-                </Layout>
-              </Switch>
-            </PageContextProvider>
-          </Suspense>
-        </AuthProvider>
-      </ThemeProvider>
-    </BrowserRouter>
+    <SentryWrapper>
+      <BrowserRouter>
+        <ThemeProvider>
+          <AuthProvider>
+            <Suspense fallback={<GlobalLoader />}>
+              <PageContextProvider>
+                <Switch>
+                  <Route path="/signin" component={SignIn} />
+                  <Route path="/signup" component={SignUp} />
+                  <Route exact path="/" component={Home} />
+                  <Layout>
+                    <Suspense fallback={<GlobalLoader />}>
+                      <Switch>
+                        <Route path="/anmeldung/:id" component={AnmeldungDetails} />
+                        <Route path="/anmeldung" component={Anmeldung} />
+                        <Route path="/impressum" component={Impressum} />
+                        <ProtectedRoute path="/office" allowed={authenticated} component={Office} />
+                        <Route component={NotFound} />
+                      </Switch>
+                    </Suspense>
+                  </Layout>
+                </Switch>
+              </PageContextProvider>
+            </Suspense>
+          </AuthProvider>
+        </ThemeProvider>
+      </BrowserRouter>
+    </SentryWrapper>
   );
 }
