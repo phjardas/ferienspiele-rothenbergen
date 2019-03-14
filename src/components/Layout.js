@@ -7,7 +7,7 @@ function Layout({ heroImage, hero, children, classes }) {
   return (
     <div className={classes.wrapper}>
       <div className={classes.page}>
-        <div className={classes.hero} style={{ backgroundImage: `url(${heroImage})` }}>
+        <div className={classes.hero} style={{ backgroundImage: heroImage ? `url(${heroImage})` : undefined }}>
           <MainMenu className={heroImage ? classes.mainMenuWithHero : undefined} />
           {hero}
         </div>

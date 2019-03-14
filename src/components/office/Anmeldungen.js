@@ -38,7 +38,7 @@ const columns = [
     label: 'Bezahlung',
   },
   {
-    label: 'Einverständnis',
+    label: 'Einverst.',
   },
 ];
 
@@ -119,18 +119,10 @@ function Anmeldungen({ classes }) {
                 <YesNoLabel value={reg.uebernachtung.type === 'uebernachtung'} />
               </TableCell>
               <TableCell>
-                <YesNoLabel
-                  value={reg.payment && reg.payment.receivedAt}
-                  noColor="error"
-                  label={reg.payment ? <Date value={reg.payment.receivedAt} /> : 'fehlt'}
-                />
+                <YesNoLabel value={reg.payment && reg.payment.receivedAt} noColor="error" />
               </TableCell>
               <TableCell>
-                <YesNoLabel
-                  value={reg.waiver && reg.waiver.receivedAt}
-                  noColor="error"
-                  label={reg.waiver ? <Date value={reg.waiver.receivedAt} /> : 'fehlt'}
-                />
+                <YesNoLabel value={reg.waiver && reg.waiver.receivedAt} noColor="error" />
               </TableCell>
             </TableRow>
           ))}
