@@ -1,5 +1,5 @@
 import 'firebase/firestore';
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import config from './config';
 import { firebase, Firebase } from './firebase';
 
@@ -45,7 +45,12 @@ export function getRegistration(id, next) {
 }
 
 export function getRegistrations({ sortField, sortDirection }, next) {
-  return registrationsColl.orderBy(sortField, sortDirection).onSnapshot({
+  let query = registrationsColl;
+  if (sortField && sortDirection) {
+    query = query.orderBy(sortField, sortDirection);
+  }
+
+  return query.onSnapshot({
     next: snapshot => next(null, snapshot.docs.map(toEntity)),
     error: next,
   });
