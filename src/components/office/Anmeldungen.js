@@ -8,6 +8,7 @@ import Date from '../Date';
 import GenderIcon from '../GenderIcon';
 import GlobalLoader from '../GlobalLoader';
 import YesNoLabel from '../YesNoLabel';
+import ExportButton from './ExportButton';
 
 const columns = [
   {
@@ -72,7 +73,7 @@ function Anmeldungen({ classes }) {
   return (
     <>
       <Typography paragraph>
-        Es gibt insgesamt <strong>{registrations.length} Anmeldungen</strong>.
+        Es gibt insgesamt <strong>{registrations.length} Anmeldungen</strong>. <ExportButton registrations={registrations} />
       </Typography>
       {(paymentsMissing > 0 || waiversMissing > 0) && (
         <Alert color="info">
