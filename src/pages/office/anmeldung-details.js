@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { getRegistration } from '../../api/firestore';
+import { usePage } from '../../api/page';
 import { useRouter } from '../../api/router';
 import Alert from '../../components/Alert';
 import GlobalLoader from '../../components/GlobalLoader';
@@ -11,12 +12,19 @@ export default function AnmeldungDetails() {
       params: { id },
     },
   } = useRouter();
+  const { setPage } = usePage();
 
   const [{ loading, error, registration }, setState] = useState({ loading: true });
 
   useEffect(() => {
     setState({ loading: true });
-    getRegistration(id, (error, registration) => setState({ loading: false, error, registration }));
+    getRegistration(id, (error, registration) => {
+      setState({ loading: false, error, registration });
+      setPage({
+        title: `${registration.child.firstName} ${registration.child.lastName}`,
+        back: { to: '/office/anmeldungen' },
+      });
+    });
   }, [id]);
 
   if (loading) return <GlobalLoader />;

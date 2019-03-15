@@ -22,7 +22,7 @@ export default function Child() {
     >
       <Grid container spacing={24}>
         <Grid item xs={12} md={6}>
-          <Field name="child.firstName" component={TextField} label="Vorname" required fullWidth validate={required} />
+          <Field name="child.firstName" component={TextField} label="Vorname" required fullWidth autoFocus validate={required} />
         </Grid>
         <Grid item xs={12} md={6}>
           <Field name="child.lastName" component={TextField} label="Nachname" required fullWidth validate={required} />

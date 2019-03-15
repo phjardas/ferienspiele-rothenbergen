@@ -1,10 +1,13 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { useRouter } from './router';
 
+const site = 'Ferienspiele Rothenbergen';
+
 const Context = createContext();
 
 const defaultPage = {
-  title: 'Ferienspiele Rothenbergen',
+  site,
+  title: null,
 };
 
 export function PageContextProvider({ children }) {
@@ -15,7 +18,12 @@ export function PageContextProvider({ children }) {
 
   const context = {
     ...page,
-    setPage: d => setPage({ ...defaultPage, ...d }),
+    setPage: d =>
+      setPage({
+        ...defaultPage,
+        ...d,
+        back: d.back || (d.title && { to: '/' }),
+      }),
   };
 
   return <Context.Provider value={context}>{children}</Context.Provider>;

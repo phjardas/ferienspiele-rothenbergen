@@ -3,7 +3,9 @@ import { Route, Switch } from 'react-router';
 import { BrowserRouter } from 'react-router-dom';
 import { AuthProvider } from './api/auth';
 import { PageContextProvider } from './api/page';
+import AnalyticsPageListener from './components/AnalyticsPageListener';
 import GlobalLoader from './components/GlobalLoader';
+import Header from './components/Header';
 import Layout from './components/Layout';
 import ProtectedRoute from './components/ProtectedRoute';
 import SentryWrapper from './components/SentryWrapper';
@@ -29,6 +31,8 @@ export default function App() {
           <AuthProvider>
             <Suspense fallback={<GlobalLoader />}>
               <PageContextProvider>
+                <Header />
+                <AnalyticsPageListener />
                 <Switch>
                   <Route path="/signin" component={SignIn} />
                   <Route path="/signup" component={SignUp} />

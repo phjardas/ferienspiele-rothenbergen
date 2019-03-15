@@ -8,7 +8,7 @@ import ButtonLink from './ButtonLink';
 import UnauthenticatedMenu from './UnauthenticatedMenu';
 
 function MainMenu({ className, classes }) {
-  const { title, back } = usePage();
+  const { title, site, back } = usePage();
   const { pending, user } = useAuth();
   const Menu = user ? AuthenticatedMenu : UnauthenticatedMenu;
 
@@ -21,7 +21,7 @@ function MainMenu({ className, classes }) {
           </ButtonLink>
         )}
         <ButtonLink component={Typography} to="/" {...back} variant="h6" color="inherit" className={classes.title}>
-          {title}
+          {title || site}
         </ButtonLink>
         {!pending && <Menu className={classes.menu} />}
       </Toolbar>

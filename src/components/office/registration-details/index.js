@@ -1,23 +1,11 @@
 import { Grid } from '@material-ui/core';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { setPaymentReceived, setWaiverReceived } from '../../../api/firestore';
-import { usePage } from '../../../api/page';
 import ChildInfo from './ChildInfo';
 import PriceInfo from './PriceInfo';
 import WaiverInfo from './WaiverInfo';
 
 export default function RegistrationDetails({ registration }) {
-  const { setPage } = usePage();
-
-  useEffect(
-    () =>
-      setPage({
-        title: `${registration.child.firstName} ${registration.child.lastName}`,
-        back: { to: '/office/anmeldungen' },
-      }),
-    [registration]
-  );
-
   const doSetPaymentReceived = async received => setPaymentReceived(registration.id, received);
   const doSetWaiverReceived = async received => setWaiverReceived(registration.id, received);
 

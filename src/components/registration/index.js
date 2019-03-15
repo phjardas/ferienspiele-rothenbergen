@@ -20,8 +20,10 @@ const emptyValues = {
   kuchen: {},
 };
 
-export default function Registration({ onSubmit }) {
-  const [initialValues, setInitialValues] = useState(withPrice(createTestData ? createTestData() : emptyValues));
+export default function Registration({ initialValues: originalValues, onSubmit }) {
+  const [initialValues, setInitialValues] = useState(
+    withPrice(originalValues ? originalValues : createTestData ? createTestData() : emptyValues)
+  );
   const updateTestData = createTestData && (() => setInitialValues(createTestData()));
 
   const submit = async data => {
@@ -37,7 +39,7 @@ export default function Registration({ onSubmit }) {
     <Form onSubmit={submit} initialValues={initialValues} decorators={[priceCalculator]}>
       {({ handleSubmit, invalid, submitting, submitError }) => (
         <form onSubmit={handleSubmit} noValidate>
-          <Welcome createTestData={updateTestData} />
+          <Welcome createTestData={updateTestData} geschwisterkind={!!originalValues} />
           <Child />
           <Parents />
           <EmergencyContact />

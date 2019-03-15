@@ -1,19 +1,17 @@
 import { Cake as CakeIcon, Person as PersonIcon } from '@material-ui/icons';
-import React, { lazy } from 'react';
+import React from 'react';
 import { Redirect, Route, Switch } from 'react-router';
 import NotFound from '../notfound';
+import AnmeldungDetails from './anmeldung-details';
+import Anmeldungen from './anmeldungen';
+import Kuchen from './kuchen';
 import OfficeNav from './OfficeNav';
-
-const Anmeldungen = lazy(() => import('./anmeldungen'));
-const AnmeldungDetails = lazy(() => import('./anmeldung-details'));
-const Kuchen = lazy(() => import('./kuchen'));
 
 export default function Office({ match }) {
   const routes = [
     {
       label: 'Anmeldungen',
       route: {
-        exact: true,
         path: `${match.path}/anmeldungen`,
       },
       component: Anmeldungen,
@@ -31,14 +29,18 @@ export default function Office({ match }) {
 
   return (
     <>
-      <OfficeNav routes={routes} />
       <Switch>
-        {routes.map((route, i) => (
-          <Route key={i} {...route.route} component={route.component} />
-        ))}
-        <Route path={`${match.path}/anmeldungen/:id`} component={AnmeldungDetails} />,
         <Route exact path={match.path} render={() => <Redirect to={`${match.path}/anmeldungen`} />} />
-        <Route component={NotFound} />
+        <>
+          <OfficeNav routes={routes} />
+          <Switch>
+            <Route path={`${match.path}/anmeldungen/:id`} component={AnmeldungDetails} />,
+            {routes.map((route, i) => (
+              <Route key={i} {...route.route} component={route.component} />
+            ))}
+            <Route component={NotFound} />
+          </Switch>
+        </>
       </Switch>
     </>
   );
