@@ -1,6 +1,7 @@
 import { Cake as CakeIcon, Person as PersonIcon } from '@material-ui/icons';
 import React from 'react';
 import { Redirect, Route, Switch } from 'react-router';
+import { useAuth } from '../../api/auth';
 import { isKuchenUser, isOfficeUser } from '../../api/rules';
 import ProtectedRoute from '../../components/ProtectedRoute';
 import NotFound from '../notfound';
@@ -10,6 +11,8 @@ import Kuchen from './kuchen';
 import OfficeNav from './OfficeNav';
 
 export default function Office({ match }) {
+  const auth = useAuth();
+
   const routes = [
     {
       label: 'Anmeldungen',
@@ -34,7 +37,7 @@ export default function Office({ match }) {
   return (
     <>
       <Switch>
-        <Route exact path={match.path} render={() => <Redirect to={`${match.path}/anmeldungen`} />} />
+        <Route exact path={match.path} render={() => <Redirect to={`${match.path}/${isOfficeUser(auth) ? 'anmeldungen' : 'kuchen'}`} />} />
         <>
           <OfficeNav routes={routes} />
           <Switch>
