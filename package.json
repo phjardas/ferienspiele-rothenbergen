@@ -37,7 +37,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "REACT_GA_PROPERTY=UA-3900768-19 REACT_APP_SENTRY_URL=https://6114124771e742b8a5e48e5b12ce0905@sentry.io/1415840 REACT_APP_COMMIT_HASH=$(git rev-parse HEAD) react-scripts build",
+    "build": "REACT_APP_GA_PROPERTY=UA-3900768-19 REACT_APP_SENTRY_URL=https://6114124771e742b8a5e48e5b12ce0905@sentry.io/1415840 REACT_APP_COMMIT_HASH=$(git rev-parse HEAD) react-scripts build",
     "test": "echo 'No tests'",
     "deploy": "firebase deploy"
   },
