@@ -75,8 +75,12 @@ export function AuthProvider({ children }) {
   useEffect(
     () =>
       auth.onAuthStateChanged(async fbUser => {
-        const user = await getUser(fbUser);
-        setState({ pending: false, authenticated: !!user, user });
+        if (fbUser) {
+          const user = await getUser(fbUser);
+          setState({ pending: false, authenticated: true, user });
+        } else {
+          setState({ pending: false, authenticated: false });
+        }
       }),
     []
   );
