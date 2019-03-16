@@ -20,9 +20,11 @@ function AuthenticatedMenu({ classes, ...props }) {
 
   return (
     <div {...props}>
-      <ButtonLink to="/office" color="inherit">
-        Verwaltung
-      </ButtonLink>
+      {user.hasAnyRole('office', 'kuchen') && (
+        <ButtonLink to="/office" color="inherit">
+          Verwaltung
+        </ButtonLink>
+      )}
       <IconButton color="inherit" aria-owns="user-menu" aria-haspopup="true" onClick={toggle}>
         {user.photoURL ? <Avatar src={user.photoURL} /> : <UserIcon />}
       </IconButton>

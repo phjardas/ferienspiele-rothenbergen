@@ -1,6 +1,8 @@
 import { Cake as CakeIcon, Person as PersonIcon } from '@material-ui/icons';
 import React from 'react';
 import { Redirect, Route, Switch } from 'react-router';
+import { isKuchenUser, isOfficeUser } from '../../api/rules';
+import ProtectedRoute from '../../components/ProtectedRoute';
 import NotFound from '../notfound';
 import AnmeldungDetails from './anmeldung-details';
 import Anmeldungen from './anmeldungen';
@@ -13,6 +15,7 @@ export default function Office({ match }) {
       label: 'Anmeldungen',
       route: {
         path: `${match.path}/anmeldungen`,
+        allowed: isOfficeUser,
       },
       component: Anmeldungen,
       icon: <PersonIcon />,
@@ -21,6 +24,7 @@ export default function Office({ match }) {
       label: 'Kuchen',
       route: {
         path: `${match.path}/kuchen`,
+        allowed: isKuchenUser,
       },
       component: Kuchen,
       icon: <CakeIcon />,
@@ -34,9 +38,9 @@ export default function Office({ match }) {
         <>
           <OfficeNav routes={routes} />
           <Switch>
-            <Route path={`${match.path}/anmeldungen/:id`} component={AnmeldungDetails} />,
+            <ProtectedRoute allowed={isOfficeUser} path={`${match.path}/anmeldungen/:id`} component={AnmeldungDetails} />,
             {routes.map((route, i) => (
-              <Route key={i} {...route.route} component={route.component} />
+              <ProtectedRoute key={i} {...route.route} component={route.component} />
             ))}
             <Route component={NotFound} />
           </Switch>

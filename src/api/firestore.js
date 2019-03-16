@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import config from './config';
 import { firebase, Firebase } from './firebase';
 
-const firestore = firebase.firestore();
+export const firestore = firebase.firestore();
 const configDoc = firestore.collection('config').doc('config');
 const kuchenDoc = firestore.collection('kuchen').doc('kuchen');
 const registrationsColl = firestore.collection('registrations');

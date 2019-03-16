@@ -14,7 +14,7 @@ import NotFound from './pages/notfound';
 import './styles.css';
 import ThemeProvider from './Theme';
 
-const authenticated = ({ user }) => !!user;
+const isOfficeUser = ({ user }) => user && user.hasAnyRole('office', 'kuchen');
 
 const Impressum = lazy(() => import('./pages/impressum'));
 const Anmeldung = lazy(() => import('./pages/anmeldung'));
@@ -43,7 +43,7 @@ export default function App() {
                         <Route path="/anmeldung/:id" component={AnmeldungDetails} />
                         <Route path="/anmeldung" component={Anmeldung} />
                         <Route path="/impressum" component={Impressum} />
-                        <ProtectedRoute path="/office" allowed={authenticated} component={Office} />
+                        <ProtectedRoute path="/office" allowed={isOfficeUser} component={Office} />
                         <Route component={NotFound} />
                       </Switch>
                     </Suspense>
