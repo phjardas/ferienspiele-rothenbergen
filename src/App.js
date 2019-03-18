@@ -3,6 +3,7 @@ import { Route, Switch } from 'react-router';
 import { BrowserRouter } from 'react-router-dom';
 import { AuthProvider } from './api/auth';
 import { PageContextProvider } from './api/page';
+import { isOfficeUser } from './api/rules';
 import AnalyticsPageListener from './components/AnalyticsPageListener';
 import GlobalLoader from './components/GlobalLoader';
 import Header from './components/Header';
@@ -13,8 +14,6 @@ import Home from './pages/index';
 import NotFound from './pages/notfound';
 import './styles.css';
 import ThemeProvider from './Theme';
-
-const isOfficeUser = ({ user }) => user && user.hasAnyRole('office', 'kuchen');
 
 const Impressum = lazy(() => import('./pages/impressum'));
 const Anmeldung = lazy(() => import('./pages/anmeldung'));

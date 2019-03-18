@@ -1,4 +1,4 @@
-import { Grid, Typography, withStyles } from '@material-ui/core';
+import { Grid, Typography } from '@material-ui/core';
 import { Warning as WarningIcon } from '@material-ui/icons';
 import qs from 'qs';
 import React from 'react';
@@ -23,24 +23,19 @@ function createSiblingRegistrationLink(reg) {
   return `/anmeldung?${qs.stringify(params)}`;
 }
 
-function RegistrationDetails({ registration, classes }) {
+export default function RegistrationDetails({ registration }) {
   const { registeredAt, child, year } = registration;
 
   return (
     <>
       <Grid container spacing={24}>
         <Grid item xs={12}>
-          <Typography variant="body1">
+          <Typography paragraph variant="body1">
             Hurra! Sie haben {child.firstName} am <Date value={registeredAt} /> zu den Ferienspielen {year} angemeldet.
-            <ButtonLink
-              to={createSiblingRegistrationLink(registration)}
-              color="primary"
-              variant="contained"
-              className={classes.siblingButton}
-            >
-              Geschwisterkind anmelden
-            </ButtonLink>
           </Typography>
+          <ButtonLink to={createSiblingRegistrationLink(registration)} color="primary" variant="contained">
+            Geschwisterkind anmelden
+          </ButtonLink>
         </Grid>
         <Grid item xs={12}>
           <Alert color="error" icon={WarningIcon}>
@@ -65,11 +60,3 @@ function RegistrationDetails({ registration, classes }) {
     </>
   );
 }
-
-const styles = ({ spacing }) => ({
-  siblingButton: {
-    marginLeft: spacing.unit,
-  },
-});
-
-export default withStyles(styles)(RegistrationDetails);

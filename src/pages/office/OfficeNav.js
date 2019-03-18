@@ -11,7 +11,7 @@ function OfficeNav({ routes, classes }) {
   return (
     <Route path={`${match.path}/:tab`}>
       {({ match: inner }) => (
-        <Tabs value={`${match.path}/${inner.params.tab}`} indicatorColor="primary" textColor="primary" className={classes.tabs}>
+        <Tabs value={`${match.path}/${inner.params.tab}`} indicatorColor="primary" textColor="primary" centered className={classes.tabs}>
           {routes
             .filter(route => route.route.allowed(auth))
             .map(route => (
