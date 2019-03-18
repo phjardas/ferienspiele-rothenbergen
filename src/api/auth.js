@@ -19,7 +19,7 @@ const providers = [
 ];
 
 function signInWithEmailAndPassword(email, password) {
-  auth.signInWithEmailAndPassword(email, password);
+  return auth.signInWithEmailAndPassword(email, password);
 }
 
 function signInWithProvider(providerId) {
@@ -29,11 +29,11 @@ function signInWithProvider(providerId) {
 }
 
 function signUp(email, password) {
-  auth.createUserWithEmailAndPassword(email, password);
+  return auth.createUserWithEmailAndPassword(email, password);
 }
 
 function signOut() {
-  auth.signOut();
+  return auth.signOut();
 }
 
 async function getUser(fbUser) {
