@@ -1,0 +1,22 @@
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /registrations/{id} {
+      allow get: if true;
+      allow create: if true;
+      allow list: if get(/databases/$(database)/documents/users/$(request.auth.uid)).data.roles.office == true;
+      allow update: if get(/databases/$(database)/documents/users/$(request.auth.uid)).data.roles.anmeldungen == true;
+    }
+
+    match /config/{id} {
+      allow get: if true;
+    }
+
+    match /kuchen/{id} {
+      allow get: if true;
+    }
+
+    match /users/{userId} {
+      allow get, create, update: if request.auth.uid == userId;
+    }
+  }
+}

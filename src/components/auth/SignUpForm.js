@@ -51,7 +51,7 @@ function SignUpForm({ onSignUp, classes }) {
         <SpinningButton
           key={provider.id}
           onClick={() => signUpWithProvider(provider.id)}
-          color="secondary"
+          color="primary"
           variant="outlined"
           disabled={!!loading}
           spinning={loading === provider.id}

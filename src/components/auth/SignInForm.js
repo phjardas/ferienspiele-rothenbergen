@@ -53,7 +53,7 @@ function SignInForm({ from = '/', onSignIn, classes }) {
         <SpinningButton
           key={provider.id}
           onClick={() => signInWithProvider(provider.id)}
-          color="secondary"
+          color="primary"
           variant="outlined"
           disabled={!!loading}
           spinning={loading === provider.id}
