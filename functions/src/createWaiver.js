@@ -1,15 +1,16 @@
 import admin from './admin';
-import createWaiver from './waiver';
+import createWaiverDoc from './waiver';
 
 const bucket = admin.storage().bucket();
 
 export default async function createWaiver(reg) {
-  const file = bucket.file(`waiver-${registrationId}.pdf`);
+  const file = bucket.file(`waiver-${reg.id}.pdf`);
 
   const [exists] = await file.exists();
   if (!exists) {
+    console.info('Creating waiver for %s', reg.id);
     await new Promise((resolve, reject) => {
-      const waiver = createWaiver(reg);
+      const waiver = createWaiverDoc(reg);
       const out = file.createWriteStream({
         contentType: 'application/pdf',
       });

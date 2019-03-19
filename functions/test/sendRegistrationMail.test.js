@@ -1,4 +1,5 @@
 import sendRegistrationMail from '../src/sendRegistrationMail';
+import fs from 'fs';
 
 describe('sendRegistrationMail', () => {
   it('should work', async () => {
@@ -23,9 +24,11 @@ describe('sendRegistrationMail', () => {
       },
     });
 
-    const { subject, text } = JSON.parse(result.message);
+    const { subject, html, text } = JSON.parse(result.message);
 
     console.log(`Subject: ${subject}`);
     console.log(text);
+    console.log(html);
+    fs.writeFileSync('mail.html', html, 'utf-8');
   });
 });

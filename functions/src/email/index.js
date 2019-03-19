@@ -14,6 +14,12 @@ export default new Email({
     root: path.resolve(__dirname, 'templates'),
   },
   juice: true,
+  juiceResources: {
+    preserveImportant: true,
+    webResources: {
+      relativeTo: path.resolve(__dirname, 'templates'),
+    },
+  },
   message: {
     from,
   },
