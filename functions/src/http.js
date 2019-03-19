@@ -8,7 +8,7 @@ const withError = handler => {
     try {
       await handler(req, res);
     } catch (error) {
-      console.error('Error getting waiver:', error);
+      console.error('Error:', error);
       res.status(500).send({ message: error.message });
     }
   };

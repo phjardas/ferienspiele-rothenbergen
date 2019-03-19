@@ -5,7 +5,7 @@ const config = {
   authDomain: 'ferienspiele-rothenbergen-2.firebaseapp.com',
   databaseURL: 'https://ferienspiele-rothenbergen-2.firebaseio.com',
   projectId: 'ferienspiele-rothenbergen-2',
-  storageBucket: '',
+  storageBucket: 'ferienspiele-rothenbergen-2.appspot.com',
   messagingSenderId: '527493473714',
 };
 
