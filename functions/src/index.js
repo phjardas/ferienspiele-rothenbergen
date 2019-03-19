@@ -1,6 +1,4 @@
-import admin from 'firebase-admin';
-import * as functions from 'firebase-functions';
+import waiver from './getWaiver';
+import handleRegistration from './handleRegistration';
 
-admin.initializeApp(functions.config().firebase);
-
-export const handleRegistration = require('./handleRegistration').default;
+export { handleRegistration, waiver };

@@ -1,4 +1,4 @@
-import * as admin from 'firebase-admin';
+import admin from './admin';
 import config from './config';
 
 const { maxParticipants, registrationDeadline } = config;

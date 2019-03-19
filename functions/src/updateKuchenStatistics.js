@@ -1,4 +1,4 @@
-import * as admin from 'firebase-admin';
+import admin from './admin';
 
 const registrationsColl = admin.firestore().collection('registrations');
 const kuchenDoc = admin

@@ -1,0 +1,28 @@
+h1 Ferienspiele Rothenbergen 2019
+
+p Herzlichen Dank für die Anmeldung von #{reg.child.firstName} #{reg.child.lastName} zu den Ferienspielen Rothenbergen!
+p Bitte beachten Sie, dass Sie für die vollständige Anmeldung noch folgende Schritte durchführen müssen:
+
+ol
+  li Öffnen Sie die Seite <a href="#{config.baseUrl}/anmeldung/#{reg.id}">#{config.baseUrl}/anmeldung/#{reg.id}</a>. Dort können Sie die Bankverbindung einsehen und die Einverständniserklärung ausdrucken.
+  li Bitte bezahlen Sie den Teilnahmebeitrag von € #{reg.price.total.toFixed(2)} gemäß den Anweisungen auf der obigen Seite.
+  li Bitte unterschreiben Sie die Einverständniserklärung und geben Sie sie bis zum #{formatDate(config.waiverDeadline)} bei uns ab.
+
+h2 Kuchen
+case reg.kuchen.date
+  when 'name'
+    p Sie bringen leider keinen Kuchen mit.
+  when 'geschwister'
+    p Sie bringen bereits für ein Geschwisterkind einen Kuchen mit.
+  default
+    p Sie bringen am #{formatDate(reg.kuchen.date)} eine(n) #{reg.kuchen.name} mit. Vielen Dank!
+
+h2 Übernachtung
+case reg.uebernachtung.type
+  when 'uebernachtung'
+    p #{reg.child.firstName} nimmt an der Übernachtung von Donnerstag auf Freitag teil.
+  default
+    p #{reg.child.firstName} nimmt nicht an der Übernachtung teil und wird am Donnerstag zur gewohnten Uhrzeit abgeholt.
+
+p Mit freundlichen Grüßen
+p Ihr Ferienspiele-Team
