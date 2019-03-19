@@ -5,8 +5,8 @@ describe('createWaiver', () => {
   it('should work', async () => {
     const reg = {
       child: {
-        firstName: 'Testine',
-        lastName: 'Tester',
+        firstName: 'Noah',
+        lastName: 'Schäfer',
       },
     };
 

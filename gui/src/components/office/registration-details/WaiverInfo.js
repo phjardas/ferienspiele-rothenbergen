@@ -1,9 +1,9 @@
-import { Button, Card, CardActions, CardContent, CardHeader } from '@material-ui/core';
+import { Card, CardActions, CardContent, CardHeader } from '@material-ui/core';
 import { Assignment as AssignmentIcon } from '@material-ui/icons';
 import React from 'react';
-import { printWaiver } from '../../../api/waiver';
 import Alert from '../../Alert';
 import Date from '../../Date';
+import PrintWaiverButton from '../../PrintWaiverButton';
 import SpinningButton from '../../SpinningButton';
 
 export default function WaiverInfo({ setWaiverReceived, ...registration }) {
@@ -29,9 +29,9 @@ export default function WaiverInfo({ setWaiverReceived, ...registration }) {
             Einverständnis erhalten
           </SpinningButton>
         )}
-        <Button color="primary" onClick={printWaiver}>
+        <PrintWaiverButton color="primary" registration={registration}>
           drucken
-        </Button>
+        </PrintWaiverButton>
       </CardActions>
     </Card>
   );

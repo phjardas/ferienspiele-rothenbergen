@@ -1,27 +1,27 @@
 import PDFDocument from 'pdfkit';
 import config from './config';
+import path from 'path';
 import { formatDate } from './i18n';
 
 export default function createWaiver(reg) {
   const doc = new PDFDocument({
     size: 'a4',
+    margins: { top: 30, left: 80, right: 30, bottom: 30 },
   });
 
   doc.info.Author = 'Ferienspiele Rothenbergen';
   doc.info.Title = `Einverständniserklärung für ${reg.child.firstName} ${reg.child.lastName}`;
 
-  doc
-    .font('Helvetica-Bold')
+  bold(doc)
     .fontSize(18)
     .text(`Kinderferienspiele Rothenbergen ${config.year}`);
 
-  doc
-    .font('Helvetica-Bold')
+  bold(doc)
     .fontSize(14)
     .text(`Einverständniserklärung für ${reg.child.firstName} ${reg.child.lastName}`);
   doc.moveDown();
 
-  doc.font('Helvetica').fontSize(11);
+  regular(doc).fontSize(11);
 
   createBody(reg)
     .trim()
@@ -36,6 +36,16 @@ export default function createWaiver(reg) {
     });
 
   return doc;
+}
+
+const fontsDir = path.resolve(__dirname, 'fonts');
+
+function regular(doc) {
+  return doc.font(path.resolve(fontsDir, 'OpenSans-Regular.ttf'));
+}
+
+function bold(doc) {
+  return doc.font(path.resolve(fontsDir, 'OpenSans-Bold.ttf'));
 }
 
 function createBody(reg) {

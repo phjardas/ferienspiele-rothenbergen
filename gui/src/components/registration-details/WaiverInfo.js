@@ -1,10 +1,10 @@
-import { Button, Card, CardActions, CardContent, CardHeader, Typography } from '@material-ui/core';
+import { Card, CardActions, CardContent, CardHeader, Typography } from '@material-ui/core';
 import { Assignment as AssignmentIcon } from '@material-ui/icons';
 import React from 'react';
 import config from '../../api/config';
-import { printWaiver } from '../../api/waiver';
 import Alert from '../Alert';
 import Date from '../Date';
+import PrintWaiverButton from '../PrintWaiverButton';
 
 export default function WaiverInfo(registration) {
   return (
@@ -26,9 +26,9 @@ export default function WaiverInfo(registration) {
         </Typography>
       </CardContent>
       <CardActions disableActionSpacing>
-        <Button color="primary" onClick={printWaiver}>
+        <PrintWaiverButton registration={registration} color="primary">
           Einverständniserklärung ausdrucken
-        </Button>
+        </PrintWaiverButton>
       </CardActions>
     </Card>
   );
