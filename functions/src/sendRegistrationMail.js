@@ -1,7 +1,7 @@
 import config from './config';
 import email, { helpers } from './email';
 
-export default function sendRegistrationMail(reg) {
+export default function sendRegistrationMail(reg, waiverFile) {
   return email.send({
     template: 'registration',
     message: {
