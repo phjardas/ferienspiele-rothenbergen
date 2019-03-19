@@ -5,8 +5,10 @@ cache:
   directories:
     - node_modules
     - functions/node_modules
+    - gui/node_modules
 install:
   - npm ci
   - (cd functions && npm ci)
+  - (cd gui && npm ci)
 after_script:
   - ./travis-deploy.sh

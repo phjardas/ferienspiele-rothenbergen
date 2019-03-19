@@ -1,0 +1,40 @@
+{
+  "name": "ferienspiele-rothenbergen-gui",
+  "private": true,
+  "homepage": "https://ferienspiele-rothenbergen.de/",
+  "dependencies": {
+    "@material-ui/core": "^3.9.2",
+    "@material-ui/icons": "^3.0.2",
+    "@sentry/browser": "^4.6.4",
+    "final-form": "^4.11.1",
+    "final-form-calculate": "^1.3.1",
+    "final-form-material-ui": "^0.3.0",
+    "firebase": "^5.8.3",
+    "jspdf": "^1.5.3",
+    "qs": "^6.6.0",
+    "react": "^16.8.4",
+    "react-dom": "^16.8.4",
+    "react-final-form": "^4.0.2",
+    "react-ga": "^2.5.7",
+    "react-helmet": "^5.2.0",
+    "react-router": "^4.4.0-beta.7",
+    "react-router-dom": "^4.4.0-beta.7"
+  },
+  "devDependencies": {
+    "react-scripts": "^2.1.8"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "REACT_APP_GA_PROPERTY=UA-3900768-19 REACT_APP_SENTRY_URL=https://6114124771e742b8a5e48e5b12ce0905@sentry.io/1415840 REACT_APP_COMMIT_HASH=$(git rev-parse HEAD) react-scripts build",
+    "test": "echo 'No tests'"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
+}
