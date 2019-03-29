@@ -3,22 +3,24 @@ import createWaiverDoc from './waiver';
 
 const bucket = admin.storage().bucket();
 
-export default async function createWaiver(reg) {
-  const file = bucket.file(`waiver-${reg.id}.pdf`);
+export default async function createWaiver(reg, format) {
+  const file = bucket.file(`waiver-${reg.id}.${format}`);
 
   const [exists] = await file.exists();
   if (!exists) {
     console.info('Creating waiver for %s', reg.id);
     await new Promise((resolve, reject) => {
-      const waiver = createWaiverDoc(reg);
+      const waiver = createWaiverDoc(reg, format);
       const out = file.createWriteStream({
-        contentType: 'application/pdf',
+        contentType: format === 'pdf' ? 'application/pdf' : 'text/html',
       });
+
       waiver
         .pipe(out)
         .on('finish', resolve)
         .on('error', reject);
-      waiver.end();
+
+      typeof waiver.end === 'function' && waiver.end();
     });
   }
 

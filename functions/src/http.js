@@ -9,7 +9,10 @@ const withError = handler => {
       await handler(req, res);
     } catch (error) {
       console.error('Error:', error);
-      res.status(500).send({ message: error.message });
+      res.status(500).send({
+        message: error.message,
+        stack: error.stack,
+      });
     }
   };
 };

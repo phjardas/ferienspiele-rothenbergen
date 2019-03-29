@@ -19,7 +19,8 @@
     "react-helmet": "^5.2.0",
     "react-router": "^4.4.0-beta.7",
     "react-router-dom": "^4.4.0-beta.7",
-    "unfetch": "^4.1.0"
+    "unfetch": "^4.1.0",
+    "whatwg-fetch": "^3.0.0"
   },
   "devDependencies": {
     "react-scripts": "^2.1.8"

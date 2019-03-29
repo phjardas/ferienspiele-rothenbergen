@@ -1,5 +1,4 @@
 import { Grid, Typography } from '@material-ui/core';
-import { Mail as MailIcon, Phone as PhoneIcon } from '@material-ui/icons';
 import React from 'react';
 import H2 from '../components/H2';
 import H3 from '../components/H3';
@@ -30,11 +29,9 @@ export default function Imprint() {
             <br /> 63584 Gründau-Rothenbergen
           </Typography>
           <Typography paragraph>
-            <PhoneIcon />
             <a href="tel:+4960512649">06051 2649</a>
             <br />
-            <MailIcon />
-            <a href="mailto:Karl-Heinz.Rothlaender@EmK-Grossenhausen.de">Karl-Heinz.Rothlaender@EmK-Grossenhausen.de</a>
+            <a href="mailto:gillian.horton-krueger@emk.de">gillian.horton-krueger@emk.de</a>
           </Typography>
         </Grid>
         <Grid item lg={4}>
@@ -44,17 +41,16 @@ export default function Imprint() {
           <Typography paragraph>Verantwortlich für redaktionelle Beiträge:</Typography>
 
           <Typography paragraph>
-            <strong>Karl-Heinz Rothländer</strong>
-            <br /> Am Storksberg 1
-            <br /> 63589 Linsengericht-Altenhasslau
+            <strong>Gillian Horton-Krüger</strong>
+            <br /> Evangelisch-methodistische Kirche
+            <br /> Kirchbergstraße 8-10
+            <br /> 63584 Gründau-Rothenbergen
           </Typography>
 
           <Typography paragraph>
-            <PhoneIcon />
             <a href="tel:+4960512649">06051 2649</a>
             <br />
-            <MailIcon />
-            <a href="mailto:Karl-Heinz.Rothlaender@EmK-Grossenhausen.de">Karl-Heinz.Rothlaender@EmK-Grossenhausen.de</a>
+            <a href="mailto:gillian.horton-krueger@emk.de">gillian.horton-krueger@emk.de</a>
           </Typography>
         </Grid>
         <Grid item lg={4}>

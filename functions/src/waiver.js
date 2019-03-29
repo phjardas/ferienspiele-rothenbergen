@@ -1,16 +1,29 @@
-import PDFDocument from 'pdfkit';
-import config from './config';
 import path from 'path';
+import PDFDocument from 'pdfkit';
+import { Readable } from 'stream';
+import config from './config';
 import { formatDate } from './i18n';
 
-export default function createWaiver(reg) {
+export default function createWaiver(reg, format) {
+  switch (format) {
+    case 'pdf':
+      return createPDF(reg);
+    case 'html':
+      return createHTML(reg);
+    default:
+      throw new Error(`Unsupported waiver format: ${format}`);
+  }
+}
+
+function createPDF(reg) {
   const doc = new PDFDocument({
     size: 'a4',
-    margins: { top: 30, left: 80, right: 30, bottom: 30 },
+    margins: { top: 40, left: 80, right: 40, bottom: 30 },
   });
 
-  doc.info.Author = 'Ferienspiele Rothenbergen';
-  doc.info.Title = `Einverständniserklärung für ${reg.child.firstName} ${reg.child.lastName}`;
+  const title = `Einverständniserklärung für ${reg.child.firstName} ${reg.child.lastName}`;
+  doc.info.Author = 'Kinderferienspiele Rothenbergen';
+  doc.info.Title = title;
 
   bold(doc)
     .fontSize(18)
@@ -18,24 +31,35 @@ export default function createWaiver(reg) {
 
   bold(doc)
     .fontSize(14)
-    .text(`Einverständniserklärung für ${reg.child.firstName} ${reg.child.lastName}`);
+    .text(title);
   doc.moveDown();
 
   regular(doc).fontSize(11);
 
-  createBody(reg)
-    .trim()
-    .split(/\n/)
-    .map(line => line.trim())
-    .forEach(line => {
-      if (line.length) {
-        doc.text(line);
-      } else {
-        doc.moveDown();
-      }
+  const appendLines = lines =>
+    lines.forEach(line => {
+      doc.text(line);
+      doc.moveDown();
     });
 
+  appendLines(createBody(reg));
+  doc.moveDown();
+  doc.moveDown();
+  doc.moveDown();
+  doc.moveDown();
+  doc.moveDown();
+  appendLines(createFooter(reg));
+
   return doc;
+}
+
+function createHTML(reg) {
+  const s = new Readable();
+  createBody(reg)
+    .map(line => `<p>${line}</p>`)
+    .forEach(line => s.push(line));
+  s.push(null);
+  return s;
 }
 
 const fontsDir = path.resolve(__dirname, 'fonts');
@@ -50,9 +74,11 @@ function bold(doc) {
 
 function createBody(reg) {
   return `
-Hiermit erkläre ich mich einverstanden, dass ${reg.child.firstName} ${
-    reg.child.lastName
-  } an den Kinderferienspielen Rothenbergen vom ${formatDate(config.startDate)} bis ${formatDate(config.endDate)} teilnehmen darf.
+Hiermit erkläre ich mich einverstanden, dass mein Kind an den Kinderferienspielen Rothenbergen vom ${formatDate(
+    config.startDate
+  )} bis ${formatDate(config.endDate)} ${
+    reg.uebernachtung && reg.uebernachtung.type === 'uebernachtung' ? 'mit anschließender Übernachtung ' : ''
+  }teilnehmen darf.
 
 Mir ist bekannt, dass die Anmeldung erst gültig ist, wenn diese Einverständniserklärung unterschrieben vorliegt und alle notwendigen Zahlungen geleistet sind.
 
@@ -72,13 +98,14 @@ Meine Angaben in Bezug auf Allergien und Unverträglichkeiten sind vollständig.
 
 Die Veranstalter haften nicht für den Verlust oder die Beschädigung von Gegenständen.
 
-Es werden während der Ferienspiele Fotos gemacht. Ich bin mit deren Veröffentlichung auf den Homepages und in den Gemeindebriefen der drei ausrichtenden Kirchengemeinden einverstanden.
+Es werden während der Ferienspiele Fotos gemacht. Ich bin mit deren Veröffentlichung auf den Homepages und in den Gemeindebriefen der drei ausrichtenden Kirchengemeinden einverstanden.`
+    .split(/\n/)
+    .map(line => line.trim())
+    .filter(line => line.length);
+}
 
-
-
-
-
-
+function createFooter() {
+  return `
 Datum, Unterschrift
 
 Bitte schicken Sie diese Einverständniserklärung bis zum ${formatDate(
@@ -87,5 +114,8 @@ Bitte schicken Sie diese Einverständniserklärung bis zum ${formatDate(
 
 Büro der Katholischen Kirche "Christkönig", Niedergründauer Straße 20, 63584 Rothenbergen, Einwurf in den Briefkasten genügt.
 
-Sie können das Geld und die Einverständniserklärung auch im Sekretariat der Anton Calaminus Schule in Rothenbergen abgeben.`;
+Sie können das Geld und die Einverständniserklärung auch im Sekretariat der Anton Calaminus Schule in Rothenbergen abgeben.`
+    .split(/\n/)
+    .map(line => line.trim())
+    .filter(line => line.length);
 }

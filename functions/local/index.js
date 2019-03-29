@@ -12,4 +12,4 @@ const waiver = require('../build/getWaiver').default;
 
 const app = express();
 app.use('/waiver', waiver);
-app.listen(3000, () => console.log('ready'));
+app.listen(3001, () => console.log('ready'));

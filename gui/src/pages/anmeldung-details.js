@@ -19,7 +19,7 @@ export default function AnmeldungDetails() {
     setState({ loading: true });
     getRegistration(id, (error, registration) => {
       setState({ loading: false, error, registration });
-      setPage({ title: `${registration.child.firstName} ${registration.child.lastName}` });
+      registration && setPage({ title: `${registration.child.firstName} ${registration.child.lastName}` });
     });
   }, [id]);
 

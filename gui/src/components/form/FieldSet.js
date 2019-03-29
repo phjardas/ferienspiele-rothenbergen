@@ -4,7 +4,7 @@ import React from 'react';
 function FieldSet({ icon, title, subtitle, children, classes }) {
   return (
     <Card className={classes.root}>
-      <CardHeader avatar={icon} title={title} subheader={subtitle} />
+      {title && <CardHeader avatar={icon} title={title} subheader={subtitle} />}
       <CardContent>{children}</CardContent>
     </Card>
   );

@@ -16,6 +16,8 @@ import './styles.css';
 import ThemeProvider from './Theme';
 
 const Impressum = lazy(() => import('./pages/impressum'));
+const Datenschutz = lazy(() => import('./pages/datenschutz'));
+const Teilnahmebedingungen = lazy(() => import('./pages/teilnahmebedingungen'));
 const Anmeldung = lazy(() => import('./pages/anmeldung'));
 const AnmeldungDetails = lazy(() => import('./pages/anmeldung-details'));
 const SignIn = lazy(() => import('./pages/signin'));
@@ -42,6 +44,8 @@ export default function App() {
                         <Route path="/anmeldung/:id" component={AnmeldungDetails} />
                         <Route path="/anmeldung" component={Anmeldung} />
                         <Route path="/impressum" component={Impressum} />
+                        <Route path="/datenschutz" component={Datenschutz} />
+                        <Route path="/teilnahmebedingungen" component={Teilnahmebedingungen} />
                         <ProtectedRoute path="/office" allowed={isOfficeUser} component={Office} />
                         <Route component={NotFound} />
                       </Switch>

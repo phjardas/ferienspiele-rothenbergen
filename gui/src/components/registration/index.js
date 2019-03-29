@@ -4,6 +4,7 @@ import { Form } from 'react-final-form';
 import { createTestData } from '../../api/testdata';
 import Actions from './Actions';
 import Child from './Child';
+import Consent from './Consent';
 import EmergencyContact from './EmergencyContact';
 import Kuchen from './Kuchen';
 import Parents from './Parents';
@@ -46,6 +47,7 @@ export default function Registration({ initialValues: originalValues, onSubmit }
           <Uebernachtung />
           <Kuchen />
           <Price />
+          <Consent />
           <Actions invalid={invalid} submitting={submitting} submitError={submitError} />
         </form>
       )}
