@@ -5,7 +5,7 @@ export default {
   year: 2019,
   startDate: new Date('2019-07-01'),
   endDate: new Date('2019-07-05'),
-  registrationStart: new Date('2019-04-01'),
+  registrationStart: new Date('2019-04-03'),
   registrationDeadline: new Date('2019-06-01'),
   waiverDeadline: new Date('2019-06-15'),
   maxParticipants: 45,
