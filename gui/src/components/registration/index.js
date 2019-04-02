@@ -1,7 +1,6 @@
 import { FORM_ERROR } from 'final-form';
 import React, { useState } from 'react';
 import { Form } from 'react-final-form';
-import { createTestData } from '../../api/testdata';
 import Actions from './Actions';
 import Child from './Child';
 import Consent from './Consent';
@@ -12,6 +11,8 @@ import Price from './Price';
 import { priceCalculator, withPrice } from './priceCalculator';
 import Uebernachtung from './Uebernachtung';
 import Welcome from './Welcome';
+
+const createTestData = null;
 
 const emptyValues = {
   child: {},
