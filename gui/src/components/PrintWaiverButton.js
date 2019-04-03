@@ -1,4 +1,3 @@
-import * as Sentry from '@sentry/browser';
 import React, { useState } from 'react';
 import { createWaiver } from '../api/waiver';
 import SpinningButton from './SpinningButton';
@@ -14,7 +13,6 @@ export default function PrintWaiverButton({ registration, ...rest }) {
       setLoading(false);
     } catch (error) {
       console.error('Error printing waiver:', error);
-      Sentry.captureException(error);
       alert('Beim Drucken der Einverständniserklärung ist leider ein Fehler aufgetreten.');
       setLoading(false);
     }
