@@ -30,9 +30,6 @@ export default function PriceInfo({ child, price }) {
           Niedergründauer Straße 20 <br />
           63584 Rothenbergen
         </Typography>
-        <Typography paragraph>
-          Sie können das Geld und die Einverstädniserklärung auch im Sekretariat der Anton Calaminus Schule in Rothenbergen abgeben.
-        </Typography>
       </CardContent>
     </Card>
   );

@@ -112,9 +112,7 @@ Bitte schicken Sie diese Einverständniserklärung bis zum ${formatDate(
     config.waiverDeadline
   )} unterschrieben an das Gemeindebüro der katholischen Kirche oder geben sie in einem verschlossenen Umschlag dort ab.
 
-Büro der Katholischen Kirche "Christkönig", Niedergründauer Straße 20, 63584 Rothenbergen, Einwurf in den Briefkasten genügt.
-
-Sie können das Geld und die Einverständniserklärung auch im Sekretariat der Anton Calaminus Schule in Rothenbergen abgeben.`
+Büro der Katholischen Kirche "Christkönig", Niedergründauer Straße 20, 63584 Rothenbergen, Einwurf in den Briefkasten genügt.`
     .split(/\n/)
     .map(line => line.trim())
     .filter(line => line.length);

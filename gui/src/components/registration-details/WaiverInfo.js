@@ -21,9 +21,6 @@ export default function WaiverInfo(registration) {
           </strong>{' '}
           unterschrieben an uns zurück oder bringen Sie sie im Gemeindebüro vorbei.
         </Typography>
-        <Typography paragraph>
-          Sie können das Geld und die Einverstädniserklärung auch im Sekretariat der Anton Calaminus Schule in Rothenbergen abgeben.
-        </Typography>
       </CardContent>
       <CardActions disableActionSpacing>
         <PrintWaiverButton registration={registration} color="primary">
