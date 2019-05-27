@@ -17,5 +17,10 @@ const labels = {
 };
 
 export default function GenderIcon({ gender, label, ...props }) {
-  return <LabelIcon icon={icons[gender]} label={label && labels[gender]} {...props} />;
+  const icon = icons[gender];
+  if (!icon) {
+    console.error(`Invalid gender: ${gender}`);
+    return null;
+  }
+  return <LabelIcon icon={icon} label={label && labels[gender]} {...props} />;
 }
