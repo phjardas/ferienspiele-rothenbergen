@@ -6,7 +6,6 @@ import Date from '../../Date';
 import GenderIcon from '../../GenderIcon';
 import ShirtSize from '../../ShirtSize';
 import KuchenInfo from './KuchenInfo';
-import UebernachtungInfo from './UebernachtungInfo';
 
 export default function ChildInfo({ registration }) {
   return (
@@ -67,9 +66,9 @@ export default function ChildInfo({ registration }) {
           <CardContent>
             <KuchenInfo kuchen={registration.kuchen} />
           </CardContent>
-          <CardContent>
+          {/* <CardContent>
             <UebernachtungInfo uebernachtung={registration.uebernachtung} />
-          </CardContent>
+          </CardContent> */}
         </Card>
       </Grid>{' '}
     </>

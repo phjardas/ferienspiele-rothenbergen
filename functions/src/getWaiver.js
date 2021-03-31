@@ -32,7 +32,7 @@ async function getRegistration(registrationId) {
   }
 
   const doc = await registrationsColl.doc(registrationId).get();
-  if (!doc.exists) return res.status(404).end();
+  if (!doc.exists) throw new Error('Anmeldung nicht gefunden');
 
   return { ...doc.data(), id: doc.id };
 }

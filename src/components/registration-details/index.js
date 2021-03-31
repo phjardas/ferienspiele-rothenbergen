@@ -8,7 +8,6 @@ import Date from '../Date';
 import H3 from '../H3';
 import KuchenInfo from './KuchenInfo';
 import PriceInfo from './PriceInfo';
-import UebernachtungInfo from './UebernachtungInfo';
 import WaiverInfo from './WaiverInfo';
 
 function createSiblingRegistrationLink(reg) {
@@ -52,10 +51,10 @@ export default function RegistrationDetails({ registration }) {
           <H3>Kuchen</H3>
           <KuchenInfo {...registration} />
         </Grid>
-        <Grid item xs={12}>
+        {/* <Grid item xs={12}>
           <H3>Übernachtung</H3>
           <UebernachtungInfo {...registration} />
-        </Grid>
+        </Grid> */}
       </Grid>
     </>
   );
