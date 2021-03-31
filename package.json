@@ -17,7 +17,8 @@
     "prettier": "^2.2.1"
   },
   "scripts": {
-    "deploy": "firebase deploy"
+    "deploy": "firebase deploy",
+    "test": "echo 'No tests'"
   },
   "lint-staged": {
     "src/**/*.{js,jsx}": [
