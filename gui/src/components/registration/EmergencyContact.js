@@ -1,9 +1,9 @@
 import { Grid } from '@material-ui/core';
 import { LocalHospital as HospitalIcon } from '@material-ui/icons';
-import { TextField } from 'final-form-material-ui';
 import React from 'react';
 import { Field } from 'react-final-form';
 import FieldSet from '../form/FieldSet';
+import TextField from '../form/TextField';
 import { required } from '../form/validation';
 
 export default function EmergencyContact() {
@@ -13,7 +13,7 @@ export default function EmergencyContact() {
       title="Notfallkontakt"
       subtitle="Bitte geben Sie hier ein, wen wir im Falle eines Notfalles anrufen sollen."
     >
-      <Grid container spacing={24}>
+      <Grid container spacing={2}>
         <Grid item xs={12} md={6}>
           <Field name="emergencyContact.name" component={TextField} label="Name" required fullWidth validate={required} />
         </Grid>

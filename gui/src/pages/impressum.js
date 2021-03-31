@@ -17,7 +17,7 @@ export default function Imprint() {
         Evangelisch-methodistische Kirche – Friedenskirche
       </Typography>
 
-      <Grid container spacing={24}>
+      <Grid container spacing={2}>
         <Grid item lg={4}>
           <H3>
             Betreiberin <small>gem. § 5 TMG</small>

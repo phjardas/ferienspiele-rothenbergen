@@ -73,10 +73,14 @@ function Anmeldungen({ classes }) {
   return (
     <>
       <Typography paragraph>
-        Es gibt insgesamt <strong>{registrations.length} Anmeldungen</strong>. <ExportButton registrations={registrations} />
+        Es gibt insgesamt{' '}
+        <strong>
+          {registrations.length} Anmeldung{registrations.length === 1 ? '' : 'en'}
+        </strong>
+        . <ExportButton registrations={registrations} />
       </Typography>
       {(paymentsMissing > 0 || waiversMissing > 0) && (
-        <Alert color="info">
+        <Alert color="info" gutterBottom>
           Es {paymentsMissing + waiversMissing === 1 ? 'fehlt' : 'fehlen'} noch{' '}
           {paymentsMissing > 0 && `${paymentsMissing} ${paymentsMissing === 1 ? 'Teilnahmebeitrag' : 'Teilnahmebeiträge'}`}{' '}
           {waiversMissing > 0 &&
@@ -86,7 +90,7 @@ function Anmeldungen({ classes }) {
           .
         </Alert>
       )}
-      <Table padding="dense">
+      <Table>
         <TableHead>
           <TableRow>
             {columns.map((col, i) => (

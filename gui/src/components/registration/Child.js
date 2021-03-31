@@ -1,12 +1,13 @@
 import { Grid, MenuItem } from '@material-ui/core';
 import { ChildCare as ChildIcon } from '@material-ui/icons';
-import { Select, TextField } from 'final-form-material-ui';
 import React from 'react';
 import { Field } from 'react-final-form';
 import config from '../../api/config';
 import FieldSet from '../form/FieldSet';
 import Radios from '../form/Radios';
+import Select from '../form/Select';
 import Switch from '../form/Switch';
+import TextField from '../form/TextField';
 import { required } from '../form/validation';
 
 export default function Child() {
@@ -20,7 +21,7 @@ export default function Child() {
         </>
       }
     >
-      <Grid container spacing={24}>
+      <Grid container spacing={2}>
         <Grid item xs={12} md={6}>
           <Field name="child.firstName" component={TextField} label="Vorname" required fullWidth validate={required} />
         </Grid>

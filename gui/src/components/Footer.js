@@ -4,29 +4,26 @@ import { Link } from 'react-router-dom';
 
 function Footer({ classes }) {
   return (
-    <footer className={classes.root}>
-      <Typography color="inherit">
-        Eine Veranstaltung der{' '}
-        <a href="http://www.kirche-aufdemberg.de/kinder-und-jugend/ferienspiele/index.html">Ev. Kirchengemeinde "Auf dem Berg"</a>, der{' '}
-        <a href="http://www.emk-rothenbergen.de/Ferienspiele/">Ev.-methodistischen Kirche Rothenbergen</a> und der{' '}
-        <a href="http://kath-kirche-mhg.de/">Kath. Kirchengemeinde Christkönig</a> – <Link to="/impressum">Impressum</Link> –{' '}
-        <Link to="/datenschutz">Datenschutz</Link>
-      </Typography>
-    </footer>
+    <Typography component="footer" variant="caption" className={classes.root}>
+      Eine Veranstaltung der{' '}
+      <a href="http://www.kirche-aufdemberg.de/kinder-und-jugend/ferienspiele/index.html">Ev. Kirchengemeinde "Auf dem Berg"</a>, der{' '}
+      <a href="http://www.emk-rothenbergen.de/Ferienspiele/">Ev.-methodistischen Kirche Rothenbergen</a> und der{' '}
+      <a href="http://kath-kirche-mhg.de/">Kath. Kirchengemeinde Christkönig</a> – <Link to="/impressum">Impressum</Link> –{' '}
+      <Link to="/datenschutz">Datenschutz</Link>
+    </Typography>
   );
 }
 
 const styles = ({ breakpoints, palette, spacing }) => ({
   root: {
-    padding: `${spacing.unit}px ${spacing.unit * 2}px`,
-    color: palette.text.secondary,
+    padding: `${spacing(1)}px ${spacing(2)}px`,
     borderTop: `1px solid ${palette.grey[400]}`,
     '& a': {
       color: 'inherit',
     },
     [breakpoints.up('lg')]: {
       padding: 0,
-      marginTop: spacing.unit,
+      marginTop: spacing(1),
       border: 0,
     },
   },

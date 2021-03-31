@@ -36,7 +36,7 @@ function ConsentCheckbox({ name, info, modalTitle, modalContent, ...props }) {
 export default function Consent() {
   return (
     <FieldSet>
-      <Grid container spacing={24}>
+      <Grid container spacing={2}>
         <Grid item>
           <ConsentCheckbox
             name="consent.teilnahmebedingungen"

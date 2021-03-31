@@ -70,7 +70,7 @@ const styles = ({ spacing }) => ({
     maxWidth: 300,
   },
   signUpButton: {
-    marginTop: spacing.unit * 2,
+    marginTop: spacing(2),
   },
 });
 

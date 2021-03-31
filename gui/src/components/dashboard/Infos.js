@@ -9,19 +9,21 @@ export default function Infos() {
   const { startDate, endDate, prices } = config;
 
   return (
-    <Grid container spacing={24}>
+    <Grid container spacing={4}>
       <Grid item xs={12} lg={4}>
         <H3>Das Programm</H3>
         <Typography paragraph>
-          Fünf Tage lang dreht sich bei den Ferienspielen in Rothenbergen alles um die Helden des Alltags. Ein Höhepunkt der Woche wird
-          unsere Übernachtung in der Bergkirche sein.
+          „In 5 Tagen um die Welt“ – so lautet das Thema der ökumenischen Ferienspiele für Rothenbergen und Niedergründau, die dieses Jahr
+          wieder stattfinden sollen. Wir wollen mit den Kinder spielerisch auf eine Weltreise gehen. Wir wollen rauskriegen, was man an
+          anderen Orten der Welt so isst, mit was man spielt, was für Musik man macht und vieles mehr. Die Ferienspiele bieten in gewohnter
+          Weise eine bunte Mischung aus sportlichen Aktionen, Basteln und Spielen. Natürlich immer unter der Voraussetzung, dass die
+          Pandemie-Situation es im Sommer zulässt, dass Ferienspiel durchgeführt werden können.
         </Typography>
 
-        <H3>Wann genau?</H3>
         <Typography paragraph>
-          Von <Date value={startDate} /> bis <Date value={endDate} /> sind wir jeweils von 9.30 Uhr bis 17.00 Uhr für Euch da. Am Donnerstag
-          könnt Ihr zusätzlich an einer Übernachtung teilnehmen. Am Freitag um 17 Uhr ist noch längst nicht Schluss – sondern wir laden Eure
-          Familien zum Abschlussgottesdienst und anschließendem Grillfest ein!
+          Und natürlich wird in diesem Jahr wegen Corona einiges anders sein als sonst, so werden wir viel in Kleingruppen machen und auf
+          eine Übernachtung, einen Ausflug und ein Abschlussfest verzichten. Ort der Ferienspiele ist erstmalig das Gelände rund um die
+          Bergkirche.
         </Typography>
       </Grid>
 
@@ -36,14 +38,27 @@ export default function Infos() {
           Pfarrerin Caroline Miesner (ev. Kirchengemeinde Auf dem Berg), Pastorin Gillian Horton-Krüger (Evangelisch-methodistische
           Friedenskirche) und Gemeindereferentin Rita Kunzmann (kath. Gemeinde Christkönig).
         </Typography>
+
+        <H3>COVID-19</H3>
+        <Typography paragraph>
+          Wegen Corona möchte wir bei der Zuteilung der Gruppen darauf achten, dass Geschwisterkinder und befreundete Kinder, die auch sonst
+          viel gemeinsam unternehmen oder in einer Klasse sind, zusammen in eine Gruppe kommen. Geben Sie dies deshalb bei der Anmeldung mit
+          an.
+        </Typography>
       </Grid>
 
       <Grid item xs={12} lg={4}>
+        <H3>Wann genau?</H3>
+        <Typography paragraph>
+          Von <Date value={startDate} /> bis <Date value={endDate} /> sind wir jeweils von 9.00 Uhr bis 16.00 Uhr für Euch da. Am Freitag
+          endet die Ferienspielwoche mit einem Gottesdienst am frühen Nachmittag.
+        </Typography>
+
         <H3>Wo genau?</H3>
         <Typography paragraph>
-          Auf dem Gelände der Evangelisch-methodistischen Friedenskirche Rothenbergen,{' '}
-          <a href="https://goo.gl/maps/HmJgc" target="_blank" rel="noopener noreferrer">
-            Kirchbergstraße 10
+          Auf dem Gelände der evangelischen Bergkirche in Niedergründau,{' '}
+          <a href="https://goo.gl/maps/ZH62ALCbZyurS5sR9" target="_blank" rel="noopener noreferrer">
+            Schieferbergstr. 33
           </a>
           .
         </Typography>

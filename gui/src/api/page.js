@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import React, { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import { useRouter } from './router';
 
 const site = 'Ferienspiele Rothenbergen';
@@ -14,17 +14,25 @@ export function PageContextProvider({ children }) {
   const { history } = useRouter();
   const [page, setPage] = useState(defaultPage);
 
-  useEffect(() => history.listen(() => setPage(defaultPage)), []);
+  useEffect(() => history.listen(() => setPage(defaultPage)), [history]);
 
-  const context = {
-    ...page,
-    setPage: d =>
+  const doSetPage = useCallback(
+    d =>
       setPage({
         ...defaultPage,
         ...d,
         back: d.back || (d.title && { to: '/' }),
       }),
-  };
+    []
+  );
+
+  const context = useMemo(
+    () => ({
+      ...page,
+      setPage: doSetPage,
+    }),
+    [page, doSetPage]
+  );
 
   return <Context.Provider value={context}>{children}</Context.Provider>;
 }

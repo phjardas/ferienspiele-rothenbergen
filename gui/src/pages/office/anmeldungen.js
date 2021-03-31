@@ -7,7 +7,7 @@ export default function OfficeAnmeldungen() {
 
   useEffect(() => {
     setPage({ title: 'Anmeldungen' });
-  }, []);
+  }, [setPage]);
 
   return <Anmeldungen />;
 }

@@ -17,7 +17,7 @@ export default function Kuchen() {
   const byDate = registrations.reduce((acc, reg) => ({ ...acc, [reg.kuchen.date]: [...(acc[reg.kuchen.date] || []), reg] }), {});
 
   return (
-    <Grid container spacing={24}>
+    <Grid container spacing={2}>
       {config.kuchen.map(req => (
         <Grid key={req.date} item xs={12}>
           <KuchenStatistics date={req.date} required={req.amount} actual={byDate[req.date] || []} />

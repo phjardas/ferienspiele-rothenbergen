@@ -20,7 +20,7 @@ ButtonLink.defaultProps = {
 
 const styles = ({ spacing }) => ({
   icon: {
-    marginRight: spacing.unit,
+    marginRight: spacing(1),
   },
 });
 

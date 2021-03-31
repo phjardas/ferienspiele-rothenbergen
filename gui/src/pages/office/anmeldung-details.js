@@ -25,7 +25,7 @@ export default function AnmeldungDetails() {
         back: { to: '/office/anmeldungen' },
       });
     });
-  }, [id]);
+  }, [id, setPage]);
 
   if (loading) return <GlobalLoader />;
   if (error) return <Alert color="error">{error.message}</Alert>;

@@ -1,7 +1,7 @@
 import { withStyles } from '@material-ui/core';
-import { TextField } from 'final-form-material-ui';
 import React from 'react';
 import { Field } from 'react-final-form';
+import TextField from '../form/TextField';
 import { required as validateRequired } from '../form/validation';
 
 function SignInField({ required, classes, ...props }) {
@@ -18,10 +18,10 @@ function SignInField({ required, classes, ...props }) {
   );
 }
 
-const styles = ({ spacing }) => ({
+const styles = {
   hidden: {
     display: 'none',
   },
-});
+};
 
 export default withStyles(styles)(SignInField);

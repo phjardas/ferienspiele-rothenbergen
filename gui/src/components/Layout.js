@@ -24,7 +24,7 @@ const styles = ({ breakpoints, mixins, palette, shadows, shape, spacing, transit
     display: 'flex',
     flexDirection: 'column',
     [breakpoints.up('lg')]: {
-      padding: `${spacing.unit * 4}px 0`,
+      padding: `${spacing(4)}px 0`,
       alignItems: 'center',
     },
   },
@@ -33,18 +33,18 @@ const styles = ({ breakpoints, mixins, palette, shadows, shape, spacing, transit
     display: 'flex',
     flexDirection: 'column',
     [breakpoints.up('lg')]: {
-      width: breakpoints.values.lg - spacing.unit * 4,
+      width: breakpoints.values.lg - spacing(4),
       boxShadow: shadows[4],
       backgroundColor: palette.background.paper,
       borderRadius: shape.borderRadius,
     },
   },
   mainMenuWithHero: {
-    background: 'transparent',
+    background: 'rgba(255, 255, 255, .75)',
     boxShadow: 'none',
     transition: `background ${transitions.duration.short}ms ${transitions.easing.sharp}`,
     '&:hover': {
-      background: 'rgba(0, 0, 0, 0.2)',
+      background: 'rgba(0, 0, 0, 0.5)',
     },
   },
   hero: {
@@ -57,8 +57,8 @@ const styles = ({ breakpoints, mixins, palette, shadows, shape, spacing, transit
     flexGrow: 1,
     position: 'relative',
     ...mixins.gutters(),
-    paddingTop: spacing.unit * 3,
-    paddingBottom: spacing.unit * 3,
+    paddingTop: spacing(3),
+    paddingBottom: spacing(3),
   },
 });
 

@@ -1,5 +1,5 @@
-import { Grid, Typography } from '@material-ui/core';
-import { Warning as WarningIcon } from '@material-ui/icons';
+import { Grid } from '@material-ui/core';
+import { Check as SuccessIcon, Warning as WarningIcon } from '@material-ui/icons';
 import qs from 'qs';
 import React from 'react';
 import Alert from '../Alert';
@@ -28,11 +28,11 @@ export default function RegistrationDetails({ registration }) {
 
   return (
     <>
-      <Grid container spacing={24}>
+      <Grid container spacing={2}>
         <Grid item xs={12}>
-          <Typography paragraph variant="body1">
+          <Alert color="info" icon={SuccessIcon} gutterBottom>
             Hurra! Sie haben {child.firstName} am <Date value={registeredAt} /> zu den Ferienspielen {year} angemeldet.
-          </Typography>
+          </Alert>
           <ButtonLink to={createSiblingRegistrationLink(registration)} color="primary" variant="contained">
             Geschwisterkind anmelden
           </ButtonLink>

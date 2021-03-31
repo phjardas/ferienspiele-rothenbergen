@@ -1,10 +1,10 @@
 import { withStyles } from '@material-ui/core';
 import React from 'react';
 
-function Alert({ color, icon, children, className, classes }) {
+function Alert({ color, icon, children, gutterBottom, className, classes }) {
   const Icon = icon;
   return (
-    <div className={`${classes.root} ${classes[color]} ${className || ''}`}>
+    <div className={`${classes.root} ${classes[color]} ${gutterBottom && classes.gutterBottom} ${className || ''}`}>
       {Icon && <Icon className={classes.icon} />}
       <div>{children}</div>
     </div>
@@ -14,7 +14,7 @@ function Alert({ color, icon, children, className, classes }) {
 const styles = ({ palette, spacing, typography }) => ({
   root: {
     ...typography.body1,
-    padding: spacing.unit * 2,
+    padding: spacing(2),
     display: 'flex',
     alignItems: 'flex-start',
   },
@@ -30,7 +30,10 @@ const styles = ({ palette, spacing, typography }) => ({
     },
   },
   icon: {
-    marginRight: spacing.unit,
+    marginRight: spacing(1),
+  },
+  gutterBottom: {
+    marginBottom: spacing(2),
   },
 });
 

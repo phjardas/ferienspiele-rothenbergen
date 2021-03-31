@@ -1,4 +1,4 @@
-import { Grid, Typography, withStyles } from '@material-ui/core';
+import { Typography, withStyles } from '@material-ui/core';
 import React from 'react';
 import config from '../../api/config';
 import Date from '../Date';
@@ -9,33 +9,32 @@ const { title, startDate, endDate } = config;
 
 function Hero({ classes }) {
   return (
-    <Grid container>
-      <Grid item xs={12} lg={6} className={classes.content}>
-        <H2 variant="h2" className={classes.heading}>
-          {title}
-        </H2>
-        <Typography variant="h5" paragraph>
-          Ökumenische Ferienspiele in Rothenbergen
-        </Typography>
-        <Typography variant="body1" paragraph>
-          Von <Date value={startDate} /> bis <Date value={endDate} />
-        </Typography>
-        <RegistrationStatus />
-      </Grid>
-    </Grid>
+    <div className={classes.content}>
+      <H2 variant="h2" className={classes.heading}>
+        {title}
+      </H2>
+      <Typography variant="h5" paragraph>
+        Ökumenische Ferienspiele in Rothenbergen
+      </Typography>
+      <Typography variant="body1" paragraph>
+        Von <Date value={startDate} /> bis <Date value={endDate} />
+      </Typography>
+      <RegistrationStatus />
+    </div>
   );
 }
 
 const styles = ({ breakpoints, mixins, spacing }) => ({
   heading: {
     [breakpoints.up('lg')]: {
-      marginTop: spacing.unit * 30,
+      marginTop: spacing(30),
     },
   },
   content: {
     ...mixins.gutters(),
-    paddingTop: spacing.unit * 3,
-    paddingBottom: spacing.unit * 3,
+    paddingTop: spacing(3),
+    paddingBottom: spacing(3),
+    background: 'rgba(255, 255, 255, .75)',
   },
 });
 

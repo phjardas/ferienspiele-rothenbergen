@@ -1,6 +1,5 @@
 import { CircularProgress, Grid, List, ListItem, ListItemText, Typography } from '@material-ui/core';
 import { Cake as CakeIcon } from '@material-ui/icons';
-import { TextField } from 'final-form-material-ui';
 import React from 'react';
 import { Field } from 'react-final-form';
 import config from '../../api/config';
@@ -10,6 +9,7 @@ import Date from '../Date';
 import Condition from '../form/Condition';
 import FieldSet from '../form/FieldSet';
 import Radios from '../form/Radios';
+import TextField from '../form/TextField';
 import { required } from '../form/validation';
 
 function isKuchenSelected(date) {
@@ -46,7 +46,7 @@ function KuchenInfo({ date }) {
 export default function Kuchen() {
   return (
     <FieldSet icon={<CakeIcon />} title="Kuchen">
-      <Grid container spacing={24}>
+      <Grid container spacing={2}>
         <Grid item xs={12}>
           <Typography>
             Um die Ferienspiele lecker und abwechslungsreich zu gestalten, sind auch Sie gefragt! Wir benötigen insgesamt über 50 Kuchen von

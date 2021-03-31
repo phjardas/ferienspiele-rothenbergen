@@ -22,7 +22,7 @@ export default function WaiverInfo(registration) {
           unterschrieben an uns zurück oder bringen Sie sie im Gemeindebüro vorbei.
         </Typography>
       </CardContent>
-      <CardActions disableActionSpacing>
+      <CardActions disableSpacing>
         <PrintWaiverButton registration={registration} color="primary">
           Einverständniserklärung ausdrucken
         </PrintWaiverButton>

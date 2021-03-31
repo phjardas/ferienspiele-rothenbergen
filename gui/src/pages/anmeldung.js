@@ -16,7 +16,7 @@ export default function Anmeldung() {
 
   useEffect(() => {
     setPage({ title: 'Anmeldung' });
-  }, []);
+  }, [setPage]);
 
   const onSubmit = async reg => {
     const result = await storeRegistration(reg);

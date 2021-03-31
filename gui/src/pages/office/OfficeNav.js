@@ -33,10 +33,10 @@ function OfficeNav({ routes, classes }) {
 
 const styles = ({ palette, spacing }) => ({
   tabs: {
-    marginTop: -spacing.unit * 3,
-    marginLeft: -spacing.unit * 3,
-    marginRight: -spacing.unit * 3,
-    marginBottom: spacing.unit * 3,
+    marginTop: -spacing(3),
+    marginLeft: -spacing(3),
+    marginRight: -spacing(3),
+    marginBottom: spacing(3),
     borderBottom: `1px solid ${palette.divider}`,
   },
   link: {

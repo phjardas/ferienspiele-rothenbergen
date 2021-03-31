@@ -10,7 +10,7 @@ const styles = ({ spacing }) => ({
     minHeight: '100%',
     display: 'flex',
     flexDirection: 'column',
-    padding: `${spacing.unit * 4}px 0`,
+    padding: `${spacing(4)}px 0`,
     alignItems: 'center',
     justifyContent: 'center',
   },

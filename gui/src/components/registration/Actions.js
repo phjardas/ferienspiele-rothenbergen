@@ -28,10 +28,10 @@ function Actions({ invalid, submitting, submitError, classes }) {
 
 const styles = ({ spacing }) => ({
   root: {
-    marginTop: spacing.unit * 2,
+    marginTop: spacing(2),
   },
   alert: {
-    marginBottom: spacing.unit * 2,
+    marginBottom: spacing(2),
   },
 });
 

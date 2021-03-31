@@ -10,14 +10,14 @@ export default function RegistrationDetails({ registration }) {
   const doSetWaiverReceived = async received => setWaiverReceived(registration.id, received);
 
   return (
-    <Grid container spacing={24}>
+    <Grid container spacing={2}>
       <Grid item xs={12} lg={6}>
-        <Grid container spacing={24}>
+        <Grid container spacing={2}>
           <ChildInfo registration={registration} />
         </Grid>
       </Grid>
       <Grid item xs={12} lg={6}>
-        <Grid container spacing={24}>
+        <Grid container spacing={2}>
           <Grid item xs={12}>
             <PriceInfo {...registration} setPaymentReceived={doSetPaymentReceived} />
           </Grid>

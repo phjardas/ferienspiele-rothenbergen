@@ -7,7 +7,7 @@ export default function KuchenPage() {
 
   useEffect(() => {
     setPage({ title: 'Kuchen' });
-  }, []);
+  }, [setPage]);
 
   return <Kuchen />;
 }

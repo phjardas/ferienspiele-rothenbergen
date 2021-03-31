@@ -27,7 +27,7 @@ const styles = ({ palette, spacing }) => ({
     color: palette.error.dark,
   },
   icon: {
-    marginRight: spacing.unit,
+    marginRight: spacing(1),
   },
 });
 

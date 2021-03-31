@@ -54,7 +54,7 @@ const styles = ({ spacing, zIndex }) => ({
     },
   },
   paper: {
-    padding: spacing.unit * 3,
+    padding: spacing(3),
   },
 });
 

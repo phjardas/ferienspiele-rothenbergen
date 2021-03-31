@@ -1,26 +1,30 @@
-export default {
+const config = {
   baseUrl: 'https://ferienspiele-rothenbergen.de',
   apiUrl: 'https://us-central1-ferienspiele-rothenbergen-2.cloudfunctions.net',
-  title: 'Helden des Alltags',
-  year: 2019,
-  startDate: new Date('2019-07-01'),
-  endDate: new Date('2019-07-05'),
-  registrationStart: new Date('2019-04-04'),
-  registrationDeadline: new Date('2019-06-01'),
-  waiverDeadline: new Date('2019-06-15'),
-  maxParticipants: 45,
+  title: 'In fünf Tagen um die Welt',
+  year: 2021,
+  startDate: new Date('2021-07-19'),
+  endDate: new Date('2021-07-23'),
+  registrationStart: new Date('2021-05-01'),
+  registrationDeadline: new Date('2021-06-13'),
+  waiverDeadline: new Date('2021-07-05'),
+  maxParticipants: 40,
   prices: {
     base: 35,
     sibling: -10,
     noCake: 10,
   },
   kuchen: [
-    { date: '2019-07-01', amount: 10 },
-    { date: '2019-07-02', amount: 10 },
-    { date: '2019-07-03', amount: 10 },
-    { date: '2019-07-04', amount: 10 },
+    { date: '2021-07-19', amount: 8 },
+    { date: '2021-07-20', amount: 8 },
+    { date: '2021-07-21', amount: 8 },
+    { date: '2021-07-22', amount: 8 },
   ],
-  genders: [{ value: 'm', label: 'männlich' }, { value: 'f', label: 'weiblich' }, { value: 'd', label: 'divers' }],
+  genders: [
+    { value: 'm', label: 'männlich' },
+    { value: 'f', label: 'weiblich' },
+    { value: 'd', label: 'divers' },
+  ],
   shirtSizes: [
     { value: 'WOMEN_XS', label: 'Damen XS' },
     { value: 'WOMEN_S', label: 'Damen S' },
@@ -40,3 +44,5 @@ export default {
     { value: 'CHILDREN_L', label: 'Kinder 12-14 Jahre (152/164)' },
   ],
 };
+
+export default config;

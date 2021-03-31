@@ -9,7 +9,6 @@ import Kuchen from './Kuchen';
 import Parents from './Parents';
 import Price from './Price';
 import { priceCalculator, withPrice } from './priceCalculator';
-import Uebernachtung from './Uebernachtung';
 import Welcome from './Welcome';
 
 const createTestData = null;
@@ -45,7 +44,7 @@ export default function Registration({ initialValues: originalValues, onSubmit }
           <Child />
           <Parents />
           <EmergencyContact />
-          <Uebernachtung />
+          {/* <Uebernachtung /> */}
           <Kuchen />
           <Price />
           <Consent />

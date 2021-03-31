@@ -21,7 +21,7 @@ export default function AnmeldungDetails() {
       setState({ loading: false, error, registration });
       registration && setPage({ title: `${registration.child.firstName} ${registration.child.lastName}` });
     });
-  }, [id]);
+  }, [id, setPage]);
 
   if (loading) return <GlobalLoader />;
   if (error) return <Alert color="error">{error.message}</Alert>;

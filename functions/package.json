@@ -9,7 +9,7 @@
   },
   "main": "build/index.js",
   "engines": {
-    "node": "8"
+    "node": "12"
   },
   "dependencies": {
     "cors": "^2.8.5",

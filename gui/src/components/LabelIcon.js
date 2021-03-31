@@ -18,7 +18,7 @@ const styles = ({ spacing }) => ({
     alignItems: 'center',
   },
   iconWithLabel: {
-    marginRight: spacing.unit,
+    marginRight: spacing(1),
   },
 });
 
