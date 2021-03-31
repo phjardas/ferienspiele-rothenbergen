@@ -13,14 +13,12 @@ jobs:
     steps:
     - name: checkout
       uses: actions/checkout@v2
-    - name: Use Node.js 12
+    - name: node 12
       uses: actions/setup-node@v1
       with:
         node-version: 12
-    - name: install
-      run: yarn --frozen-lockfile
     - name: build gui
-      run: cd gui && yarn --frozen-lockfile && yarn build
+      run: yarn --frozen-lockfile && yarn build
     - name: build functions
       run: cd functions && yarn --frozen-lockfile && yarn build
     - name: deploy
