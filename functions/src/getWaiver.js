@@ -7,7 +7,7 @@ const registrationsColl = admin.firestore().collection('registrations');
 
 export default onRequest(async (req, res) => {
   const { pathname } = url.parse(req.url);
-  const [registrationId, format = 'pdf'] = pathname.substring(1).split('.');
+  const [registrationId, format] = pathname.substring(1).split('.');
 
   const reg = await getRegistration(registrationId);
   const file = await createWaiver(reg, format);

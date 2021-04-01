@@ -12,8 +12,7 @@
   "homepage": "https://ferienspiele-rothenbergen.de/",
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
-    "deploy": "firebase deploy"
+    "build": "react-scripts build"
   },
   "dependencies": {
     "@material-ui/core": "^4.11.3",
