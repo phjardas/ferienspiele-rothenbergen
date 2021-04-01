@@ -17,19 +17,12 @@ body
 
   h2 Kuchen
   case reg.kuchen.date
-    when 'name'
+    when 'none'
       p Sie bringen leider keinen Kuchen mit.
     when 'geschwister'
       p Sie bringen bereits für ein Geschwisterkind einen Kuchen mit.
     default
       p Sie bringen am #{formatDate(reg.kuchen.date)} eine(n) #{reg.kuchen.name} mit. Vielen Dank!
-
-  h2 Übernachtung
-  case reg.uebernachtung.type
-    when 'uebernachtung'
-      p #{reg.child.firstName} nimmt an der Übernachtung von Donnerstag auf Freitag teil.
-    default
-      p #{reg.child.firstName} nimmt nicht an der Übernachtung teil und wird am Donnerstag zur gewohnten Uhrzeit abgeholt.
 
   p Mit freundlichen Grüßen
   p Ihr Ferienspiele-Team
