@@ -11,14 +11,14 @@ export default function Kuchen() {
 
   useEffect(() => getRegistrations({}, (error, registrations) => setState({ error, registrations })), []);
 
-  if (loading) return <GlobalLoader />;
+  if (loading) return <GlobalLoader noLayout />;
   if (error) return <Alert color="error">{error.message}</Alert>;
 
   const byDate = registrations.reduce((acc, reg) => ({ ...acc, [reg.kuchen.date]: [...(acc[reg.kuchen.date] || []), reg] }), {});
 
   return (
     <Grid container spacing={2}>
-      {config.kuchen.map(req => (
+      {config.kuchen.map((req) => (
         <Grid key={req.date} item xs={12}>
           <KuchenStatistics date={req.date} required={req.amount} actual={byDate[req.date] || []} />
         </Grid>
@@ -28,7 +28,7 @@ export default function Kuchen() {
           <Card>
             <CardHeader title="Kein Kuchen" />
             <List>
-              {byDate.none.map(reg => (
+              {byDate.none.map((reg) => (
                 <ListItem key={reg.id}>
                   <ListItemText
                     primary={`${reg.child.firstName} ${reg.child.lastName}`}

@@ -2,10 +2,11 @@ import { Grid, Typography } from '@material-ui/core';
 import React from 'react';
 import H2 from '../components/H2';
 import H3 from '../components/H3';
+import Layout from '../components/Layout';
 
 export default function Imprint() {
   return (
-    <>
+    <Layout title="Impressum" back={{ to: '/' }}>
       <H2>Impressum</H2>
       <Typography paragraph>
         Die Ferienspiele Rothenbergen sind eine Veranstaltung der drei Kirchengemeinden in Rothenbergen:
@@ -69,6 +70,6 @@ export default function Imprint() {
         Trotz sorgfältiger inhaltlicher Kontrolle übernehmen wir keine Haftung für die Inhalte externer Links. Für den Inhalt der verlinkten
         Seiten sind ausschließlich deren Betreiber verantwortlich.
       </Typography>
-    </>
+    </Layout>
   );
 }

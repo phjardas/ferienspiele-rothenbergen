@@ -1,13 +1,13 @@
-import React, { useEffect } from 'react';
+import React from 'react';
+import Layout from '../../components/Layout';
 import Anmeldungen from '../../components/office/Anmeldungen';
-import { usePage } from '../../api/page';
+import OfficeNav from './OfficeNav';
 
 export default function OfficeAnmeldungen() {
-  const { setPage } = usePage();
-
-  useEffect(() => {
-    setPage({ title: 'Anmeldungen' });
-  }, [setPage]);
-
-  return <Anmeldungen />;
+  return (
+    <Layout title="Anmeldungen">
+      <OfficeNav />
+      <Anmeldungen />
+    </Layout>
+  );
 }

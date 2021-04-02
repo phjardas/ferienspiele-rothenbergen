@@ -1,26 +1,13 @@
-import { withStyles } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core';
 import React from 'react';
+import { Helmet } from 'react-helmet-async';
 import Footer from './Footer';
 import MainMenu from './MainMenu';
+import config from '../api/config';
 
-function Layout({ heroImage, hero, children, classes }) {
-  return (
-    <div className={classes.wrapper}>
-      <div className={classes.page}>
-        <div className={classes.hero} style={{ backgroundImage: heroImage ? `url(${heroImage})` : undefined }}>
-          <MainMenu className={heroImage ? classes.mainMenuWithHero : undefined} />
-          {hero}
-        </div>
-        <main className={classes.content}>{children}</main>
-      </div>
-      <Footer />
-    </div>
-  );
-}
-
-const styles = ({ breakpoints, mixins, palette, shadows, shape, spacing, transitions }) => ({
+const useStyles = makeStyles(({ breakpoints, mixins, palette, shadows, shape, spacing, transitions }) => ({
   wrapper: {
-    minHeight: '100%',
+    minHeight: '100vh',
     display: 'flex',
     flexDirection: 'column',
     [breakpoints.up('lg')]: {
@@ -60,6 +47,24 @@ const styles = ({ breakpoints, mixins, palette, shadows, shape, spacing, transit
     paddingTop: spacing(3),
     paddingBottom: spacing(3),
   },
-});
+}));
 
-export default withStyles(styles)(Layout);
+export default function Layout({ title, back, heroImage, hero, children }) {
+  const classes = useStyles();
+
+  return (
+    <>
+      <Helmet title={title ? `${title} - ${config.title} - Ferienspiele Rothenbergen` : `${config.title} - Ferienspiele Rothenbergen`} />
+      <div className={classes.wrapper}>
+        <div className={classes.page}>
+          <div className={classes.hero} style={{ backgroundImage: heroImage ? `url(${heroImage})` : undefined }}>
+            <MainMenu title={title} back={back} className={heroImage ? classes.mainMenuWithHero : undefined} />
+            {hero}
+          </div>
+          <main className={classes.content}>{children}</main>
+        </div>
+        <Footer />
+      </div>
+    </>
+  );
+}

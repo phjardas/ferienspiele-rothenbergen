@@ -1,15 +1,8 @@
+import { CircularProgress, makeStyles } from '@material-ui/core';
 import React from 'react';
-import { CircularProgress, withStyles } from '@material-ui/core';
+import Layout from './Layout';
 
-function GlobalLoader({ classes }) {
-  return (
-    <div className={classes.root}>
-      <CircularProgress size={80} color="secondary" />
-    </div>
-  );
-}
-
-const styles = {
+const useStyles = makeStyles(() => ({
   root: {
     position: 'absolute',
     top: 0,
@@ -20,6 +13,15 @@ const styles = {
     alignItems: 'center',
     justifyContent: 'center',
   },
-};
+}));
 
-export default withStyles(styles)(GlobalLoader);
+export default function GlobalLoader({ noLayout, ...props }) {
+  const classes = useStyles();
+  const content = (
+    <div className={classes.root}>
+      <CircularProgress size={80} color="secondary" />
+    </div>
+  );
+
+  return noLayout ? content : <Layout {...props}>{content}</Layout>;
+}

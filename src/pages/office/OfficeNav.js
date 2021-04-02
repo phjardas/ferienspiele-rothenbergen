@@ -1,20 +1,37 @@
-import { Tab, Tabs, withStyles } from '@material-ui/core';
+import { makeStyles, Tab, Tabs } from '@material-ui/core';
 import React from 'react';
-import { Link, Route } from 'react-router-dom';
+import { Link, Route, useRouteMatch } from 'react-router-dom';
 import { useAuth } from '../../api/auth';
-import { useRouter } from '../../api/router';
+import { useOfficeRoutes } from './routes';
 
-function OfficeNav({ routes, classes }) {
+const useStyles = makeStyles(({ palette, spacing }) => ({
+  tabs: {
+    marginTop: -spacing(3),
+    marginLeft: -spacing(3),
+    marginRight: -spacing(3),
+    marginBottom: spacing(3),
+    borderBottom: `1px solid ${palette.divider}`,
+  },
+  link: {
+    '&:hover': {
+      textDecoration: 'none',
+    },
+  },
+}));
+
+export default function OfficeNav() {
+  const classes = useStyles();
   const auth = useAuth();
-  const { match } = useRouter();
+  const { path } = useRouteMatch('/office');
+  const routes = useOfficeRoutes();
 
   return (
-    <Route path={`${match.path}/:tab`}>
+    <Route path={`${path}/:tab`}>
       {({ match: inner }) => (
-        <Tabs value={`${match.path}/${inner.params.tab}`} indicatorColor="primary" textColor="primary" centered className={classes.tabs}>
+        <Tabs value={`${path}/${inner.params.tab}`} indicatorColor="primary" textColor="primary" centered className={classes.tabs}>
           {routes
-            .filter(route => route.route.allowed(auth))
-            .map(route => (
+            .filter((route) => route.route.allowed(auth))
+            .map((route) => (
               <Tab
                 key={route.route.path}
                 value={route.route.path}
@@ -30,20 +47,3 @@ function OfficeNav({ routes, classes }) {
     </Route>
   );
 }
-
-const styles = ({ palette, spacing }) => ({
-  tabs: {
-    marginTop: -spacing(3),
-    marginLeft: -spacing(3),
-    marginRight: -spacing(3),
-    marginBottom: spacing(3),
-    borderBottom: `1px solid ${palette.divider}`,
-  },
-  link: {
-    '&:hover': {
-      textDecoration: 'none',
-    },
-  },
-});
-
-export default withStyles(styles)(OfficeNav);

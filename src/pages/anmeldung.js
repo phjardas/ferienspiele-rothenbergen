@@ -1,27 +1,30 @@
-import React, { useEffect } from 'react';
-import { storeRegistration } from '../api/firestore';
-import { usePage } from '../api/page';
-import { useRouter } from '../api/router';
-import Registration from '../components/registration';
 import qs from 'qs';
+import React, { useCallback } from 'react';
+import { useHistory, useLocation } from 'react-router';
+import { storeRegistration } from '../api/firestore';
+import Layout from '../components/Layout';
+import Registration from '../components/registration';
 
-function parseParams({ search }) {
+function useParams() {
+  const { search } = useLocation();
   return search && search.startsWith('?') && qs.parse(search.substring(1));
 }
 
 export default function Anmeldung() {
-  const { location, history } = useRouter();
-  const { setPage } = usePage();
-  const params = parseParams(location);
+  const history = useHistory();
+  const params = useParams();
 
-  useEffect(() => {
-    setPage({ title: 'Anmeldung' });
-  }, [setPage]);
+  const onSubmit = useCallback(
+    async (reg) => {
+      const result = await storeRegistration(reg);
+      history.push(`/anmeldung/${result.id}`);
+    },
+    [history]
+  );
 
-  const onSubmit = async reg => {
-    const result = await storeRegistration(reg);
-    history.push(`/anmeldung/${result.id}`);
-  };
-
-  return <Registration onSubmit={onSubmit} initialValues={params} />;
+  return (
+    <Layout title="Anmeldung" back={{ to: '/' }}>
+      <Registration onSubmit={onSubmit} initialValues={params} />
+    </Layout>
+  );
 }

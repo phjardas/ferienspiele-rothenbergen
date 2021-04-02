@@ -1,22 +1,22 @@
 import { Avatar, Button, Card, CardActions, CardHeader, IconButton, Popper, withStyles } from '@material-ui/core';
 import { AccountCircle as UserIcon } from '@material-ui/icons';
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
+import { useHistory } from 'react-router';
 import { useAuth } from '../api/auth';
-import { useRouter } from '../api/router';
 import ButtonLink from './ButtonLink';
 
 function AuthenticatedMenu({ classes, ...props }) {
-  const { history } = useRouter();
+  const history = useHistory();
   const { signOut, user } = useAuth();
   const [anchor, setAnchor] = useState();
 
-  const toggle = e => setAnchor(a => (a ? undefined : e.currentTarget));
+  const toggle = useCallback((e) => setAnchor((a) => (a ? undefined : e.currentTarget)), []);
 
-  const doSignOut = () => {
+  const doSignOut = useCallback(() => {
     toggle();
     signOut();
     history.push('/');
-  };
+  }, [toggle, signOut, history]);
 
   return (
     <div {...props}>

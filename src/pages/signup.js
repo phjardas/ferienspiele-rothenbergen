@@ -1,13 +1,14 @@
 import { Card, CardContent, CardHeader } from '@material-ui/core';
-import React from 'react';
-import { useRouter } from '../api/router';
+import React, { useCallback, useMemo } from 'react';
+import { useHistory, useLocation } from 'react-router';
 import SignUpForm from '../components/auth/SignUpForm';
 import MiniLayout from '../components/MiniLayout';
 
 export default function SignUp() {
-  const { location, history } = useRouter();
-  const from = (location.state && location.state.from) || { pathname: '/' };
-  const onSignUp = () => history.push(from);
+  const location = useLocation();
+  const history = useHistory();
+  const from = useMemo(() => (location.state && location.state.from) || { pathname: '/' }, [location]);
+  const onSignUp = useCallback(() => history.push(from), [history, from]);
 
   return (
     <MiniLayout>

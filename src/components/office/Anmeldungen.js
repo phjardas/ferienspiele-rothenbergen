@@ -1,7 +1,7 @@
 import { Table, TableBody, TableCell, TableHead, TableRow, TableSortLabel, Typography, withStyles } from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
+import { useHistory, useRouteMatch } from 'react-router';
 import { getRegistrations } from '../../api/firestore';
-import { useRouter } from '../../api/router';
 import Age from '../Age';
 import Alert from '../Alert';
 import Date from '../Date';
@@ -44,7 +44,8 @@ const columns = [
 ];
 
 function Anmeldungen({ classes }) {
-  const { match, history } = useRouter();
+  const match = useRouteMatch();
+  const history = useHistory();
   const [{ loading, error, registrations }, setState] = useState({ loading: true });
   const [{ sortColumn, sortDirection }, setSort] = useState({ sortColumn: columns[0], sortDirection: 'asc' });
 
@@ -56,19 +57,19 @@ function Anmeldungen({ classes }) {
     [sortColumn, sortDirection]
   );
 
-  if (loading) return <GlobalLoader />;
+  if (loading) return <GlobalLoader noLayout />;
   if (error) return <Alert color="error">{error.message}</Alert>;
 
-  const toggleSort = col => () =>
-    setSort(s => {
+  const toggleSort = (col) => () =>
+    setSort((s) => {
       const current = col === s.sortColumn;
       return { sortColumn: col, sortDirection: current && s.sortDirection === 'asc' ? 'desc' : 'asc' };
     });
 
-  const openRegistration = reg => history.push(`${match.path}/${reg.id}`);
+  const openRegistration = (reg) => history.push(`${match.path}/${reg.id}`);
 
-  const paymentsMissing = registrations.filter(r => !r.payment).length;
-  const waiversMissing = registrations.filter(r => !r.waiver).length;
+  const paymentsMissing = registrations.filter((r) => !r.payment).length;
+  const waiversMissing = registrations.filter((r) => !r.waiver).length;
 
   return (
     <>
@@ -107,7 +108,7 @@ function Anmeldungen({ classes }) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {registrations.map(reg => (
+          {registrations.map((reg) => (
             <TableRow key={reg.id} hover onClick={() => openRegistration(reg)} classes={{ hover: classes.rowHover }}>
               <TableCell>{reg.child.lastName}</TableCell>
               <TableCell>{reg.child.firstName}</TableCell>
@@ -121,7 +122,7 @@ function Anmeldungen({ classes }) {
                 <Date value={reg.registeredAt} />
               </TableCell>
               <TableCell>
-                <YesNoLabel value={reg.uebernachtung.type === 'uebernachtung'} />
+                <YesNoLabel value={reg.uebernachtung && reg.uebernachtung.type === 'uebernachtung'} />
               </TableCell>
               <TableCell>
                 <YesNoLabel value={reg.payment && reg.payment.receivedAt} noColor="error" />

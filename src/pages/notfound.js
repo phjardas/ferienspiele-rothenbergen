@@ -1,6 +1,6 @@
 import React from 'react';
-import H2 from '../components/H2';
+import GlobalError from '../components/GlobalError';
 
 export default function NotFound() {
-  return <H2>Seite nicht gefunden</H2>;
+  return <GlobalError error={new Error('Seite nicht gefunden')} back={{ to: '/' }} />;
 }

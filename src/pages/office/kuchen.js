@@ -1,13 +1,13 @@
-import React, { useEffect } from 'react';
-import { usePage } from '../../api/page';
+import React from 'react';
+import Layout from '../../components/Layout';
 import Kuchen from '../../components/office/Kuchen';
+import OfficeNav from './OfficeNav';
 
 export default function KuchenPage() {
-  const { setPage } = usePage();
-
-  useEffect(() => {
-    setPage({ title: 'Kuchen' });
-  }, [setPage]);
-
-  return <Kuchen />;
+  return (
+    <Layout title="Kuchen">
+      <OfficeNav />
+      <Kuchen />
+    </Layout>
+  );
 }

@@ -1,14 +1,19 @@
-import { AppBar, IconButton, Toolbar, Typography, withStyles } from '@material-ui/core';
+import { AppBar, IconButton, makeStyles, Toolbar, Typography } from '@material-ui/core';
 import { ArrowBack as BackIcon } from '@material-ui/icons';
 import React from 'react';
 import { useAuth } from '../api/auth';
-import { usePage } from '../api/page';
 import AuthenticatedMenu from './AuthenticatedMenu';
 import ButtonLink from './ButtonLink';
 import UnauthenticatedMenu from './UnauthenticatedMenu';
 
-function MainMenu({ className, classes }) {
-  const { title, site, back } = usePage();
+const useStyles = makeStyles(() => ({
+  menu: {
+    marginLeft: 'auto',
+  },
+}));
+
+export default function MainMenu({ title, back, className }) {
+  const classes = useStyles();
   const { pending, user } = useAuth();
   const Menu = user ? AuthenticatedMenu : UnauthenticatedMenu;
 
@@ -16,29 +21,15 @@ function MainMenu({ className, classes }) {
     <AppBar position="static" className={className}>
       <Toolbar>
         {back && (
-          <ButtonLink {...back} component={IconButton} color="inherit" className={classes.backButton}>
+          <ButtonLink {...back} component={IconButton} color="inherit" edge="start">
             <BackIcon />
           </ButtonLink>
         )}
-        <ButtonLink component={Typography} to="/" {...back} variant="h6" color="inherit" className={classes.title}>
-          {title || site}
-        </ButtonLink>
+        <Typography variant="h6" color="inherit" className={classes.title}>
+          {title || 'Ferienspiele Rothenbergen'}
+        </Typography>
         {!pending && <Menu className={classes.menu} />}
       </Toolbar>
     </AppBar>
   );
 }
-
-const styles = {
-  title: {
-    textDecoration: 'none',
-  },
-  backButton: {
-    marginLeft: -12,
-  },
-  menu: {
-    marginLeft: 'auto',
-  },
-};
-
-export default withStyles(styles)(MainMenu);
