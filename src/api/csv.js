@@ -28,7 +28,7 @@ export function exportRegistrations(regs) {
     'Bezahlung',
   ];
 
-  const rows = regs.map(reg => [
+  const rows = regs.map((reg) => [
     reg.id,
     reg.registeredAt,
     reg.child.lastName,
@@ -48,7 +48,7 @@ export function exportRegistrations(regs) {
     toKuchenSelection(reg.kuchen.date),
     reg.kuchen.date !== 'none' && reg.kuchen.date !== 'geschwister' ? reg.kuchen.date : '',
     reg.kuchen.name,
-    reg.uebernachtung.type === 'uebernachtung',
+    reg.uebernachtung?.type === 'uebernachtung',
     reg.child.nextChild,
     reg.price.total,
     !!reg.waiver,
@@ -88,7 +88,7 @@ function encodeRow(data) {
 }
 
 function getLabel(value, options) {
-  const option = options.find(g => g.value === value);
+  const option = options.find((g) => g.value === value);
   return option ? option.label : '';
 }
 
