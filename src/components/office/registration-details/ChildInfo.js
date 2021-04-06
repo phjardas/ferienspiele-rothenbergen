@@ -1,4 +1,4 @@
-import { Card, CardContent, CardHeader, Grid, Typography } from '@material-ui/core';
+import { Card, CardContent, CardHeader, Grid, makeStyles, Typography } from '@material-ui/core';
 import { Cake as CakeIcon, ChildCare as ChildIcon, LocalHospital as HospitalIcon, Person as PersonIcon } from '@material-ui/icons';
 import React from 'react';
 import Age from '../../Age';
@@ -7,7 +7,15 @@ import GenderIcon from '../../GenderIcon';
 import ShirtSize from '../../ShirtSize';
 import KuchenInfo from './KuchenInfo';
 
+const useStyles = makeStyles(() => ({
+  pre: {
+    whiteSpace: 'pre-line',
+  },
+}));
+
 export default function ChildInfo({ registration }) {
+  const classes = useStyles();
+
   return (
     <>
       <Grid item xs={12}>
@@ -27,7 +35,20 @@ export default function ChildInfo({ registration }) {
               T-Shirt: <ShirtSize shirtSize={registration.child.shirtSize} />
             </Typography>
             <Typography paragraph>Vegetarisch: {registration.child.vegetarian ? 'ja' : 'nein'}</Typography>
-            {registration.child.miscellaneous && <Typography paragraph>Besonderheiten: {registration.child.miscellaneous}</Typography>}
+            {registration.child.miscellaneous && (
+              <Typography paragraph className={classes.pre}>
+                Besonderheiten:
+                <br />
+                {registration.child.miscellaneous}
+              </Typography>
+            )}
+            {registration.child.friends && (
+              <Typography className={classes.pre}>
+                Freunde:
+                <br />
+                {registration.child.friends}
+              </Typography>
+            )}
           </CardContent>
         </Card>
       </Grid>
@@ -41,7 +62,7 @@ export default function ChildInfo({ registration }) {
             <Typography paragraph>
               E-Mail: <a href={`mailto:${registration.parent.email}`}>{registration.parent.email}</a>
             </Typography>
-            <Typography paragraph>
+            <Typography>
               {registration.parent.street}
               <br />
               {registration.parent.plz} {registration.parent.city}
@@ -53,7 +74,7 @@ export default function ChildInfo({ registration }) {
         <Card>
           <CardHeader avatar={<HospitalIcon />} title="Notfallkontakt" />
           <CardContent>
-            <Typography paragraph>
+            <Typography>
               {registration.emergencyContact.name}:{' '}
               <a href={`tel:${registration.emergencyContact.phone}`}>{registration.emergencyContact.phone}</a>
             </Typography>

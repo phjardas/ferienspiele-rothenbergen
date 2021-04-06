@@ -56,7 +56,7 @@ export default function Child() {
             formControlProps={{ fullWidth: true }}
             validate={required}
           >
-            {config.shirtSizes.map(option => (
+            {config.shirtSizes.map((option) => (
               <MenuItem key={option.value} value={option.value}>
                 {option.label}
               </MenuItem>
@@ -72,6 +72,17 @@ export default function Child() {
             multiline
             fullWidth
             helperText="Muss Ihr Kind regelmäßig Medikamente zu sich nehmen? Gibt es Besonderheiten zu beachten? z.B. ADS, Allergien, Nahrungsunverträglichkeiten, religiöse Essensvorschriften, Einnässen etc."
+          />
+        </Grid>
+
+        <Grid item xs={12}>
+          <Field
+            name="child.friends"
+            component={TextField}
+            label="Freunde"
+            multiline
+            fullWidth
+            helperText="Ihr Kind möchte gerne mit seinen/ihren Freund:innen in eine Gruppe? Bitte geben Sie hier die Namen an."
           />
         </Grid>
 

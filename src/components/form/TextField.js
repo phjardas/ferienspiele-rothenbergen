@@ -13,6 +13,7 @@ export default function TextFieldWrapper({ input: { name, onChange, value, ...re
       inputProps={restInput}
       onChange={onChange}
       value={value}
+      variant="outlined"
     />
   );
 }

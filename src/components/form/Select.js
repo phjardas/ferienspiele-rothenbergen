@@ -8,11 +8,9 @@ export default function SelectWrapper({ input: { name, value, onChange, ...restI
   const showError = ((meta.submitError && !meta.dirtySinceLastSubmit) || meta.error) && meta.touched;
 
   return (
-    <FormControl {...formControlProps} error={showError}>
+    <FormControl {...formControlProps} error={showError} variant="outlined">
       <InputLabel htmlFor={name}>{label}</InputLabel>
-
-      <Select {...rest} name={name} onChange={onChange} inputProps={restInput} value={value} />
-
+      <Select {...rest} label={label} name={name} onChange={onChange} inputProps={restInput} value={value} />
       {showError && <FormHelperText>{meta.error || meta.submitError}</FormHelperText>}
     </FormControl>
   );
