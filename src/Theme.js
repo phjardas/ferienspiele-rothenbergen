@@ -1,4 +1,4 @@
-import { createMuiTheme, CssBaseline, MuiThemeProvider } from '@material-ui/core';
+import { createMuiTheme, CssBaseline, makeStyles, MuiThemeProvider } from '@material-ui/core';
 import React from 'react';
 
 const theme = createMuiTheme({
@@ -21,9 +21,30 @@ if (process.env.NODE_ENV === 'development') {
 
 export default function ThemeProvider({ children }) {
   return (
-    <>
+    <MuiThemeProvider theme={theme}>
       <CssBaseline />
-      <MuiThemeProvider theme={theme}>{children}</MuiThemeProvider>
-    </>
+      <GlobalStyles />
+      {children}
+    </MuiThemeProvider>
   );
+}
+
+const useStyles = makeStyles(({ palette }) => ({
+  '@global': {
+    strong: {
+      fontWeight: 500,
+    },
+    a: {
+      color: palette.primary.main,
+      textDecoration: 'none',
+      '&:hover': {
+        textDecoration: 'underline',
+      },
+    },
+  },
+}));
+
+function GlobalStyles() {
+  useStyles();
+  return null;
 }

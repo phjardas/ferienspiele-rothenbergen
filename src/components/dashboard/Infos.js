@@ -35,7 +35,7 @@ export default function Infos() {
         </Typography>
         <Typography paragraph>
           <strong>WIR, das Team:</strong> Eine fröhliche Mischung aus Jugendlichen und Erwachsenen, ehrenamtlich und voller Energie – sowie
-          Pfarrerin Caroline Miesner (ev. Kirchengemeinde Auf dem Berg), Pastorin Gillian Horton-Krüger (Evangelisch-methodistische
+          Pfarrerin Caroline Miesner (ev. Kirchengemeinde Auf dem Berg), Pastor Ralf Schweinsberg (Evangelisch-methodistische
           Friedenskirche) und Gemeindereferentin Rita Kunzmann (kath. Gemeinde Christkönig).
         </Typography>
 
@@ -71,8 +71,8 @@ export default function Infos() {
           Ferienspiel-Shirt.
         </Typography>
         <Typography paragraph>
-          Der fantastisch niedrige Preis wird übrigens ermöglicht durch viel ehrenamtliches Engagement, die drei beteiligten Kirchen, die
-          Gemeinde Gründau – und unsere Sponsoren!
+          Der fantastisch niedrige Preis wird übrigens ermöglicht durch viel ehrenamtliches Engagement, die drei beteiligten Kirchen und die
+          Gemeinde Gründau.
         </Typography>
       </Grid>
     </Grid>

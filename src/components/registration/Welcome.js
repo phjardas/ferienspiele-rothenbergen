@@ -36,8 +36,8 @@ export default function Welcome({ createTestData, geschwisterkind }) {
             eingegangen sind!
           </Typography>
           <Typography paragraph>
-            Bei nachträglichen Änderungen nehmen Sie bitte telefonisch unter <a href="tel:+4960512649">06051 2649</a> oder per Email unter{' '}
-            <a href="mailto:gillian.horton-krueger@emk-rothenbergen.de">gillian.horton-krueger@emk-rothenbergen.de</a> Kontakt mit uns auf.
+            Bei nachträglichen Änderungen nehmen Sie bitte telefonisch unter <a href="tel:+4960518878048">06051 8878048</a> oder per Email
+            unter <a href="mailto:caroline.miesner@kirche-aufdemberg.de">caroline.miesner@kirche-aufdemberg.de</a> Kontakt mit uns auf.
           </Typography>
         </>
       )}

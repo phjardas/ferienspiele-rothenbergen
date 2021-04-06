@@ -25,19 +25,15 @@ function createPDF(reg) {
   doc.info.Author = 'Kinderferienspiele Rothenbergen';
   doc.info.Title = title;
 
-  bold(doc)
-    .fontSize(18)
-    .text(`Kinderferienspiele Rothenbergen ${config.year}`);
+  bold(doc).fontSize(18).text(`Kinderferienspiele Rothenbergen ${config.year}`);
 
-  bold(doc)
-    .fontSize(14)
-    .text(title);
+  bold(doc).fontSize(14).text(title);
   doc.moveDown();
 
   regular(doc).fontSize(11);
 
-  const appendLines = lines =>
-    lines.forEach(line => {
+  const appendLines = (lines) =>
+    lines.forEach((line) => {
       doc.text(line);
       doc.moveDown();
     });
@@ -56,8 +52,8 @@ function createPDF(reg) {
 function createHTML(reg) {
   const s = new Readable();
   createBody(reg)
-    .map(line => `<p>${line}</p>`)
-    .forEach(line => s.push(line));
+    .map((line) => `<p>${line}</p>`)
+    .forEach((line) => s.push(line));
   s.push(null);
   return s;
 }
@@ -98,10 +94,12 @@ Meine Angaben in Bezug auf Allergien und Unverträglichkeiten sind vollständig.
 
 Die Veranstalter haften nicht für den Verlust oder die Beschädigung von Gegenständen.
 
-Es werden während der Ferienspiele Fotos gemacht. Ich bin mit deren Veröffentlichung auf den Homepages und in den Gemeindebriefen der drei ausrichtenden Kirchengemeinden einverstanden.`
+Es werden während der Ferienspiele Fotos gemacht. Ich bin mit deren Veröffentlichung auf den Homepages und in den Gemeindebriefen der drei ausrichtenden Kirchengemeinden einverstanden.
+
+Ich akzeptieren die zu dem Zeitpunkt der Ferienspiele geltenden und mit dem Ordnungsamt abgestimmten Hygienemaßnahmen gegen die Coronapandemie und erkläre sie vorab meinem Kind. Sollte die Veranstaltung aufgrund der Coronasituation von Seiten der Kirchengemeinden abgesagt, werden bereits bezahlte Beiträge selbstverständlich zurückerstattet.`
     .split(/\n/)
-    .map(line => line.trim())
-    .filter(line => line.length);
+    .map((line) => line.trim())
+    .filter((line) => line.length);
 }
 
 function createFooter() {
@@ -110,10 +108,10 @@ Datum, Unterschrift
 
 Bitte schicken Sie diese Einverständniserklärung bis zum ${formatDate(
     config.waiverDeadline
-  )} unterschrieben an das Gemeindebüro der katholischen Kirche oder geben sie in einem verschlossenen Umschlag dort ab.
+  )} unterschrieben an das Gemeindebüro der ev. Kirche oder geben sie in einem verschlossenen Umschlag dort ab.
 
-Büro der Katholischen Kirche "Christkönig", Niedergründauer Straße 20, 63584 Rothenbergen, Einwurf in den Briefkasten genügt.`
+Büro der ev. Kirche "Auf dem Berg", Paul-Gerhardt Str.2, 63584 Gründau-Lieblos, Einwurf in den Briefkasten genügt.`
     .split(/\n/)
-    .map(line => line.trim())
-    .filter(line => line.length);
+    .map((line) => line.trim())
+    .filter((line) => line.length);
 }

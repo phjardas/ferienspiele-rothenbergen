@@ -45,7 +45,7 @@ export default function RegistrationStatus() {
           Leider ist die Anmeldefrist für die Kinderferienspiele abgelaufen.
           <br />
           Für eventuelle Rückfragen nehmen Sie bitte telefonisch unter <a href="tel:+4960512649">06051 2649</a> oder per Email unter{' '}
-          <a href="mailto:gillian.horton-krueger@emk-rothenbergen.de">gillian.horton-krueger@emk-rothenbergen.de</a> Kontakt mit uns auf.
+          <a href="mailto:ralf.schweinsberg@emk.de">ralf.schweinsberg@emk.de</a> Kontakt mit uns auf.
         </Alert>
       );
 

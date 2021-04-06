@@ -19,7 +19,7 @@ export default function WaiverInfo(registration) {
           <strong>
             bis zum <Date value={config.waiverDeadline} />
           </strong>{' '}
-          unterschrieben an uns zurück oder bringen Sie sie im Gemeindebüro vorbei.
+          unterschrieben an uns zurück oder bringen Sie sie im Gemeindebüro der ev. Kirche (Paul-Gerhardt Str.2 in Gründau-Lieblos) vorbei.
         </Typography>
       </CardContent>
       <CardActions disableSpacing>

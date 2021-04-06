@@ -8,7 +8,6 @@ import GlobalLoader from './components/GlobalLoader';
 import ProtectedRoute from './components/ProtectedRoute';
 import Home from './pages/index';
 import NotFound from './pages/notfound';
-import './styles.css';
 import ThemeProvider from './Theme';
 
 const Impressum = lazy(() => import('./pages/impressum'));

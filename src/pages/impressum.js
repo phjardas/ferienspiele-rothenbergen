@@ -32,7 +32,7 @@ export default function Imprint() {
           <Typography paragraph>
             <a href="tel:+4960512649">06051 2649</a>
             <br />
-            <a href="mailto:gillian.horton-krueger@emk.de">gillian.horton-krueger@emk.de</a>
+            <a href="mailto:ralf.schweinsberg@emk.de">ralf.schweinsberg@emk.de</a>
           </Typography>
         </Grid>
         <Grid item lg={4}>
@@ -42,7 +42,7 @@ export default function Imprint() {
           <Typography paragraph>Verantwortlich für redaktionelle Beiträge:</Typography>
 
           <Typography paragraph>
-            <strong>Gillian Horton-Krüger</strong>
+            <strong>Ralf Schweinsberg</strong>
             <br /> Evangelisch-methodistische Kirche
             <br /> Kirchbergstraße 8-10
             <br /> 63584 Gründau-Rothenbergen
@@ -51,7 +51,7 @@ export default function Imprint() {
           <Typography paragraph>
             <a href="tel:+4960512649">06051 2649</a>
             <br />
-            <a href="mailto:gillian.horton-krueger@emk.de">gillian.horton-krueger@emk.de</a>
+            <a href="mailto:ralf.schweinsberg@emk.de">ralf.schweinsberg@emk.de</a>
           </Typography>
         </Grid>
         <Grid item lg={4}>

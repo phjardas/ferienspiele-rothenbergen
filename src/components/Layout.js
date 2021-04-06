@@ -4,6 +4,7 @@ import { Helmet } from 'react-helmet-async';
 import Footer from './Footer';
 import MainMenu from './MainMenu';
 import config from '../api/config';
+import background from './background.jpg';
 
 const useStyles = makeStyles(({ breakpoints, mixins, palette, shadows, shape, spacing, transitions }) => ({
   wrapper: {
@@ -13,25 +14,31 @@ const useStyles = makeStyles(({ breakpoints, mixins, palette, shadows, shape, sp
     [breakpoints.up('lg')]: {
       padding: `${spacing(4)}px 0`,
       alignItems: 'center',
+      backgroundImage: `url(${background})`,
     },
   },
   page: {
     flexGrow: 1,
     display: 'flex',
     flexDirection: 'column',
+    backgroundColor: palette.background.paper,
     [breakpoints.up('lg')]: {
       width: breakpoints.values.lg - spacing(4),
       boxShadow: shadows[4],
-      backgroundColor: palette.background.paper,
       borderRadius: shape.borderRadius,
     },
   },
   mainMenuWithHero: {
     background: 'rgba(255, 255, 255, .75)',
+    color: 'rgba(255, 255, 255, 0)',
     boxShadow: 'none',
-    transition: `background ${transitions.duration.short}ms ${transitions.easing.sharp}`,
+    transition: ['background', 'color', 'box-shadow']
+      .map((p) => `${p} ${transitions.duration.standard}ms ${transitions.easing.sharp}`)
+      .join(', '),
     '&:hover': {
-      background: 'rgba(0, 0, 0, 0.5)',
+      background: 'rgba(0, 63, 140, 1)',
+      color: 'rgba(255, 255, 255, 1)',
+      boxShadow: shadows[4],
     },
   },
   hero: {

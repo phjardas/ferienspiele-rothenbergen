@@ -1,8 +1,5 @@
 {
   "name": "ferienspiele-rothenbergen",
-  "version": "2019.0.0",
-  "description": "Ferienspiele Rothenbergen",
-  "license": "UNLICENSED",
   "private": true,
   "repository": {
     "type": "git",
