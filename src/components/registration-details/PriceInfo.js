@@ -23,12 +23,13 @@ export default function PriceInfo({ child, price }) {
           BIC: HELADEF1GEL <br />
           Verwendungszweck: "Ferienspiele {child.firstName} {child.lastName}"
         </Typography>
-        <Typography paragraph>Sie können den Teilnahmebeitrag in bar bezahlen:</Typography>
+        <Typography paragraph>Sie können den Teilnahmebeitrag auch in bar bezahlen:</Typography>
         <Typography paragraph>
-          Büro der Katholischen Kirche "Christkönig"
+          Büro der Evangelischen Kirche
           <br />
-          Niedergründauer Straße 20 <br />
-          63584 Rothenbergen
+          Paul-Gerhardt Str. 2
+          <br />
+          63584 Gründau-Lieblos
         </Typography>
       </CardContent>
     </Card>
