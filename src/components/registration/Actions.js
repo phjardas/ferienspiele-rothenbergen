@@ -19,7 +19,17 @@ function Actions({ invalid, submitting, submitError, classes }) {
         </Alert>
       )}
 
-      <SpinningButton type="submit" color="primary" variant="contained" icon={CheckIcon} spinning={submitting} disabled={invalid}>
+      <SpinningButton
+        type="submit"
+        color="primary"
+        variant="contained"
+        size="large"
+        fullWidth
+        icon={CheckIcon}
+        spinning={submitting}
+        disabled={invalid}
+        className={classes.button}
+      >
         Kostenpflichtig anmelden
       </SpinningButton>
     </div>
@@ -32,6 +42,10 @@ const styles = ({ spacing }) => ({
   },
   alert: {
     marginBottom: spacing(2),
+  },
+  button: {
+    paddingTop: spacing(2),
+    paddingBottom: spacing(2),
   },
 });
 

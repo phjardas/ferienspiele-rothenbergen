@@ -1,10 +1,13 @@
-import { Card, CardActions, CardContent, CardHeader } from '@material-ui/core';
+import { CardHeader } from '@material-ui/core';
 import { Assignment as AssignmentIcon } from '@material-ui/icons';
 import React from 'react';
 import Alert from '../../Alert';
 import Date from '../../Date';
 import PrintWaiverButton from '../../PrintWaiverButton';
 import SpinningButton from '../../SpinningButton';
+import Card from '../../Card';
+import CardActions from '../../CardActions';
+import CardContent from '../../CardContent';
 
 export default function WaiverInfo({ setWaiverReceived, ...registration }) {
   return (

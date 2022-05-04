@@ -16,7 +16,7 @@ export default onRequest(async (req, res) => {
     .set('content-type', meta.contentType)
     .set('content-length', meta.size)
     .set('etag', meta.etag)
-    .set('cache-control', 'public, immutable');
+    .set('cache-control', 'private,no-cache');
   file.createReadStream().pipe(res);
 });
 

@@ -23,7 +23,7 @@ export default function Anmeldung() {
   );
 
   return (
-    <Layout title="Anmeldung" back={{ to: '/' }}>
+    <Layout back={{ to: '/' }}>
       <Registration onSubmit={onSubmit} initialValues={params} />
     </Layout>
   );

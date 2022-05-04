@@ -20,7 +20,7 @@ export default function AnmeldungDetails() {
   if (error) return <GlobalError error={error} back={{ to: '/' }} />;
   if (!registration) return <GlobalError error={new Error('Ungültige Anmeldung-ID')} back={{ to: '/' }} />;
   return (
-    <Layout title={`${registration.child.firstName} ${registration.child.lastName}`} back={{ to: '/' }}>
+    <Layout back={{ to: '/' }}>
       <RegistrationDetails registration={registration} />
     </Layout>
   );

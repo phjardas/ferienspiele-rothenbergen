@@ -11,12 +11,13 @@ function Alert({ color, icon, children, gutterBottom, className, classes }) {
   );
 }
 
-const styles = ({ palette, spacing, typography }) => ({
+const styles = ({ palette, spacing, shape, typography }) => ({
   root: {
     ...typography.body1,
     padding: spacing(2),
     display: 'flex',
     alignItems: 'flex-start',
+    borderRadius: shape.borderRadius,
   },
   info: {
     backgroundColor: palette.primary.light,

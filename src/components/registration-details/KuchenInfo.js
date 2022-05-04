@@ -1,8 +1,22 @@
 import { Typography } from '@material-ui/core';
 import React from 'react';
+import Card from '../Card';
+import CardContent from '../CardContent';
 import Date from '../Date';
+import H3 from '../H3';
 
-export default function KuchenInfo({ kuchen: { date, name } }) {
+export default function KuchenInfo(props) {
+  return (
+    <Card>
+      <CardContent>
+        <H3>Kuchen</H3>
+        <KuchenInfoData {...props} />
+      </CardContent>
+    </Card>
+  );
+}
+
+function KuchenInfoData({ kuchen: { date, name } }) {
   if (date === 'none') return <Typography>Sie bringen leider keinen Kuchen mit.</Typography>;
   if (date === 'geschwister') return <Typography>Sie bringen bereits für ein Geschwisterkind einen Kuchen mit.</Typography>;
 

@@ -6,9 +6,6 @@ import { useOfficeRoutes } from './routes';
 
 const useStyles = makeStyles(({ palette, spacing }) => ({
   tabs: {
-    marginTop: -spacing(3),
-    marginLeft: -spacing(3),
-    marginRight: -spacing(3),
     marginBottom: spacing(3),
     borderBottom: `1px solid ${palette.divider}`,
   },

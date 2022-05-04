@@ -1,4 +1,4 @@
-import { Card, CardContent, CardHeader, Grid, Link, makeStyles, Typography } from '@material-ui/core';
+import { CardHeader, Grid, Link, makeStyles, Typography } from '@material-ui/core';
 import {
   ArrowForward,
   Cake as CakeIcon,
@@ -9,6 +9,8 @@ import {
 import React from 'react';
 import Stack from '../../../components/Stack';
 import Age from '../../Age';
+import Card from '../../Card';
+import CardContent from '../../CardContent';
 import Date from '../../Date';
 import GenderIcon from '../../GenderIcon';
 import ShirtSize from '../../ShirtSize';

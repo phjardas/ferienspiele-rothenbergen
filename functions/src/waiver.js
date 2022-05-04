@@ -9,7 +9,7 @@ export default function createWaiver(reg, format) {
     case 'pdf':
       return createPDF(reg);
     case 'html':
-      return createHTML(reg);
+      return createHTML();
     default:
       throw new Error(`Unsupported waiver format: ${format}`);
   }
@@ -38,20 +38,20 @@ function createPDF(reg) {
       doc.moveDown();
     });
 
-  appendLines(createBody(reg));
+  appendLines(createBody());
   doc.moveDown();
   doc.moveDown();
   doc.moveDown();
   doc.moveDown();
   doc.moveDown();
-  appendLines(createFooter(reg));
+  appendLines(createFooter());
 
   return doc;
 }
 
-function createHTML(reg) {
+function createHTML() {
   const s = new Readable();
-  createBody(reg)
+  createBody()
     .map((line) => `<p>${line}</p>`)
     .forEach((line) => s.push(line));
   s.push(null);
@@ -68,7 +68,7 @@ function bold(doc) {
   return doc.font(path.resolve(fontsDir, 'OpenSans-Bold.ttf'));
 }
 
-function createBody(reg) {
+function createBody() {
   return [
     `Hiermit erkläre ich mich einverstanden, dass mein Kind an den Kinderferienspielen Rothenbergen vom ${formatDate(
       config.startDate

@@ -1,5 +1,6 @@
-import { Card, CardHeader, LinearProgress, Link, List, ListItem, ListItemText } from '@material-ui/core';
+import { CardHeader, LinearProgress, Link, List, ListItem, ListItemText } from '@material-ui/core';
 import React from 'react';
+import Card from '../Card';
 import Date from '../Date';
 
 export default function KuchenStatistics({ date, required, actual }) {

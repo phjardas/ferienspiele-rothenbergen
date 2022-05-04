@@ -1,5 +1,17 @@
-import { Box } from '@material-ui/core';
+import { Box, useTheme } from '@material-ui/core';
 
-export default function Stack({ children }) {
-  return <Box sx={{ display: 'flex', flexDirection: 'column', gap: 8 }}>{children}</Box>;
+export default function Stack({ spacing = 1, direction = 'column', children }) {
+  const theme = useTheme();
+
+  return (
+    <Box
+      sx={{
+        display: 'flex',
+        flexDirection: direction,
+        gap: theme.spacing(spacing),
+      }}
+    >
+      {children}
+    </Box>
+  );
 }

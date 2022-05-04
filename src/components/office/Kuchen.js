@@ -1,8 +1,9 @@
-import { Card, CardHeader, Grid, Link, List, ListItem, ListItemText } from '@material-ui/core';
+import { CardHeader, Grid, Link, List, ListItem, ListItemText } from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
 import config from '../../api/config';
 import { getRegistrations } from '../../api/firestore';
 import Alert from '../Alert';
+import Card from '../Card';
 import GlobalLoader from '../GlobalLoader';
 import KuchenStatistics from './KuchenStatistics';
 

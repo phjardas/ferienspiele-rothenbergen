@@ -1,3 +1,4 @@
+import { Box } from '@material-ui/core';
 import { FORM_ERROR } from 'final-form';
 import React, { useMemo, useState } from 'react';
 import { Form } from 'react-final-form';
@@ -42,14 +43,16 @@ export default function Registration({ initialValues: originalValues, onSubmit }
     <Form onSubmit={submit} initialValues={initialValues} decorators={decorators}>
       {({ handleSubmit, invalid, submitting, submitError }) => (
         <form onSubmit={handleSubmit} noValidate>
-          <Welcome createTestData={updateTestData} geschwisterkind={!!originalValues} />
-          <Child />
-          <Parents />
-          <EmergencyContact />
-          <Fruehbetreuung />
-          <Kuchen />
-          <Price />
-          <Consent />
+          <Box sx={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
+            <Welcome createTestData={updateTestData} geschwisterkind={!!originalValues} />
+            <Child />
+            <Parents />
+            <EmergencyContact />
+            <Fruehbetreuung />
+            <Kuchen />
+            <Price />
+            <Consent />
+          </Box>
           <Actions invalid={invalid} submitting={submitting} submitError={submitError} />
         </form>
       )}
