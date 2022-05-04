@@ -1,9 +1,11 @@
-import { Dialog, DialogContent, DialogTitle, IconButton, withMobileDialog } from '@material-ui/core';
+import { Dialog, DialogContent, DialogTitle, IconButton, useMediaQuery } from '@material-ui/core';
 import { Close as CloseIcon } from '@material-ui/icons';
 import React, { Suspense } from 'react';
 import GlobalLoader from './GlobalLoader';
 
-function Modal({ title, fullScreen, open, onClose, children }) {
+export default function Modal({ title, open, onClose, children }) {
+  const fullScreen = useMediaQuery((theme) => theme.breakpoints.down('sm'));
+
   return (
     <Dialog fullScreen={fullScreen} open={open} onClose={onClose}>
       <DialogTitle>
@@ -18,5 +20,3 @@ function Modal({ title, fullScreen, open, onClose, children }) {
     </Dialog>
   );
 }
-
-export default withMobileDialog()(Modal);

@@ -32,8 +32,12 @@ const columns = [
     label: 'Registriert',
   },
   {
-    field: ['uebernachtung', 'type'],
+    field: ['child', 'sleepover'],
     label: 'Übernachtung',
+  },
+  {
+    field: ['child', 'earlyCare'],
+    label: 'Frühbetreuung',
   },
   {
     label: 'Bezahlung',
@@ -122,7 +126,10 @@ function Anmeldungen({ classes }) {
                 <Date value={reg.registeredAt} />
               </TableCell>
               <TableCell>
-                <YesNoLabel value={reg.uebernachtung && reg.uebernachtung.type === 'uebernachtung'} />
+                <YesNoLabel value={reg.child.sleepover} />
+              </TableCell>
+              <TableCell>
+                <YesNoLabel value={reg.child.earlyCare} />
               </TableCell>
               <TableCell>
                 <YesNoLabel value={reg.payment && reg.payment.receivedAt} noColor="error" />

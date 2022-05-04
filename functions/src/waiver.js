@@ -69,49 +69,31 @@ function bold(doc) {
 }
 
 function createBody(reg) {
-  return `
-Hiermit erkläre ich mich einverstanden, dass mein Kind an den Kinderferienspielen Rothenbergen vom ${formatDate(
-    config.startDate
-  )} bis ${formatDate(config.endDate)} ${
-    reg.uebernachtung && reg.uebernachtung.type === 'uebernachtung' ? 'mit anschließender Übernachtung ' : ''
-  }teilnehmen darf.
-
-Mir ist bekannt, dass die Anmeldung erst gültig ist, wenn diese Einverständniserklärung unterschrieben vorliegt und alle notwendigen Zahlungen geleistet sind.
-
-Bei einer Absage durch teilnehmende Personen kann die Rückerstattung des Beitrages nach dem ${formatDate(
-    config.registrationDeadline
-  )} nicht garantiert werden.
-
-Mein Kind ist von mir angewiesen, den Anordnungen der Aufsichtspersonen Folge zu leisten. Die Aufsichtsführenden haben das Recht, mein Kind bei fortwährender Missachtung von Regeln und Anweisungen nach Hause zu schicken und von der weiteren Teilnahme auszuschließen. Eine Beitragserstattung erfolgt in diesem Fall nicht.
-
-Ich garantiere, dass unter der Telefonnummer des Notfallkontaktes jederzeit jemand erreichbar ist.
-
-Mir ist bewusst, dass in Ausnahmefällen die Aufsicht für kurze Zeit auch von einer minderjährigen Person wahrgenommen werden wird.
-
-Ich bin damit einverstanden, dass mein Kind in Ausnahmesituationen im privateigenen Pkw befördert wird.
-
-Meine Angaben in Bezug auf Allergien und Unverträglichkeiten sind vollständig.
-
-Die Veranstalter haften nicht für den Verlust oder die Beschädigung von Gegenständen.
-
-Es werden während der Ferienspiele Fotos gemacht. Ich bin mit deren Veröffentlichung auf den Homepages und in den Gemeindebriefen der drei ausrichtenden Kirchengemeinden einverstanden.
-
-Derzeit lassen sich keine verbindlichen Aussagen über Maßnahmen zur Eindämmung der Coronapandemie treffen. Wir hoffen, dass sich die Lage weiterhin gut entwickelt – falls aber nicht, bitten wir um Ihr Verständnis und Unterstützung, wenn das Team zum Selbstschutz und zum Schutz Ihrer Kinder und Familien Maßnahmen ergreifen sollte: Ich erkläre mich grundsätzlich damit einverstanden, dass die Verantwortlichen zum gegenseitigen Schutz je nach Pandemielage und/oder geplanter Aktivität während der Ferienspiele eine Testung oder das kurzzeitige(!) Tragen einer Maske zur Teilnahmevoraussetzung machen können.`
-    .split(/\n/)
-    .map((line) => line.trim())
-    .filter((line) => line.length);
+  return [
+    `Hiermit erkläre ich mich einverstanden, dass mein Kind an den Kinderferienspielen Rothenbergen vom ${formatDate(
+      config.startDate
+    )} bis ${formatDate(config.endDate)} teilnehmen darf.`,
+    `Mir ist bekannt, dass die Anmeldung erst gültig ist, wenn diese Einverständniserklärung unterschrieben vorliegt und alle notwendigen Zahlungen geleistet sind.`,
+    `Bei einer Absage durch teilnehmende Personen kann die Rückerstattung des Beitrages nach dem ${formatDate(
+      config.registrationDeadline
+    )} nicht garantiert werden.`,
+    `Mein Kind ist von mir angewiesen, den Anordnungen der Aufsichtspersonen Folge zu leisten. Die Aufsichtsführenden haben das Recht, mein Kind bei fortwährender Missachtung von Regeln und Anweisungen nach Hause zu schicken und von der weiteren Teilnahme auszuschließen. Eine Beitragserstattung erfolgt in diesem Fall nicht.`,
+    `Ich garantiere, dass unter der Telefonnummer des Notfallkontaktes jederzeit jemand erreichbar ist.`,
+    `Mir ist bewusst, dass in Ausnahmefällen die Aufsicht für kurze Zeit auch von einer minderjährigen Person wahrgenommen werden wird.`,
+    `Ich bin damit einverstanden, dass mein Kind in Ausnahmesituationen im privateigenen Pkw befördert wird.`,
+    `Meine Angaben in Bezug auf Allergien und Unverträglichkeiten sind vollständig.`,
+    `Die Veranstalter haften nicht für den Verlust oder die Beschädigung von Gegenständen.`,
+    `Es werden während der Ferienspiele Fotos gemacht. Ich bin mit deren Veröffentlichung auf den Homepages und in den Gemeindebriefen der drei ausrichtenden Kirchengemeinden einverstanden.`,
+    `Ich erkläre mich grundsätzlich damit einverstanden, dass die Verantwortlichen zum gegenseitigen Schutz je nach Pandemielage und/oder geplanter Aktivität während der Ferienspiele eine Testung oder das kurzzeitige Tragen einer Maske zur Teilnahmevoraussetzung machen können.`,
+  ].map((line) => line.trim());
 }
 
 function createFooter() {
-  return `
-Datum, Unterschrift
-
-Bitte schicken Sie diese Einverständniserklärung bis zum ${formatDate(
-    config.waiverDeadline
-  )} unterschrieben an das Gemeindebüro der ev. Kirche oder geben sie in einem verschlossenen Umschlag dort ab.
-
-Büro der ev. Kirche "Auf dem Berg", Paul-Gerhardt Str.2, 63584 Gründau-Lieblos, Einwurf in den Briefkasten genügt.`
-    .split(/\n/)
-    .map((line) => line.trim())
-    .filter((line) => line.length);
+  return [
+    `Datum, Unterschrift`,
+    `Bitte schicken Sie diese Einverständniserklärung bis zum ${formatDate(
+      config.waiverDeadline
+    )} unterschrieben an das Gemeindebüro der ev. Kirchengemeinde oder geben sie in einem verschlossenen Umschlag dort ab, Einwurf in den Briefkasten genügt.`,
+    `Büro der ev. Kirchengemeinde "Auf dem Berg", Paul-Gerhardt Str.2, 63584 Gründau-Lieblos.`,
+  ].map((line) => line.trim());
 }

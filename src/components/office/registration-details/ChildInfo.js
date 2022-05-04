@@ -1,5 +1,11 @@
 import { Card, CardContent, CardHeader, Grid, Link, makeStyles, Typography } from '@material-ui/core';
-import { Cake as CakeIcon, ChildCare as ChildIcon, LocalHospital as HospitalIcon, Person as PersonIcon } from '@material-ui/icons';
+import {
+  ArrowForward,
+  Cake as CakeIcon,
+  ChildCare as ChildIcon,
+  LocalHospital as HospitalIcon,
+  Person as PersonIcon,
+} from '@material-ui/icons';
 import React from 'react';
 import Stack from '../../../components/Stack';
 import Age from '../../Age';
@@ -89,17 +95,42 @@ export default function ChildInfo({ registration }) {
       </Grid>
       <Grid item xs={12}>
         <Card>
+          <CardHeader avatar={<ArrowForward />} title="Abholung" />
+          <CardContent>
+            <Stack>
+              {registration.child.authorizedFetchers && (
+                <Typography className={classes.pre}>
+                  Abholer:
+                  <br />
+                  {registration.child.authorizedFetchers}
+                </Typography>
+              )}
+              <Typography>
+                <YesNoLabel
+                  value={registration.child.walkHome}
+                  label={registration.child.walkHome ? 'Darf alleine laufen' : 'Darf nicht alleine laufen'}
+                />
+              </Typography>
+            </Stack>
+          </CardContent>
+        </Card>
+      </Grid>
+      <Grid item xs={12}>
+        <Card>
           <CardHeader avatar={<CakeIcon />} title="Optionen" />
           <CardContent>
             <Stack>
               <KuchenInfo kuchen={registration.kuchen} />
               <Typography>
-                <YesNoLabel value={registration.sleepover} label="Übernachtung" />
+                <YesNoLabel value={registration.child.sleepover} label="Übernachtung" />
+              </Typography>
+              <Typography>
+                <YesNoLabel value={registration.child.earlyCare} label="Frühbetreuung" />
               </Typography>
             </Stack>
           </CardContent>
         </Card>
-      </Grid>{' '}
+      </Grid>
     </>
   );
 }

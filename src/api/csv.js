@@ -23,6 +23,9 @@ export function exportRegistrations(regs) {
     'Kuchen Datum',
     'Kuchen Name',
     'Übernachtung',
+    'Frühbetreuung',
+    'Abholer',
+    'alleine laufen',
     'Geschwisterkind',
     'Betrag',
     'Einverständnis',
@@ -51,6 +54,9 @@ export function exportRegistrations(regs) {
     reg.kuchen.date !== 'none' && reg.kuchen.date !== 'geschwister' ? reg.kuchen.date : '',
     reg.kuchen.name,
     reg.child.sleepover,
+    reg.child.earlyCare,
+    reg.child.authorizedFetchers,
+    reg.child.walkHome,
     reg.child.nextChild,
     reg.price.total,
     !!reg.waiver,
@@ -63,7 +69,7 @@ export function exportRegistrations(regs) {
 
 function encodeCell(value) {
   if (typeof value === 'string') {
-    return '"' + value.replace(/\r?\n/, '\\r\\n').replace('"', '""') + '"';
+    return '"' + value.replace(/\r?\n/g, '\\r\\n').replace('"', '""') + '"';
   }
 
   if (typeof value === 'number') {

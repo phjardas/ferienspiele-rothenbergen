@@ -68,7 +68,7 @@ export default function Child() {
           <Field
             name="child.miscellaneous"
             component={TextField}
-            label="Besonderheiten (Allergien, Medikamente, Unverträglichkeiten)"
+            label="Besonderheiten"
             multiline
             fullWidth
             helperText="Muss Ihr Kind regelmäßig Medikamente zu sich nehmen? Gibt es Besonderheiten zu beachten? z.B. ADS, Allergien, Nahrungsunverträglichkeiten, religiöse Essensvorschriften, Einnässen etc."
@@ -82,7 +82,7 @@ export default function Child() {
             label="Freunde"
             multiline
             fullWidth
-            helperText="Ihr Kind möchte gerne mit seinen/ihren Freund:innen in eine Gruppe? Bitte geben Sie hier die Namen an."
+            helperText="Wir bemühen uns, bei der Gruppeneinteilung wenigstens einen Freundeswunsch zu erfüllen, können aber keine Garantie abgeben. Danke für Ihr Verständnis!"
           />
         </Grid>
 
@@ -119,6 +119,21 @@ export default function Child() {
             type="checkbox"
             label="Mein Kind nimmt an der Übernachtung von Donnerstag auf Freitag in der evangelisch-methodistischen Friedenskirche in Rothenbergen teil."
           />
+        </Grid>
+
+        <Grid item xs={12}>
+          <Field
+            name="child.authorizedFetchers"
+            component={TextField}
+            label="Diese Personen sind berechtigt, mein Kind nach Programmende abzuholen"
+            multiline
+            fullWidth
+            helperText="Bitte eine Zeile pro Person mit vollständigen Namen und, falls bekannt, Geburtsdatum."
+          />
+        </Grid>
+
+        <Grid item xs={12}>
+          <Field name="child.walkHome" component={Switch} type="checkbox" label="Mein Kind darf alleine nach Hause gehen." />
         </Grid>
       </Grid>
     </FieldSet>

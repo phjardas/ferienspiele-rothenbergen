@@ -1,14 +1,11 @@
 import { createTheme, CssBaseline, makeStyles, MuiThemeProvider } from '@material-ui/core';
+import { indigo, purple } from '@material-ui/core/colors';
 import React from 'react';
 
 const theme = createTheme({
   palette: {
-    primary: {
-      main: '#013f8c',
-    },
-    secondary: {
-      main: '#08d353',
-    },
+    primary: indigo,
+    secondary: purple,
   },
   typography: {
     useNextVariants: true,

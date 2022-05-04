@@ -6,6 +6,7 @@ import Actions from './Actions';
 import Child from './Child';
 import Consent from './Consent';
 import EmergencyContact from './EmergencyContact';
+import Fruehbetreuung from './Fruehbetreuung';
 import Kuchen from './Kuchen';
 import Parents from './Parents';
 import Price from './Price';
@@ -45,7 +46,7 @@ export default function Registration({ initialValues: originalValues, onSubmit }
           <Child />
           <Parents />
           <EmergencyContact />
-          {/* <Uebernachtung /> */}
+          <Fruehbetreuung />
           <Kuchen />
           <Price />
           <Consent />

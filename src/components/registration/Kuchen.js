@@ -1,4 +1,4 @@
-import { CircularProgress, Grid, List, ListItem, ListItemText, Typography } from '@material-ui/core';
+import { Box, Chip, CircularProgress, Grid, Typography } from '@material-ui/core';
 import { Cake as CakeIcon } from '@material-ui/icons';
 import React from 'react';
 import { Field } from 'react-final-form';
@@ -32,13 +32,11 @@ function KuchenInfo({ date }) {
       <Typography>
         Wir haben schon Zusagen für folgende Kuchen am <KuchenDate value={date} />:
       </Typography>
-      <List dense>
+      <Box sx={{ display: 'flex', gap: 1 }}>
         {kuchen.sort().map((k, i) => (
-          <ListItem key={i}>
-            <ListItemText primary={k} />
-          </ListItem>
+          <Chip key={i} label={k} />
         ))}
-      </List>
+      </Box>
     </>
   );
 }
@@ -78,7 +76,7 @@ export default function Kuchen() {
         </Grid>
 
         <Condition when="kuchen.date" is={isKuchenSelected}>
-          {date => (
+          {(date) => (
             <>
               <Grid item xs={12} lg={6}>
                 <Field

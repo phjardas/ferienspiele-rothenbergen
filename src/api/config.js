@@ -17,10 +17,10 @@ const config = {
     noCake: 10,
   },
   kuchen: [
-    { date: '2022-07-25', amount: 8 },
-    { date: '2022-07-26', amount: 8 },
-    { date: '2022-07-27', amount: 8 },
-    { date: '2022-07-28', amount: 8 },
+    { date: '2022-07-25', amount: 9 },
+    { date: '2022-07-26', amount: 9 },
+    { date: '2022-07-27', amount: 9 },
+    { date: '2022-07-28', amount: 9 },
   ],
   genders: [
     { value: 'm', label: 'männlich' },

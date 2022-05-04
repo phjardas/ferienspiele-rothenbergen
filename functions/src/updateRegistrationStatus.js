@@ -1,32 +1,45 @@
 import admin from './admin';
 import config from './config';
 
-const { maxParticipants, registrationDeadline } = config;
+const { maxParticipants, earlyCarePlaces, registrationDeadline } = config;
 const configDoc = admin.firestore().collection('config').doc('config');
 const registrationsColl = admin.firestore().collection('registrations');
 
-async function getRegistrationCount() {
+async function getRegistrationCounts() {
   const documents = await registrationsColl.get();
-  return documents.size;
+
+  return {
+    total: documents.size,
+    earlyCare: documents.docs.filter((d) => d.get('earlyCare')).length,
+  };
 }
 
-function getConfigurationStatus(registrationCount) {
-  if (Date.now() > registrationDeadline.getTime()) return { registrationStatus: 'deadlineExpired', spotsLeft: 0 };
-  if (registrationCount >= maxParticipants) return { registrationStatus: 'maxParticipants', spotsLeft: 0 };
-  return { registrationStatus: 'open', spotsLeft: maxParticipants - registrationCount };
-}
-
-async function setRegistrationStatus({ registrationStatus, spotsLeft }) {
-  const doc = await configDoc.get();
-  if (doc.exists) {
-    await configDoc.update({ registrationStatus, spotsLeft });
-  } else {
-    await configDoc.set({ registrationStatus, spotsLeft });
+function getConfigurationStatus({ total, earlyCare }) {
+  if (Date.now() > registrationDeadline.getTime()) {
+    return {
+      registrationStatus: 'deadlineExpired',
+      spotsLeft: 0,
+      earlySpotsLeft: 0,
+    };
   }
+
+  if (total >= maxParticipants) {
+    return {
+      registrationStatus: 'maxParticipants',
+      spotsLeft: 0,
+      earlySpotsLeft: 0,
+    };
+  }
+
+  return {
+    registrationStatus: 'open',
+    spotsLeft: maxParticipants - total,
+    earlySpotsLeft: earlyCarePlaces - earlyCare,
+  };
 }
 
 export default async function updateRegistrationStatus() {
-  const registrationCount = await getRegistrationCount();
-  const status = getConfigurationStatus(registrationCount);
-  await setRegistrationStatus(status);
+  const counts = await getRegistrationCounts();
+  const status = getConfigurationStatus(counts);
+  await configDoc.set(status);
 }

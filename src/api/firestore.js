@@ -20,7 +20,10 @@ function useDoc(doc) {
   const [state, setState] = useState({ loading: true });
 
   useEffect(() => {
-    doc.get().then(snap => setState({ loading: false, data: snap.data() || {} }), error => setState({ loading: false, error }));
+    doc.onSnapshot(
+      (snap) => setState({ loading: false, data: snap.data() || {} }),
+      (error) => setState({ loading: false, error })
+    );
   }, [doc]);
 
   return state;
@@ -39,7 +42,7 @@ export async function storeRegistration(registration) {
 
 export function getRegistration(id, next) {
   return registrationsColl.doc(id).onSnapshot({
-    next: snapshot => next(null, toEntity(snapshot)),
+    next: (snapshot) => next(null, toEntity(snapshot)),
     error: next,
   });
 }
@@ -51,7 +54,7 @@ export function getRegistrations({ sortField, sortDirection }, next) {
   }
 
   return query.onSnapshot({
-    next: snapshot => next(null, snapshot.docs.map(toEntity)),
+    next: (snapshot) => next(null, snapshot.docs.map(toEntity)),
     error: next,
   });
 }
@@ -81,7 +84,7 @@ function toEntity(doc) {
 }
 
 function removeUndefinedFields(obj) {
-  Object.keys(obj).forEach(key => {
+  Object.keys(obj).forEach((key) => {
     const type = typeof obj[key];
     if (type === 'undefined') {
       delete obj[key];

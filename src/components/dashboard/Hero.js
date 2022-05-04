@@ -24,16 +24,21 @@ function Hero({ classes }) {
   );
 }
 
-const styles = ({ breakpoints, mixins, spacing }) => ({
+const styles = ({ breakpoints, spacing }) => ({
   heading: {
     [breakpoints.up('lg')]: {
       marginTop: spacing(30),
     },
   },
   content: {
-    ...mixins.gutters(),
     paddingTop: spacing(3),
     paddingBottom: spacing(3),
+    paddingLeft: spacing(2),
+    paddingRight: spacing(2),
+    [breakpoints.up('sm')]: {
+      paddingLeft: spacing(3),
+      paddingRight: spacing(3),
+    },
     background: 'rgba(255, 255, 255, .75)',
   },
 });

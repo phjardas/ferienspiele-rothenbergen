@@ -6,7 +6,7 @@ import background from './background.jpg';
 import Footer from './Footer';
 import MainMenu from './MainMenu';
 
-const useStyles = makeStyles(({ breakpoints, mixins, palette, shadows, shape, spacing, transitions }) => ({
+const useStyles = makeStyles(({ breakpoints, palette, shadows, shape, spacing, transitions }) => ({
   wrapper: {
     minHeight: '100vh',
     display: 'flex',
@@ -50,9 +50,14 @@ const useStyles = makeStyles(({ breakpoints, mixins, palette, shadows, shape, sp
   content: {
     flexGrow: 1,
     position: 'relative',
-    ...mixins.gutters(),
     paddingTop: spacing(3),
     paddingBottom: spacing(3),
+    paddingLeft: spacing(2),
+    paddingRight: spacing(2),
+    [breakpoints.up('sm')]: {
+      paddingLeft: spacing(3),
+      paddingRight: spacing(3),
+    },
   },
 }));
 

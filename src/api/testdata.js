@@ -94,9 +94,9 @@ function randomPhone() {
 
 function randomDateOfBirth() {
   const currentYear = new Date().getFullYear();
-  const years = [6, 7, 8, 9, 10, 11, 12].map(age => currentYear - age);
+  const years = [6, 7, 8, 9, 10, 11, 12].map((age) => currentYear - age);
   const months = Array.from(Array(12).keys());
-  const days = Array.from(Array(27).keys()).map(i => i + 1);
+  const days = Array.from(Array(27).keys()).map((i) => i + 1);
 
   const year = randomElement(years);
   const month = randomElement(months);
@@ -107,7 +107,7 @@ function randomDateOfBirth() {
 export function createTestData() {
   const gender = randomElement(config.genders).value;
   const lastName = randomElement(lastNames);
-  const kuchenDate = randomElement([...config.kuchen.map(k => k.date), 'geschwister', 'none']);
+  const kuchenDate = randomElement([...config.kuchen.map((k) => k.date), 'geschwister', 'none']);
 
   return {
     child: {
@@ -116,8 +116,12 @@ export function createTestData() {
       gender,
       dateOfBirth: randomDateOfBirth(),
       shirtSize: randomElement(config.shirtSizes).value,
+      foodPreference: randomElement(config.foodPreferences).value,
       vegetarian: randomBoolean(),
       nextChild: randomBoolean(),
+      earlyCare: randomBoolean(),
+      sleepover: randomBoolean(),
+      walkHome: randomBoolean(),
     },
     parent: {
       phone: randomPhone(),
@@ -129,9 +133,6 @@ export function createTestData() {
     emergencyContact: {
       name: `${randomElement(names.d)} ${lastName}`,
       phone: randomPhone(),
-    },
-    uebernachtung: {
-      type: randomElement(['uebernachtung', 'none']),
     },
     kuchen: {
       date: kuchenDate,
