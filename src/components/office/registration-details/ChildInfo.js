@@ -1,10 +1,12 @@
-import { Card, CardContent, CardHeader, Grid, makeStyles, Typography } from '@material-ui/core';
+import { Card, CardContent, CardHeader, Grid, Link, makeStyles, Typography } from '@material-ui/core';
 import { Cake as CakeIcon, ChildCare as ChildIcon, LocalHospital as HospitalIcon, Person as PersonIcon } from '@material-ui/icons';
 import React from 'react';
+import Stack from '../../../components/Stack';
 import Age from '../../Age';
 import Date from '../../Date';
 import GenderIcon from '../../GenderIcon';
 import ShirtSize from '../../ShirtSize';
+import YesNoLabel from '../../YesNoLabel';
 import KuchenInfo from './KuchenInfo';
 
 const useStyles = makeStyles(() => ({
@@ -22,33 +24,35 @@ export default function ChildInfo({ registration }) {
         <Card>
           <CardHeader avatar={<ChildIcon />} title={`${registration.child.firstName} ${registration.child.lastName}`} />
           <CardContent>
-            <Typography paragraph>
-              Geschlecht: <GenderIcon gender={registration.child.gender} label />
-            </Typography>
-            <Typography paragraph>
-              Geburtstag: <Date value={registration.child.dateOfBirth} />
-            </Typography>
-            <Typography paragraph>
-              Alter: <Age dateOfBirth={registration.child.dateOfBirth} /> Jahre bei Beginn der Ferienspiele
-            </Typography>
-            <Typography paragraph>
-              T-Shirt: <ShirtSize shirtSize={registration.child.shirtSize} />
-            </Typography>
-            <Typography paragraph>Vegetarisch: {registration.child.vegetarian ? 'ja' : 'nein'}</Typography>
-            {registration.child.miscellaneous && (
-              <Typography paragraph className={classes.pre}>
-                Besonderheiten:
-                <br />
-                {registration.child.miscellaneous}
+            <Stack>
+              <Typography>
+                Geschlecht: <GenderIcon gender={registration.child.gender} label />
               </Typography>
-            )}
-            {registration.child.friends && (
-              <Typography className={classes.pre}>
-                Freunde:
-                <br />
-                {registration.child.friends}
+              <Typography>
+                Geburtstag: <Date value={registration.child.dateOfBirth} />
               </Typography>
-            )}
+              <Typography>
+                Alter: <Age dateOfBirth={registration.child.dateOfBirth} /> Jahre bei Beginn der Ferienspiele
+              </Typography>
+              <Typography>
+                T-Shirt: <ShirtSize shirtSize={registration.child.shirtSize} />
+              </Typography>
+              <Typography>{registration.child.foodPreference}</Typography>
+              {registration.child.miscellaneous && (
+                <Typography className={classes.pre}>
+                  Besonderheiten:
+                  <br />
+                  {registration.child.miscellaneous}
+                </Typography>
+              )}
+              {registration.child.friends && (
+                <Typography className={classes.pre}>
+                  Freunde:
+                  <br />
+                  {registration.child.friends}
+                </Typography>
+              )}
+            </Stack>
           </CardContent>
         </Card>
       </Grid>
@@ -56,17 +60,19 @@ export default function ChildInfo({ registration }) {
         <Card>
           <CardHeader avatar={<PersonIcon />} title="Eltern" />
           <CardContent>
-            <Typography paragraph>
-              Telefon: <a href={`tel:${registration.parent.phone}`}>{registration.parent.phone}</a>
-            </Typography>
-            <Typography paragraph>
-              E-Mail: <a href={`mailto:${registration.parent.email}`}>{registration.parent.email}</a>
-            </Typography>
-            <Typography>
-              {registration.parent.street}
-              <br />
-              {registration.parent.plz} {registration.parent.city}
-            </Typography>
+            <Stack>
+              <Typography>
+                Telefon: <Link href={`tel:${registration.parent.phone}`}>{registration.parent.phone}</Link>
+              </Typography>
+              <Typography>
+                E-Mail: <Link href={`mailto:${registration.parent.email}`}>{registration.parent.email}</Link>
+              </Typography>
+              <Typography>
+                {registration.parent.street}
+                <br />
+                {registration.parent.plz} {registration.parent.city}
+              </Typography>
+            </Stack>
           </CardContent>
         </Card>
       </Grid>
@@ -76,7 +82,7 @@ export default function ChildInfo({ registration }) {
           <CardContent>
             <Typography>
               {registration.emergencyContact.name}:{' '}
-              <a href={`tel:${registration.emergencyContact.phone}`}>{registration.emergencyContact.phone}</a>
+              <Link href={`tel:${registration.emergencyContact.phone}`}>{registration.emergencyContact.phone}</Link>
             </Typography>
           </CardContent>
         </Card>
@@ -85,11 +91,13 @@ export default function ChildInfo({ registration }) {
         <Card>
           <CardHeader avatar={<CakeIcon />} title="Optionen" />
           <CardContent>
-            <KuchenInfo kuchen={registration.kuchen} />
+            <Stack>
+              <KuchenInfo kuchen={registration.kuchen} />
+              <Typography>
+                <YesNoLabel value={registration.sleepover} label="Übernachtung" />
+              </Typography>
+            </Stack>
           </CardContent>
-          {/* <CardContent>
-            <UebernachtungInfo uebernachtung={registration.uebernachtung} />
-          </CardContent> */}
         </Card>
       </Grid>{' '}
     </>

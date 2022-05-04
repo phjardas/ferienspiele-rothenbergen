@@ -5,7 +5,7 @@ import Date from '../Date';
 import H2 from '../H2';
 import RegistrationStatus from './RegistrationStatus';
 
-const { title, startDate, endDate } = config;
+const { app, title, startDate, endDate } = config;
 
 function Hero({ classes }) {
   return (
@@ -14,7 +14,7 @@ function Hero({ classes }) {
         {title}
       </H2>
       <Typography variant="h5" paragraph>
-        Ökumenische Ferienspiele in Rothenbergen
+        {app}
       </Typography>
       <Typography variant="body1" paragraph>
         Von <Date value={startDate} /> bis <Date value={endDate} />

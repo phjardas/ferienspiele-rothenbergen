@@ -1,4 +1,4 @@
-import { Card, CardHeader, LinearProgress, List, ListItem, ListItemText } from '@material-ui/core';
+import { Card, CardHeader, LinearProgress, Link, List, ListItem, ListItemText } from '@material-ui/core';
 import React from 'react';
 import Date from '../Date';
 
@@ -11,7 +11,7 @@ export default function KuchenStatistics({ date, required, actual }) {
         <List>
           {actual
             .sort((a, b) => a.kuchen.name.localeCompare(b.kuchen.name))
-            .map(reg => (
+            .map((reg) => (
               <ListItem key={reg.id}>
                 <ListItemText
                   primary={reg.kuchen.name}
@@ -19,9 +19,9 @@ export default function KuchenStatistics({ date, required, actual }) {
                     <>
                       {reg.child.firstName} {reg.child.lastName}
                       <br />
-                      <a href={`tel:${reg.parent.phone}`}>{reg.parent.phone}</a>
+                      <Link href={`tel:${reg.parent.phone}`}>{reg.parent.phone}</Link>
                       <br />
-                      <a href={`mailto:${reg.parent.email}`}>{reg.parent.email}</a>
+                      <Link href={`mailto:${reg.parent.email}`}>{reg.parent.email}</Link>
                     </>
                   }
                 />

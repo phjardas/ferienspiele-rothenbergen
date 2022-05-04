@@ -19,7 +19,7 @@ export default function WaiverInfo({ setWaiverReceived, ...registration }) {
           <Alert color="error">Noch nicht abgegeben.</Alert>
         )}
       </CardContent>
-      <CardActions disableActionSpacing>
+      <CardActions>
         {registration.waiver ? (
           <SpinningButton color="error" onClick={() => setWaiverReceived(false)}>
             Einverständnis doch nicht erhalten

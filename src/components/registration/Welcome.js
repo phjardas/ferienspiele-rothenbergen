@@ -1,4 +1,4 @@
-import { Button, Typography } from '@material-ui/core';
+import { Button, Link, Typography } from '@material-ui/core';
 import React from 'react';
 import config from '../../api/config';
 import Date from '../Date';
@@ -36,8 +36,8 @@ export default function Welcome({ createTestData, geschwisterkind }) {
             eingegangen sind!
           </Typography>
           <Typography paragraph>
-            Bei nachträglichen Änderungen nehmen Sie bitte telefonisch unter <a href="tel:+4960518878048">06051 8878048</a> oder per Email
-            unter <a href="mailto:caroline.miesner@kirche-aufdemberg.de">caroline.miesner@kirche-aufdemberg.de</a> Kontakt mit uns auf.
+            Bei nachträglichen Änderungen nehmen Sie bitte unter{' '}
+            <Link href="mailto:ferienspiele@kirche-aufdemberg.de">ferienspiele@kirche-aufdemberg.de</Link> Kontakt mit uns auf.
           </Typography>
         </>
       )}

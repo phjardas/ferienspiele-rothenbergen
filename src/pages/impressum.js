@@ -1,4 +1,4 @@
-import { Grid, Typography } from '@material-ui/core';
+import { Grid, Link, Typography } from '@material-ui/core';
 import React from 'react';
 import H2 from '../components/H2';
 import H3 from '../components/H3';
@@ -30,9 +30,9 @@ export default function Imprint() {
             <br /> 63584 Gründau-Rothenbergen
           </Typography>
           <Typography paragraph>
-            <a href="tel:+4960512649">06051 2649</a>
+            <Link href="tel:+4960512649">06051 2649</Link>
             <br />
-            <a href="mailto:ralf.schweinsberg@emk.de">ralf.schweinsberg@emk.de</a>
+            <Link href="mailto:ralf.schweinsberg@emk.de">ralf.schweinsberg@emk.de</Link>
           </Typography>
         </Grid>
         <Grid item lg={4}>
@@ -49,18 +49,18 @@ export default function Imprint() {
           </Typography>
 
           <Typography paragraph>
-            <a href="tel:+4960512649">06051 2649</a>
+            <Link href="tel:+4960512649">06051 2649</Link>
             <br />
-            <a href="mailto:ralf.schweinsberg@emk.de">ralf.schweinsberg@emk.de</a>
+            <Link href="mailto:ralf.schweinsberg@emk.de">ralf.schweinsberg@emk.de</Link>
           </Typography>
         </Grid>
         <Grid item lg={4}>
           <H3>Webseite</H3>
           <Typography paragraph>
             Diese Webseite wurde ehrenamtlich und kostenfrei entwickelt von{' '}
-            <a href="https://jardas.de/" target="_blank" rel="noopener noreferrer">
+            <Link href="https://jardas.de/" target="_blank" rel="noopener noreferrer">
               Philipp Jardas
-            </a>
+            </Link>
           </Typography>
         </Grid>
       </Grid>

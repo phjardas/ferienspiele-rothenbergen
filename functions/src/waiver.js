@@ -96,7 +96,7 @@ Die Veranstalter haften nicht für den Verlust oder die Beschädigung von Gegens
 
 Es werden während der Ferienspiele Fotos gemacht. Ich bin mit deren Veröffentlichung auf den Homepages und in den Gemeindebriefen der drei ausrichtenden Kirchengemeinden einverstanden.
 
-Ich akzeptieren die zu dem Zeitpunkt der Ferienspiele geltenden und mit dem Ordnungsamt abgestimmten Hygienemaßnahmen gegen die Coronapandemie und erkläre sie vorab meinem Kind. Sollte die Veranstaltung aufgrund der Coronasituation von Seiten der Kirchengemeinden abgesagt, werden bereits bezahlte Beiträge selbstverständlich zurückerstattet.`
+Derzeit lassen sich keine verbindlichen Aussagen über Maßnahmen zur Eindämmung der Coronapandemie treffen. Wir hoffen, dass sich die Lage weiterhin gut entwickelt – falls aber nicht, bitten wir um Ihr Verständnis und Unterstützung, wenn das Team zum Selbstschutz und zum Schutz Ihrer Kinder und Familien Maßnahmen ergreifen sollte: Ich erkläre mich grundsätzlich damit einverstanden, dass die Verantwortlichen zum gegenseitigen Schutz je nach Pandemielage und/oder geplanter Aktivität während der Ferienspiele eine Testung oder das kurzzeitige(!) Tragen einer Maske zur Teilnahmevoraussetzung machen können.`
     .split(/\n/)
     .map((line) => line.trim())
     .filter((line) => line.length);

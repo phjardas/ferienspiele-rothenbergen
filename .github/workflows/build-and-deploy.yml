@@ -2,9 +2,9 @@ name: build and deploy
 
 on:
   push:
-    branches: [ master ]
+    branches: [master]
   pull_request:
-    branches: [ master ]
+    branches: [master]
 
 jobs:
   build:
@@ -12,19 +12,38 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: checkout
-      uses: actions/checkout@v2
-    - name: node 12
-      uses: actions/setup-node@v1
-      with:
-        node-version: 12
-    - name: build gui
-      run: yarn --frozen-lockfile && yarn build
-    - name: build functions
-      run: cd functions && yarn --frozen-lockfile && yarn build
-    - name: deploy
-      uses: w9jds/firebase-action@master
-      with:
-        args: deploy
-      env:
-        FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+      - name: checkout
+        uses: actions/checkout@v2
+
+      - name: node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '14.19.1'
+          cache: npm
+          cache-dependency-path: |
+            package-lock.json
+            functions/package-lock.json
+
+      - name: npm
+        run: npm i -g npm@8.8.0
+
+      - name: install gui
+        run: npm ci
+
+      - name: build gui
+        run: npm run build
+
+      - name: install functions
+        run: npm ci
+        working-directory: functions
+
+      - name: build functions
+        run: npm run build
+        working-directory: functions
+
+      - name: deploy
+        uses: w9jds/firebase-action@master
+        with:
+          args: deploy
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}

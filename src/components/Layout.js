@@ -1,10 +1,10 @@
 import { makeStyles } from '@material-ui/core';
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
-import Footer from './Footer';
-import MainMenu from './MainMenu';
 import config from '../api/config';
 import background from './background.jpg';
+import Footer from './Footer';
+import MainMenu from './MainMenu';
 
 const useStyles = makeStyles(({ breakpoints, mixins, palette, shadows, shape, spacing, transitions }) => ({
   wrapper: {
@@ -61,7 +61,7 @@ export default function Layout({ title, back, heroImage, hero, children }) {
 
   return (
     <>
-      <Helmet title={title ? `${title} - ${config.title} - Ferienspiele Rothenbergen` : `${config.title} - Ferienspiele Rothenbergen`} />
+      <Helmet title={title ? `${title} - ${config.title} - ${config.app}` : `${config.title} - ${config.app}`} />
       <div className={classes.wrapper}>
         <div className={classes.page}>
           <div className={classes.hero} style={{ backgroundImage: heroImage ? `url(${heroImage})` : undefined }}>

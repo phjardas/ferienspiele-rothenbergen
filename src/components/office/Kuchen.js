@@ -1,4 +1,4 @@
-import { Card, CardHeader, Grid, List, ListItem, ListItemText } from '@material-ui/core';
+import { Card, CardHeader, Grid, Link, List, ListItem, ListItemText } from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
 import config from '../../api/config';
 import { getRegistrations } from '../../api/firestore';
@@ -34,9 +34,9 @@ export default function Kuchen() {
                     primary={`${reg.child.firstName} ${reg.child.lastName}`}
                     secondary={
                       <>
-                        <a href={`tel:${reg.parent.phone}`}>{reg.parent.phone}</a>
+                        <Link href={`tel:${reg.parent.phone}`}>{reg.parent.phone}</Link>
                         <br />
-                        <a href={`mailto:${reg.parent.email}`}>{reg.parent.email}</a>
+                        <Link href={`mailto:${reg.parent.email}`}>{reg.parent.email}</Link>
                       </>
                     }
                   />

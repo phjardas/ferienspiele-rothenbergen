@@ -1,7 +1,7 @@
-import { createMuiTheme, CssBaseline, makeStyles, MuiThemeProvider } from '@material-ui/core';
+import { createTheme, CssBaseline, makeStyles, MuiThemeProvider } from '@material-ui/core';
 import React from 'react';
 
-const theme = createMuiTheme({
+const theme = createTheme({
   palette: {
     primary: {
       main: '#013f8c',

@@ -1,4 +1,4 @@
-import { Typography, CircularProgress } from '@material-ui/core';
+import { Typography, CircularProgress, Link } from '@material-ui/core';
 import React from 'react';
 import config from '../../api/config';
 import { useRegistrationStatus } from '../../api/firestore';
@@ -44,8 +44,8 @@ export default function RegistrationStatus() {
         <Alert color="error">
           Leider ist die Anmeldefrist für die Kinderferienspiele abgelaufen.
           <br />
-          Für eventuelle Rückfragen nehmen Sie bitte telefonisch unter <a href="tel:+4960512649">06051 2649</a> oder per Email unter{' '}
-          <a href="mailto:ralf.schweinsberg@emk.de">ralf.schweinsberg@emk.de</a> Kontakt mit uns auf.
+          Für eventuelle Rückfragen nehmen Sie bitte telefonisch unter <Link href="tel:+4960512649">06051 2649</Link> oder per Email unter{' '}
+          <Link href="mailto:ralf.schweinsberg@emk.de">ralf.schweinsberg@emk.de</Link> Kontakt mit uns auf.
         </Alert>
       );
 

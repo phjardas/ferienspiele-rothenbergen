@@ -68,7 +68,7 @@ export default function Child() {
           <Field
             name="child.miscellaneous"
             component={TextField}
-            label="Besonderheiten"
+            label="Besonderheiten (Allergien, Medikamente, Unverträglichkeiten)"
             multiline
             fullWidth
             helperText="Muss Ihr Kind regelmäßig Medikamente zu sich nehmen? Gibt es Besonderheiten zu beachten? z.B. ADS, Allergien, Nahrungsunverträglichkeiten, religiöse Essensvorschriften, Einnässen etc."
@@ -87,7 +87,20 @@ export default function Child() {
         </Grid>
 
         <Grid item xs={12}>
-          <Field name="child.vegetarian" component={Switch} type="checkbox" label="Mein Kind soll vegetarisch essen" />
+          <Field
+            name="child.foodPreference"
+            component={Select}
+            label="Verpflegung"
+            required
+            formControlProps={{ fullWidth: true }}
+            validate={required}
+          >
+            {config.foodPreferences.map((option) => (
+              <MenuItem key={option.value} value={option.value}>
+                {option.label}
+              </MenuItem>
+            ))}
+          </Field>
         </Grid>
 
         <Grid item xs={12}>
@@ -96,6 +109,15 @@ export default function Child() {
             component={Switch}
             type="checkbox"
             label="Wir haben bereits ein Geschwisterkind bei den Ferienspielen angemeldet"
+          />
+        </Grid>
+
+        <Grid item xs={12}>
+          <Field
+            name="child.sleepover"
+            component={Switch}
+            type="checkbox"
+            label="Mein Kind nimmt an der Übernachtung von Donnerstag auf Freitag in der evangelisch-methodistischen Friedenskirche in Rothenbergen teil."
           />
         </Grid>
       </Grid>
