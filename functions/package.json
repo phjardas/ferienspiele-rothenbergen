@@ -2,7 +2,7 @@
   "name": "functions",
   "private": true,
   "scripts": {
-    "clean": "del build",
+    "clean": "shx rm -rf build",
     "build": "npm run clean && cp ../src/api/config.js src && babel --out-dir build src && cp -r src/email/templates build/email/templates && cp -r src/fonts build/fonts",
     "start": "npm run build && node local",
     "dev": "nodemon --watch src --ignore src/config.js --exec 'npm start'"
@@ -13,19 +13,20 @@
   },
   "dependencies": {
     "cors": "^2.8.5",
-    "email-templates": "^8.0.4",
+    "email-templates": "^9.0.0",
     "firebase-admin": "^10.1.0",
     "firebase-functions": "^3.20.1",
-    "pdfkit": "^0.11.0",
+    "pdfkit": "^0.13.0",
     "pug": "^3.0.2"
   },
   "devDependencies": {
-    "@babel/cli": "^7.2.3",
-    "@babel/core": "^7.3.4",
-    "@babel/preset-env": "^7.3.4",
-    "del-cli": "^3.0.1",
-    "express": "^4.16.4",
-    "nodemon": "^2.0.7"
+    "@babel/cli": "^7.17.10",
+    "@babel/core": "^7.17.10",
+    "@babel/preset-env": "^7.17.10",
+    "chokidar": "^3.5.3",
+    "express": "^4.18.1",
+    "nodemon": "^2.0.16",
+    "shx": "^0.3.4"
   },
   "volta": {
     "node": "14.19.1",
