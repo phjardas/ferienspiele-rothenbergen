@@ -9,6 +9,7 @@ jobs:
   deploy:
     environment: Production
     runs-on: ubuntu-latest
+    concurrency: functions
 
     steps:
       - name: checkout
@@ -19,12 +20,17 @@ jobs:
         with:
           node-version: '14.19.1'
           cache: npm
-          cache-dependency-path: functions/package-lock.json
+          cache-dependency-path: |
+            package-lock.json
+            functions/package-lock.json
 
       - name: npm
         run: npm i -g npm@8.8.0
 
       - name: install
+        run: npm ci
+
+      - name: install functions
         run: npm ci
         working-directory: functions
 
@@ -33,8 +39,6 @@ jobs:
         working-directory: functions
 
       - name: deploy
-        uses: w9jds/firebase-action@v2.0.0
-        with:
-          args: deploy --only functions
+        run: npm run deploy:functions
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}

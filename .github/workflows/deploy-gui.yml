@@ -9,6 +9,7 @@ jobs:
   deploy:
     environment: Production
     runs-on: ubuntu-latest
+    concurrency: gui
 
     steps:
       - name: checkout
@@ -30,8 +31,6 @@ jobs:
         run: npm run build
 
       - name: deploy
-        uses: w9jds/firebase-action@v2.0.0
-        with:
-          args: deploy --only hosting
+        run: npm run deploy:hosting
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
