@@ -1,0 +1,37 @@
+name: deploy gui
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    environment: Production
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+
+      - name: node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '14.19.1'
+          cache: npm
+
+      - name: npm
+        run: npm i -g npm@8.8.0
+
+      - name: install
+        run: npm ci
+
+      - name: build
+        run: npm run build
+
+      - name: deploy
+        uses: w9jds/firebase-action@v2.0.0
+        with:
+          args: deploy --only hosting
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
