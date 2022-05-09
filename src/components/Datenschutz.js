@@ -1,6 +1,7 @@
 import { Typography } from '@material-ui/core';
 import React from 'react';
 import H3 from './H3';
+import config from '../api/config';
 
 export default function Datenschutz() {
   return (
@@ -31,9 +32,9 @@ export default function Datenschutz() {
 
       <H3>Umgang mit personenbezogenen Daten</H3>
       <Typography paragraph>
-        Diese Website dient der Information und Anmeldung zu den Ökumenischen Ferienspielen 2019 in Rothenbergen. Wir erheben, nutzen und
-        geben Ihre personenbezogenen Daten nur dann weiter, wenn dies im gesetzlichen Rahmen erlaubt ist oder Sie in die Datenerhebung
-        einwilligen.
+        Diese Website dient der Information und Anmeldung zu den Ökumenischen Ferienspielen {config.year} in Rothenbergen. Wir erheben,
+        nutzen und geben Ihre personenbezogenen Daten nur dann weiter, wenn dies im gesetzlichen Rahmen erlaubt ist oder Sie in die
+        Datenerhebung einwilligen.
       </Typography>
       <Typography paragraph>
         Für die Anmeldung Ihres Kindes zu den Ferienspielen werden personenbezogene Daten von uns digital erhoben und verarbeitet. Welche
