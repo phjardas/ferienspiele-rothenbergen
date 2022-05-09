@@ -8,7 +8,6 @@ export default async function createWaiver(reg, format) {
   const file = bucket.file(filename);
 
   const [exists] = await file.exists();
-  console.log('%s exists: %s', filename, exists);
 
   if (!exists) {
     console.info('Creating waiver for %s in format %s', reg.id, format);

@@ -4,12 +4,8 @@ import createWaiver from './createWaiver';
 import { onRequest } from './http';
 
 export default onRequest(async (req, res) => {
-  console.log('path:', req.url);
   const { pathname } = url.parse(req.url);
-  console.log('pathname:', pathname);
   const [registrationId, format] = pathname.substring(1).split('.');
-
-  console.log('getWaiver', { registrationId, format });
 
   const reg = await getRegistration(registrationId);
   const file = await createWaiver(reg, format);
