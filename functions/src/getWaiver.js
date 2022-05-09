@@ -2,12 +2,18 @@ import url from 'url';
 import admin from './admin';
 import createWaiver from './createWaiver';
 import { onRequest } from './http';
+import { https } from 'firebase-functions';
 
-const registrationsColl = admin.firestore().collection('registrations');
+export default https.onRequest((req, res) => {
+  console.log('Request:', req);
+  res.send({ message: 'ok' });
+});
 
-export default onRequest(async (req, res) => {
+onRequest(async (req, res) => {
   const { pathname } = url.parse(req.url);
   const [registrationId, format] = pathname.substring(1).split('.');
+
+  console.log('getWaiver', { registrationId, format });
 
   const reg = await getRegistration(registrationId);
   const file = await createWaiver(reg, format);
@@ -31,7 +37,7 @@ async function getRegistration(registrationId) {
     };
   }
 
-  const doc = await registrationsColl.doc(registrationId).get();
+  const doc = await admin.firestore().collection('registrations').doc(registrationId).get();
   if (!doc.exists) throw new Error('Anmeldung nicht gefunden');
 
   return { ...doc.data(), id: doc.id };

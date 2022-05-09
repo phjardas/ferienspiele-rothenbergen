@@ -1,9 +1,11 @@
 import cors from 'cors';
-import * as functions from 'firebase-functions';
+import { https } from 'firebase-functions';
 
-export const onRequest = handler => functions.https.onRequest(withCors(withError(handler)));
+export function onRequest(handler) {
+  return https.onRequest(withCors(withError(handler)));
+}
 
-const withError = handler => {
+function withError(handler) {
   return async (req, res) => {
     try {
       await handler(req, res);
@@ -15,9 +17,9 @@ const withError = handler => {
       });
     }
   };
-};
+}
 
-const withCors = handler => {
+function withCors(handler) {
   const c = cors();
   return (req, res) => c(req, res, () => handler(req, res));
-};
+}

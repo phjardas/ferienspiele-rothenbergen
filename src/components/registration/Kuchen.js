@@ -29,12 +29,12 @@ function KuchenInfo({ date }) {
   if (!kuchen || !kuchen.length) return null;
   return (
     <>
-      <Typography>
+      <Typography gutterBottom>
         Wir haben schon Zusagen für folgende Kuchen am <KuchenDate value={date} />:
       </Typography>
-      <Box sx={{ display: 'flex', gap: 1 }}>
+      <Box sx={{ display: 'flex', gap: 8 }}>
         {kuchen.sort().map((k, i) => (
-          <Chip key={i} label={k} />
+          <Chip key={i} variant="outlined" label={k} />
         ))}
       </Box>
     </>

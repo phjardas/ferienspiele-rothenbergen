@@ -4,9 +4,12 @@ import createWaiverDoc from './waiver';
 const bucket = admin.storage().bucket();
 
 export default async function createWaiver(reg, format) {
-  const file = bucket.file(`waiver-${reg.id}.${format}`);
+  const filename = `waiver-${reg.id}.${format}`;
+  const file = bucket.file(filename);
 
   const [exists] = await file.exists();
+  console.log('%s exists: %s', filename, exists);
+
   if (!exists) {
     console.info('Creating waiver for %s in format %s', reg.id, format);
     await new Promise((resolve, reject) => {

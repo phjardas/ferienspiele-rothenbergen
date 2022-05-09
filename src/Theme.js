@@ -1,16 +1,18 @@
-import { createTheme, CssBaseline, makeStyles, MuiThemeProvider } from '@material-ui/core';
-import { indigo, purple } from '@material-ui/core/colors';
+import { createTheme, CssBaseline, makeStyles, MuiThemeProvider, responsiveFontSizes } from '@material-ui/core';
+import { indigo, orange } from '@material-ui/core/colors';
 import React from 'react';
 
-const theme = createTheme({
-  palette: {
-    primary: indigo,
-    secondary: purple,
-  },
-  typography: {
-    useNextVariants: true,
-  },
-});
+const theme = responsiveFontSizes(
+  createTheme({
+    palette: {
+      primary: indigo,
+      secondary: orange,
+    },
+    typography: {
+      useNextVariants: true,
+    },
+  })
+);
 
 if (process.env.NODE_ENV === 'development') {
   console.info('Theme:', theme);

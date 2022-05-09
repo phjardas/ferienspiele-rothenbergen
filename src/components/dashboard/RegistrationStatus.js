@@ -12,11 +12,9 @@ export default function RegistrationStatus() {
 
   if (Date.now() < registrationStart.getTime()) {
     return (
-      <>
-        <Typography variant="subtitle2" paragraph>
-          Die Anmeldung ist geöffnet ab dem <DateComp value={registrationStart} />
-        </Typography>
-      </>
+      <Typography variant="subtitle2">
+        Die Anmeldung ist geöffnet ab dem <DateComp value={registrationStart} />
+      </Typography>
     );
   }
 
@@ -27,13 +25,13 @@ export default function RegistrationStatus() {
     case 'open':
       return (
         <>
-          <Typography paragraph>
-            <ButtonLink to="/anmeldung" color="primary" variant="contained" size="large">
+          <Typography>
+            <ButtonLink to="/anmeldung" color="secondary" variant="contained" size="large">
               Jetzt anmelden!
             </ButtonLink>
             {spotsLeft < 10 && <span style={{ marginLeft: 16 }}>Nur noch {spotsLeft} Plätze frei!</span>}
           </Typography>
-          <Typography variant="subtitle2" paragraph>
+          <Typography variant="subtitle2">
             Anmeldeschluss ist am <DateComp value={registrationDeadline} />.
           </Typography>
         </>
