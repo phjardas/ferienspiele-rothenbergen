@@ -1,6 +1,6 @@
 const config = {
   baseUrl: 'https://ferienspiele-rothenbergen.de',
-  apiUrl: 'https://us-central1-ferienspiele-rothenbergen-2.cloudfunctions.net',
+  apiUrl: 'https://europe-west3-ferienspiele-rothenbergen-2.cloudfunctions.net',
   app: 'Ökumenische Ferienspiele für Niedergründau und Rothenbergen',
   title: 'Ein Fest für die Sinne',
   year: 2022,

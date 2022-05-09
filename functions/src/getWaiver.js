@@ -2,15 +2,11 @@ import url from 'url';
 import admin from './admin';
 import createWaiver from './createWaiver';
 import { onRequest } from './http';
-import { https } from 'firebase-functions';
 
-export default https.onRequest((req, res) => {
-  console.log('Request:', req);
-  res.send({ message: 'ok' });
-});
-
-onRequest(async (req, res) => {
+export default onRequest(async (req, res) => {
+  console.log('path:', req.url);
   const { pathname } = url.parse(req.url);
+  console.log('pathname:', pathname);
   const [registrationId, format] = pathname.substring(1).split('.');
 
   console.log('getWaiver', { registrationId, format });
