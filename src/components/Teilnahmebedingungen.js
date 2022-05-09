@@ -20,7 +20,7 @@ export default function Teilnahmebedingungen() {
     loadWaiver();
   }, []);
 
-  if (loading) return <GlobalLoader />;
+  if (loading) return <GlobalLoader noLayout />;
   if (error) return <Alert color="error">{error.message}</Alert>;
 
   return <Typography component="div" dangerouslySetInnerHTML={{ __html: waiver }} />;
