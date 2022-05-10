@@ -9,7 +9,7 @@ const config = {
   registrationStart: new Date('2022-05-07'),
   registrationDeadline: new Date('2022-06-27'),
   waiverDeadline: new Date('2022-06-27'),
-  maxParticipants: 55,
+  maxParticipants: 50,
   earlyCarePlaces: 20,
   prices: {
     base: 40,
