@@ -33,13 +33,6 @@ const useStyles = makeStyles(({ palette }) => ({
     strong: {
       fontWeight: 500,
     },
-    a: {
-      color: palette.primary.main,
-      textDecoration: 'none',
-      '&:hover': {
-        textDecoration: 'underline',
-      },
-    },
   },
 }));
 

@@ -53,6 +53,15 @@ export default function RegistrationStatus() {
           Leider sind schon alle Plätze belegt.
           <br />
           Wir bitten um Ihr Verständnis, dass wir keine weiteren Anmeldungen entgegennehmen können.
+          <br />
+          Bei der{' '}
+          <Link
+            href="https://www.katholische-kirche-raum-gelnhausen.de/gelnhausen/05-Gemeindeleben/Kinder-und-Familie/lamakoe.php"
+            underline="always"
+          >
+            Lagerfreizeit der katholischen Kirchengemeinde
+          </Link>{' '}
+          in der letzten Ferienwoche sind aber noch Plätze frei!
         </Alert>
       );
 
