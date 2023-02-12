@@ -31,7 +31,7 @@
     "whatwg-fetch": "^3.6.2"
   },
   "devDependencies": {
-    "firebase-tools": "^10.7.2",
+    "firebase-tools": "^11.22.0",
     "react-scripts": "^5.0.1"
   },
   "eslintConfig": {
