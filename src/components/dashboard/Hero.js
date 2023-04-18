@@ -14,7 +14,14 @@ export default function Hero() {
     <Card>
       <CardContent>
         <Box sx={{ display: 'flex', flexDirection: 'column', gap: 16, alignItems: 'center', textAlign: 'center' }}>
-          <Box component="img" src="/logo-256.png" width="256" height="256" alt="Logo der Ferienspiele" sx={{ maxWidth: '100%' }} />
+          <Box
+            component="img"
+            src="/logo-640.webp"
+            width="640"
+            height="640"
+            alt="Logo der Ferienspiele"
+            sx={{ maxWidth: ['100%', '50%'] }}
+          />
           <H2 variant="h2">{title}</H2>
           <Typography variant="h5">{app}</Typography>
           <Typography variant="body1">
