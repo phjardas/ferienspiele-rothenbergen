@@ -83,8 +83,7 @@ function createBody() {
     `Ich bin damit einverstanden, dass mein Kind in Ausnahmesituationen im privateigenen Pkw befördert wird.`,
     `Meine Angaben in Bezug auf Allergien und Unverträglichkeiten sind vollständig.`,
     `Die Veranstalter haften nicht für den Verlust oder die Beschädigung von Gegenständen.`,
-    `Es werden während der Ferienspiele Fotos gemacht. Ich bin mit deren Veröffentlichung auf den Homepages und in den Gemeindebriefen der drei ausrichtenden Kirchengemeinden einverstanden.`,
-    `Ich erkläre mich grundsätzlich damit einverstanden, dass die Verantwortlichen zum gegenseitigen Schutz je nach Pandemielage und/oder geplanter Aktivität während der Ferienspiele eine Testung oder das kurzzeitige Tragen einer Maske zur Teilnahmevoraussetzung machen können.`,
+    `Es werden während der Ferienspiele Fotos gemacht. Ich bin mit deren Veröffentlichung auf den Homepages und in den Gemeindebriefen der drei ausrichtenden Kirchengemeinden sowie im Ferienspiele-Journal einverstanden. Das ausgedruckte Journal wird bei den Ferienspielen verteilt und den Firmen/Organisationen zugesandt, die die Ferienspiele per Sponsoring oder Spende unterstützen.`,
   ].map((line) => line.trim());
 }
 

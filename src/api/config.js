@@ -7,8 +7,8 @@ const config = {
   startDate: new Date('2023-07-24'),
   endDate: new Date('2023-07-28'),
   registrationStart: new Date('2023-05-01'),
-  registrationDeadline: new Date('2023-06-27'),
-  waiverDeadline: new Date('2023-06-27'),
+  registrationDeadline: new Date('2023-06-19'),
+  waiverDeadline: new Date('2023-06-19'),
   maxParticipants: 50,
   earlyCarePlaces: 20,
   prices: {

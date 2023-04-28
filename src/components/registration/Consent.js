@@ -37,13 +37,6 @@ export default function Consent() {
   return (
     <FieldSet>
       <Grid container spacing={2}>
-        <Grid item xs={12}>
-          <Typography>
-            Ich erkläre mich grundsätzlich damit einverstanden, dass die Verantwortlichen zum gegenseitigen Schutz je nach Pandemielage
-            und/oder geplanter Aktivität während der Ferienspiele eine Testung oder das kurzzeitige Tragen einer Maske zur
-            Teilnahmevoraussetzung machen können.
-          </Typography>
-        </Grid>
         <Grid item>
           <ConsentCheckbox
             name="consent.teilnahmebedingungen"
