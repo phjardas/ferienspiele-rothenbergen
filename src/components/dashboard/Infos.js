@@ -57,9 +57,9 @@ export default function Infos() {
             Von <Date value={startDate} /> bis <Date value={endDate} /> sind wir jeweils von 9.00 Uhr bis 16.00 Uhr für Euch da.
           </Typography>
           <Typography paragraph>
-            Für berufstätige Eltern bieten wir auch in diesem Jahr 20 Plätze in einer (Not-)Frühbetreuung von 8.00 Uhr bis 9.00 Uhr an. Wir
-            bitten euch herzlich, dass diese Plätze ausschließlich von Familien genutzt werden, die keine andere Möglichkeit haben, ihre
-            Kinder zu dieser früheren Uhrzeit betreuen zu lassen. Danke, dass Ihr da aufeinander Rücksicht nehmt!
+            Für berufstätige Eltern bieten wir auch in diesem Jahr {earlyCarePlaces} Plätze in einer (Not-)Frühbetreuung von 8.00 Uhr bis
+            9.00 Uhr an. Wir bitten euch herzlich, dass diese Plätze ausschließlich von Familien genutzt werden, die keine andere
+            Möglichkeit haben, ihre Kinder zu dieser früheren Uhrzeit betreuen zu lassen. Danke, dass Ihr da aufeinander Rücksicht nehmt!
           </Typography>
           <Typography paragraph>
             Am Freitag gibt es zum Abschluss der Ferienspiele einen Gottesdienst mit Eltern und Geschwistern um 15.00 Uhr.
