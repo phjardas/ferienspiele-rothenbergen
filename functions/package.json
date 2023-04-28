@@ -3,7 +3,7 @@
   "private": true,
   "scripts": {
     "clean": "shx rm -rf build",
-    "build": "pwd && npm run clean && cp ../src/api/config.js src && babel --out-dir build src && cp -r src/email/templates build/email/templates && cp -r src/fonts build/fonts",
+    "build-functions": "pwd && npm run clean && cp ../src/api/config.js src && babel --out-dir build src && cp -r src/email/templates build/email/templates && cp -r src/fonts build/fonts",
     "start": "npm run build && node local",
     "dev": "nodemon --watch src --ignore src/config.js --exec 'npm start'"
   },

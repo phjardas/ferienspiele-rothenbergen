@@ -35,7 +35,7 @@ jobs:
         working-directory: functions
 
       - name: build
-        run: npm run build
+        run: npm run build-functions
         working-directory: functions
 
       - name: deploy
