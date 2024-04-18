@@ -11,7 +11,7 @@ import { useRegistrationStatus } from "../../api/firestore";
 import DateComp from "../Date";
 import LinkBehavior from "../LinkBehavior";
 
-export default function RegistrationStatus() {
+export default function RegistrationStatus({ children }) {
   const { registrationStart, registrationDeadline } = config;
   const {
     loading,
@@ -22,7 +22,12 @@ export default function RegistrationStatus() {
   if (Date.now() < registrationStart.getTime()) {
     return (
       <Typography variant="subtitle2">
-        Die Anmeldung ist geöffnet ab dem <DateComp value={registrationStart} />
+        Die Anmeldung ist geöffnet ab{" "}
+        <DateComp
+          value={registrationStart}
+          dateStyle="full"
+          timeStyle="short"
+        />
       </Typography>
     );
   }
@@ -95,6 +100,6 @@ export default function RegistrationStatus() {
       );
 
     default:
-      return null;
+      return children ?? null;
   }
 }

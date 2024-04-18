@@ -1,7 +1,7 @@
 import { Alert, CircularProgress, Link } from "@mui/material";
 import config from "../../api/config";
 import { useRegistrationStatus } from "../../api/firestore";
-import DateComp from "../Date";
+import FormattedDate from "../Date";
 
 export default function RegistrationStatus({ children }) {
   const { registrationStart } = config;
@@ -13,8 +13,13 @@ export default function RegistrationStatus({ children }) {
 
   if (Date.now() < registrationStart.getTime()) {
     return (
-      <Alert severity="info">
-        Die Anmeldung ist geöffnet ab dem <DateComp value={registrationStart} />
+      <Alert severity="error">
+        Die Anmeldung ist geöffnet ab{" "}
+        <FormattedDate
+          value={registrationStart}
+          dateStyle="full"
+          timeStyle="short"
+        />
       </Alert>
     );
   }

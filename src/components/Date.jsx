@@ -10,10 +10,10 @@ function toDate(value) {
 
 function formatDate(value, options = {}) {
   if (Object.keys(options).length === 0) {
-    options = { year: "numeric", month: "2-digit", day: "2-digit" };
+    options = { dateStyle: "medium" };
   }
 
-  return value.toLocaleDateString("de-DE", options);
+  return value.toLocaleString("de-DE", options);
 }
 
 export default function FormattedDate({ value, ...options }) {
