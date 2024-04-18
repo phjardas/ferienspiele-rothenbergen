@@ -1,23 +1,23 @@
-import admin from './admin';
-import config from './config';
+import admin from "./admin";
+import config from "./config";
 
 const { maxParticipants, earlyCarePlaces, registrationDeadline } = config;
-const configDoc = admin.firestore().collection('config').doc('config');
-const registrationsColl = admin.firestore().collection('registrations');
+const configDoc = admin.firestore().collection("config").doc("config");
+const registrationsColl = admin.firestore().collection("registrations");
 
 async function getRegistrationCounts() {
   const documents = await registrationsColl.get();
 
   return {
     total: documents.size,
-    earlyCare: documents.docs.filter((d) => d.get('earlyCare')).length,
+    earlyCare: documents.docs.filter((d) => d.get("earlyCare")).length,
   };
 }
 
 function getConfigurationStatus({ total, earlyCare }) {
   if (Date.now() > registrationDeadline.getTime()) {
     return {
-      registrationStatus: 'deadlineExpired',
+      registrationStatus: "deadlineExpired",
       spotsLeft: 0,
       earlySpotsLeft: 0,
     };
@@ -25,14 +25,14 @@ function getConfigurationStatus({ total, earlyCare }) {
 
   if (total >= maxParticipants) {
     return {
-      registrationStatus: 'maxParticipants',
+      registrationStatus: "maxParticipants",
       spotsLeft: 0,
       earlySpotsLeft: 0,
     };
   }
 
   return {
-    registrationStatus: 'open',
+    registrationStatus: "open",
     spotsLeft: maxParticipants - total,
     earlySpotsLeft: earlyCarePlaces - earlyCare,
   };

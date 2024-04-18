@@ -1,51 +1,51 @@
-import config from './config';
+import config from "./config";
 
 // Exported from http://www.vorname.com/beliebte_vornamen,0.html
 // JSON.stringify([...document.querySelectorAll('.cpink.fz20')[0].parentNode.querySelectorAll('a.ellipsis')].map(el => el.text).slice(0, 20))
 const names = {
   f: [
-    'Laura',
-    'Julia',
-    'Emilia',
-    'Lea',
-    'Lina',
-    'Anna',
-    'Lena',
-    'Lara',
-    'Sarah',
-    'Elena',
-    'Amelie',
-    'Sophie',
-    'Vanessa',
-    'Alina',
-    'Luca',
-    'Juna',
-    'Mia',
-    'Nina',
-    'Mila',
-    'Lisa',
+    "Laura",
+    "Julia",
+    "Emilia",
+    "Lea",
+    "Lina",
+    "Anna",
+    "Lena",
+    "Lara",
+    "Sarah",
+    "Elena",
+    "Amelie",
+    "Sophie",
+    "Vanessa",
+    "Alina",
+    "Luca",
+    "Juna",
+    "Mia",
+    "Nina",
+    "Mila",
+    "Lisa",
   ],
   m: [
-    'Liam',
-    'Milan',
-    'Jonas',
-    'Elias',
-    'Julian',
-    'Levi',
-    'Tim',
-    'Michael',
-    'Linus',
-    'Luca',
-    'Daniel',
-    'David',
-    'Alexander',
-    'Samuel',
-    'Lukas',
-    'Jan',
-    'Noah',
-    'Marcel',
-    'Leon',
-    'Maria',
+    "Liam",
+    "Milan",
+    "Jonas",
+    "Elias",
+    "Julian",
+    "Levi",
+    "Tim",
+    "Michael",
+    "Linus",
+    "Luca",
+    "Daniel",
+    "David",
+    "Alexander",
+    "Samuel",
+    "Lukas",
+    "Jan",
+    "Noah",
+    "Marcel",
+    "Leon",
+    "Maria",
   ],
 };
 
@@ -53,28 +53,43 @@ names.d = [...names.f, ...names.m];
 
 // https://de.wikipedia.org/wiki/Liste_der_h%C3%A4ufigsten_Familiennamen_in_Deutschland
 const lastNames = [
-  'Müller',
-  'Schmidt',
-  'Schneier',
-  'Fischer',
-  'Weber',
-  'Meyer',
-  'Wagner',
-  'Becker',
-  'Schulz',
-  'Hoffmann',
-  'Schäfer',
-  'Koch',
-  'Bauer',
-  'Richter',
-  'Klein',
-  'Wolf',
-  'Schröder',
+  "Müller",
+  "Schmidt",
+  "Schneier",
+  "Fischer",
+  "Weber",
+  "Meyer",
+  "Wagner",
+  "Becker",
+  "Schulz",
+  "Hoffmann",
+  "Schäfer",
+  "Koch",
+  "Bauer",
+  "Richter",
+  "Klein",
+  "Wolf",
+  "Schröder",
 ];
 
-const streets = ['Mustergasse', 'Sackgasse', 'Teststraße', 'Hauptstraße'];
-const cities = ['Niedergründau', 'Rothenbergen', 'Langenselbold', 'Büdingen', 'Gründau-Lieblos', 'Mittel-Gründau', 'Hain-Gründau'];
-const kuchen = ['Marmorkuchen', 'Sandkuchen', 'Rüeblitorte', 'Schwarzwälder Kirschtorte', 'Matschkuchen', 'Wölkchenkuchen'];
+const streets = ["Mustergasse", "Sackgasse", "Teststraße", "Hauptstraße"];
+const cities = [
+  "Niedergründau",
+  "Rothenbergen",
+  "Langenselbold",
+  "Büdingen",
+  "Gründau-Lieblos",
+  "Mittel-Gründau",
+  "Hain-Gründau",
+];
+const kuchen = [
+  "Marmorkuchen",
+  "Sandkuchen",
+  "Rüeblitorte",
+  "Schwarzwälder Kirschtorte",
+  "Matschkuchen",
+  "Wölkchenkuchen",
+];
 
 function randomBoolean() {
   return Math.random() < 0.5;
@@ -107,7 +122,11 @@ function randomDateOfBirth() {
 export function createTestData() {
   const gender = randomElement(config.genders).value;
   const lastName = randomElement(lastNames);
-  const kuchenDate = randomElement([...config.kuchen.map((k) => k.date), 'geschwister', 'none']);
+  const kuchenDate = randomElement([
+    ...config.kuchen.map((k) => k.date),
+    "geschwister",
+    "none",
+  ]);
 
   return {
     child: {
@@ -125,7 +144,7 @@ export function createTestData() {
     },
     parent: {
       phone: randomPhone(),
-      email: 'ferienspiele-rothenbergen@mailinator.com',
+      email: "ferienspiele-rothenbergen@mailinator.com",
       street: `${randomElement(streets)} ${randomNumber(1, 100)}`,
       zip: `6${randomNumber(1, 10000)}`,
       city: randomElement(cities),
@@ -136,7 +155,10 @@ export function createTestData() {
     },
     kuchen: {
       date: kuchenDate,
-      name: kuchenDate !== 'none' && kuchenDate !== 'geschwister' ? randomElement(kuchen) : undefined,
+      name:
+        kuchenDate !== "none" && kuchenDate !== "geschwister"
+          ? randomElement(kuchen)
+          : undefined,
     },
   };
 }

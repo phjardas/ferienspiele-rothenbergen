@@ -1,14 +1,14 @@
-import path from 'path';
-import PDFDocument from 'pdfkit';
-import { Readable } from 'stream';
-import config from './config';
-import { formatDate } from './i18n';
+import path from "path";
+import PDFDocument from "pdfkit";
+import { Readable } from "stream";
+import config from "./config";
+import { formatDate } from "./i18n";
 
 export default function createWaiver(reg, format) {
   switch (format) {
-    case 'pdf':
+    case "pdf":
       return createPDF(reg);
-    case 'html':
+    case "html":
       return createHTML();
     default:
       throw new Error(`Unsupported waiver format: ${format}`);
@@ -17,12 +17,12 @@ export default function createWaiver(reg, format) {
 
 function createPDF(reg) {
   const doc = new PDFDocument({
-    size: 'a4',
+    size: "a4",
     margins: { top: 40, left: 80, right: 40, bottom: 30 },
   });
 
   const title = `Einverständniserklärung für ${reg.child.firstName} ${reg.child.lastName}`;
-  doc.info.Author = 'Kinderferienspiele Rothenbergen';
+  doc.info.Author = "Kinderferienspiele Rothenbergen";
   doc.info.Title = title;
 
   bold(doc).fontSize(18).text(`Kinderferienspiele Rothenbergen ${config.year}`);
@@ -58,24 +58,24 @@ function createHTML() {
   return s;
 }
 
-const fontsDir = path.resolve(__dirname, 'fonts');
+const fontsDir = path.resolve(__dirname, "fonts");
 
 function regular(doc) {
-  return doc.font(path.resolve(fontsDir, 'OpenSans-Regular.ttf'));
+  return doc.font(path.resolve(fontsDir, "OpenSans-Regular.ttf"));
 }
 
 function bold(doc) {
-  return doc.font(path.resolve(fontsDir, 'OpenSans-Bold.ttf'));
+  return doc.font(path.resolve(fontsDir, "OpenSans-Bold.ttf"));
 }
 
 function createBody() {
   return [
     `Hiermit erkläre ich mich einverstanden, dass mein Kind an den Kinderferienspielen Rothenbergen vom ${formatDate(
-      config.startDate
+      config.startDate,
     )} bis ${formatDate(config.endDate)} teilnehmen darf.`,
     `Mir ist bekannt, dass die Anmeldung erst gültig ist, wenn diese Einverständniserklärung unterschrieben vorliegt und alle notwendigen Zahlungen geleistet sind.`,
     `Bei einer Absage durch teilnehmende Personen kann die Rückerstattung des Beitrages nach dem ${formatDate(
-      config.registrationDeadline
+      config.registrationDeadline,
     )} nicht garantiert werden.`,
     `Mein Kind ist von mir angewiesen, den Anordnungen der Aufsichtspersonen Folge zu leisten. Die Aufsichtsführenden haben das Recht, mein Kind bei fortwährender Missachtung von Regeln und Anweisungen nach Hause zu schicken und von der weiteren Teilnahme auszuschließen. Eine Beitragserstattung erfolgt in diesem Fall nicht.`,
     `Ich garantiere, dass unter der Telefonnummer des Notfallkontaktes jederzeit jemand erreichbar ist.`,
@@ -91,7 +91,7 @@ function createFooter() {
   return [
     `Datum, Unterschrift`,
     `Bitte schicken Sie diese Einverständniserklärung bis zum ${formatDate(
-      config.waiverDeadline
+      config.waiverDeadline,
     )} unterschrieben an das Gemeindebüro der ev. Kirchengemeinde oder geben sie in einem verschlossenen Umschlag dort ab, Einwurf in den Briefkasten genügt.`,
     `Büro der ev. Kirchengemeinde "Auf dem Berg", Paul-Gerhardt Str.2, 63584 Gründau-Lieblos.`,
   ].map((line) => line.trim());

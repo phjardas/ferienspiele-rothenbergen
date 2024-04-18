@@ -1,9 +1,10 @@
-import Email from 'email-templates';
-import path from 'path';
-import transport from './transport';
-import { formatDate } from '../i18n';
+import Email from "email-templates";
+import path from "path";
+import transport from "./transport";
+import { formatDate } from "../i18n";
 
-const from = '"Ferienspiele Rothenbergen" <ferienspiele.rothenbergen@gmail.com>';
+const from =
+  '"Ferienspiele Rothenbergen" <ferienspiele.rothenbergen@gmail.com>';
 
 export const helpers = {
   formatDate,
@@ -11,18 +12,18 @@ export const helpers = {
 
 export default new Email({
   views: {
-    root: path.resolve(__dirname, 'templates'),
+    root: path.resolve(__dirname, "templates"),
   },
   juice: true,
   juiceResources: {
     preserveImportant: true,
     webResources: {
-      relativeTo: path.resolve(__dirname, 'templates'),
+      relativeTo: path.resolve(__dirname, "templates"),
     },
   },
   message: {
     from,
   },
   transport,
-  subjectPrefix: '[Ferienspiele Rothenbergen] ',
+  subjectPrefix: "[Ferienspiele Rothenbergen] ",
 });

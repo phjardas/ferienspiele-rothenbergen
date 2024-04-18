@@ -1,35 +1,35 @@
-import config from './config';
+import config from "./config";
 
 export function exportRegistrations(regs) {
   const header = [
-    'ID',
-    'Registrierungs-Datum',
-    'Nachname',
-    'Vorname',
-    'Geschlecht',
-    'Geburtsdatum',
-    'T-Shirt-Größe',
-    'Email',
-    'Telefon',
-    'Straße',
-    'PLZ',
-    'Wohnort',
-    'Notfall Name',
-    'Notfall Telefon',
-    'Besonderheiten',
-    'Freunde',
-    'Verpflegung',
-    'Kuchen Typ',
-    'Kuchen Datum',
-    'Kuchen Name',
-    'Übernachtung',
-    'Frühbetreuung',
-    'Abholer',
-    'alleine laufen',
-    'Geschwisterkind',
-    'Betrag',
-    'Einverständnis',
-    'Bezahlung',
+    "ID",
+    "Registrierungs-Datum",
+    "Nachname",
+    "Vorname",
+    "Geschlecht",
+    "Geburtsdatum",
+    "T-Shirt-Größe",
+    "Email",
+    "Telefon",
+    "Straße",
+    "PLZ",
+    "Wohnort",
+    "Notfall Name",
+    "Notfall Telefon",
+    "Besonderheiten",
+    "Freunde",
+    "Verpflegung",
+    "Kuchen Typ",
+    "Kuchen Datum",
+    "Kuchen Name",
+    "Übernachtung",
+    "Frühbetreuung",
+    "Abholer",
+    "alleine laufen",
+    "Geschwisterkind",
+    "Betrag",
+    "Einverständnis",
+    "Bezahlung",
   ];
 
   const rows = regs.map((reg) => [
@@ -51,7 +51,9 @@ export function exportRegistrations(regs) {
     reg.child.friends,
     getLabel(reg.child.foodPreference, config.foodPreferences),
     toKuchenSelection(reg.kuchen.date),
-    reg.kuchen.date !== 'none' && reg.kuchen.date !== 'geschwister' ? reg.kuchen.date : '',
+    reg.kuchen.date !== "none" && reg.kuchen.date !== "geschwister"
+      ? reg.kuchen.date
+      : "",
     reg.kuchen.name,
     reg.child.sleepover,
     reg.child.earlyCare,
@@ -63,24 +65,28 @@ export function exportRegistrations(regs) {
     !!reg.payment,
   ]);
 
-  const data = [header, ...rows].map(encodeRow).join('\r\n');
-  return new Blob([data], { type: 'text/csv' });
+  const data = [header, ...rows].map(encodeRow).join("\r\n");
+  return new Blob([data], { type: "text/csv" });
 }
 
 function encodeCell(value) {
-  if (typeof value === 'string') {
-    return '"' + value.replace(/\r?\n/g, '\\r\\n').replace('"', '""') + '"';
+  if (typeof value === "string") {
+    return '"' + value.replace(/\r?\n/g, "\\r\\n").replace('"', '""') + '"';
   }
 
-  if (typeof value === 'number') {
+  if (typeof value === "number") {
     return value.toString();
   }
 
-  if (typeof value === 'boolean') {
-    return value ? 'ja' : 'nein';
+  if (typeof value === "boolean") {
+    return value ? "ja" : "nein";
   }
 
-  if (typeof value === 'object' && 'seconds' in value && 'nanoseconds' in value) {
+  if (
+    typeof value === "object" &&
+    "seconds" in value &&
+    "nanoseconds" in value
+  ) {
     value = new Date(value.seconds * 1000);
   }
 
@@ -88,25 +94,25 @@ function encodeCell(value) {
     return value.toISOString();
   }
 
-  return '';
+  return "";
 }
 
 function encodeRow(data) {
-  return data.map(encodeCell).join(';');
+  return data.map(encodeCell).join(";");
 }
 
 function getLabel(value, options) {
   const option = options.find((g) => g.value === value);
-  return option ? option.label : '';
+  return option ? option.label : "";
 }
 
 function toKuchenSelection(date) {
   switch (date) {
-    case 'none':
-      return 'kein Kuchen';
-    case 'geschwister':
-      return 'Geschwisterkind';
+    case "none":
+      return "kein Kuchen";
+    case "geschwister":
+      return "Geschwisterkind";
     default:
-      return 'bringt mit';
+      return "bringt mit";
   }
 }

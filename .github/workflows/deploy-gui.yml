@@ -15,22 +15,26 @@ jobs:
       - name: checkout
         uses: actions/checkout@v2
 
-      - name: node
-        uses: actions/setup-node@v3
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          node-version: '14.19.1'
-          cache: npm
+          node-version-file: package.json
 
-      - name: npm
-        run: npm i -g npm@8.8.0
+      - name: Cache dependencies
+        id: npm-cache
+        uses: actions/cache@v4
+        with:
+          path: node_modules
+          key: npm-${{ hashFiles('package-lock.json') }}
 
-      - name: install
-        run: npm ci
+      - name: Install
+        if: steps.npm-cache.outputs.cache-hit != 'true'
+        run: npm ci --ignore-scripts
 
-      - name: build
+      - name: Build
         run: npm run build
 
-      - name: deploy
+      - name: Deploy
         run: npm run deploy:hosting
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}

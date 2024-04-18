@@ -1,10 +1,10 @@
-import * as functions from 'firebase-functions';
-import * as nodemailer from 'nodemailer';
+import * as functions from "firebase-functions";
+import * as nodemailer from "nodemailer";
 
 export default createTransport();
 
 function createTransport() {
-  if (process.env.NODE_ENV === 'test') {
+  if (process.env.NODE_ENV === "test") {
     return {
       jsonTransport: true,
     };

@@ -1,12 +1,12 @@
-import 'firebase/firestore';
-import { useEffect, useState } from 'react';
-import config from './config';
-import { firebase, Firebase } from './firebase';
+import "firebase/firestore";
+import { useEffect, useState } from "react";
+import config from "./config";
+import { firebase, Firebase } from "./firebase";
 
 export const firestore = firebase.firestore();
-const configDoc = firestore.collection('config').doc('config');
-const kuchenDoc = firestore.collection('kuchen').doc('kuchen');
-const registrationsColl = firestore.collection('registrations');
+const configDoc = firestore.collection("config").doc("config");
+const kuchenDoc = firestore.collection("kuchen").doc("kuchen");
+const registrationsColl = firestore.collection("registrations");
 
 export function useRegistrationStatus() {
   return useDoc(configDoc);
@@ -22,7 +22,7 @@ function useDoc(doc) {
   useEffect(() => {
     doc.onSnapshot(
       (snap) => setState({ loading: false, data: snap.data() || {} }),
-      (error) => setState({ loading: false, error })
+      (error) => setState({ loading: false, error }),
     );
   }, [doc]);
 
@@ -86,9 +86,9 @@ function toEntity(doc) {
 function removeUndefinedFields(obj) {
   Object.keys(obj).forEach((key) => {
     const type = typeof obj[key];
-    if (type === 'undefined') {
+    if (type === "undefined") {
       delete obj[key];
-    } else if (type === 'object') {
+    } else if (type === "object") {
       removeUndefinedFields(obj[key]);
     }
   });

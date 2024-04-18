@@ -1,18 +1,18 @@
-import config from './config';
-import email, { helpers } from './email';
+import config from "./config";
+import email, { helpers } from "./email";
 
 export default function sendRegistrationMail(reg, waiverFile) {
   const attachments = [];
   if (waiverFile) {
     attachments.push({
-      filename: 'Einverständniserklärung.pdf',
-      contentType: 'application/pdf',
+      filename: "Einverständniserklärung.pdf",
+      contentType: "application/pdf",
       content: waiverFile.createReadStream(),
     });
   }
 
   return email.send({
-    template: 'registration',
+    template: "registration",
     message: {
       to: reg.parent.email,
       attachments,
