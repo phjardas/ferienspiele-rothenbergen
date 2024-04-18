@@ -1,8 +1,4 @@
-import {
-  Check as SuccessIcon,
-  Warning as WarningIcon,
-} from "@mui/icons-material";
-import { Alert, Button, Grid } from "@mui/material";
+import { Alert, Button, Grid, Typography } from "@mui/material";
 import qs from "qs";
 import React from "react";
 import Date from "../Date";
@@ -30,10 +26,13 @@ export default function RegistrationDetails({ registration }) {
   return (
     <Grid container spacing={2}>
       <Grid item xs={12}>
-        <Alert severity="info" icon={SuccessIcon} gutterBottom>
-          Hurra! Sie haben {child.firstName} am <Date value={registeredAt} /> zu
-          den Ferienspielen {year} angemeldet.
-        </Alert>
+        <Typography variant="h3" paragraph>
+          Herzlich Willkommen, {child.firstName}!
+        </Typography>
+        <Typography paragraph>
+          Sie haben {child.firstName} am <Date value={registeredAt} /> zu den
+          Ferienspielen {year} angemeldet.
+        </Typography>
         <Button
           component={LinkBehavior}
           href={createSiblingRegistrationLink(registration)}
@@ -44,7 +43,7 @@ export default function RegistrationDetails({ registration }) {
         </Button>
       </Grid>
       <Grid item xs={12}>
-        <Alert severity="error" icon={WarningIcon}>
+        <Alert severity="error">
           Die Anmeldung ist noch nicht abgeschlossen. Bitte beachten Sie die
           folgenden Hinweise.
         </Alert>
@@ -53,7 +52,7 @@ export default function RegistrationDetails({ registration }) {
         <PriceInfo {...registration} />
       </Grid>
       <Grid item xs={12} md={6}>
-        <Stack spacing={3}>
+        <Stack spacing={2}>
           <WaiverInfo {...registration} />
           <KuchenInfo {...registration} />
         </Stack>

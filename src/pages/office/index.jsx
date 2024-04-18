@@ -43,5 +43,7 @@ function OfficeWrapper() {
 function OfficeIndex() {
   const auth = useAuth();
   if (auth.pending) return <GlobalLoader />;
-  return <Navigate to={isAnmeldungUser(auth) ? "anmeldungen" : "kuchen"} />;
+  return (
+    <Navigate to={isAnmeldungUser(auth) ? "anmeldungen" : "kuchen"} replace />
+  );
 }

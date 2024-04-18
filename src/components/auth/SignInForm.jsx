@@ -6,10 +6,7 @@ import { useAuth } from "../../api/auth";
 import LinkBehavior from "../LinkBehavior";
 import SignInField from "./SignInField";
 
-export default function SignInForm({
-  from = window.location.pathname,
-  onSignIn,
-}) {
+export default function SignInForm({ onSignIn }) {
   const auth = useAuth();
   const [{ loading, error }, setState] = useState({});
 

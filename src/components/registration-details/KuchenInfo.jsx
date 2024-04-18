@@ -17,6 +17,7 @@ export default function KuchenInfo(props) {
 function KuchenInfoData({ kuchen: { date, name } }) {
   if (date === "none")
     return <Typography>Sie bringen leider keinen Kuchen mit.</Typography>;
+
   if (date === "geschwister")
     return (
       <Typography>

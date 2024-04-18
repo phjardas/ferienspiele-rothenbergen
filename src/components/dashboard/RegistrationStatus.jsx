@@ -1,10 +1,4 @@
-import {
-  Alert,
-  Button,
-  CircularProgress,
-  Link,
-  Typography,
-} from "@mui/material";
+import { Alert, Button, LinearProgress, Link, Typography } from "@mui/material";
 import React from "react";
 import config from "../../api/config";
 import { useRegistrationStatus } from "../../api/firestore";
@@ -32,7 +26,7 @@ export default function RegistrationStatus({ children }) {
     );
   }
 
-  if (loading) return <CircularProgress />;
+  if (loading) return <LinearProgress />;
   if (error)
     return (
       <Alert severity="error">

@@ -1,12 +1,13 @@
 import "firebase/firestore";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import config from "./config";
-import { firebase, Firebase } from "./firebase";
+import { Firebase, firebase } from "./firebase";
 
 export const firestore = firebase.firestore();
 const configDoc = firestore.collection("config").doc("config");
 const kuchenDoc = firestore.collection("kuchen").doc("kuchen");
 const registrationsColl = firestore.collection("registrations");
+const invitationsColl = firestore.collection("invitations");
 
 export function useRegistrationStatus() {
   return useDoc(configDoc);
@@ -16,12 +17,45 @@ export function useKuchenStatistics() {
   return useDoc(kuchenDoc);
 }
 
+export function useInvitation(code) {
+  return useDoc(firestore.collection("invitations").doc(code));
+}
+
+export function useInvitations() {
+  const [state, setState] = useState({ loading: true });
+
+  useEffect(() => {
+    invitationsColl.onSnapshot(
+      (snap) => setState({ loading: false, data: snap.docs.map(doc => ({ ...doc.data(), id: doc.id })) }),
+      (error) => setState({ loading: false, error }),
+    );
+  }, []);
+
+  return state;
+}
+
+export function useCreateInvitation() {
+  return useCallback(async (data) => {
+    const doc = await invitationsColl.add({
+      ...data,
+      createdAt: Firebase.firestore.FieldValue.serverTimestamp()
+    })
+    return { ...data, id: doc.id }
+  }, [])
+}
+
+export function useDeleteInvitation() {
+  return useCallback(async (id) => {
+    await invitationsColl.doc(id).delete()
+  }, [])
+}
+
 function useDoc(doc) {
   const [state, setState] = useState({ loading: true });
 
   useEffect(() => {
     doc.onSnapshot(
-      (snap) => setState({ loading: false, data: snap.data() || {} }),
+      (snap) => setState({ loading: false, data: snap.data() }),
       (error) => setState({ loading: false, error }),
     );
   }, [doc]);
@@ -29,13 +63,14 @@ function useDoc(doc) {
   return state;
 }
 
-export async function storeRegistration(registration) {
+export async function storeRegistration(registration, code) {
   const doc = registrationsColl.doc();
-  await doc.set({
-    ...removeUndefinedFields(registration),
+  await doc.set(removeUndefinedFields({
+    ...registration,
+    code,
     year: config.year,
     registeredAt: Firebase.firestore.FieldValue.serverTimestamp(),
-  });
+  }));
 
   return toEntity(await doc.get());
 }
@@ -63,8 +98,8 @@ export async function setPaymentReceived(registrationId, received) {
   await registrationsColl.doc(registrationId).update({
     payment: received
       ? {
-          receivedAt: Firebase.firestore.FieldValue.serverTimestamp(),
-        }
+        receivedAt: Firebase.firestore.FieldValue.serverTimestamp(),
+      }
       : Firebase.firestore.FieldValue.delete(),
   });
 }
@@ -73,8 +108,8 @@ export async function setWaiverReceived(registrationId, received) {
   await registrationsColl.doc(registrationId).update({
     waiver: received
       ? {
-          receivedAt: Firebase.firestore.FieldValue.serverTimestamp(),
-        }
+        receivedAt: Firebase.firestore.FieldValue.serverTimestamp(),
+      }
       : Firebase.firestore.FieldValue.delete(),
   });
 }

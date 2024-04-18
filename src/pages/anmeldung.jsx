@@ -7,16 +7,16 @@ import Registration from "../components/registration";
 
 function useParams() {
   const { search } = useLocation();
-  return search && search.startsWith("?") && qs.parse(search.substring(1));
+  return search && search.startsWith("?") ? qs.parse(search.substring(1)) : {};
 }
 
 export default function Anmeldung() {
   const navigate = useNavigate();
-  const params = useParams();
+  const { code, ...params } = useParams();
 
   const onSubmit = useCallback(
     async (reg) => {
-      const result = await storeRegistration(reg);
+      const result = await storeRegistration(reg, code);
       navigate(`/anmeldung/${result.id}`);
     },
     [navigate],
@@ -24,7 +24,7 @@ export default function Anmeldung() {
 
   return (
     <Layout back={{ to: "/" }}>
-      <Registration onSubmit={onSubmit} initialValues={params} />
+      <Registration onSubmit={onSubmit} code={code} initialValues={params} />
     </Layout>
   );
 }

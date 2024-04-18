@@ -15,7 +15,7 @@ export default function MainMenu({ title, back }) {
       position="fixed"
       color="primary"
       elevation={0}
-      sx={{ bgcolor: "primary.300" }}
+      sx={{ bgcolor: "primary.400" }}
     >
       <Toolbar>
         {back && (

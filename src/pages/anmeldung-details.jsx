@@ -11,6 +11,7 @@ export default function AnmeldungDetails() {
   const [{ loading, error, registration }, setState] = useState({
     loading: true,
   });
+
   useEffect(() => {
     setState({ loading: true });
     getRegistration(id, (error, registration) =>

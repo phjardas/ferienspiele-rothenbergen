@@ -18,6 +18,11 @@ service cloud.firestore {
     match /users/{userId} {
       allow get, create, update: if request.auth.uid == userId;
     }
+
+    match /invitations/{id} {
+      allow get: if true;
+      allow list, create, update, delete: if get(/databases/$(database)/documents/users/$(request.auth.uid)).data.roles.anmeldungen == true;
+    }
   }
 }
 

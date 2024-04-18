@@ -1,5 +1,5 @@
 import { NightsStay as EarlyIcon } from "@mui/icons-material";
-import { Alert, CircularProgress, Grid, Typography } from "@mui/material";
+import { Alert, Grid, LinearProgress, Typography } from "@mui/material";
 import React from "react";
 import { Field } from "react-final-form";
 import config from "../../api/config";
@@ -31,7 +31,7 @@ export default function Fruehbetreuung() {
 function FruehbetreuungSelect() {
   const { loading, data } = useRegistrationStatus();
 
-  if (loading) return <CircularProgress />;
+  if (loading) return <LinearProgress />;
 
   if (!data.earlySpotsLeft) {
     return (

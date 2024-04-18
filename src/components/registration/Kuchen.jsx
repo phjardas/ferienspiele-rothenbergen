@@ -3,8 +3,8 @@ import {
   Alert,
   Box,
   Chip,
-  CircularProgress,
   Grid,
+  LinearProgress,
   Typography,
 } from "@mui/material";
 import React from "react";
@@ -28,14 +28,14 @@ function KuchenDate({ value }) {
 
 function KuchenInfo({ date }) {
   const { loading, error, data } = useKuchenStatistics();
-  if (loading) return <CircularProgress />;
+  if (loading) return <LinearProgress />;
   if (error) return <Alert severity="error">{error.message}</Alert>;
 
-  const kuchen = data[date];
+  const kuchen = data?.[date];
   if (!kuchen || !kuchen.length) return null;
   return (
     <>
-      <Typography gutterBottom>
+      <Typography paragraph>
         Wir haben schon Zusagen für folgende Kuchen am{" "}
         <KuchenDate value={date} />:
       </Typography>

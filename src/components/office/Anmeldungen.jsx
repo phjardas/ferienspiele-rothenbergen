@@ -107,7 +107,7 @@ export default function Anmeldungen() {
             . <ExportButton registrations={registrations} />
           </Typography>
           {(paymentsMissing > 0 || waiversMissing > 0) && (
-            <Alert severity="info" gutterBottom>
+            <Alert severity="info">
               Es {paymentsMissing + waiversMissing === 1 ? "fehlt" : "fehlen"}{" "}
               noch{" "}
               {paymentsMissing > 0 &&

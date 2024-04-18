@@ -1,4 +1,4 @@
-import { Box, CircularProgress } from "@mui/material";
+import { Box, LinearProgress } from "@mui/material";
 import React from "react";
 import Layout from "./Layout";
 
@@ -16,7 +16,7 @@ export default function GlobalLoader({ noLayout, ...props }) {
         justifyContent: "center",
       }}
     >
-      <CircularProgress size={80} color="secondary" />
+      <LinearProgress />
     </Box>
   );
 

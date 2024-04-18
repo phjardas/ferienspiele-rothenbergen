@@ -6,10 +6,16 @@ export default function LabelIcon({ icon, label, ...props }) {
 
   return (
     <Box
+      component="span"
       {...props}
-      sx={{ display: "inline-flex", alignItems: "center", ...props.sx }}
+      sx={{
+        display: "inline-flex",
+        alignItems: "center",
+        gap: 0.5,
+        ...props.sx,
+      }}
     >
-      <Icon sx={label ? { marginRight: 1 } : {}} />
+      <Icon />
       {label}
     </Box>
   );

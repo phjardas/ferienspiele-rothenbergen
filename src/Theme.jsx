@@ -6,10 +6,7 @@ import {
   ThemeProvider as MuiThemeProvider,
   responsiveFontSizes,
 } from "@mui/material";
-import {
-  purple as primary,
-  deepOrange as secondary,
-} from "@mui/material/colors";
+import { purple as primary, pink as secondary } from "@mui/material/colors";
 import React from "react";
 
 const theme = responsiveFontSizes(

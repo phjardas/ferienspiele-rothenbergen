@@ -31,7 +31,11 @@ export default function Registration({
   onSubmit,
 }) {
   const [initialValues, setInitialValues] = useState(
-    withPrice(originalValues ? originalValues : createInitialValues()),
+    withPrice(
+      originalValues && Object.keys(originalValues).length
+        ? originalValues
+        : createInitialValues(),
+    ),
   );
   const updateTestData = useMemo(
     () => enableTestData && (() => setInitialValues(createInitialValues())),
@@ -58,7 +62,9 @@ export default function Registration({
           <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
             <Welcome
               createTestData={updateTestData}
-              geschwisterkind={!!originalValues}
+              geschwisterkind={
+                originalValues && Object.keys(originalValues).length > 0
+              }
             />
             <Child />
             <Parents />

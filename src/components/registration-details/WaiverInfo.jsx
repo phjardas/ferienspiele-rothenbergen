@@ -16,8 +16,8 @@ export default function WaiverInfo(registration) {
   return (
     <Card>
       <CardContent>
+        <H3>Einverständniserklärung</H3>
         <Stack>
-          <H3>Einverständniserklärung</H3>
           <Alert severity="error">
             Sie haben die Einverständniserklärung noch nicht abgegeben.
           </Alert>

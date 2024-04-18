@@ -26,16 +26,16 @@ export default function PriceInfo({ child, price }) {
             Verwendungszweck: "Ferienspiele {child.firstName} {child.lastName}"
           </Typography>
 
-          <Typography variant="h6" paragraph>
-            Überweisung mit Giropay
-          </Typography>
-          <Typography paragraph>
+          <Typography variant="h6">Überweisung mit App</Typography>
+          <Typography>
             <EPC child={child} price={price} />
           </Typography>
-
-          <Typography variant="h6" paragraph>
-            Barzahlung
+          <Typography variant="caption" paragraph>
+            Scannen Sie einfach diesen QR-Code in Ihrer Banking-App mit der
+            Funktion "Foto-Überweisung".
           </Typography>
+
+          <Typography variant="h6">Barzahlung</Typography>
           <Typography paragraph>
             Sie können den Teilnahmebeitrag auch in bar bezahlen:
           </Typography>
@@ -67,5 +67,5 @@ EUR${price.total}
 Ferienspiele ${child.firstName.trim()} ${child.lastName.trim()}
 `.trim();
 
-  return <QR value={data} size={256} />;
+  return <QR value={data} size={128} />;
 }
