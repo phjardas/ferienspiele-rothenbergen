@@ -4,6 +4,8 @@ import Date from "../Date";
 import H3 from "../H3";
 
 export default function KuchenInfo(props) {
+  if (props.kuchen.date === "team") return null;
+
   return (
     <Card>
       <CardContent>

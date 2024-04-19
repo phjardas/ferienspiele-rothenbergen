@@ -7,7 +7,7 @@ export default async function updateKuchenStatistics() {
   const registrations = await registrationsColl.get();
   const kuchens = registrations.docs.map((doc) => doc.get("kuchen"));
   const statistics = kuchens
-    .filter((k) => k.date !== "none" && k.date !== "geschwister")
+    .filter((k) => k.date !== "none" && k.date !== "geschwister" && k.date !== "team")
     .reduce(
       (acc, k) => ({ ...acc, [k.date]: [...(acc[k.date] || []), k.name] }),
       {},

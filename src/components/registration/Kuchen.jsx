@@ -19,7 +19,7 @@ import TextField from "../form/TextField";
 import { required } from "../form/validation";
 
 function isKuchenSelected(date) {
-  return date && date !== "none" && date !== "geschwister";
+  return date && date !== "none" && date !== "geschwister" && date !== "team";
 }
 
 function KuchenDate({ value }) {
@@ -86,6 +86,11 @@ export default function Kuchen() {
                 value: "geschwister",
                 label:
                   "Ich bringe bereits für ein Geschwisterkind einen Kuchen mit.",
+              },
+              {
+                value: "team",
+                label:
+                  "Ich bin Mitarbeiter*in und muss darum keinen Kuchen mitbringen.",
               },
             ]}
           />
