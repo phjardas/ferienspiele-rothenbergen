@@ -12,7 +12,7 @@ const config = {
   maxParticipants: 66,
   earlyCarePlaces: 15,
   prices: {
-    base: 40,
+    base: 45,
     sibling: -15,
     noCake: 10,
   },
