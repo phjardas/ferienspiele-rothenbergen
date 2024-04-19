@@ -6,7 +6,7 @@ import {
   ThemeProvider as MuiThemeProvider,
   responsiveFontSizes,
 } from "@mui/material";
-import { purple as primary, pink as secondary } from "@mui/material/colors";
+import { teal as primary, pink as secondary } from "@mui/material/colors";
 import React from "react";
 
 const theme = responsiveFontSizes(
@@ -44,6 +44,9 @@ const theme = responsiveFontSizes(
             root: {
               textTransform: "none",
             },
+            textPrimary: {
+              color: primary[800],
+            },
           },
         },
         MuiCard: {
@@ -76,6 +79,22 @@ const theme = responsiveFontSizes(
           styleOverrides: {
             root: {
               padding: "24px 24px 16px",
+            },
+          },
+        },
+        MuiLink: {
+          styleOverrides: {
+            root: {
+              color: primary[800],
+            },
+          },
+        },
+        MuiTab: {
+          styleOverrides: {
+            textColorPrimary: {
+              "&.Mui-selected": {
+                color: primary[800],
+              },
             },
           },
         },
