@@ -1,5 +1,6 @@
 import * as functions from "firebase-functions";
 import createWaiver from "./createWaiver";
+import redeemInvitation from "./redeemInvitation";
 import sendRegistrationMail from "./sendRegistrationMail";
 import updateKuchenStatistics from "./updateKuchenStatistics";
 import updateRegistrationStatus from "./updateRegistrationStatus";
@@ -11,6 +12,7 @@ async function handleRegistration(snapshot) {
 
   return Promise.all([
     sendRegistrationMail(reg, waiverFile),
+    redeemInvitation(reg),
     updateRegistrationStatus(reg),
     updateKuchenStatistics(reg),
   ]);
