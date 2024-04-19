@@ -8,7 +8,7 @@ on:
 jobs:
   deploy:
     environment: Production
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     concurrency: gui
 
     steps:
@@ -29,12 +29,14 @@ jobs:
 
       - name: Install
         if: steps.npm-cache.outputs.cache-hit != 'true'
-        run: npm ci --ignore-scripts
+        run: npm ci
 
       - name: Build
         run: npm run build
 
+      - uses: "google-github-actions/auth@v2"
+        with:
+          credentials_json: "${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}"
+
       - name: Deploy
         run: npm run deploy:hosting
-        env:
-          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
