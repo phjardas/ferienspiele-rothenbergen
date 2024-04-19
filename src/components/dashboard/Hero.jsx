@@ -12,7 +12,7 @@ export default function Hero() {
     <Card
       sx={{
         backgroundImage: {
-          xs: "linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5)), url(/hero.avif)",
+          xs: "linear-gradient(rgba(0, 0, 0, 0.0) 0% , rgba(0, 0, 0, 0.5) 50%, rgba(0, 0, 0, 0.5) 100%), url(/hero.avif)",
           sm: "linear-gradient(90deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0)), url(/hero.avif)",
         },
         backgroundSize: "cover",
