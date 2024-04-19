@@ -4,7 +4,7 @@
   "scripts": {
     "clean": "shx rm -rf build",
     "build-functions": "pwd && npm run clean && cp ../src/api/config.js src && babel --out-dir build src && cp -r src/email/templates build/email/templates && cp -r src/fonts build/fonts",
-    "start": "npm run build && node local",
+    "start": "npm run build-functions && node local",
     "dev": "nodemon --watch src --ignore src/config.js --exec 'npm start'"
   },
   "main": "build/index.js",
@@ -13,19 +13,18 @@
   },
   "dependencies": {
     "cors": "^2.8.5",
-    "email-templates": "^9.0.0",
-    "firebase-admin": "^10.1.0",
-    "firebase-functions": "^3.20.1",
-    "pdfkit": "^0.13.0",
+    "email-templates": "^11.1.1",
+    "firebase-admin": "^12.1.0",
+    "firebase-functions": "^4.9.0",
+    "pdfkit": "^0.15.0",
     "pug": "^3.0.2"
   },
   "devDependencies": {
-    "@babel/cli": "^7.17.10",
-    "@babel/core": "^7.17.10",
-    "@babel/preset-env": "^7.17.10",
-    "chokidar": "^3.5.3",
-    "express": "^4.18.1",
-    "nodemon": "^2.0.16",
+    "@babel/cli": "^7.24.1",
+    "@babel/core": "^7.24.4",
+    "@babel/preset-env": "^7.24.4",
+    "express": "^4.19.2",
+    "nodemon": "^3.1.0",
     "shx": "^0.3.4"
   },
   "volta": {
