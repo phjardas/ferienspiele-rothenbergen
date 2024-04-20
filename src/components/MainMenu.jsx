@@ -32,7 +32,7 @@ export default function MainMenu({ title, back }) {
           </IconButton>
         )}
         <Typography variant="h6" color="inherit">
-          {title || "Ferienspiele"}
+          {title || "Ferienspiele Niedergründau und Rothenbergen"}
         </Typography>
         {!pending && (
           <Box sx={{ ml: "auto" }}>

@@ -5,7 +5,7 @@ import OfficeNav from "./OfficeNav";
 
 export default function OfficeAnmeldungen() {
   return (
-    <Layout title="Anmeldungen">
+    <Layout title="Anmeldungen" back={{ to: "/" }}>
       <OfficeNav />
       <Anmeldungen />
     </Layout>

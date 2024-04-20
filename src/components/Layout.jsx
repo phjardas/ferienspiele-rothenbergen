@@ -1,11 +1,15 @@
 import { Box } from "@mui/material";
 import React from "react";
 import { Helmet } from "react-helmet-async";
+import { useAuth } from "../api/auth";
 import config from "../api/config";
 import Footer from "./Footer";
 import MainMenu from "./MainMenu";
 
 export default function Layout({ title, back, hideMenu, children }) {
+  const auth = useAuth();
+  const hasMenu = hideMenu ? auth.authenticated : true;
+
   return (
     <>
       <Helmet
@@ -15,7 +19,7 @@ export default function Layout({ title, back, hideMenu, children }) {
             : `${config.title} - ${config.app}`
         }
       />
-      {hideMenu ? null : <MainMenu title={title} back={back} />}
+      {hasMenu && <MainMenu title={title} back={back} />}
       <Box sx={{ p: 2 }}>
         <Box
           sx={{
@@ -23,7 +27,7 @@ export default function Layout({ title, back, hideMenu, children }) {
             flexDirection: "column",
             maxWidth: "80rem",
             mx: "auto",
-            pt: hideMenu ? 0 : 8,
+            pt: hasMenu ? 8 : 0,
           }}
         >
           {children}

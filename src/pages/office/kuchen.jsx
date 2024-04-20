@@ -5,7 +5,7 @@ import OfficeNav from "./OfficeNav";
 
 export default function KuchenPage() {
   return (
-    <Layout title="Kuchen">
+    <Layout title="Kuchen" back={{ to: "/" }}>
       <OfficeNav />
       <Kuchen />
     </Layout>
