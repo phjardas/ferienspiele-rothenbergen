@@ -15,7 +15,10 @@ export default function MainMenu({ title, back }) {
       position="fixed"
       color="primary"
       elevation={0}
-      sx={{ bgcolor: "primary.400" }}
+      sx={{
+        bgcolor: (theme) =>
+          theme.palette.mode === "dark" ? "primary.900" : "primary.400",
+      }}
     >
       <Toolbar>
         {back && (

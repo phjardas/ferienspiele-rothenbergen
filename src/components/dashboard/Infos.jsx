@@ -1,5 +1,6 @@
 import { Box, Card, CardContent, Link, Typography } from "@mui/material";
 import React from "react";
+import { primary950 } from "../../Theme";
 import config from "../../api/config";
 import Currency from "../Currency";
 import Date from "../Date";
@@ -14,6 +15,10 @@ export default function Infos() {
         display: "grid",
         gridTemplateColumns: ["1fr", "repeat(2, 1fr)", "repeat(3, 1fr)"],
         gap: 2,
+        ".MuiPaper-root": {
+          backgroundColor: (theme) =>
+            theme.palette.mode === "dark" ? primary950 : undefined,
+        },
       }}
     >
       <Card>
