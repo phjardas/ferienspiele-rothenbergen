@@ -23,8 +23,24 @@ export default function Infos() {
     >
       <Card>
         <CardContent>
-          <H3>Das Programm</H3>
-          <Typography paragraph>Kommt bald. 😉</Typography>
+          <H3>Kommt mit auf eine besondere Reise!</H3>
+          <Typography paragraph>
+            Wir verwandeln die Bergkirche in eine Zeitmaschine und entdecken
+            vergangene Epochen. Welche Gefahren lauerten in der Urzeit? Wie
+            lebten die alten Ägypter, die Kelten und die Menschen im
+            Mittelalter? Und was wäre, wenn wir in die Zukunft reisen könnten?!
+          </Typography>
+          <Typography paragraph>
+            Außerdem erwartet uns die Freiwillige Feuerwehr Niedergründau zu
+            patschnassen Wasserspielen, bei denen wir uns abkühlen können. Mit
+            dem Reisebus machen wir einen spannenden Ausflug, und von Donnerstag
+            auf Freitag übernachten wir gemeinsam in der
+            Evangelisch-methodistischen Friedenskirche Rothenbergen.
+          </Typography>
+          <Typography paragraph>
+            Eure Familien sind herzlich zum Abschlussgottesdienst am Freitag um
+            15 Uhr eingeladen.
+          </Typography>
         </CardContent>
       </Card>
       <Card>
@@ -95,7 +111,7 @@ export default function Infos() {
           </Typography>
           <Typography paragraph>
             Im Preis enthalten sind Verpflegung und Materialkosten, T-Shirt und
-            der Ausflug in den Kletterpark.
+            ein Tagesausflug.
           </Typography>
           <Typography paragraph>
             Dieser fantastisch niedrige Preis wird übrigens ermöglicht durch
