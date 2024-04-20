@@ -1,7 +1,6 @@
-import { Alert, Typography } from "@mui/material";
+import { Alert, LinearProgress, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { createWaiver } from "../api/waiver";
-import GlobalLoader from "./GlobalLoader";
 
 export default function Teilnahmebedingungen() {
   const [{ loading, error, waiver }, setState] = useState({ loading: true });
@@ -19,7 +18,7 @@ export default function Teilnahmebedingungen() {
     loadWaiver();
   }, []);
 
-  if (loading) return <GlobalLoader noLayout />;
+  if (loading) return <LinearProgress />;
   if (error) return <Alert severity="error">{error.message}</Alert>;
 
   return (

@@ -1,7 +1,9 @@
 import { Grid, Link, Typography } from "@mui/material";
-import React, { lazy, useState } from "react";
+import React, { useState } from "react";
 import { Field } from "react-final-form";
+import Datenschutz from "../Datenschutz";
 import Modal from "../Modal";
+import Teilnahmebedingungen from "../Teilnahmebedingungen";
 import Checkbox from "../form/Checkbox";
 import FieldSet from "../form/FieldSet";
 
@@ -20,7 +22,13 @@ function ConsentCheckbox({ name, info, modalTitle, modalContent, ...props }) {
 
   return (
     <>
-      <Modal open={open} onClose={closeDialog} title={modalTitle}>
+      <Modal
+        maxWidth="sm"
+        fullWidth
+        open={open}
+        onClose={closeDialog}
+        title={modalTitle}
+      >
         <ModalContent />
       </Modal>
       {Info && (
@@ -50,7 +58,7 @@ export default function Consent() {
               </>
             )}
             modalTitle="Teilnahmebedingungen"
-            modalContent={lazy(() => import("../Teilnahmebedingungen"))}
+            modalContent={Teilnahmebedingungen}
             label="Ich habe die Teilnahmebedingungen gelesen und akzeptiere sie."
             required
             validate={(checked) =>
@@ -72,7 +80,7 @@ export default function Consent() {
               </>
             )}
             modalTitle="Datenschutzerklärung"
-            modalContent={lazy(() => import("../Datenschutz"))}
+            modalContent={Datenschutz}
             label="Ich habe die Datenschutzerklärung zur Kenntnis genommen."
             required
             validate={(checked) =>

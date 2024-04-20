@@ -7,10 +7,6 @@ import {
   Card,
   CardContent,
   CircularProgress,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogTitle,
   IconButton,
   Link,
   List,
@@ -36,6 +32,7 @@ import {
 } from "../../api/firestore";
 import GlobalLoader from "../GlobalLoader";
 import LinkBehavior from "../LinkBehavior";
+import Modal from "../Modal";
 import Stack from "../Stack";
 
 export default function Anmeldungen() {
@@ -81,14 +78,11 @@ function AddInvitationButton() {
         Einladung erstellen
       </Button>
       {popupState.isOpen && (
-        <Dialog maxWidth="xs" fullWidth {...bindDialog(popupState)}>
-          <DialogTitle>Einladung</DialogTitle>
-          <DialogContent>
-            <Box sx={{ pt: 1 }}>
-              <CreateInvitation />
-            </Box>
-          </DialogContent>
-          <DialogActions>
+        <Modal
+          maxWidth="xs"
+          fullWidth
+          title="Einladung"
+          actions={
             <Button
               type="text"
               color="inherit"
@@ -96,8 +90,13 @@ function AddInvitationButton() {
             >
               Schließen
             </Button>
-          </DialogActions>
-        </Dialog>
+          }
+          {...bindDialog(popupState)}
+        >
+          <Box sx={{ pt: 1 }}>
+            <CreateInvitation />
+          </Box>
+        </Modal>
       )}
     </>
   );
