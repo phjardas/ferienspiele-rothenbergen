@@ -5,7 +5,7 @@ import {
   experimental_extendTheme as extendTheme,
   useColorScheme,
 } from "@mui/material/styles";
-import React, { useEffect, useMemo } from "react";
+import { useEffect, useMemo } from "react";
 
 export const primary950 = "#003A30";
 

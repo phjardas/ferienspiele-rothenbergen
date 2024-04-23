@@ -11,15 +11,7 @@ export default function MainMenu({ title, back }) {
   const Menu = user ? AuthenticatedMenu : UnauthenticatedMenu;
 
   return (
-    <AppBar
-      position="fixed"
-      color="primary"
-      elevation={0}
-      sx={{
-        bgcolor: (theme) =>
-          theme.palette.mode === "dark" ? "primary.900" : "primary.400",
-      }}
-    >
+    <AppBar position="fixed" color="primary" elevation={0}>
       <Toolbar>
         {back && (
           <IconButton

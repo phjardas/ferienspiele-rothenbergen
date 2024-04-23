@@ -30,7 +30,6 @@ export default function Hero() {
           flexDirection: "column",
           justifyContent: "flex-end",
           gap: 2,
-          color: "white",
           width: { xs: "100%", md: "50%" },
         }}
       >
