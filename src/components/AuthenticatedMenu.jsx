@@ -46,7 +46,7 @@ export default function AuthenticatedMenu(props) {
         sx={{ zIndex: (theme) => theme.zIndex.modal }}
         {...bindPopover(popupState)}
       >
-        <Card sx={{ bgcolor: "background.paper" }}>
+        <Card>
           <CardHeader
             avatar={user.photoURL && <Avatar src={user.photoURL} />}
             title={user.displayName || user.email}

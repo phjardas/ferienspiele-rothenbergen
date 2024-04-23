@@ -42,7 +42,7 @@ export default function RegistrationStatus({ children }) {
             <Button
               component={LinkBehavior}
               href="/anmeldung"
-              color="secondary"
+              color="tertiary"
               variant="contained"
               size="large"
             >

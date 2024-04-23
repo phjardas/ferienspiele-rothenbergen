@@ -21,7 +21,7 @@ export default function UnauthenticatedMenu() {
         {...bindPopover(popupState)}
         sx={{ zIndex: (theme) => theme.zIndex.modal }}
       >
-        <Card sx={{ bgcolor: "background.paper" }}>
+        <Card>
           <CardHeader title="Anmelden" />
           <CardContent>
             <SignInForm />

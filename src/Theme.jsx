@@ -1,38 +1,110 @@
 import "@fontsource/roboto";
+import { CssBaseline, responsiveFontSizes, useMediaQuery } from "@mui/material";
 import {
-  createTheme,
-  CssBaseline,
-  GlobalStyles,
-  ThemeProvider as MuiThemeProvider,
-  responsiveFontSizes,
-  useMediaQuery,
-  useTheme,
-} from "@mui/material";
-import { grey, teal as primary, pink as secondary } from "@mui/material/colors";
-import React, { useMemo } from "react";
+  Experimental_CssVarsProvider as CssVarsProvider,
+  experimental_extendTheme as extendTheme,
+  useColorScheme,
+} from "@mui/material/styles";
+import React, { useEffect, useMemo } from "react";
 
-export const primary10 = "#002720";
 export const primary950 = "#003A30";
 
-function useMaterialTheme() {
-  const darkMode = useMediaQuery("(prefers-color-scheme: dark)");
+const light = {
+  primary: "#8a5100",
+  "on-primary": "#ffffff",
+  "primary-container": "#ffdcbe",
+  "on-primary-container": "#2c1600",
+  secondary: "#725a42",
+  "on-secondary": "#ffffff",
+  "secondary-container": "#ffdcbe",
+  "on-secondary-container": "#291806",
+  tertiary: "#58633a",
+  "on-tertiary": "#ffffff",
+  "tertiary-container": "#dce8b4",
+  "on-tertiary-container": "#161f01",
+  error: "#ba1a1a",
+  "on-error": "#ffffff",
+  "error-container": "#ffdad6",
+  "on-error-container": "#410002",
+  background: "#ffeee0",
+  "on-background": "#201b16",
+  surface: "#fff8f5",
+  "on-surface": "#201b16",
+  "surface-variant": "#f2dfd1",
+  "on-surface-variant": "#51453a",
+  outline: "#837468",
+  "outline-variant": "#d5c3b5",
+  shadow: "#000000",
+  scrim: "#000000",
+  "inverse-surface": "#352f2b",
+  "inverse-on-surface": "#faefe7",
+  "inverse-primary": "#ffb86f",
+};
 
+const dark = {
+  primary: "#ffb86d",
+  "on-primary": "#492900",
+  "primary-container": "#683c00",
+  "on-primary-container": "#ffdcbd",
+  secondary: "#e1c1a3",
+  "on-secondary": "#402c18",
+  "secondary-container": "#59422c",
+  "on-secondary-container": "#feddbe",
+  tertiary: "#bfcc9b",
+  "on-tertiary": "#2a3411",
+  "tertiary-container": "#404b25",
+  "on-tertiary-container": "#dbe8b5",
+  error: "#ffb4ab",
+  "on-error": "#690005",
+  "error-container": "#93000a",
+  "on-error-container": "#ffb4ab",
+  background: "#000000",
+  "on-background": "#ebe1d9",
+  surface: "#201b16",
+  "on-surface": "#ebe1d9",
+  "surface-variant": "#50453a",
+  "on-surface-variant": "#d5c3b5",
+  outline: "#9d8e81",
+  "outline-variant": "#50453a",
+  shadow: "#000000",
+  scrim: "#000000",
+  "inverse-surface": "#ebe1d9",
+  "inverse-on-surface": "#352f2b",
+  "inverse-primary": "#895100",
+};
+
+function createColorScheme(palette) {
+  return {
+    palette: {
+      md: palette,
+      primary: { main: palette.primary },
+      secondary: { main: palette.secondary },
+      success: { main: palette.tertiary },
+      error: { main: palette.error },
+      background: {
+        default: palette.background,
+        paper: palette.surface,
+      },
+      text: {
+        primary: palette["on-surface"],
+        secondary: palette["on-surface-variant"],
+      },
+    },
+  };
+}
+
+function useMaterialTheme() {
   return useMemo(
     () =>
       responsiveFontSizes(
-        createTheme(
+        extendTheme(
           {
-            palette: {
-              mode: darkMode ? "dark" : "light",
-              primary,
-              secondary,
-              background: {
-                default: darkMode ? "black" : primary[100],
-                paper: darkMode ? grey[900] : primary[50],
-              },
+            colorSchemes: {
+              light: createColorScheme(light),
+              dark: createColorScheme(dark),
             },
             shape: {
-              borderRadius: 24,
+              borderRadius: 20,
             },
             typography: {
               useNextVariants: true,
@@ -54,19 +126,44 @@ function useMaterialTheme() {
                   },
                 },
               },
+              MuiAppBar: {
+                styleOverrides: {
+                  colorPrimary: {
+                    "--AppBar-background":
+                      "var(--mui-palette-md-surface-variant)",
+                    "--AppBar-color":
+                      "var(--mui-palette-md-on-surface-variant)",
+                  },
+                },
+              },
               MuiButton: {
+                defaultProps: {
+                  disableElevation: true,
+                },
                 styleOverrides: {
                   root: {
                     textTransform: "none",
+                    padding: "0 24px",
+                    minHeight: 40,
                   },
-                  textPrimary: {
-                    color: darkMode ? primary[100] : primary[800],
+                  containedPrimary: {
+                    backgroundColor: "var(--mui-palette-md-primary)",
+                    color: "var(--mui-palette-md-on-primary)",
+                  },
+                  containedSecondary: {
+                    backgroundColor: "var(--mui-palette-md-secondary)",
+                    color: "var(--mui-palette-md-on-secondary)",
                   },
                 },
               },
               MuiCard: {
                 defaultProps: {
                   elevation: 0,
+                },
+                styleOverrides: {
+                  root: {
+                    color: "var(--mui-palette-md-on-primary-container)",
+                  },
                 },
               },
               MuiCardActions: {
@@ -92,45 +189,54 @@ function useMaterialTheme() {
                   },
                 },
               },
-              MuiLink: {
+              MuiDialog: {
                 styleOverrides: {
-                  root: {
-                    color: darkMode ? primary[100] : primary[800],
+                  paper: {
+                    backgroundColor: "var(--mui-palette-md-surface)",
                   },
                 },
               },
-              MuiTab: {
+              MuiPopover: {
                 styleOverrides: {
-                  textColorPrimary: {
-                    "&.Mui-selected": {
-                      color: darkMode ? primary[100] : primary[800],
+                  root: {
+                    ".MuiPaper-root": {
+                      backgroundColor: "var(--mui-palette-md-surface)",
                     },
                   },
+                },
+              },
+              MuiFilledInput: {
+                styleOverrides: {
+                  root: {
+                    borderRadius: 0,
+                  },
+                },
+              },
+              MuiTextField: {
+                defaultProps: {
+                  variant: "filled",
                 },
               },
             },
           },
         ),
       ),
-    [darkMode],
+    [],
   );
 }
 
 export default function ThemeProvider({ children }) {
   return (
-    <MuiThemeProvider theme={useMaterialTheme()}>
+    <CssVarsProvider theme={useMaterialTheme()}>
       <CssBaseline />
-      <GlobalStyling />
+      <ModeSwitcher />
       {children}
-    </MuiThemeProvider>
+    </CssVarsProvider>
   );
 }
 
-function GlobalStyling() {
-  const { palette } = useTheme();
-  return (
-    <GlobalStyles
-      styles={{ body: { backgroundColor: palette.background.default } }}
-    />
-  );
+function ModeSwitcher() {
+  const { setMode } = useColorScheme();
+  const darkMode = useMediaQuery("(prefers-color-scheme: dark)");
+  useEffect(() => setMode(darkMode ? "dark" : "light"), [darkMode, setMode]);
 }

@@ -18,7 +18,7 @@ export default function Actions({ invalid, submitting, submitError }) {
       )}
       <LoadingButton
         type="submit"
-        color="secondary"
+        color="tertiary"
         variant="contained"
         size="large"
         fullWidth

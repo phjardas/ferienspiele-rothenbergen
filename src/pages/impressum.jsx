@@ -1,4 +1,4 @@
-import { Card, CardContent, Grid, Link, Typography } from "@mui/material";
+import { Box, Card, CardContent, Link, Typography } from "@mui/material";
 import React from "react";
 import H2 from "../components/H2";
 import H3 from "../components/H3";
@@ -20,9 +20,14 @@ export default function Imprint() {
             <br />
             Evangelisch-methodistische Kirche – Friedenskirche
           </Typography>
-
-          <Grid container spacing={2}>
-            <Grid item lg={4}>
+          <Box
+            sx={{
+              display: "grid",
+              gridTemplateColumns: ["1fr", "repeat(3, 1fr)"],
+              gap: 4,
+            }}
+          >
+            <Box>
               <H3>
                 Betreiberin <small>gem. § 5 TMG</small>
               </H3>
@@ -39,8 +44,8 @@ export default function Imprint() {
                   ralf.schweinsberg@emk.de
                 </Link>
               </Typography>
-            </Grid>
-            <Grid item lg={4}>
+            </Box>
+            <Box>
               <H3>
                 Redaktion <small>gem. § 55 Abs. 2 RStV</small>
               </H3>
@@ -62,8 +67,8 @@ export default function Imprint() {
                   ralf.schweinsberg@emk.de
                 </Link>
               </Typography>
-            </Grid>
-            <Grid item lg={4}>
+            </Box>
+            <Box>
               <H3>Webseite</H3>
               <Typography paragraph>
                 Diese Webseite wurde ehrenamtlich und kostenfrei entwickelt von{" "}
@@ -75,8 +80,8 @@ export default function Imprint() {
                   Philipp Jardas
                 </Link>
               </Typography>
-            </Grid>
-          </Grid>
+            </Box>
+          </Box>
 
           <H3>Haftungshinweis</H3>
           <Typography paragraph>

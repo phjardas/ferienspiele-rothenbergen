@@ -20,7 +20,6 @@ export default function TextFieldWrapper({
       inputProps={restInput}
       onChange={onChange}
       value={value}
-      variant="outlined"
     />
   );
 }
