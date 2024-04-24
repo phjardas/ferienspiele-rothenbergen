@@ -21,6 +21,8 @@ body
       p Sie bringen leider keinen Kuchen mit.
     when 'geschwister'
       p Sie bringen bereits für ein Geschwisterkind einen Kuchen mit.
+    when 'team'
+      p Als Mitarbeiter:in musst du keinen Kuchen mitbringen.
     default
       p Sie bringen am #{formatDate(reg.kuchen.date)} eine(n) #{reg.kuchen.name} mit. Vielen Dank!
 
