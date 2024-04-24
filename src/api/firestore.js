@@ -1,13 +1,13 @@
-import "firebase/firestore";
+import { addDoc, collection, deleteDoc, doc, getFirestore, onSnapshot, orderBy, query, setDoc, updateDoc } from "firebase/firestore";
 import { useCallback, useEffect, useState } from "react";
 import config from "./config";
-import { Firebase, firebase } from "./firebase";
+import { firebase } from "./firebase";
 
-export const firestore = firebase.firestore();
-const configDoc = firestore.collection("config").doc("config");
-const kuchenDoc = firestore.collection("kuchen").doc("kuchen");
-const registrationsColl = firestore.collection("registrations");
-const invitationsColl = firestore.collection("invitations");
+export const firestore = getFirestore(firebase);
+const configDoc = doc(firestore, "config/config");
+const kuchenDoc = doc(firestore, "kuchen/kuchen");
+const registrationsColl = collection(firestore, "registrations");
+const invitationsColl = collection(firestore, "invitations");
 
 export function useRegistrationStatus() {
   return useDoc(configDoc);
@@ -18,14 +18,14 @@ export function useKuchenStatistics() {
 }
 
 export function useInvitation(code) {
-  return useDoc(firestore.collection("invitations").doc(code));
+  return useDoc(doc(invitationsColl, code));
 }
 
 export function useInvitations() {
   const [state, setState] = useState({ loading: true });
 
   useEffect(() => {
-    invitationsColl.orderBy("note").onSnapshot(
+    onSnapshot(query(invitationsColl, orderBy("note")),
       (snap) => setState({ loading: false, data: snap.docs.map(doc => ({ ...doc.data(), id: doc.id })) }),
       (error) => setState({ loading: false, error }),
     );
@@ -36,66 +36,63 @@ export function useInvitations() {
 
 export function useCreateInvitation() {
   return useCallback(async (data) => {
-    const doc = await invitationsColl.add({
+    const ref = await addDoc(invitationsColl, {
       ...data,
-      createdAt: Firebase.firestore.FieldValue.serverTimestamp()
+      createdAt: firestore.FieldValue.serverTimestamp()
     })
-    return { ...data, id: doc.id }
+    return { ...data, id: ref.id }
   }, [])
 }
 
 export function useDeleteInvitation() {
   return useCallback(async (id) => {
-    await invitationsColl.doc(id).delete()
+    await deleteDoc(doc(invitationsColl, id))
   }, [])
 }
 
 function useDoc(doc) {
   const [state, setState] = useState({ loading: true });
 
-  useEffect(() => {
-    doc.onSnapshot(
+  useEffect(() =>
+    onSnapshot(doc,
       (snap) => setState({ loading: false, data: snap.data() }),
       (error) => setState({ loading: false, error }),
-    );
-  }, [doc]);
+    )
+    , [doc]);
 
   return state;
 }
 
 export async function storeRegistration(registration, code) {
-  const doc = registrationsColl.doc();
-  await doc.set(removeUndefinedFields({
+  const ref = doc(registrationsColl);
+  await setDoc(ref, removeUndefinedFields({
     ...registration,
     code,
     year: config.year,
     registeredAt: Firebase.firestore.FieldValue.serverTimestamp(),
   }));
 
-  return toEntity(await doc.get());
+  return toEntity(await ref.get());
 }
 
 export function getRegistration(id, next) {
-  return registrationsColl.doc(id).onSnapshot({
-    next: (snapshot) => next(null, toEntity(snapshot)),
-    error: next,
-  });
+  return onSnapshot(doc(registrationsColl, id),
+    (snapshot) => next(null, toEntity(snapshot)),
+    next,
+  );
 }
 
 export function getRegistrations({ sortField, sortDirection }, next) {
-  let query = registrationsColl;
-  if (sortField && sortDirection) {
-    query = query.orderBy(sortField, sortDirection);
-  }
+  const search = sortField && sortDirection ? query(registrationsColl, orderBy(sortField, sortDirection)) : registrationsColl;
 
-  return query.onSnapshot({
-    next: (snapshot) => next(null, snapshot.docs.map(toEntity)),
-    error: next,
-  });
+  return onSnapshot(search,
+    (snapshot) => next(null, snapshot.docs.map(toEntity)),
+    next,
+  );
 }
 
 export async function setPaymentReceived(registrationId, received) {
-  await registrationsColl.doc(registrationId).update({
+  await updateDoc(doc(registrationsColl, registrationId), {
     payment: received
       ? {
         receivedAt: Firebase.firestore.FieldValue.serverTimestamp(),
@@ -105,7 +102,7 @@ export async function setPaymentReceived(registrationId, received) {
 }
 
 export async function setWaiverReceived(registrationId, received) {
-  await registrationsColl.doc(registrationId).update({
+  await updateDoc(doc(registrationsColl, registrationId), {
     waiver: received
       ? {
         receivedAt: Firebase.firestore.FieldValue.serverTimestamp(),

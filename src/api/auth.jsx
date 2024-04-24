@@ -1,10 +1,19 @@
-import "firebase/auth";
+import {
+  GoogleAuthProvider,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword as firebaseSignInWithEmailAndPassword,
+  signOut as firebaseSignOut,
+  getAuth,
+  onAuthStateChanged,
+  signInWithPopup,
+} from "firebase/auth";
+import { collection, doc, getDoc, setDoc } from "firebase/firestore";
 import React, { createContext, useContext, useEffect, useState } from "react";
-import { firebase, Firebase } from "./firebase";
+import { firebase } from "./firebase";
 import { firestore } from "./firestore";
 
-const auth = firebase.auth();
-const usersColl = firestore.collection("users");
+const auth = getAuth(firebase);
+const usersColl = collection(firestore, "users");
 
 const Context = createContext();
 
@@ -13,32 +22,32 @@ const providers = [
     id: "google",
     label: "Google",
     get provider() {
-      return new Firebase.auth.GoogleAuthProvider();
+      return new GoogleAuthProvider();
     },
   },
 ];
 
 function signInWithEmailAndPassword(email, password) {
-  return auth.signInWithEmailAndPassword(email, password);
+  return firebaseSignInWithEmailAndPassword(auth, email, password);
 }
 
 function signInWithProvider(providerId) {
   const provider = providers.find((p) => p.id === providerId);
   if (!provider) throw new Error(`Invalid sign in provider: ${providerId}`);
-  return auth.signInWithPopup(provider.provider);
+  return signInWithPopup(auth, provider.provider);
 }
 
 function signUp(email, password) {
-  return auth.createUserWithEmailAndPassword(email, password);
+  return createUserWithEmailAndPassword(auth, email, password);
 }
 
 function signOut() {
-  return auth.signOut();
+  return firebaseSignOut(auth);
 }
 
 async function getUser(fbUser) {
-  const userDoc = usersColl.doc(fbUser.uid);
-  const userData = await userDoc.get();
+  const userDoc = doc(usersColl, fbUser.uid);
+  const userData = await getDoc(userDoc);
 
   if (userData.exists) {
     return toUser(userData.id, userData.data());
@@ -52,7 +61,7 @@ async function getUser(fbUser) {
     roles: {},
   };
 
-  await userDoc.set(data);
+  await setDoc(userDoc, data);
   return toUser(fbUser.uid, data);
 }
 
@@ -74,7 +83,7 @@ export function AuthProvider({ children }) {
 
   useEffect(
     () =>
-      auth.onAuthStateChanged(async (fbUser) => {
+      onAuthStateChanged(auth, async (fbUser) => {
         if (fbUser) {
           const user = await getUser(fbUser);
           setState({ pending: false, authenticated: true, user });

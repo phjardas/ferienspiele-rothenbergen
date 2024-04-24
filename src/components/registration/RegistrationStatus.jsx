@@ -12,6 +12,8 @@ export default function RegistrationStatus({ code, children }) {
     data: { registrationStatus } = {},
   } = useRegistrationStatus();
 
+  console.log("reg status:", registrationStatus);
+
   if (Date.now() < registrationStart.getTime()) {
     return (
       <RegistrationCodeWrapper
