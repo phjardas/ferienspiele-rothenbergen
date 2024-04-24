@@ -1,8 +1,11 @@
 import { Alert, LinearProgress, Link } from "@mui/material";
+import { useMemo } from "react";
 import config from "../../api/config";
 import { useInvitation, useRegistrationStatus } from "../../api/firestore";
 import FormattedDate from "../Date";
 import Registration from "./Registration";
+
+const { registrationStart } = config;
 
 export default function RegistrationWrapper({ code, ...props }) {
   try {
@@ -71,36 +74,37 @@ export default function RegistrationWrapper({ code, ...props }) {
 }
 
 function useAnmeldungStatus({ code }) {
-  const { registrationStart } = config;
   const registrationStatus = useRegistrationStatus();
   const invitation = useInvitation(code);
 
-  if (registrationStatus.loading || invitation.loading) {
-    return { status: "loading" };
-  }
-
-  if (registrationStatus.error || invitation.error) {
-    return {
-      status: "error",
-      error: registrationStatus.error || invitation.error,
-    };
-  }
-
-  if (code) {
-    if (!invitation.data) {
-      return { status: "invitation-not-found" };
+  return useMemo(() => {
+    if (registrationStatus.loading || invitation.loading) {
+      return { status: "loading" };
     }
 
-    if (invitation.data.redeemedAt) {
-      return { status: "invitation-redeemed" };
+    if (registrationStatus.error || invitation.error) {
+      return {
+        status: "error",
+        error: registrationStatus.error || invitation.error,
+      };
     }
 
-    return { status: "open" };
-  }
+    if (code) {
+      if (!invitation.data) {
+        return { status: "invitation-not-found" };
+      }
 
-  if (Date.now() < registrationStart.getTime()) {
-    return { status: "before-registration", registrationStart };
-  }
+      if (invitation.data.redeemedAt) {
+        return { status: "invitation-redeemed" };
+      }
 
-  return { status: registrationStatus.data.registrationStatus };
+      return { status: "open" };
+    }
+
+    if (Date.now() < registrationStart.getTime()) {
+      return { status: "before-registration", registrationStart };
+    }
+
+    return { status: registrationStatus.data.registrationStatus };
+  }, [code, registrationStatus, invitation]);
 }
