@@ -34,18 +34,6 @@ export default function PriceInfo({ child, price }) {
             Scannen Sie einfach diesen QR-Code in Ihrer Banking-App mit der
             Funktion "Foto-Überweisung".
           </Typography>
-
-          <Typography variant="h6">Barzahlung</Typography>
-          <Typography paragraph>
-            Sie können den Teilnahmebeitrag auch in bar bezahlen:
-          </Typography>
-          <Typography>
-            Büro der Evangelischen Kirche
-            <br />
-            Paul-Gerhardt Str. 2
-            <br />
-            63584 Gründau-Lieblos
-          </Typography>
         </Stack>
       </CardContent>
     </Card>

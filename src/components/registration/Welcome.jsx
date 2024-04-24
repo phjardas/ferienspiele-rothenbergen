@@ -42,9 +42,8 @@ export default function Welcome({ createTestData, geschwisterkind }) {
               Nach der Anmeldung erhalten Sie von uns eine Email mit der
               Anmeldebestätigung sowie der Einverständniserklärung. Die
               Einverständniserklärung lassen Sie uns bitte unterschrieben
-              zukommen. Den Teilnahmebeitrag können Sie in bar der
-              Einverständniserklärung beilegen oder auf das angegebene Konto
-              überweisen.
+              zukommen. Den Teilnahmebeitrag überweisen Sie bitte auf das
+              angegebene Konto.
             </Typography>
             <Typography paragraph>
               Bitte beachten Sie, dass die Anmeldung erst vollständig ist, wenn
