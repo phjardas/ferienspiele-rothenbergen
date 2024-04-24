@@ -1,5 +1,18 @@
-import { addDoc, collection, deleteDoc, deleteField, doc, getFirestore, onSnapshot, orderBy, query, serverTimestamp, setDoc, updateDoc } from "firebase/firestore";
-import { useCallback, useEffect, useState } from "react";
+import {
+  addDoc,
+  collection,
+  deleteDoc,
+  deleteField,
+  doc,
+  getFirestore,
+  onSnapshot,
+  orderBy,
+  query,
+  serverTimestamp,
+  setDoc,
+  updateDoc,
+} from "firebase/firestore";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import config from "./config";
 import { firebase } from "./firebase";
 
@@ -18,15 +31,21 @@ export function useKuchenStatistics() {
 }
 
 export function useInvitation(code) {
-  return useDoc(doc(invitationsColl, code));
+  const ref = useMemo(() => code && doc(invitationsColl, code), [code]);
+  return useDoc(ref);
 }
 
 export function useInvitations() {
   const [state, setState] = useState({ loading: true });
 
   useEffect(() => {
-    onSnapshot(query(invitationsColl, orderBy("note")),
-      (snap) => setState({ loading: false, data: snap.docs.map(doc => ({ ...doc.data(), id: doc.id })) }),
+    onSnapshot(
+      query(invitationsColl, orderBy("note")),
+      (snap) =>
+        setState({
+          loading: false,
+          data: snap.docs.map((doc) => ({ ...doc.data(), id: doc.id })),
+        }),
       (error) => setState({ loading: false, error }),
     );
   }, []);
@@ -38,54 +57,67 @@ export function useCreateInvitation() {
   return useCallback(async (data) => {
     const ref = await addDoc(invitationsColl, {
       ...data,
-      createdAt: firestore.FieldValue.serverTimestamp()
-    })
-    return { ...data, id: ref.id }
-  }, [])
+      createdAt: firestore.FieldValue.serverTimestamp(),
+    });
+    return { ...data, id: ref.id };
+  }, []);
 }
 
 export function useDeleteInvitation() {
   return useCallback(async (id) => {
-    await deleteDoc(doc(invitationsColl, id))
-  }, [])
+    await deleteDoc(doc(invitationsColl, id));
+  }, []);
 }
 
 function useDoc(doc) {
   const [state, setState] = useState({ loading: true });
 
-  useEffect(() =>
-    onSnapshot(doc,
-      (snap) => setState({ loading: false, data: snap.data() }),
-      (error) => setState({ loading: false, error }),
-    )
-    , [doc]);
+  useEffect(() => {
+    if (doc) {
+      return onSnapshot(
+        doc,
+        (snap) => setState({ loading: false, data: snap.data() }),
+        (error) => setState({ loading: false, error }),
+      );
+    } else {
+      setState({ loading: false });
+    }
+  }, [doc]);
 
   return state;
 }
 
 export async function storeRegistration(registration, code) {
   const ref = doc(registrationsColl);
-  await setDoc(ref, removeUndefinedFields({
-    ...registration,
-    code,
-    year: config.year,
-    registeredAt: serverTimestamp(),
-  }));
+  await setDoc(
+    ref,
+    removeUndefinedFields({
+      ...registration,
+      code,
+      year: config.year,
+      registeredAt: serverTimestamp(),
+    }),
+  );
 
   return toEntity(await ref.get());
 }
 
 export function getRegistration(id, next) {
-  return onSnapshot(doc(registrationsColl, id),
+  return onSnapshot(
+    doc(registrationsColl, id),
     (snapshot) => next(null, toEntity(snapshot)),
     next,
   );
 }
 
 export function getRegistrations({ sortField, sortDirection }, next) {
-  const search = sortField && sortDirection ? query(registrationsColl, orderBy(sortField, sortDirection)) : registrationsColl;
+  const search =
+    sortField && sortDirection
+      ? query(registrationsColl, orderBy(sortField, sortDirection))
+      : registrationsColl;
 
-  return onSnapshot(search,
+  return onSnapshot(
+    search,
     (snapshot) => next(null, snapshot.docs.map(toEntity)),
     next,
   );
@@ -95,8 +127,8 @@ export async function setPaymentReceived(registrationId, received) {
   await updateDoc(doc(registrationsColl, registrationId), {
     payment: received
       ? {
-        receivedAt: serverTimestamp(),
-      }
+          receivedAt: serverTimestamp(),
+        }
       : deleteField(),
   });
 }
@@ -105,8 +137,8 @@ export async function setWaiverReceived(registrationId, received) {
   await updateDoc(doc(registrationsColl, registrationId), {
     waiver: received
       ? {
-        receivedAt: serverTimestamp(),
-      }
+          receivedAt: serverTimestamp(),
+        }
       : deleteField(),
   });
 }
