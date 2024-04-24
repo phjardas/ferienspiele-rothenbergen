@@ -25,7 +25,7 @@ export function useInvitations() {
   const [state, setState] = useState({ loading: true });
 
   useEffect(() => {
-    invitationsColl.onSnapshot(
+    invitationsColl.orderBy("note").onSnapshot(
       (snap) => setState({ loading: false, data: snap.docs.map(doc => ({ ...doc.data(), id: doc.id })) }),
       (error) => setState({ loading: false, error }),
     );

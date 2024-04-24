@@ -4,21 +4,10 @@ import LabelIcon from "./LabelIcon";
 
 export default function YesNoLabel({
   value,
-  yesIcon = CheckIcon,
-  yesColor = "yes",
-  noIcon = MissingIcon,
-  noColor = "grey",
+  yesIcon = <CheckIcon />,
+  noIcon = <MissingIcon />,
   label,
   ...props
 }) {
-  const Icon = value ? yesIcon : noIcon;
-
-  return (
-    <LabelIcon
-      icon={Icon}
-      label={label}
-      {...props}
-      sx={{ color: value ? "text.hint" : "error.dark", ...props.sx }}
-    />
-  );
+  return <LabelIcon icon={value ? yesIcon : noIcon} label={label} {...props} />;
 }

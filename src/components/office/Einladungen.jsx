@@ -127,13 +127,15 @@ function CreateInvitation() {
 
     return (
       <Stack>
-        <Alert severity="success">Einladung erstellt.</Alert>
+        <Alert severity="success">
+          Einladung "{invitation.note}" erstellt.
+        </Alert>
         <Typography>
           Verschicke den folgenden Link, mit dem man genau ein Kind anmelden
           kann.
         </Typography>
         <Typography>
-          <Link href={url}>{url}</Link>
+          <CopyInvitationLink invitation={invitation} />
         </Typography>
       </Stack>
     );
@@ -173,7 +175,7 @@ function OpenInvitation({ invitation }) {
       </ListItemIcon>
       <ListItemText
         primary={invitation.note}
-        secondary={<em>noch nicht eingelöst</em>}
+        secondary={<CopyInvitationLink invitation={invitation} />}
       />
       <ListItemSecondaryAction>
         <DeleteInvitationButton invitation={invitation} />
@@ -220,5 +222,30 @@ function RedeemedInvitation({ invitation }) {
         }
       />
     </ListItemButton>
+  );
+}
+
+function CopyInvitationLink({ invitation }) {
+  const url = `${location.origin}/anmeldung?code=${encodeURIComponent(invitation.id)}`;
+  const [done, setDone] = useState(false);
+
+  const copy = useCallback(() => {
+    navigator.clipboard.writeText(url).then(() => {
+      setDone(true);
+      setTimeout(() => setDone(false), 5000);
+    });
+  }, [url]);
+
+  return (
+    <Link
+      href="#"
+      onClick={(e) => {
+        e.preventDefault();
+        copy();
+      }}
+    >
+      Link zur Einladung kopieren
+      {done && <Check fontSize="1em" color="success" sx={{ ml: 0.5 }} />}
+    </Link>
   );
 }

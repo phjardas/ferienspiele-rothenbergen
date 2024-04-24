@@ -13,7 +13,7 @@ export default function Hero() {
       sx={{
         backgroundImage: {
           xs: "linear-gradient(rgba(0, 0, 0, 0.0) 0% , rgba(0, 0, 0, 0.5) 50%, rgba(0, 0, 0, 0.5) 100%), url(/hero.avif)",
-          sm: "linear-gradient(90deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0)), url(/hero.avif)",
+          md: "linear-gradient(90deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0)), url(/hero.avif)",
         },
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
@@ -30,6 +30,7 @@ export default function Hero() {
           flexDirection: "column",
           justifyContent: "flex-end",
           gap: 2,
+          color: "var(--mui-palette-md-inverse-on-surface)",
           width: { xs: "100%", md: "50%" },
         }}
       >

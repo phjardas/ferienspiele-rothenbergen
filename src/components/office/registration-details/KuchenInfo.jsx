@@ -14,7 +14,7 @@ export default function KuchenInfo({ kuchen: { date, name } }) {
       label = "Bringt für ein Geschwisterkind einen Kuchen mit.";
       break;
     case "team":
-      label = "Bring als Mitarbeiter*in keinen Kuchen mit.";
+      label = "Bringt als Mitarbeiter*in keinen Kuchen mit.";
       break;
     default:
       label = (

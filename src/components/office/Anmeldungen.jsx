@@ -174,16 +174,10 @@ export default function Anmeldungen() {
                   <YesNoLabel value={reg.child.earlyCare} />
                 </TableCell>
                 <TableCell>
-                  <YesNoLabel
-                    value={reg.payment && reg.payment.receivedAt}
-                    noColor="error"
-                  />
+                  <YesNoLabel value={reg.payment && reg.payment.receivedAt} />
                 </TableCell>
                 <TableCell>
-                  <YesNoLabel
-                    value={reg.waiver && reg.waiver.receivedAt}
-                    noColor="error"
-                  />
+                  <YesNoLabel value={reg.waiver && reg.waiver.receivedAt} />
                 </TableCell>
               </TableRow>
             ))}
