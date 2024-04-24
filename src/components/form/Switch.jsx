@@ -6,7 +6,7 @@ import {
 } from "@mui/material";
 import React from "react";
 
-function Switch({ input, meta, label, type, helperText, ...props }) {
+function Switch({ input, meta, label, helperText, ...props }) {
   return (
     <FormGroup row>
       <FormControlLabel

@@ -1,4 +1,4 @@
-import { addDoc, collection, deleteDoc, doc, getFirestore, onSnapshot, orderBy, query, setDoc, updateDoc } from "firebase/firestore";
+import { addDoc, collection, deleteDoc, deleteField, doc, getFirestore, onSnapshot, orderBy, query, serverTimestamp, setDoc, updateDoc } from "firebase/firestore";
 import { useCallback, useEffect, useState } from "react";
 import config from "./config";
 import { firebase } from "./firebase";
@@ -69,7 +69,7 @@ export async function storeRegistration(registration, code) {
     ...registration,
     code,
     year: config.year,
-    registeredAt: Firebase.firestore.FieldValue.serverTimestamp(),
+    registeredAt: serverTimestamp(),
   }));
 
   return toEntity(await ref.get());
@@ -95,9 +95,9 @@ export async function setPaymentReceived(registrationId, received) {
   await updateDoc(doc(registrationsColl, registrationId), {
     payment: received
       ? {
-        receivedAt: Firebase.firestore.FieldValue.serverTimestamp(),
+        receivedAt: serverTimestamp(),
       }
-      : Firebase.firestore.FieldValue.delete(),
+      : deleteField(),
   });
 }
 
@@ -105,9 +105,9 @@ export async function setWaiverReceived(registrationId, received) {
   await updateDoc(doc(registrationsColl, registrationId), {
     waiver: received
       ? {
-        receivedAt: Firebase.firestore.FieldValue.serverTimestamp(),
+        receivedAt: serverTimestamp(),
       }
-      : Firebase.firestore.FieldValue.delete(),
+      : deleteField(),
   });
 }
 

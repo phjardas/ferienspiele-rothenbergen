@@ -123,8 +123,6 @@ function CreateInvitation() {
   );
 
   if (invitation) {
-    const url = `${location.origin}/anmeldung?code=${encodeURIComponent(invitation.id)}`;
-
     return (
       <Stack>
         <Alert severity="success">
@@ -153,6 +151,7 @@ function CreateInvitation() {
           onChange={(e) => setNote(e.target.value)}
           disabled={submitting}
         />
+        {error && <Alert severity="error">{error.message}</Alert>}
         <LoadingButton
           type="submit"
           variant="contained"

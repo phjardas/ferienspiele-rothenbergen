@@ -40,7 +40,6 @@ export default function SignInForm({ onSignIn }) {
                 type="email"
                 label="E-Mail-Adresse"
                 required
-                autoFocus
               />
               <SignInField
                 name="password"

@@ -7,7 +7,13 @@ import {
   onAuthStateChanged,
   signInWithPopup,
 } from "firebase/auth";
-import { collection, doc, getDoc, setDoc } from "firebase/firestore";
+import {
+  collection,
+  doc,
+  getDoc,
+  serverTimestamp,
+  setDoc,
+} from "firebase/firestore";
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { firebase } from "./firebase";
 import { firestore } from "./firestore";
@@ -57,7 +63,7 @@ async function getUser(fbUser) {
     displayName: fbUser.displayName,
     email: fbUser.email,
     photoURL: fbUser.photoURL,
-    registeredAt: Firebase.firestore.FieldValue.serverTimestamp(),
+    registeredAt: serverTimestamp(),
     roles: {},
   };
 

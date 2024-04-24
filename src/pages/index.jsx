@@ -37,7 +37,7 @@ function useRouter() {
     ];
 
     return createBrowserRouter(routes);
-  }, []);
+  }, [office]);
 }
 
 export default function Pages() {

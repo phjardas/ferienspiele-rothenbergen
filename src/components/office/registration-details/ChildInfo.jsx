@@ -100,7 +100,7 @@ export default function ChildInfo({ registration }) {
         <CardContent>
           <Stack>
             {registration.child.authorizedFetchers && (
-              <Typography className={classes.pre}>
+              <Typography whiteSpace="pre-line">
                 Abholer:
                 <br />
                 {registration.child.authorizedFetchers}

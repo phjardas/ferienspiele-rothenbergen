@@ -21,7 +21,7 @@ function Radios({ name, label, options, required, groupProps }) {
             value={option.value}
             label={option.label}
           >
-            {({ input, meta, ...rest }) => (
+            {({ input, ...rest }) => (
               <FormControlLabel control={<Radio />} {...input} {...rest} />
             )}
           </Field>

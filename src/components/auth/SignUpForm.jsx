@@ -39,7 +39,6 @@ export default function SignUpForm({ onSignUp }) {
                 type="email"
                 label="E-Mail-Adresse"
                 required
-                autoFocus
               />
               <SignInField
                 name="password"
