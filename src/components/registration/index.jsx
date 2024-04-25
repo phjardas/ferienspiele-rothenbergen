@@ -1,19 +1,41 @@
 import { Alert, LinearProgress, Link } from "@mui/material";
-import { useMemo } from "react";
+import { useCallback, useMemo, useState } from "react";
+import { useNavigate } from "react-router";
 import config from "../../api/config";
-import { useInvitation, useRegistrationStatus } from "../../api/firestore";
+import {
+  storeRegistration,
+  useInvitation,
+  useRegistrationStatus,
+} from "../../api/firestore";
 import FormattedDate from "../Date";
 import Registration from "./Registration";
 
 const { registrationStart } = config;
 
 export default function RegistrationWrapper({ code, ...props }) {
-  try {
-    const status = useAnmeldungStatus({ code });
+  const [submitting, setSubmitting] = useState(false);
+  const status = useAnmeldungStatus({ code });
 
+  const navigate = useNavigate();
+  const onSubmit = useCallback(
+    async (data) => {
+      try {
+        setSubmitting(true);
+        const result = await storeRegistration(data, code);
+        navigate(`/anmeldung/${result.id}`);
+      } finally {
+        setSubmitting(false);
+      }
+    },
+    [navigate, code],
+  );
+
+  if (submitting || status.status === "open") {
+    return <Registration {...props} onSubmit={onSubmit} />;
+  }
+
+  try {
     switch (status.status) {
-      case "open":
-        return <Registration code={code} {...props} />;
       case "loading":
         return <LinearProgress />;
       case "before-registration":

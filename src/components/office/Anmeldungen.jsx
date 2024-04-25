@@ -107,7 +107,12 @@ export default function Anmeldungen() {
             . <ExportButton registrations={registrations} />
           </Typography>
           {(paymentsMissing > 0 || waiversMissing > 0) && (
-            <Alert severity="info">
+            <Alert
+              sx={{
+                backgroundColor: "var(--mui-palette-md-secondary-container)",
+                color: "var(--mui-palette-md-on-secondary-container)",
+              }}
+            >
               Es {paymentsMissing + waiversMissing === 1 ? "fehlt" : "fehlen"}{" "}
               noch{" "}
               {paymentsMissing > 0 &&

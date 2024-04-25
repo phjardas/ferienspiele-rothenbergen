@@ -4,6 +4,7 @@ import {
   deleteDoc,
   deleteField,
   doc,
+  getDoc,
   getFirestore,
   onSnapshot,
   orderBy,
@@ -57,7 +58,7 @@ export function useCreateInvitation() {
   return useCallback(async (data) => {
     const ref = await addDoc(invitationsColl, {
       ...data,
-      createdAt: firestore.FieldValue.serverTimestamp(),
+      createdAt: serverTimestamp(),
     });
     return { ...data, id: ref.id };
   }, []);
@@ -99,7 +100,7 @@ export async function storeRegistration(registration, code) {
     }),
   );
 
-  return toEntity(await ref.get());
+  return toEntity(await getDoc(ref));
 }
 
 export function getRegistration(id, next) {
