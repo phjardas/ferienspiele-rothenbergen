@@ -63,7 +63,12 @@ export default function RegistrationStatus({ children }) {
     case "deadlineExpired":
       return (
         <Alert severity="error">
-          Leider ist die Anmeldefrist für die Kinderferienspiele abgelaufen.
+          Leider ist die Anmeldefrist für die Kinderferienspiele abgelaufen. Sie
+          können sich aber gerne in unsere{" "}
+          <Link href="https://forms.churchdesk.com/f/RiTAxzb5lO">
+            Warteliste
+          </Link>{" "}
+          eintragen.
           <br />
           Für eventuelle Rückfragen nehmen Sie bitte telefonisch unter{" "}
           <Link href="tel:+4960512649">06051 2649</Link> oder per Email unter{" "}
