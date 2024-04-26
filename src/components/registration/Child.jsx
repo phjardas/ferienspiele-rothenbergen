@@ -1,5 +1,5 @@
 import { ChildCare as ChildIcon } from "@mui/icons-material";
-import { Grid, MenuItem } from "@mui/material";
+import { Box, Grid, MenuItem } from "@mui/material";
 import React from "react";
 import { Field } from "react-final-form";
 import config from "../../api/config";
@@ -63,6 +63,7 @@ export default function Child() {
             required
             fullWidth
             validate={required}
+            helperText={<AgeInfo />}
             InputLabelProps={{
               shrink: true,
             }}
@@ -164,5 +165,22 @@ export default function Child() {
         </Grid>
       </Grid>
     </FieldSet>
+  );
+}
+
+function AgeInfo() {
+  return (
+    <Field name="child.age" subscription={{ value: true }}>
+      {({ input: { value } }) => {
+        return typeof value === "number" && value < config.minAge ? (
+          <Box component="span" sx={{ color: "var(--mui-palette-md-error)" }}>
+            Bitte beachten Sie, dass sich die Ferienspiele an Schulkinder ab 7
+            Jahren bzw. nach Abschluss der 1. Klasse richten. Auf
+            Vorschulkinder, die nach den Sommerferien eingeschult werden, freuen
+            wir uns im kommenden Jahr!
+          </Box>
+        ) : null;
+      }}
+    </Field>
   );
 }

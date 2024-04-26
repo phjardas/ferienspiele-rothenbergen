@@ -1,8 +1,10 @@
 import { Box } from "@mui/material";
 import { FORM_ERROR } from "final-form";
+import createDecorator from "final-form-calculate";
 import { useCallback, useMemo, useState } from "react";
 import { Form } from "react-final-form";
 import { createTestData } from "../../api/testdata";
+import { getAge } from "../Age";
 import Actions from "./Actions";
 import Child from "./Child";
 import Consent from "./Consent";
@@ -24,7 +26,18 @@ const emptyValues = {
 
 const enableTestData = import.meta.env.DEV;
 const createInitialValues = enableTestData ? createTestData : () => emptyValues;
-const decorators = [priceCalculator];
+
+const ageCalculator = createDecorator({
+  field: ["child.dateOfBirth"],
+  updates: {
+    "child.age": (_, values) =>
+      values.child.dateOfBirth
+        ? getAge(new Date(values.child.dateOfBirth))
+        : undefined,
+  },
+});
+
+const decorators = [priceCalculator, ageCalculator];
 
 export default function Registration({
   initialValues: originalValues,

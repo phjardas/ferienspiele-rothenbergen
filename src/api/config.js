@@ -11,6 +11,7 @@ const config = {
   waiverDeadline: new Date("2024-06-14"),
   maxParticipants: 66,
   earlyCarePlaces: 15,
+  minAge: 7,
   prices: {
     base: 45,
     sibling: -15,

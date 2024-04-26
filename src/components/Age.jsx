@@ -1,6 +1,6 @@
 import config from "../api/config";
 
-export default function Age({ dateOfBirth, ref = config.startDate }) {
+export default function Age({ dateOfBirth }) {
   if (!dateOfBirth) return null;
   if (
     typeof dateOfBirth !== "string" &&
@@ -10,10 +10,10 @@ export default function Age({ dateOfBirth, ref = config.startDate }) {
     dateOfBirth = new Date(dateOfBirth.seconds * 1000);
   if (typeof dateOfBirth === "string") dateOfBirth = new Date(dateOfBirth);
 
-  return getAge(dateOfBirth, ref);
+  return getAge(dateOfBirth);
 }
 
-function getAge(birthday, ref) {
+export function getAge(birthday, ref = config.startDate) {
   var thisYear = 0;
 
   if (ref.getMonth() < birthday.getMonth()) {
