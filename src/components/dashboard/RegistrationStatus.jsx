@@ -63,12 +63,7 @@ export default function RegistrationStatus({ children }) {
     case "deadlineExpired":
       return (
         <Alert severity="error">
-          Leider ist die Anmeldefrist für die Kinderferienspiele abgelaufen. Sie
-          können sich aber gerne in unsere{" "}
-          <Link href="https://forms.churchdesk.com/f/RiTAxzb5lO">
-            Warteliste
-          </Link>{" "}
-          eintragen.
+          Leider ist die Anmeldefrist für die Kinderferienspiele abgelaufen.
           <br />
           Für eventuelle Rückfragen nehmen Sie bitte telefonisch unter{" "}
           <Link href="tel:+4960512649">06051 2649</Link> oder per Email unter{" "}
@@ -87,14 +82,11 @@ export default function RegistrationStatus({ children }) {
           Wir bitten um Ihr Verständnis, dass wir keine weiteren Anmeldungen
           entgegennehmen können.
           <br />
-          Bei der{" "}
-          <Link
-            href="https://www.katholische-kirche-raum-gelnhausen.de/gelnhausen/05-Gemeindeleben/Kinder-und-Familie/lamakoe.php"
-            underline="always"
-          >
-            Lagerfreizeit der katholischen Kirchengemeinde
+          Sie können sich aber gerne in unsere{" "}
+          <Link href="https://forms.churchdesk.com/f/RiTAxzb5lO">
+            Warteliste
           </Link>{" "}
-          in der letzten Ferienwoche sind aber noch Plätze frei!
+          eintragen.
         </Alert>
       );
 
