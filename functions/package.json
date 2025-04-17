@@ -9,7 +9,7 @@
   },
   "main": "build/index.js",
   "engines": {
-    "node": "20"
+    "node": "18"
   },
   "dependencies": {
     "cors": "^2.8.5",
@@ -28,6 +28,6 @@
     "shx": "^0.3.4"
   },
   "volta": {
-    "node": "20.19.0"
+    "node": "18.20.8"
   }
 }
