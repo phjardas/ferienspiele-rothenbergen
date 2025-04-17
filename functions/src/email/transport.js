@@ -1,5 +1,5 @@
 import * as nodemailer from "nodemailer";
-import { getConfig } from "../configuration";
+import { configuration } from "../configuration";
 
 export default createTransport();
 
@@ -10,8 +10,6 @@ function createTransport() {
     };
   }
 
-  const config = getConfig();
-
-  const url = `smtps://${encodeURIComponent(config.gmail.email)}:${encodeURIComponent(config.gmail.password)}@smtp.gmail.com`;
+  const url = `smtps://${encodeURIComponent(configuration.gmail.email)}:${encodeURIComponent(configuration.gmail.password)}@smtp.gmail.com`;
   return nodemailer.createTransport(url);
 }

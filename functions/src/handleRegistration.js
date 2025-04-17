@@ -20,4 +20,7 @@ async function handleRegistration(event) {
   ]);
 }
 
-export default onDocumentCreated("/registrations/{id}", handleRegistration);
+export default onDocumentCreated(
+  { document: "/registrations/{id}", region: "europe-west1" },
+  handleRegistration,
+);

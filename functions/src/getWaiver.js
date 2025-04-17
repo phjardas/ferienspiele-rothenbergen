@@ -3,7 +3,7 @@ import url from "url";
 import admin from "./admin";
 import createWaiver from "./createWaiver";
 
-export default onRequest(async (req, res) => {
+export default onRequest({ region: "europe-west1" }, async (req, res) => {
   const { pathname } = url.parse(req.url);
   const [registrationId, format] = pathname.substring(1).split(".");
 
