@@ -1,7 +1,7 @@
+import { onRequest } from "firebase-functions/v2/https";
 import url from "url";
 import admin from "./admin";
 import createWaiver from "./createWaiver";
-import { onRequest } from "./http";
 
 export default onRequest(async (req, res) => {
   const { pathname } = url.parse(req.url);
