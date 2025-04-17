@@ -6,7 +6,6 @@ export function formatDate(value) {
 }
 
 function toDate(value) {
-  console.log("toDate value: %s, type: %s", value, typeof value);
   if (!value) return null;
   if (typeof value !== "string" && "seconds" in value && "nanoseconds" in value)
     return new Date(value.seconds * 1000).toISOString();

@@ -1,15 +1,17 @@
+import { defineString } from "firebase-functions/params";
 import * as nodemailer from "nodemailer";
-import { configuration } from "../configuration";
+import { memoize } from "../memo";
 
-export default createTransport();
+const email = defineString("GMAIL_EMAIL");
+const password = defineString("GMAIL_PASSWORD");
 
-function createTransport() {
+export const getTransport = memoize(() => {
   if (process.env.NODE_ENV === "test") {
     return {
       jsonTransport: true,
     };
   }
 
-  const url = `smtps://${encodeURIComponent(configuration.gmail.email)}:${encodeURIComponent(configuration.gmail.password)}@smtp.gmail.com`;
+  const url = `smtps://${encodeURIComponent(email.value())}:${encodeURIComponent(password.value())}@smtp.gmail.com`;
   return nodemailer.createTransport(url);
-}
+});

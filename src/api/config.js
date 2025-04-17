@@ -1,6 +1,6 @@
 const config = {
   baseUrl: "https://ferienspiele-rothenbergen.de",
-  apiUrl: "https://europe-west3-ferienspiele-rothenbergen-2.cloudfunctions.net",
+  waiverUrl: "https://waiver-ch3dktibga-ew.a.run.app",
   app: "Ökumenische Ferienspiele für Niedergründau und Rothenbergen",
   title: "Echte Helden (brauchen kein Cape)",
   year: 2025,

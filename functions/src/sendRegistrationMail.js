@@ -1,5 +1,5 @@
 import config from "./config";
-import email, { helpers } from "./email";
+import { getEmail, helpers } from "./email";
 
 export default function sendRegistrationMail(reg, waiverFile) {
   const attachments = [];
@@ -11,7 +11,7 @@ export default function sendRegistrationMail(reg, waiverFile) {
     });
   }
 
-  return email.send({
+  return getEmail().send({
     template: "registration",
     message: {
       to: reg.parent.email,

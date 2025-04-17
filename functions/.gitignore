@@ -3,3 +3,4 @@
 /src/config.js
 /waiver.pdf
 /local/serviceAccountKey.json
+/.env.*
