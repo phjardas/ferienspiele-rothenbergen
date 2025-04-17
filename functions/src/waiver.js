@@ -83,7 +83,7 @@ function createBody() {
     `Ich bin damit einverstanden, dass mein Kind in Ausnahmesituationen im privateigenen Pkw befördert wird.`,
     `Meine Angaben in Bezug auf Allergien und Unverträglichkeiten sind vollständig.`,
     `Die Veranstalter haften nicht für den Verlust oder die Beschädigung von Gegenständen.`,
-    `Es werden während der Ferienspiele Fotos gemacht. Ich bin mit deren Veröffentlichung auf den Homepages und in den Gemeindebriefen der drei ausrichtenden Kirchengemeinden sowie im Ferienspiele-Journal einverstanden. Das ausgedruckte Journal wird bei den Ferienspielen verteilt und den Firmen/Organisationen zugesandt, die die Ferienspiele per Sponsoring oder Spende unterstützen.`,
+    `Es werden während der Ferienspiele Fotos gemacht. Ich bin mit deren Veröffentlichung ohne Namensnennung auf den Homepages und in den Gemeindebriefen der drei ausrichtenden Kirchengemeinden sowie im Ferienspiele-Journal einverstanden. Das ausgedruckte Journal wird bei den Ferienspielen verteilt und den Firmen/Organisationen zugesandt, die die Ferienspiele per Sponsoring oder Spende unterstützen.`,
   ].map((line) => line.trim());
 }
 
@@ -92,7 +92,9 @@ function createFooter() {
     `Datum, Unterschrift`,
     `Bitte schicken Sie diese Einverständniserklärung bis zum ${formatDate(
       config.waiverDeadline,
-    )} unterschrieben an das Gemeindebüro der ev. Kirchengemeinde oder geben sie in einem verschlossenen Umschlag dort ab, Einwurf in den Briefkasten genügt.`,
-    `Büro der ev. Kirchengemeinde "Auf dem Berg", Paul-Gerhardt Str.2, 63584 Gründau-Lieblos.`,
+    )} unterschrieben an Pfarrerin Ligaya Jardas, Schieferbergstraße 33, 63571 Gelnhausen oder geben sie in einem verschlossenen Umschlag dort ab, Einwurf in den Briefkasten genügt.`,
+    `Alle Zahlungen überweisen Sie bitte bis zum ${formatDate(
+      config.waiverDeadline,
+    )} auf das Konto der Evangelisch-Methodistischen Kirche: EMK Rothenbergen, IBAN: DE38 5075 0094 0027 0509 92`,
   ].map((line) => line.trim());
 }
