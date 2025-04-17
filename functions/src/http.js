@@ -1,5 +1,5 @@
 import cors from "cors";
-import { region } from "firebase-functions";
+import { region } from "firebase-functions/v1";
 
 export function onRequest(handler) {
   return region("europe-west3").https.onRequest(withCors(withError(handler)));
