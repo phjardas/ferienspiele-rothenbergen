@@ -18,19 +18,25 @@ export default function Infos() {
     >
       <Card>
         <CardContent>
-          <H3>Kommt mit auf eine besondere Reise!</H3>
+          <H3>Zeit für Heldinnen und Helden!</H3>
           <Typography paragraph>
-            Wir verwandeln die Bergkirche in eine Zeitmaschine und entdecken
-            vergangene Epochen. Welche Gefahren lauerten in der Urzeit? Wie
-            lebten die alten Ägypter, die Kelten und die Menschen im
-            Mittelalter? Und was wäre, wenn wir in die Zukunft reisen könnten?!
+            Brauchen Superhelden eigentlich immer ein Cape?! Nein, natürlich
+            nicht. Und wo begegnet man eigentlich Menschen, die ihre Superkräfte
+            im Alltag für andere einsetzen? Manchmal genau da, wo man sie
+            erwartet – und manchmal an ganz unerwarteten Orten.
           </Typography>
           <Typography paragraph>
-            Außerdem erwartet uns die Freiwillige Feuerwehr Niedergründau zu
-            patschnassen Wasserspielen, bei denen wir uns abkühlen können. Mit
-            dem Reisebus machen wir einen spannenden Ausflug, und von Donnerstag
-            auf Freitag übernachten wir gemeinsam in der
-            Evangelisch-methodistischen Friedenskirche Rothenbergen.
+            Und welche Superkräfte schlummern eigentlich in Euch?
+          </Typography>
+          <Typography paragraph>
+            Euch erwarten spannende Begegnungen mit Menschen, die echte
+            Alltagsheld’innen sind! Mit dem Reisebus besuchen wir die große
+            Feuerwache in Frankfurt und freuen uns auf jede Menge tolle Lieder,
+            Spiele, Spaß und Action rund um die Bergkirche.
+          </Typography>
+          <Typography paragraph>
+            Wer mag, kann von Donnerstag auf Freitag an der Übernachtung in der
+            Evangelisch- Methodistischen Kirche in Rothenbergen teilnehmen.
           </Typography>
           <Typography paragraph>
             Eure Familien sind herzlich zum Abschlussgottesdienst am Freitag um
@@ -42,18 +48,19 @@ export default function Infos() {
         <CardContent>
           <H3>Wer genau?</H3>
           <Typography paragraph>
-            <strong>IHR, die Kinder:</strong> Im Alter von 7 bis 12 Jahren seid
-            Ihr sehr herzlich eingeladen, bei uns mitzumachen – ganz gleich,
-            vorher Ihr kommt oder welcher Konfession oder Religion Ihr angehört,
-            wir freuen uns auf Euch!
+            <strong>IHR, die Kinder:</strong> Im Alter von 7 (d.h. wenn Ihr nach
+            den Sommerferien in die 2. Klasse kommt) bis 12 Jahren seid Ihr
+            herzlich eingeladen, bei uns mitzumachen – ganz gleich, woher Ihr
+            kommt oder welcher Konfession oder Religion Ihr angehört, wir freuen
+            uns auf Euch!
           </Typography>
           <Typography paragraph>
             <strong>WIR, das Team:</strong> Eine bunte Mischung aus Jugendlichen
             und Erwachsenen, ehrenamtlich und voller Energie für Eure Action…
             Und dazu noch Pfarrerin Ligaya Jardas (ev. Kirchengemeinde Auf dem
-            Berg), Pastor Ralf Schweinsberg (Evangelisch-methodistische Kirche)
-            und Gemeindereferentin i.R. Rita Kunzmann (katholische Gemeinde
-            Sankt Raphael).
+            Berg), Pastor Ralf Schweinsberg (ev.-methodistische Kirche) und
+            Gemeindereferentin i.R. Rita Kunzmann (katholische Gemeinde Sankt
+            Raphael).
           </Typography>
         </CardContent>
       </Card>

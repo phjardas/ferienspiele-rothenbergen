@@ -13,7 +13,7 @@ import Date from "../Date";
 import H2 from "../H2";
 
 export default function Welcome({ createTestData, geschwisterkind }) {
-  const { startDate, endDate, registrationDeadline } = config;
+  const { startDate, endDate, registrationDeadline, waiverDeadline } = config;
 
   return (
     <Card>
@@ -39,13 +39,20 @@ export default function Welcome({ createTestData, geschwisterkind }) {
               </strong>
             </Typography>
             <Typography paragraph>
-              Nach der Anmeldung erhalten Sie von uns eine Email mit der
-              Anmeldebestätigung sowie der Einverständniserklärung. Die
-              Einverständniserklärung lassen Sie uns bitte unterschrieben
-              zukommen. Den Teilnahmebeitrag überweisen Sie bitte auf das
-              angegebene Konto.
+              Nach der Anmeldung erhalten Sie von uns eine Email mit einer
+              Einverständniserklärung.
             </Typography>
             <Typography paragraph>
+              Die Email beinhaltet auch einen Link, unter dem Sie die
+              wichtigsten Informationen sowie die Bankverbindung der
+              Evangelisch-Methodistischen Kirche finden.
+            </Typography>
+            <Typography paragraph>
+              Die Einverständniserklärung lassen Sie uns bitte unterschrieben
+              zukommen und überweisen den Teilnahmebeitrag bis zum{" "}
+              <Date value={waiverDeadline} /> auf das angegebene Konto.
+            </Typography>
+            <Typography fontWeight="bold" paragraph>
               Bitte beachten Sie, dass die Anmeldung erst vollständig ist, wenn
               Einverständniserklärung und Teilnahmebeitrag bei uns eingegangen
               sind!

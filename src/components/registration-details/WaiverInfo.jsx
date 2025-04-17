@@ -27,8 +27,8 @@ export default function WaiverInfo(registration) {
             <strong>
               bis zum <Date value={config.waiverDeadline} />
             </strong>{" "}
-            unterschrieben an uns zurück oder bringen Sie sie im Gemeindebüro
-            der ev. Kirche (Paul-Gerhardt Str.2 in Gründau-Lieblos) vorbei.
+            unterschrieben an uns zurück oder werfen Sie sie bei Pfarrerin
+            Ligaya Jardas (Schieferbergstraße 33 in Niedergründau) ein.
           </Typography>
         </Stack>
       </CardContent>
