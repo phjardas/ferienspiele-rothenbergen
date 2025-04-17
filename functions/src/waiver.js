@@ -43,7 +43,6 @@ function createPDF(reg) {
   doc.moveDown();
   doc.moveDown();
   doc.moveDown();
-  doc.moveDown();
   appendLines(createFooter());
 
   return doc;
