@@ -1,8 +1,8 @@
 import admin from "firebase-admin";
-import * as functions from "firebase-functions/v1";
+import { config } from "firebase-functions/v2";
 
 if (!admin.apps.length) {
-  admin.initializeApp(functions.config().firebase);
+  admin.initializeApp(config().firebase);
 }
 
 export default admin;

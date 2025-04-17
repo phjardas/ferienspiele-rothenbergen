@@ -1,11 +1,13 @@
-import * as functions from "firebase-functions/v1";
+import { onDocumentCreated } from "firebase-functions/v2/firestore";
 import createWaiver from "./createWaiver";
 import redeemInvitation from "./redeemInvitation";
 import sendRegistrationMail from "./sendRegistrationMail";
 import updateKuchenStatistics from "./updateKuchenStatistics";
 import updateRegistrationStatus from "./updateRegistrationStatus";
 
-async function handleRegistration(snapshot) {
+async function handleRegistration(event) {
+  console.log("handleRegistration:", event);
+  const snapshot = event.data;
   const id = snapshot.id;
   const reg = { ...snapshot.data(), id };
   const waiverFile = await createWaiver(reg, "pdf");
@@ -18,6 +20,4 @@ async function handleRegistration(snapshot) {
   ]);
 }
 
-export default functions.firestore
-  .document("/registrations/{id}")
-  .onCreate(handleRegistration);
+export default onDocumentCreated("/registrations/{id}", handleRegistration);

@@ -1,4 +1,4 @@
-import * as functions from "firebase-functions/v1";
+import { config } from "firebase-functions/v2";
 import * as nodemailer from "nodemailer";
 
 export default createTransport();
@@ -10,7 +10,7 @@ function createTransport() {
     };
   }
 
-  const gmailConfig = functions.config().gmail;
+  const gmailConfig = config().gmail;
   const url = `smtps://${encodeURIComponent(gmailConfig.email)}:${encodeURIComponent(gmailConfig.password)}@smtp.gmail.com`;
   return nodemailer.createTransport(url);
 }
