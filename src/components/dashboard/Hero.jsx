@@ -29,7 +29,7 @@ export default function Hero() {
           flexDirection: "column",
           justifyContent: "flex-end",
           gap: 2,
-          color: "var(--mui-palette-md-inverse-on-surface)",
+          color: "var(--mui-palette-common-white)",
           width: { xs: "100%", md: "50%" },
         }}
       >
