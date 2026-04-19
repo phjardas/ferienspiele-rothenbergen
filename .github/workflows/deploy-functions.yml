@@ -12,29 +12,28 @@ jobs:
     concurrency: functions
 
     steps:
-      - name: checkout
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - name: Checkout
+        uses: actions/checkout@v6
         with:
-          node-version-file: functions/package.json
+          fetch-depth: 0
 
-      - name: Cache dependencies
-        id: npm-cache
-        uses: actions/cache@v4
+      - name: Install pnpm
+        uses: pnpm/action-setup@v5
         with:
-          path: |
-            node_modules
-            functions/node_modules
-          key: npm-${{ hashFiles('package-lock.json', 'functions/package-lock.json') }}
+          version: 10
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          cache: pnpm
+          cache-dependency-path: pnpm-lock.yaml
 
       - name: Install
-        if: steps.npm-cache.outputs.cache-hit != 'true'
-        run: npm ci && (cd functions && npm ci)
+        run: pnpm install
 
       - name: Build
-        run: npm run build-functions
+        run: pnpm build-functions
         working-directory: functions
 
       - uses: "google-github-actions/auth@v2"
@@ -47,4 +46,4 @@ jobs:
           echo "GMAIL_PASSWORD=${{ secrets.GMAIL_PASSWORD }}" >> functions/.env
 
       - name: Deploy
-        run: npm run deploy:functions
+        run: pnpm deploy:functions
