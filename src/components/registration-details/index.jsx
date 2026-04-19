@@ -1,4 +1,4 @@
-import { Alert, Button, Grid, Typography } from "@mui/material";
+import { Button, Grid, Typography } from "@mui/material";
 import qs from "qs";
 import Confetti from "react-confetti";
 import Date from "../Date";
@@ -43,12 +43,6 @@ export default function RegistrationDetails({ registration }) {
           >
             Geschwisterkind anmelden
           </Button>
-        </Grid>
-        <Grid item size={{ xs: 12 }}>
-          <Alert severity="error">
-            Die Anmeldung ist noch nicht abgeschlossen. Bitte beachten Sie die
-            folgenden Hinweise.
-          </Alert>
         </Grid>
         <Grid item size={{ xs: 12, md: 6 }}>
           <PriceInfo {...registration} />

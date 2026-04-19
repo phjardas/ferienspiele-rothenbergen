@@ -1,11 +1,4 @@
-import {
-  Alert,
-  Card,
-  CardActions,
-  CardContent,
-  Typography,
-} from "@mui/material";
-import React from "react";
+import { Card, CardActions, CardContent, Typography } from "@mui/material";
 import config from "../../api/config";
 import Date from "../Date";
 import H3 from "../H3";
@@ -18,9 +11,6 @@ export default function WaiverInfo(registration) {
       <CardContent>
         <H3>Einverständniserklärung</H3>
         <Stack>
-          <Alert severity="error">
-            Sie haben die Einverständniserklärung noch nicht abgegeben.
-          </Alert>
           <Typography>
             Bitte drucken Sie jetzt die Einverständniserklärung aus und schicken
             Sie sie{" "}
