@@ -1,7 +1,6 @@
 import { ArrowBack as BackIcon } from "@mui/icons-material";
 import { AppBar, Box, IconButton, Toolbar, Typography } from "@mui/material";
 import { useAuth } from "../api/auth";
-import config from "../api/config";
 import AuthenticatedMenu from "./AuthenticatedMenu";
 import LinkBehavior from "./LinkBehavior";
 import UnauthenticatedMenu from "./UnauthenticatedMenu";
@@ -24,7 +23,7 @@ export default function MainMenu({ title, back }) {
           </IconButton>
         )}
         <Typography variant="h6" color="inherit">
-          {title || config.app}
+          {title || "Ferienspiele 2026"}
         </Typography>
         {!pending && (
           <Box sx={{ ml: "auto" }}>

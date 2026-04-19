@@ -1,7 +1,3 @@
-import "@fontsource/merriweather/400.css";
-import "@fontsource/merriweather/500.css";
-import "@fontsource/merriweather/600.css";
-import "@fontsource/merriweather/700.css";
 import {
   argbFromHex,
   hexFromArgb,
@@ -15,6 +11,13 @@ import {
 } from "@mui/material/styles";
 import { useMemo, type ReactNode } from "react";
 import { useThemeColor } from "./color.js";
+import {
+  fontFamily,
+  fontWeightBold,
+  fontWeightLight,
+  fontWeightMedium,
+  fontWeightRegular,
+} from "./font.js";
 
 declare module "@mui/material/styles" {
   interface Palette {
@@ -54,7 +57,11 @@ function useMuiTheme() {
         dark: createColorScheme(theme, "dark"),
       },
       typography: {
-        fontFamily: "Merriweather, sans-serif",
+        fontFamily,
+        fontWeightLight,
+        fontWeightRegular,
+        fontWeightMedium,
+        fontWeightBold,
       },
       shape: {
         borderRadius: 20,

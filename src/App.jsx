@@ -1,3 +1,5 @@
+import { LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { HelmetProvider } from "react-helmet-async";
 import { AuthProvider } from "./api/auth";
 import Pages from "./pages/index";
@@ -11,7 +13,9 @@ export default function App() {
       <ThemeProvider>
         <HelmetProvider>
           <AuthProvider>
-            <Pages />
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <Pages />
+            </LocalizationProvider>
           </AuthProvider>
         </HelmetProvider>
       </ThemeProvider>

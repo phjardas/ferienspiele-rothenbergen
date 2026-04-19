@@ -1,6 +1,5 @@
-import React from "react";
-
 function toDate(value) {
+  console.log("date:", value);
   if (!value) return null;
   if (typeof value !== "string" && "seconds" in value && "nanoseconds" in value)
     return new Date(value.seconds * 1000);

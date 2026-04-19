@@ -2,6 +2,7 @@ import { ChildCare as ChildIcon } from "@mui/icons-material";
 import { Box, Grid, MenuItem } from "@mui/material";
 import { Field } from "react-final-form";
 import config from "../../api/config";
+import DateField from "../form/DateField";
 import FieldSet from "../form/FieldSet";
 import Radios from "../form/Radios";
 import Select from "../form/Select";
@@ -56,7 +57,7 @@ export default function Child() {
         <Grid item size={{ xs: 12, md: 6 }}>
           <Field
             name="child.dateOfBirth"
-            component={TextField}
+            component={DateField}
             type="date"
             label="Geburtsdatum"
             required
