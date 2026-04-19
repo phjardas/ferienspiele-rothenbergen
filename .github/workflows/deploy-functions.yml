@@ -25,16 +25,21 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v6
         with:
-          node-version: 22
           cache: pnpm
-          cache-dependency-path: pnpm-lock.yaml
+          cache-dependency-path: |
+            pnpm-lock.yaml
+            functions/pnpm-lock.yaml
+          node-version-file: package.json
 
-      - name: Install
+      - name: Install root
         run: pnpm install
 
-      - name: Build
-        run: pnpm build-functions
+      - name: Install functions
+        run: pnpm install
         working-directory: functions
+
+      - name: Build
+        run: pnpm build:functions
 
       - uses: "google-github-actions/auth@v2"
         with:
