@@ -1,4 +1,5 @@
 import { Box, Card, CardContent, Link, Typography } from "@mui/material";
+import config from "../api/config";
 import H2 from "../components/H2";
 import H3 from "../components/H3";
 import Layout from "../components/Layout";
@@ -9,9 +10,10 @@ export default function Imprint() {
       <Card>
         <CardContent>
           <H2>Impressum</H2>
-          <Typography gutterBottom>
-            Die Ferienspiele Rothenbergen sind eine Veranstaltung der drei
-            Kirchengemeinden in Rothenbergen:
+          <Typography>
+            <strong>{config.app}</strong>
+            <br />
+            Eine Veranstaltung der drei Kirchengemeinden in Rothenbergen:
             <br />
             Römisch-katholische Kirchengemeinde Christkönig
             <br />
@@ -24,6 +26,7 @@ export default function Imprint() {
               display: "grid",
               gridTemplateColumns: ["1fr", "repeat(3, 1fr)"],
               gap: 4,
+              my: 4,
             }}
           >
             <Box>

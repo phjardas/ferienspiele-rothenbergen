@@ -1,7 +1,7 @@
 const config = {
   baseUrl: "https://ferienspiele-rothenbergen.de",
   waiverUrl: "https://waiver-ch3dktibga-ew.a.run.app",
-  app: "Ökumenische Ferienspiele für Niedergründau und Rothenbergen",
+  app: "Ökumenische Ferienspiele für Niedergründau, Rothenbergen, Lieblos und Roth",
   title: "Konfetti im Kopf",
   year: 2026,
   startDate: new Date("2026-06-29"),

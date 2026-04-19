@@ -22,10 +22,10 @@ function createPDF(reg) {
   });
 
   const title = `Einverständniserklärung für ${reg.child.firstName} ${reg.child.lastName}`;
-  doc.info.Author = "Kinderferienspiele Rothenbergen";
+  doc.info.Author = config.app;
   doc.info.Title = title;
 
-  bold(doc).fontSize(18).text(`Kinderferienspiele Rothenbergen ${config.year}`);
+  bold(doc).fontSize(18).text(`${config.app} ${config.year}`);
 
   bold(doc).fontSize(14).text(title);
   doc.moveDown();
@@ -69,7 +69,7 @@ function bold(doc) {
 
 function createBody() {
   return [
-    `Hiermit erkläre ich mich einverstanden, dass mein Kind an den Kinderferienspielen Rothenbergen vom ${formatDate(
+    `Hiermit erkläre ich mich einverstanden, dass mein Kind an den Ferienspielen vom ${formatDate(
       config.startDate,
     )} bis ${formatDate(config.endDate)} teilnehmen darf.`,
     `Mir ist bekannt, dass die Anmeldung erst gültig ist, wenn diese Einverständniserklärung unterschrieben vorliegt und alle notwendigen Zahlungen geleistet sind.`,
@@ -91,9 +91,9 @@ function createFooter() {
     `Datum, Unterschrift`,
     `Bitte schicken Sie diese Einverständniserklärung bis zum ${formatDate(
       config.waiverDeadline,
-    )} unterschrieben an Pfarrerin Ligaya Jardas, Schieferbergstraße 33, 63571 Gelnhausen oder geben sie in einem verschlossenen Umschlag dort ab, Einwurf in den Briefkasten genügt.`,
+    )} unterschrieben an Pfarrerin Ligaya Jardas, Schieferbergstraße 33, 63571 Gründau oder geben sie in einem verschlossenen Umschlag dort ab, Einwurf in den Briefkasten genügt.`,
     `Alle Zahlungen überweisen Sie bitte bis zum ${formatDate(
       config.waiverDeadline,
-    )} auf das Konto der Evangelisch-Methodistischen Kirche: EMK Rothenbergen, IBAN: DE38 5075 0094 0027 0509 92`,
+    )} auf das Konto der Evangelisch-Methodistischen Kirche bei der Sparkasse Rothenbergen: EmK Rothenbergen, IBAN: DE38 5075 0094 0027 0509 92.`,
   ].map((line) => line.trim());
 }

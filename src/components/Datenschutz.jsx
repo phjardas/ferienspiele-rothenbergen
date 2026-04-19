@@ -41,11 +41,10 @@ export default function Datenschutz() {
 
       <H3>Umgang mit personenbezogenen Daten</H3>
       <Typography gutterBottom>
-        Diese Website dient der Information und Anmeldung zu den Ökumenischen
-        Ferienspielen {config.year} in Rothenbergen. Wir erheben, nutzen und
-        geben Ihre personenbezogenen Daten nur dann weiter, wenn dies im
-        gesetzlichen Rahmen erlaubt ist oder Sie in die Datenerhebung
-        einwilligen.
+        Diese Website dient der Information und Anmeldung zu den {config.app}{" "}
+        {config.year}. Wir erheben, nutzen und geben Ihre personenbezogenen
+        Daten nur dann weiter, wenn dies im gesetzlichen Rahmen erlaubt ist oder
+        Sie in die Datenerhebung einwilligen.
       </Typography>
       <Typography gutterBottom>
         Für die Anmeldung Ihres Kindes zu den Ferienspielen werden
@@ -65,15 +64,15 @@ export default function Datenschutz() {
         der Namen und Allergieinformationen an das Küchenpersonal).
       </Typography>
       <Typography gutterBottom>
-        Die Ökumenischen Ferienspiele Rothenbergen werden von der Gemeinde
-        Gründau sowie durch das Kreisjugendwerk Hessen der
-        Evangelisch-methodistischen Kirche mit Zuschüssen gefördert. Die
-        Beantragung dieser Zuschüsse erfordert Teilnehmerlisten, aus denen Name,
-        Wohnort und Geburtsdatum der teilnehmenden Kinder hervorgehen. Diese
-        Listen werden von uns nach Ende der Ferienspiele in Papierform an die
-        zuständigen Behörden weitergeleitet. Abgesehen von dieser speziellen
-        Weitergabe zum Zwecke der Zuschussbeantragung erfolgt die Verarbeitung
-        und Verwendung der personenbezogenen Daten nur intern.
+        Die Ferienspiele werden von der Gemeinde Gründau sowie durch das
+        Kreisjugendwerk Hessen der Evangelisch-methodistischen Kirche mit
+        Zuschüssen gefördert. Die Beantragung dieser Zuschüsse erfordert
+        Teilnehmerlisten, aus denen Name, Wohnort und Geburtsdatum der
+        teilnehmenden Kinder hervorgehen. Diese Listen werden von uns nach Ende
+        der Ferienspiele in Papierform an die zuständigen Behörden
+        weitergeleitet. Abgesehen von dieser speziellen Weitergabe zum Zwecke
+        der Zuschussbeantragung erfolgt die Verarbeitung und Verwendung der
+        personenbezogenen Daten nur intern.
       </Typography>
       <Typography gutterBottom>
         Mit der Anmeldung stellen Sie uns auch Kontaktdaten wie Emailadresse
