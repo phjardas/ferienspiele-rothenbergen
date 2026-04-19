@@ -9,9 +9,10 @@
   },
   "main": "build/index.js",
   "engines": {
-    "node": "20"
+    "node": "24"
   },
   "dependencies": {
+    "@google-cloud/functions-framework": "^5.0.2",
     "email-templates": "^11.1.1",
     "firebase-admin": "^13.2.0",
     "firebase-functions": "^6.3.2",
@@ -27,6 +28,6 @@
     "shx": "^0.3.4"
   },
   "volta": {
-    "node": "20.19.0"
+    "node": "24.15.0"
   }
 }
