@@ -25,7 +25,7 @@ function createPDF(reg) {
   doc.info.Author = config.app;
   doc.info.Title = title;
 
-  bold(doc).fontSize(18).text(`${config.app} ${config.year}`);
+  bold(doc).fontSize(16).text(`${config.app} ${config.year}`);
 
   bold(doc).fontSize(14).text(title);
   doc.moveDown();
@@ -43,6 +43,8 @@ function createPDF(reg) {
   doc.moveDown();
   doc.moveDown();
   doc.moveDown();
+
+  regular(doc).fontSize(9);
   appendLines(createFooter());
 
   return doc;
