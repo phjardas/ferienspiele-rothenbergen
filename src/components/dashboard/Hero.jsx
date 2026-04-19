@@ -1,5 +1,4 @@
 import { Card, CardContent, Typography } from "@mui/material";
-import React from "react";
 import config from "../../api/config";
 import Date from "../Date";
 import H2 from "../H2";
@@ -12,8 +11,8 @@ export default function Hero() {
     <Card
       sx={{
         backgroundImage: {
-          xs: "linear-gradient(rgba(0, 0, 0, 0.0) 0% , rgba(0, 0, 0, 0.5) 50%, rgba(0, 0, 0, 0.5) 100%), url(/hero-2025.webp)",
-          md: "linear-gradient(90deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0)), url(/hero-2025.webp)",
+          xs: "linear-gradient(rgba(0, 0, 0, 0.0) 0% , rgba(0, 0, 0, 0.5) 50%, rgba(0, 0, 0, 0.5) 100%), url(/hero-2026.webp)",
+          md: "linear-gradient(90deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0)), url(/hero-2026.webp)",
         },
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
@@ -34,7 +33,7 @@ export default function Hero() {
           width: { xs: "100%", md: "50%" },
         }}
       >
-        <H2 component="h1" variant="h1" paragraph={false}>
+        <H2 component="h1" variant="h1" gutterBottom={false}>
           {title}
         </H2>
         <Typography variant="h5">{app}</Typography>

@@ -18,13 +18,12 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import useId from "@mui/material/utils/useId";
 import {
   bindDialog,
   bindTrigger,
   usePopupState,
 } from "material-ui-popup-state/hooks";
-import React, { useCallback, useState } from "react";
+import { useCallback, useState } from "react";
 import {
   useCreateInvitation,
   useDeleteInvitation,
@@ -44,7 +43,7 @@ export default function Anmeldungen() {
   return (
     <Card>
       <CardContent>
-        <Typography paragraph>
+        <Typography gutterBottom>
           Mit einer Einladung kann ein einziges Kind unabhängig vom
           Registrierungszeitraum oder der maximalen Teilnehmeranzahl registriert
           werden.
@@ -65,7 +64,7 @@ export default function Anmeldungen() {
 }
 
 function AddInvitationButton() {
-  const popupState = usePopupState({ variant: "popover", popupId: useId() });
+  const popupState = usePopupState({ variant: "popover" });
 
   return (
     <>

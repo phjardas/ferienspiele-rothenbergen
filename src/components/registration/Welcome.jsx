@@ -7,7 +7,6 @@ import {
   Link,
   Typography,
 } from "@mui/material";
-import React from "react";
 import config from "../../api/config";
 import Date from "../Date";
 import H2 from "../H2";
@@ -26,33 +25,33 @@ export default function Welcome({ createTestData, geschwisterkind }) {
           </Alert>
         ) : (
           <>
-            <Typography paragraph>
+            <Typography gutterBottom>
               Wir freuen uns, dass Sie Ihr Kind bei den Ferienspielen
               Rothenbergen vom <Date value={startDate} /> bis{" "}
               <Date value={endDate} /> (jeweils 9.00 Uhr bis 16.00 Uhr) anmelden
               wollen.
             </Typography>
-            <Typography paragraph>
+            <Typography gutterBottom>
               <strong>
                 Anmeldeschluss ist am <Date value={registrationDeadline} /> -
                 oder wenn alle Plätze belegt sind.
               </strong>
             </Typography>
-            <Typography paragraph>
+            <Typography gutterBottom>
               Nach der Anmeldung erhalten Sie von uns eine Email mit einer
               Einverständniserklärung.
             </Typography>
-            <Typography paragraph>
+            <Typography gutterBottom>
               Die Email beinhaltet auch einen Link, unter dem Sie die
               wichtigsten Informationen sowie die Bankverbindung der
               Evangelisch-Methodistischen Kirche finden.
             </Typography>
-            <Typography paragraph>
+            <Typography gutterBottom>
               Die Einverständniserklärung lassen Sie uns bitte unterschrieben
               zukommen und überweisen den Teilnahmebeitrag bis zum{" "}
               <Date value={waiverDeadline} /> auf das angegebene Konto.
             </Typography>
-            <Typography fontWeight="bold" paragraph>
+            <Typography fontWeight="bold" gutterBottom>
               Bitte beachten Sie, dass die Anmeldung erst vollständig ist, wenn
               Einverständniserklärung und Teilnahmebeitrag bei uns eingegangen
               sind!

@@ -1,12 +1,11 @@
 import { Typography } from "@mui/material";
-import React from "react";
 
-export default function H3({ variant = "h6", paragraph = true, ...props }) {
+export default function H3({ variant = "h6", gutterBottom = true, ...props }) {
   return (
     <Typography
       component="h2"
       variant={variant}
-      paragraph={paragraph}
+      gutterBottom={gutterBottom}
       {...props}
     />
   );

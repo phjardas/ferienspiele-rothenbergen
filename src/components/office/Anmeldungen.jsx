@@ -10,7 +10,7 @@ import {
   TableSortLabel,
   Typography,
 } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { getRegistrations } from "../../api/firestore";
 import Age from "../Age";
@@ -98,7 +98,7 @@ export default function Anmeldungen() {
     <Stack spacing={3}>
       <Card>
         <CardContent>
-          <Typography paragraph>
+          <Typography gutterBottom>
             Es gibt insgesamt{" "}
             <strong>
               {registrations.length} Anmeldung

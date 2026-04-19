@@ -1,16 +1,21 @@
 import { HelmetProvider } from "react-helmet-async";
-import ThemeProvider from "./Theme";
 import { AuthProvider } from "./api/auth";
 import Pages from "./pages/index";
+import ThemeColorProvider from "./theme/ThemeColorProvider";
+import ThemeColorRotator from "./theme/ThemeColorRotator";
+import ThemeProvider from "./theme/ThemeProvider";
 
 export default function App() {
   return (
-    <ThemeProvider>
-      <HelmetProvider>
-        <AuthProvider>
-          <Pages />
-        </AuthProvider>
-      </HelmetProvider>
-    </ThemeProvider>
+    <ThemeColorProvider>
+      <ThemeProvider>
+        <HelmetProvider>
+          <AuthProvider>
+            <Pages />
+          </AuthProvider>
+        </HelmetProvider>
+      </ThemeProvider>
+      <ThemeColorRotator />
+    </ThemeColorProvider>
   );
 }

@@ -1,6 +1,5 @@
 import { NightsStay as EarlyIcon } from "@mui/icons-material";
 import { Alert, Grid, LinearProgress, Typography } from "@mui/material";
-import React from "react";
 import { Field } from "react-final-form";
 import config from "../../api/config";
 import { useRegistrationStatus } from "../../api/firestore";
@@ -11,7 +10,7 @@ export default function Fruehbetreuung() {
   return (
     <FieldSet icon={<EarlyIcon />} title="Früh(not)betreuung">
       <Grid container spacing={2}>
-        <Grid item xs={12}>
+        <Grid item size={{ xs: 12 }}>
           <Typography>
             Bitte beachten Sie, dass die Ferienspiele jeden Tag regulär um 9.00
             Uhr (Einlass auf das Gelände) beginnen und das Frühbetreuungsangebot
@@ -20,7 +19,7 @@ export default function Fruehbetreuung() {
             {config.earlyCarePlaces} Plätze). Danke für Ihr Verständnis!
           </Typography>
         </Grid>
-        <Grid item xs={12}>
+        <Grid item size={{ xs: 12 }}>
           <FruehbetreuungSelect />
         </Grid>
       </Grid>

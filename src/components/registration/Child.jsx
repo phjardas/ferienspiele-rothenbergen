@@ -1,6 +1,5 @@
 import { ChildCare as ChildIcon } from "@mui/icons-material";
 import { Box, Grid, MenuItem } from "@mui/material";
-import React from "react";
 import { Field } from "react-final-form";
 import config from "../../api/config";
 import FieldSet from "../form/FieldSet";
@@ -23,7 +22,7 @@ export default function Child() {
       }
     >
       <Grid container spacing={2}>
-        <Grid item xs={12} md={6}>
+        <Grid item size={{ xs: 12, md: 6 }}>
           <Field
             name="child.firstName"
             component={TextField}
@@ -33,7 +32,7 @@ export default function Child() {
             validate={required}
           />
         </Grid>
-        <Grid item xs={12} md={6}>
+        <Grid item size={{ xs: 12, md: 6 }}>
           <Field
             name="child.lastName"
             component={TextField}
@@ -44,7 +43,7 @@ export default function Child() {
           />
         </Grid>
 
-        <Grid item xs={12} md={6}>
+        <Grid item size={{ xs: 12, md: 6 }}>
           <Radios
             name="child.gender"
             label="Geschlecht"
@@ -54,7 +53,7 @@ export default function Child() {
             groupProps={{ row: true }}
           />
         </Grid>
-        <Grid item xs={12} md={6}>
+        <Grid item size={{ xs: 12, md: 6 }}>
           <Field
             name="child.dateOfBirth"
             component={TextField}
@@ -70,7 +69,7 @@ export default function Child() {
           />
         </Grid>
 
-        <Grid item xs={12}>
+        <Grid item size={{ xs: 12 }}>
           <Field
             name="child.shirtSize"
             component={Select}
@@ -87,7 +86,7 @@ export default function Child() {
           </Field>
         </Grid>
 
-        <Grid item xs={12}>
+        <Grid item size={{ xs: 12 }}>
           <Field
             name="child.miscellaneous"
             component={TextField}
@@ -98,7 +97,7 @@ export default function Child() {
           />
         </Grid>
 
-        <Grid item xs={12}>
+        <Grid item size={{ xs: 12 }}>
           <Field
             name="child.friends"
             component={TextField}
@@ -109,7 +108,7 @@ export default function Child() {
           />
         </Grid>
 
-        <Grid item xs={12}>
+        <Grid item size={{ xs: 12 }}>
           <Field
             name="child.foodPreference"
             component={Select}
@@ -126,7 +125,7 @@ export default function Child() {
           </Field>
         </Grid>
 
-        <Grid item xs={12}>
+        <Grid item size={{ xs: 12 }}>
           <Field
             name="child.nextChild"
             component={Switch}
@@ -135,7 +134,7 @@ export default function Child() {
           />
         </Grid>
 
-        <Grid item xs={12}>
+        <Grid item size={{ xs: 12 }}>
           <Field
             name="child.sleepover"
             component={Switch}
@@ -144,7 +143,7 @@ export default function Child() {
           />
         </Grid>
 
-        <Grid item xs={12}>
+        <Grid item size={{ xs: 12 }}>
           <Field
             name="child.authorizedFetchers"
             component={TextField}
@@ -155,7 +154,7 @@ export default function Child() {
           />
         </Grid>
 
-        <Grid item xs={12}>
+        <Grid item size={{ xs: 12 }}>
           <Field
             name="child.walkHome"
             component={Switch}

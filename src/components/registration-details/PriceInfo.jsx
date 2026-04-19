@@ -1,6 +1,5 @@
 import { Alert, Card, CardContent, Typography } from "@mui/material";
-import QR from "qrcode.react";
-import React from "react";
+import { QRCodeSVG } from "qrcode.react";
 import config from "../../api/config";
 import Date from "../Date";
 import H3 from "../H3";
@@ -13,20 +12,16 @@ export default function PriceInfo({ child, price }) {
       <CardContent>
         <H3>Teilnahmebeitrag</H3>
         <Stack>
-          <Alert severity="error">
-            Sie haben den Teilnahmebeitrag noch nicht bezahlt, oder die Buchung
-            wurde von uns noch nicht registriert.
-          </Alert>
-          <Typography paragraph>
+          <Alert severity="info" gutterBottom>
             Falls Sie bereits bezahlt haben: Wir melden uns bei Ihnen, wenn bis
             zum <Date value={config.waiverDeadline} /> keine Zahlung eingegangen
             ist. Bis dahin sehen Sie bitte von Rückfragen ab. Vielen Dank!
-          </Typography>
+          </Alert>
           <PriceTable price={price} />
-          <Typography paragraph>
+          <Typography gutterBottom>
             Bitte überweisen Sie den Betrag auf das folgende Konto:
           </Typography>
-          <Typography paragraph>
+          <Typography gutterBottom>
             Empfänger: EmK Rothenbergen
             <br />
             IBAN: DE38 5075 0094 0027 0509 92 <br />
@@ -38,7 +33,7 @@ export default function PriceInfo({ child, price }) {
           <Typography>
             <EPC child={child} price={price} />
           </Typography>
-          <Typography variant="caption" paragraph>
+          <Typography variant="caption" gutterBottom>
             Scannen Sie einfach diesen QR-Code in Ihrer Banking-App mit der
             Funktion "Foto-Überweisung".
           </Typography>
@@ -63,5 +58,5 @@ EUR${price.total}
 Ferienspiele ${child.firstName.trim()} ${child.lastName.trim()}
 `.trim();
 
-  return <QR value={data} size={128} />;
+  return <QRCodeSVG value={data} size={128} />;
 }

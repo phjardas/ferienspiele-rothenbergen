@@ -1,6 +1,5 @@
 import { Person as PersonIcon } from "@mui/icons-material";
 import { Grid } from "@mui/material";
-import React from "react";
 import { Field } from "react-final-form";
 import FieldSet from "../form/FieldSet";
 import TextField from "../form/TextField";
@@ -19,7 +18,7 @@ export default function Parents() {
       }
     >
       <Grid container spacing={2}>
-        <Grid item xs={12} md={6}>
+        <Grid item size={{ xs: 12, md: 6 }}>
           <Field
             name="parent.phone"
             component={TextField}
@@ -30,7 +29,7 @@ export default function Parents() {
             validate={required}
           />
         </Grid>
-        <Grid item xs={12} md={6}>
+        <Grid item size={{ xs: 12, md: 6 }}>
           <Field
             name="parent.email"
             component={TextField}
@@ -41,7 +40,7 @@ export default function Parents() {
             validate={required}
           />
         </Grid>
-        <Grid item xs={12}>
+        <Grid item size={{ xs: 12 }}>
           <Field
             name="parent.street"
             component={TextField}
@@ -52,7 +51,7 @@ export default function Parents() {
             validate={required}
           />
         </Grid>
-        <Grid item xs={12} md={6}>
+        <Grid item size={{ xs: 12, md: 6 }}>
           <Field
             name="parent.zip"
             component={TextField}
@@ -63,7 +62,7 @@ export default function Parents() {
             validate={required}
           />
         </Grid>
-        <Grid item xs={12} md={6}>
+        <Grid item size={{ xs: 12, md: 6 }}>
           <Field
             name="parent.city"
             component={TextField}

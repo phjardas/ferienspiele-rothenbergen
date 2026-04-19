@@ -4,11 +4,10 @@ import {
   bindTrigger,
   usePopupState,
 } from "material-ui-popup-state/hooks";
-import React, { useId } from "react";
 import SignInForm from "./auth/SignInForm";
 
 export default function UnauthenticatedMenu() {
-  const popupState = usePopupState({ variant: "popover", popupId: useId() });
+  const popupState = usePopupState({ variant: "popover" });
 
   return (
     <>

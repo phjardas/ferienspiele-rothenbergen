@@ -7,7 +7,6 @@ import {
   LinearProgress,
   Typography,
 } from "@mui/material";
-import React from "react";
 import { Field } from "react-final-form";
 import config from "../../api/config";
 import { useKuchenStatistics } from "../../api/firestore";
@@ -35,7 +34,7 @@ function KuchenInfo({ date }) {
   if (!kuchen || !kuchen.length) return null;
   return (
     <>
-      <Typography paragraph>
+      <Typography gutterBottom>
         Wir haben schon Zusagen für folgende Kuchen am{" "}
         <KuchenDate value={date} />:
       </Typography>
@@ -52,7 +51,7 @@ export default function Kuchen() {
   return (
     <FieldSet icon={<CakeIcon />} title="Kuchen">
       <Grid container spacing={2}>
-        <Grid item xs={12}>
+        <Grid item size={{ xs: 12 }}>
           <Typography>
             Um die Ferienspiele lecker und abwechslungsreich zu gestalten, sind
             auch Sie gefragt! Wir benötigen insgesamt über 50 Kuchen von den
@@ -61,7 +60,7 @@ export default function Kuchen() {
           </Typography>
         </Grid>
 
-        <Grid item xs={12}>
+        <Grid item size={{ xs: 12 }}>
           <Radios
             name="kuchen.date"
             required
@@ -99,7 +98,7 @@ export default function Kuchen() {
         <Condition when="kuchen.date" is={isKuchenSelected}>
           {(date) => (
             <>
-              <Grid item xs={12} lg={6}>
+              <Grid item size={{ xs: 12, lg: 6 }}>
                 <Field
                   name="kuchen.name"
                   component={TextField}
@@ -110,7 +109,7 @@ export default function Kuchen() {
                   helperText="Bitte bringen Sie nur halbwegs trockene Rührkuchen mit, keine Torten oder Kuchen mit Sahne."
                 />
               </Grid>
-              <Grid item xs={12} lg={6}>
+              <Grid item size={{ xs: 12, lg: 6 }}>
                 <KuchenInfo date={date} />
               </Grid>
             </>

@@ -8,13 +8,12 @@ import {
   IconButton,
   Popover,
 } from "@mui/material";
-import useId from "@mui/material/utils/useId";
 import {
   bindPopover,
   bindTrigger,
   usePopupState,
 } from "material-ui-popup-state/hooks";
-import React, { useCallback } from "react";
+import { useCallback } from "react";
 import { useNavigate } from "react-router";
 import { useAuth } from "../api/auth";
 import LinkBehavior from "./LinkBehavior";
@@ -22,7 +21,7 @@ import LinkBehavior from "./LinkBehavior";
 export default function AuthenticatedMenu(props) {
   const navigate = useNavigate();
   const { signOut, user } = useAuth();
-  const popupState = usePopupState({ variant: "popover", popupId: useId() });
+  const popupState = usePopupState({ variant: "popover" });
 
   const doSignOut = useCallback(() => {
     popupState.close();
