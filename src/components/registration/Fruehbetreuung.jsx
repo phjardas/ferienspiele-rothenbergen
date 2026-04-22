@@ -10,7 +10,7 @@ export default function Fruehbetreuung() {
   return (
     <FieldSet icon={<EarlyIcon />} title="Früh(not)betreuung">
       <Grid container spacing={2}>
-        <Grid item size={{ xs: 12 }}>
+        <Grid size={{ xs: 12 }}>
           <Typography>
             Bitte beachten Sie, dass die Ferienspiele jeden Tag regulär um 9.00
             Uhr (Einlass auf das Gelände) beginnen und das Frühbetreuungsangebot
@@ -19,7 +19,7 @@ export default function Fruehbetreuung() {
             {config.earlyCarePlaces} Plätze). Danke für Ihr Verständnis!
           </Typography>
         </Grid>
-        <Grid item size={{ xs: 12 }}>
+        <Grid size={{ xs: 12 }}>
           <FruehbetreuungSelect />
         </Grid>
       </Grid>

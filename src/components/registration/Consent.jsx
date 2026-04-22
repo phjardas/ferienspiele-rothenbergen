@@ -1,5 +1,5 @@
 import { Grid, Link, Typography } from "@mui/material";
-import React, { useState } from "react";
+import { useState } from "react";
 import { Field } from "react-final-form";
 import Datenschutz from "../Datenschutz";
 import Modal from "../Modal";
@@ -45,7 +45,7 @@ export default function Consent() {
   return (
     <FieldSet>
       <Grid container spacing={2}>
-        <Grid item>
+        <Grid>
           <ConsentCheckbox
             name="consent.teilnahmebedingungen"
             info={({ onClick }) => (
@@ -67,7 +67,7 @@ export default function Consent() {
             }
           />
         </Grid>
-        <Grid item>
+        <Grid>
           <ConsentCheckbox
             name="consent.datenschutz"
             info={({ onClick }) => (

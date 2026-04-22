@@ -1,5 +1,5 @@
-import { LoadingButton } from "@mui/lab";
-import React, { useState } from "react";
+import { Button as LoadingButton } from "@mui/material";
+import { useState } from "react";
 import { createWaiver } from "../api/waiver";
 
 export default function PrintWaiverButton({ registration, ...rest }) {

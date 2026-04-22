@@ -51,7 +51,7 @@ export default function Kuchen() {
   return (
     <FieldSet icon={<CakeIcon />} title="Kuchen">
       <Grid container spacing={2}>
-        <Grid item size={{ xs: 12 }}>
+        <Grid size={{ xs: 12 }}>
           <Typography>
             Um die Ferienspiele lecker und abwechslungsreich zu gestalten, sind
             auch Sie gefragt! Wir benötigen insgesamt über 50 Kuchen von den
@@ -60,7 +60,7 @@ export default function Kuchen() {
           </Typography>
         </Grid>
 
-        <Grid item size={{ xs: 12 }}>
+        <Grid size={{ xs: 12 }}>
           <Radios
             name="kuchen.date"
             required
@@ -98,7 +98,7 @@ export default function Kuchen() {
         <Condition when="kuchen.date" is={isKuchenSelected}>
           {(date) => (
             <>
-              <Grid item size={{ xs: 12, lg: 6 }}>
+              <Grid size={{ xs: 12, lg: 6 }}>
                 <Field
                   name="kuchen.name"
                   component={TextField}
@@ -109,7 +109,7 @@ export default function Kuchen() {
                   helperText="Bitte bringen Sie nur halbwegs trockene Rührkuchen mit, keine Torten oder Kuchen mit Sahne."
                 />
               </Grid>
-              <Grid item size={{ xs: 12, lg: 6 }}>
+              <Grid size={{ xs: 12, lg: 6 }}>
                 <KuchenInfo date={date} />
               </Grid>
             </>

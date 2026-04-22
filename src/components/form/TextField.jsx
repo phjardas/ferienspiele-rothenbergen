@@ -1,5 +1,4 @@
 import { TextField } from "@mui/material";
-import * as React from "react";
 
 export default function TextFieldWrapper({
   input: { name, onChange, value, ...restInput },
@@ -17,7 +16,7 @@ export default function TextFieldWrapper({
       name={name}
       helperText={showError ? meta.error || meta.submitError : helperText}
       error={showError}
-      inputProps={restInput}
+      slotProps={{ input: restInput }}
       onChange={onChange}
       value={value}
     />

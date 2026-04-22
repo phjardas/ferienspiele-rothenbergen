@@ -27,7 +27,7 @@ export default function RegistrationDetails({ registration }) {
     <>
       <Confetti />
       <Grid container spacing={2}>
-        <Grid item size={{ xs: 12 }}>
+        <Grid size={{ xs: 12 }}>
           <Typography variant="h3" gutterBottom>
             Herzlich Willkommen, {child.firstName}!
           </Typography>
@@ -44,10 +44,10 @@ export default function RegistrationDetails({ registration }) {
             Geschwisterkind anmelden
           </Button>
         </Grid>
-        <Grid item size={{ xs: 12, md: 6 }}>
+        <Grid size={{ xs: 12, md: 6 }}>
           <PriceInfo {...registration} />
         </Grid>
-        <Grid item size={{ xs: 12, md: 6 }}>
+        <Grid size={{ xs: 12, md: 6 }}>
           <Stack spacing={2}>
             <WaiverInfo {...registration} />
             <KuchenInfo {...registration} />

@@ -13,7 +13,7 @@ export default function EmergencyContact() {
       subtitle="Bitte geben Sie hier ein, wen wir im Falle eines Notfalles anrufen sollen."
     >
       <Grid container spacing={2}>
-        <Grid item size={{ xs: 12, md: 6 }}>
+        <Grid size={{ xs: 12, md: 6 }}>
           <Field
             name="emergencyContact.name"
             component={TextField}
@@ -23,7 +23,7 @@ export default function EmergencyContact() {
             validate={required}
           />
         </Grid>
-        <Grid item size={{ xs: 12, md: 6 }}>
+        <Grid size={{ xs: 12, md: 6 }}>
           <Field
             name="emergencyContact.phone"
             component={TextField}

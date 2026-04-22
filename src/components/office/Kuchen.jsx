@@ -50,7 +50,7 @@ export default function Kuchen() {
         </Grid>
       ))}
       {"none" in byDate && (
-        <Grid item size={{ xs: 12 }}>
+        <Grid size={{ xs: 12 }}>
           <Card>
             <CardHeader title="Kein Kuchen" />
             <List>

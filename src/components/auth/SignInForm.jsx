@@ -1,6 +1,5 @@
-import { LoadingButton } from "@mui/lab";
-import { Alert, Box, Button } from "@mui/material";
-import React, { useState } from "react";
+import { Alert, Box, Button, Button as LoadingButton } from "@mui/material";
+import { useState } from "react";
 import { Form } from "react-final-form";
 import { useAuth } from "../../api/auth";
 import LinkBehavior from "../LinkBehavior";

@@ -1,5 +1,4 @@
 import { Add, Check, CheckBoxOutlineBlank, Delete } from "@mui/icons-material";
-import { LoadingButton } from "@mui/lab";
 import {
   Alert,
   Box,
@@ -15,6 +14,7 @@ import {
   ListItemIcon,
   ListItemSecondaryAction,
   ListItemText,
+  Button as LoadingButton,
   TextField,
   Typography,
 } from "@mui/material";

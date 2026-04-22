@@ -1,8 +1,7 @@
 import { ChildCare as ChildIcon } from "@mui/icons-material";
-import { Box, Grid, MenuItem } from "@mui/material";
+import { Box, FormHelperText, Grid, MenuItem } from "@mui/material";
 import { Field } from "react-final-form";
 import config from "../../api/config";
-import DateField from "../form/DateField";
 import FieldSet from "../form/FieldSet";
 import Radios from "../form/Radios";
 import Select from "../form/Select";
@@ -23,7 +22,7 @@ export default function Child() {
       }
     >
       <Grid container spacing={2}>
-        <Grid item size={{ xs: 12, md: 6 }}>
+        <Grid size={{ xs: 12, md: 6 }}>
           <Field
             name="child.firstName"
             component={TextField}
@@ -33,7 +32,7 @@ export default function Child() {
             validate={required}
           />
         </Grid>
-        <Grid item size={{ xs: 12, md: 6 }}>
+        <Grid size={{ xs: 12, md: 6 }}>
           <Field
             name="child.lastName"
             component={TextField}
@@ -44,7 +43,7 @@ export default function Child() {
           />
         </Grid>
 
-        <Grid item size={{ xs: 12, md: 6 }}>
+        <Grid size={{ xs: 12, md: 6 }}>
           <Radios
             name="child.gender"
             label="Geschlecht"
@@ -54,23 +53,23 @@ export default function Child() {
             groupProps={{ row: true }}
           />
         </Grid>
-        <Grid item size={{ xs: 12, md: 6 }}>
+        <Grid size={{ xs: 12, md: 6 }}>
           <Field
             name="child.dateOfBirth"
-            component={DateField}
+            component={TextField}
             type="date"
             label="Geburtsdatum"
             required
             fullWidth
             validate={required}
-            helperText={<AgeInfo />}
-            InputLabelProps={{
-              shrink: true,
-            }}
+            InputLabelProps={{ shrink: true }}
           />
+          <FormHelperText>
+            <AgeInfo />
+          </FormHelperText>
         </Grid>
 
-        <Grid item size={{ xs: 12 }}>
+        <Grid size={{ xs: 12 }}>
           <Field
             name="child.shirtSize"
             component={Select}
@@ -87,7 +86,7 @@ export default function Child() {
           </Field>
         </Grid>
 
-        <Grid item size={{ xs: 12 }}>
+        <Grid size={{ xs: 12 }}>
           <Field
             name="child.miscellaneous"
             component={TextField}
@@ -98,7 +97,7 @@ export default function Child() {
           />
         </Grid>
 
-        <Grid item size={{ xs: 12 }}>
+        <Grid size={{ xs: 12 }}>
           <Field
             name="child.friends"
             component={TextField}
@@ -109,7 +108,7 @@ export default function Child() {
           />
         </Grid>
 
-        <Grid item size={{ xs: 12 }}>
+        <Grid size={{ xs: 12 }}>
           <Field
             name="child.foodPreference"
             component={Select}
@@ -126,7 +125,7 @@ export default function Child() {
           </Field>
         </Grid>
 
-        <Grid item size={{ xs: 12 }}>
+        <Grid size={{ xs: 12 }}>
           <Field
             name="child.nextChild"
             component={Switch}
@@ -135,7 +134,7 @@ export default function Child() {
           />
         </Grid>
 
-        <Grid item size={{ xs: 12 }}>
+        <Grid size={{ xs: 12 }}>
           <Field
             name="child.sleepover"
             component={Switch}
@@ -144,7 +143,7 @@ export default function Child() {
           />
         </Grid>
 
-        <Grid item size={{ xs: 12 }}>
+        <Grid size={{ xs: 12 }}>
           <Field
             name="child.authorizedFetchers"
             component={TextField}
@@ -155,7 +154,7 @@ export default function Child() {
           />
         </Grid>
 
-        <Grid item size={{ xs: 12 }}>
+        <Grid size={{ xs: 12 }}>
           <Field
             name="child.walkHome"
             component={Switch}
@@ -171,16 +170,16 @@ export default function Child() {
 function AgeInfo() {
   return (
     <Field name="child.age" subscription={{ value: true }}>
-      {({ input: { value } }) => {
-        return typeof value === "number" && value < config.minAge ? (
+      {({ input: { value } }) =>
+        typeof value === "number" && value < config.minAge ? (
           <Box component="span" sx={{ color: "var(--mui-palette-md-error)" }}>
             Bitte beachten Sie, dass sich die Ferienspiele an Schulkinder ab 7
             Jahren bzw. nach Abschluss der 1. Klasse richten. Auf
             Vorschulkinder, die nach den Sommerferien eingeschult werden, freuen
             wir uns im kommenden Jahr!
           </Box>
-        ) : null;
-      }}
+        ) : null
+      }
     </Field>
   );
 }

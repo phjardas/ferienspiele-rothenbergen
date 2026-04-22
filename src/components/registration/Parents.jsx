@@ -18,7 +18,7 @@ export default function Parents() {
       }
     >
       <Grid container spacing={2}>
-        <Grid item size={{ xs: 12, md: 6 }}>
+        <Grid size={{ xs: 12, md: 6 }}>
           <Field
             name="parent.phone"
             component={TextField}
@@ -29,7 +29,7 @@ export default function Parents() {
             validate={required}
           />
         </Grid>
-        <Grid item size={{ xs: 12, md: 6 }}>
+        <Grid size={{ xs: 12, md: 6 }}>
           <Field
             name="parent.email"
             component={TextField}
@@ -40,7 +40,7 @@ export default function Parents() {
             validate={required}
           />
         </Grid>
-        <Grid item size={{ xs: 12 }}>
+        <Grid size={{ xs: 12 }}>
           <Field
             name="parent.street"
             component={TextField}
@@ -51,7 +51,7 @@ export default function Parents() {
             validate={required}
           />
         </Grid>
-        <Grid item size={{ xs: 12, md: 6 }}>
+        <Grid size={{ xs: 12, md: 6 }}>
           <Field
             name="parent.zip"
             component={TextField}
@@ -62,7 +62,7 @@ export default function Parents() {
             validate={required}
           />
         </Grid>
-        <Grid item size={{ xs: 12, md: 6 }}>
+        <Grid size={{ xs: 12, md: 6 }}>
           <Field
             name="parent.city"
             component={TextField}

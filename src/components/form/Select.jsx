@@ -1,5 +1,4 @@
 import { FormControl, FormHelperText, InputLabel, Select } from "@mui/material";
-import * as React from "react";
 
 export default function SelectWrapper({
   input: { name, value, onChange, ...restInput },
@@ -21,7 +20,7 @@ export default function SelectWrapper({
         label={label}
         name={name}
         onChange={onChange}
-        inputProps={restInput}
+        slotProps={{ input: restInput }}
         value={value}
       />
       {(showError || helperText) && (

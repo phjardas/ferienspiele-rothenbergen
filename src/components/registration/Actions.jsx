@@ -1,7 +1,5 @@
 import { Send as SendIcon } from "@mui/icons-material";
-import { LoadingButton } from "@mui/lab";
-import { Alert, Box } from "@mui/material";
-import React from "react";
+import { Alert, Box, Button as LoadingButton } from "@mui/material";
 
 export default function Actions({ invalid, submitting, submitError }) {
   return (
