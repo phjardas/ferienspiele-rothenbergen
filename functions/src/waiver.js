@@ -96,6 +96,6 @@ function createFooter() {
     )} unterschrieben an Pfarrerin Ligaya Jardas, Schieferbergstraße 33, 63571 Gründau oder geben sie in einem verschlossenen Umschlag dort ab, Einwurf in den Briefkasten genügt.`,
     `Alle Zahlungen überweisen Sie bitte bis zum ${formatDate(
       config.waiverDeadline,
-    )} auf das Konto der Evangelisch-Methodistischen Kirche bei der Sparkasse Rothenbergen: EmK Rothenbergen, IBAN: DE38 5075 0094 0027 0509 92.`,
+    )} auf das Konto der Evangelisch-Methodistischen Kirche bei der Sparkasse Rothenbergen: EmK Rothenbergen, IBAN: DE59 5075 0094 0027 6145 72.`,
   ].map((line) => line.trim());
 }

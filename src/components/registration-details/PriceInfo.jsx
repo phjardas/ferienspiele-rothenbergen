@@ -24,7 +24,7 @@ export default function PriceInfo({ child, price }) {
           <Typography gutterBottom>
             Empfänger: EmK Rothenbergen
             <br />
-            IBAN: DE38 5075 0094 0027 0509 92 <br />
+            IBAN: DE59 5075 0094 0027 6145 72 <br />
             BIC: HELADEF1GEL <br />
             Verwendungszweck: "Ferienspiele {child.firstName} {child.lastName}"
           </Typography>
