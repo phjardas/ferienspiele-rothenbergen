@@ -47,6 +47,10 @@ const config = {
     { value: "vegetarian", label: "Mein Kind isst vegetarisch" },
     { value: "vegan", label: "Mein Kind isst vegan" },
   ],
+  bankverbindung: {
+    name: "EmK Rothenbergen",
+    iban: "DE59 5075 0094 0027 6145 72",
+  },
 };
 
 export default config;

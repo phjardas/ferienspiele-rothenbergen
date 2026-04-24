@@ -22,13 +22,12 @@ export default function PriceInfo({ child, price }) {
             Bitte überweisen Sie den Betrag auf das folgende Konto:
           </Typography>
           <Typography gutterBottom>
-            Empfänger: EmK Rothenbergen
+            Empfänger: {config.bankverbindung.name}
             <br />
-            IBAN: DE59 5075 0094 0027 6145 72 <br />
-            BIC: HELADEF1GEL <br />
+            IBAN: {config.bankverbindung.iban}
+            <br />
             Verwendungszweck: "Ferienspiele {child.firstName} {child.lastName}"
           </Typography>
-
           <Typography variant="h6">Überweisung mit App</Typography>
           <Typography>
             <EPC child={child} price={price} />
@@ -50,8 +49,8 @@ BCD
 1
 SCT
 
-EmK Rothenbergen
-DE38507500940027050992
+${config.bankverbindung.name}
+${config.bankverbindung.iban.replace(/\s/g, "")}
 EUR${price.total}
 
 
